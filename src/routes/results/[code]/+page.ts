@@ -1,3 +1,4 @@
+import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
 import { error } from '@sveltejs/kit';
 
@@ -15,7 +16,7 @@ const dbKeysToToolKeys: any = {
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, fetch }: { params: { code: string }; fetch: any }) {
 	const { code } = params;
-	const response = await fetch(`http://localhost:8000/api/results?resultCode=${code}`, {
+	const response = await fetch(`${PUBLIC_SERVER_URL}/api/results?resultCode=${code}`, {
 		method: 'GET'
 	});
 

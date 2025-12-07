@@ -1,10 +1,11 @@
+import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
 
 // TODO: Make this not an api call
 export async function POST({ request }) {
 	try {
 		const data = await request.json();
-		const response = await fetch('http://localhost:8000/api/results', {
+		const response = await fetch(`${PUBLIC_SERVER_URL}/api/results`, {
 			method: 'POST',
 			body: JSON.stringify({
 				...data,
