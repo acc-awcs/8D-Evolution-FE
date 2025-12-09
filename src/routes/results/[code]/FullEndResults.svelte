@@ -46,7 +46,7 @@
 	}
 
 	function onHover(select: number) {
-		// highlight = select;
+		highlight = select;
 		// stopRotate();
 	}
 
@@ -180,6 +180,7 @@
 						isStart={true}
 						onLeave={startRotate}
 						skipHover={true}
+						showHighlight={innerWidth < BREAKPOINT}
 					/>
 				</div>
 				<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
@@ -191,6 +192,7 @@
 						{onHover}
 						onLeave={startRotate}
 						skipHover={true}
+						showHighlight={innerWidth < BREAKPOINT}
 					/>
 				</div>
 			</div>
@@ -205,38 +207,40 @@
 			</div>
 		</section>
 		<section class="up-next">
-			<div class="column">
+			<div class="charts-overlaid">
 				<!-- Overlaid version -->
-				<SpiderChart
-					startAnswers={data.start?.object}
-					answers={data.current?.object}
-					{highlight}
-					{chartWidth}
-					{onHover}
-					onLeave={startRotate}
-					skipHover={true}
-				/>
-				<!-- <p class="pre-title">Next Steps</p>
-				<h1 class="title">Save Your Results Code</h1>
-				<div class="instructions">
-					<p>
-						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code ({data.code}) to reference these results later.
-					</p>
-					<p>
-						We recommend writing or storing your code somewhere secure. Try a password manager, a
-						favorite journal, or an email to yourself. If you email yourself your code with the
-						button below, your email will not be stored and your results will remain fully
-						anonymous.
-					</p>
+				<div class="charts">
+					<div class="absolute-wrapper">
+						<SpiderChart
+							answers={data.start?.object}
+							{highlight}
+							{chartWidth}
+							{onHover}
+							onLeave={startRotate}
+							skipHover={true}
+							isOverlay={true}
+							isStart={true}
+						/>
+					</div>
+					<SpiderChart
+						answers={data.current?.object}
+						startAnswers={data.start?.object}
+						{highlight}
+						{chartWidth}
+						{onHover}
+						onLeave={startRotate}
+						skipHover={true}
+						isOverlay={true}
+					/>
 				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn primary"
-					>Email Your Results Code</button
-				>
-				<label>
-					<span>Your Unique Code</span>
-					<CopyBox text={prettyCode(data.code)} textToCopy={data.code} />
-				</label> -->
+				<div class="text">
+					<h2>Next Steps</h2>
+					<p>
+						Let me know whatever you want to be called out here! Can be a statistical insight on
+						their results, opportunities for further progress, etc.
+					</p>
+					<p>I can also remove the animation on the chart here and just do a static overlay.</p>
+				</div>
 			</div>
 		</section>
 		<section class="conclusion">
@@ -260,18 +264,6 @@
 </div>
 
 <style>
-	/* .intro a {
-		color: var(--charcoal);
-		font-weight: 300;
-		text-decoration: none;
-		font-style: normal;
-		z-index: 1;
-	}
-	.intro a:hover,
-	.intro a:active,
-	.intro a:focus {
-		font-weight: 500;
-	} */
 	.intro {
 		display: flex;
 		justify-content: center;
@@ -318,7 +310,7 @@
 		align-items: center;
 		text-align: center;
 	}
-	.chart h2 {
+	h2 {
 		font-family: 'adobe-garamond-pro', serif;
 	}
 	.logo {
@@ -343,6 +335,40 @@
 		margin-top: 30px;
 		margin-bottom: 40px;
 	}
+
+	.charts-overlaid {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 80px;
+		width: 1000px;
+	}
+
+	.charts {
+		/* width: 50%; */
+		position: relative;
+	}
+
+	.text {
+		padding: 20px;
+	}
+
+	.text h2 {
+		font-family: 'adobe-garamond-pro', serif;
+		font-size: 32px;
+	}
+
+	.text p {
+		font-size: 1rem;
+	}
+
+	.absolute-wrapper {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+
 	.pre-title {
 		font-family: 'adobe-garamond-pro', serif;
 		font-weight: 400;
@@ -363,7 +389,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: var(--width-medium);
+		width: var(--width-large);
 		text-align: center;
 		max-width: 100%;
 		margin: 40px 0px;
@@ -477,6 +503,16 @@
 		}
 		.intro {
 			margin: 0px;
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		.side-by-side {
+			flex-direction: column;
+			gap: 60px;
+		}
+		.charts-overlaid {
+			flex-direction: column;
 		}
 	}
 

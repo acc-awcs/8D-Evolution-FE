@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { line, scaleLinear } from 'd3';
+	import { onDestroy, onMount } from 'svelte';
 	let {
 		answers,
 		startAnswers,
@@ -8,19 +9,49 @@
 		onHover,
 		onLeave,
 		isStart,
-		skipHover
+		skipHover,
+		isOverlay,
+		showHighlight
 	}: {
 		answers: Record<string, number>;
-		startAnswers: Record<string, number>;
+		startAnswers?: Record<string, number>;
 		highlight: number;
 		chartWidth: number;
 		onHover: CallableFunction;
 		onLeave: CallableFunction;
 		isStart?: Boolean;
 		skipHover?: Boolean;
+		isOverlay?: Boolean;
+		showHighlight?: Boolean;
 	} = $props();
 
+	let useStartData = $state(true);
 	const features = $derived(Object.keys(answers));
+	let intervalId = $state<number>();
+	let firstRunComplete = $state(false);
+
+	function startRotate() {
+		if (startAnswers) {
+			intervalId = setInterval(() => {
+				if (!firstRunComplete) {
+					firstRunComplete = true;
+				}
+				useStartData = !useStartData;
+			}, 3000);
+		}
+	}
+
+	function stopRotate() {
+		clearInterval(intervalId);
+		intervalId = undefined;
+	}
+
+	onMount(() => {
+		startRotate();
+	});
+	onDestroy(() => {
+		stopRotate();
+	});
 
 	const config = $derived({
 		d: chartWidth, // diameter of chart
@@ -114,7 +145,7 @@
 				feature,
 				idx
 			) => {
-				const answer = answers[feature];
+				const answer = useStartData && startAnswers ? startAnswers[feature] : answers[feature];
 				const coords = getCircleCoords({ answer, idx });
 				resultArray.push({ feature, answer, xCoord: coords.x, yCoord: coords.y, idx });
 				return resultArray;
@@ -127,22 +158,19 @@
 <div class="outer">
 	<svg
 		id="chart"
+		class:overlay={isOverlay}
 		class:start={isStart}
-		class:overlay={startAnswers != null}
 		width={config.d}
 		height={config.d}
 		aria-hidden="true"
 	>
-		<path class="answer" stroke-width="3" opacity="0.8" d={drawAnswerShape(answers)} />
-		{#if startAnswers}
-			<path
-				class="answer"
-				class:start={true}
-				stroke-width="3"
-				opacity="0.8"
-				d={drawAnswerShape(startAnswers)}
-			/>
-		{/if}
+		<path
+			class="answer"
+			class:transition={firstRunComplete}
+			stroke-width="3"
+			opacity="0.8"
+			d={`${drawAnswerShape(useStartData && startAnswers ? startAnswers : answers)}`}
+		/>
 		<g id="ticks">
 			{#each config.ticks as tick}
 				<!-- concentric octogons -->
@@ -151,7 +179,7 @@
 			{#each radialTickLines as f, idx}
 				<line x1={config.d / 2} y1={config.d / 2} x2={f.outerX} y2={f.outerY} />
 				<line class="dash" x1={f.outerX} y1={f.outerY} x2={f.labelX} y2={f.labelY} />
-				{#if skipHover}
+				{#if skipHover && !showHighlight}
 					<g class="label" aria-hidden="true">
 						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius}> </circle>
 						<text x={f.labelX} y={f.labelY}>{idx + 1}</text>
@@ -171,13 +199,15 @@
 				{/if}
 			{/each}
 		</g>
-		<g id="answer">
-			{#each formattedAnswers as ans}
-				<!-- note: adding 1px to radius to make same size as charcoal circle (with stroke of 1px) -->
-				<circle cx={ans.xCoord} cy={ans.yCoord} r={config.labelRadius + 1}></circle>
-				<text x={ans.xCoord} y={ans.yCoord}>{ans.answer}</text>
-			{/each}
-		</g>
+		{#if !isOverlay}
+			<g id="answer">
+				{#each formattedAnswers as ans}
+					<!-- note: adding 1px to radius to make same size as charcoal circle (with stroke of 1px) -->
+					<circle cx={ans.xCoord} cy={ans.yCoord} r={config.labelRadius + 1}></circle>
+					<text x={ans.xCoord} y={ans.yCoord}>{ans.answer}</text>
+				{/each}
+			</g>
+		{/if}
 	</svg>
 </div>
 
@@ -205,6 +235,9 @@
 		fill: var(--mustard);
 		opacity: 0.5;
 	}
+	path.answer.transition {
+		transition: d 2s ease-in-out;
+	}
 	#answer circle {
 		fill: var(--mustard);
 	}
@@ -212,11 +245,12 @@
 		fill: var(--cream);
 	}
 
-	.start path.answer {
-		fill: var(--moss);
-	}
+	.start path.answer,
 	.start #answer circle {
 		fill: var(--moss);
+	}
+	.overlay.start path.answer {
+		opacity: 0.3;
 	}
 
 	text {
@@ -235,6 +269,9 @@
 		transition: fill 0.2s linear;
 		stroke: var(--charcoal);
 		stroke-width: 1;
+	}
+	.overlay .label circle {
+		fill: var(--cream);
 	}
 	.label.highlight circle {
 		fill: var(--charcoal);
