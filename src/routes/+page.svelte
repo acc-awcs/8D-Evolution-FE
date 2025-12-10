@@ -81,4 +81,10 @@
 		align-items: center;
 		gap: 20px;
 	}
+
+	@media screen and (max-width: 600px) {
+		.links {
+			flex-direction: column;
+		}
+	}
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import trackEvent from '$lib/custom-event';
 	import type { Section } from '$lib/types';
+	import ButtonLoader from './ButtonLoader.svelte';
 
 	export let value: number;
 	export let section: Section;
@@ -8,6 +9,7 @@
 	export let handleSectionChange: (evt: Event, idx: number) => void;
 	export let resultsLink: string | null; // Only used for final section
 	export let onFinish: (() => void) | null;
+	export let loading: Boolean;
 </script>
 
 <div class="wrapper">
@@ -52,7 +54,13 @@
 
 	{#if resultsLink}
 		<div class="finish">
-			<button class="btn secondary" onclick={onFinish}> Finish </button>
+			<button class="btn secondary" onclick={loading ? null : onFinish}>
+				{#if loading}
+					<ButtonLoader />
+				{:else}
+					Submit
+				{/if}
+			</button>
 		</div>
 	{/if}
 </div>

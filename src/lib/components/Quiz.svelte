@@ -8,6 +8,7 @@
 	import { goto } from '$app/navigation';
 
 	let { data, isStart } = $props();
+	let loading = $state(false);
 
 	// console.log('START CODE?', data.startCode);
 
@@ -103,6 +104,7 @@
 
 	const onFinish = $derived.by(() => {
 		return async () => {
+			loading = true;
 			const valuesByDynamic = sections.reduce<{ [key: string]: number }>((dynamicsMap, s, i) => {
 				dynamicsMap[`d${i + 1}`] = s.value;
 				return dynamicsMap;
@@ -165,6 +167,7 @@
 				handleSectionChange={scrollToSection}
 				onFinish={index === sections.length - 1 ? onFinish : null}
 				resultsLink={index === sections.length - 1 ? resultsLink : null}
+				{loading}
 			/>
 		</section>
 	{/each}
