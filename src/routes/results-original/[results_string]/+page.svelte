@@ -199,7 +199,7 @@
 
 <style>
 	.intro a {
-		color: var(--charcoal);
+		color: var(--onyx);
 		font-weight: 300;
 		text-decoration: none;
 		font-style: normal;
@@ -207,11 +207,11 @@
 	}
 	.intro a:hover,
 	.intro a:active,
-	.intro a:focus {
+	.intro a:focus-visible {
 		font-weight: 500;
 	}
 	.outer {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		min-height: 100vh;
 		background-image:
 			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
@@ -253,7 +253,7 @@
 		margin-bottom: 40px;
 	}
 	h2 {
-		font-family: 'adobe-garamond-pro', serif;
+		font-family: 'Instrument Serif', serif;
 		font-weight: 400;
 		font-size: 26px;
 		line-height: 1.4;
@@ -270,9 +270,9 @@
 		padding-inline-start: 20px;
 	}
 	.next-steps {
-		border: 1px solid var(--charcoal);
-		border-radius: 10px;
-		background-color: var(--cream);
+		border: 1px solid var(--onyx);
+		border-radius: var(--br);
+		background-color: var(--cloud);
 		padding: 30px;
 		margin-top: 2em;
 	}
@@ -287,30 +287,16 @@
 	footer {
 		text-align: center;
 		padding: 2em 3em 4em;
-		font-family: 'adobe-garamond-pro', serif;
+		font-family: 'Instrument Serif', serif;
 		font-weight: 400;
 		font-size: 18px;
 		font-style: italic;
-		color: var(--charcoal);
+		color: var(--onyx);
 	}
 	footer > a {
 		color: inherit;
 	}
 
-	input {
-		padding: 16px 30px;
-		padding-bottom: 19px;
-		font-size: 18px;
-		font-family: 'General Grotesque', Helvetica, Arial, sans-serif;
-		font-weight: 300;
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		transition: outline 0.2s linear;
-		width: 100%;
-		box-sizing: border-box;
-	}
-	input:focus {
-		outline: 4px solid var(--mustard);
-	}
 	.buttons {
 		width: 100%;
 		margin-top: 20px;

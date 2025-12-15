@@ -66,7 +66,7 @@ export async function load({ params, fetch }: { params: { code: string }; fetch:
 	return {
 		current: transformResults(currentResults),
 		start: transformResults(startingPointResults),
-		code
+		resultCode: code
 	};
 	// 	return {
 	// 	answers: matches.map((m) => {
@@ -128,7 +128,7 @@ export async function load({ params, fetch }: { params: { code: string }; fetch:
 
 export async function _sendEmail(
 	email: string,
-	results_string: string
+	resultCode: string
 ): Promise<{ success: boolean; message?: string; invalidFormat?: boolean }> {
 	try {
 		const response = await fetch('/api/email', {
@@ -136,7 +136,7 @@ export async function _sendEmail(
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email, results_string })
+			body: JSON.stringify({ email, resultCode })
 		});
 
 		if (!response.ok) {

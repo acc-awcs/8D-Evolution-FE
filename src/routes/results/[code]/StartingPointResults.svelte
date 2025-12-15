@@ -96,7 +96,7 @@
 						emailError = 'Please enter an email address';
 					} else if (!sendEmailLoading) {
 						sendEmailLoading = true;
-						const resp = await _sendEmail(email, data.results_string);
+						const resp = await _sendEmail(email, data.resultCode);
 						sendEmailLoading = false;
 						if (resp.invalidFormat) {
 							emailError = 'Please enter a valid email';
@@ -193,7 +193,7 @@
 				<div class="instructions">
 					<p>
 						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code ({data.code}) to reference these results later.
+						generated you a unique code ({data.resultCode}) to reference these results later.
 					</p>
 					<p>
 						We recommend writing or storing your code somewhere secure. Try a password manager, a
@@ -207,7 +207,7 @@
 				>
 				<label>
 					<span>Your Unique Code</span>
-					<CopyBox text={prettyCode(data.code)} textToCopy={data.code} />
+					<CopyBox text={prettyCode(data.resultCode)} textToCopy={data.resultCode} />
 				</label>
 			</div>
 		</section>
@@ -233,7 +233,7 @@
 
 <style>
 	.intro a {
-		color: var(--charcoal);
+		color: var(--onyx);
 		font-weight: 300;
 		text-decoration: none;
 		font-style: normal;
@@ -241,16 +241,16 @@
 	}
 	.intro a:hover,
 	.intro a:active,
-	.intro a:focus {
+	.intro a:focus-visible {
 		font-weight: 500;
 	}
 	.outer {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		min-height: 100vh;
 		box-sizing: border-box;
 	}
 	.clouds {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		background-image:
 			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
 		background-repeat: no-repeat, no-repeat, no-repeat;
@@ -293,18 +293,11 @@
 		margin-top: 30px;
 		margin-bottom: 40px;
 	}
-	.pre-title {
-		font-family: 'adobe-garamond-pro', serif;
-		font-weight: 400;
-		font-size: 26px;
-		line-height: 1.4;
-		margin: 0;
-	}
 
 	.up-next {
 		display: flex;
 		justify-content: center;
-		background-color: var(--cream);
+		background-color: var(--cloud);
 		padding: 60px 20px;
 	}
 
@@ -331,20 +324,6 @@
 		margin-bottom: 30px;
 	}
 
-	input {
-		padding: 16px 30px;
-		padding-bottom: 19px;
-		font-size: 18px;
-		font-family: 'General Grotesque', Helvetica, Arial, sans-serif;
-		font-weight: 300;
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		transition: outline 0.2s linear;
-		width: 100%;
-		box-sizing: border-box;
-	}
-	input:focus {
-		outline: 4px solid var(--mustard);
-	}
 	.buttons {
 		width: 100%;
 		margin-top: 20px;
@@ -378,19 +357,19 @@
 	}
 
 	.conclusion {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		padding: 40px;
 		display: flex;
 		justify-content: center;
 	}
 
 	.fancy-link {
-		font-family: 'adobe-garamond-pro', serif;
+		font-family: 'Instrument Serif', serif;
 		font-weight: 400;
 		font-size: 26px;
 		line-height: 1.4;
 		margin: 0;
-		color: var(--charcoal);
+		color: var(--onyx);
 		text-decoration: none;
 	}
 

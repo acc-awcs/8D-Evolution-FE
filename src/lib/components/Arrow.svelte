@@ -37,7 +37,7 @@
 		transform: rotate(180deg);
 	}
 	path {
-		stroke: var(--charcoal);
+		stroke: var(--onyx);
 		stroke-width: 2px;
 		stroke-linejoin: round;
 		stroke-linecap: round;

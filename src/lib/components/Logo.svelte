@@ -1,8 +1,8 @@
 <script lang="ts">
-	export const { onDark = false } = $props();
+	export const { onDark = false, relative = false } = $props();
 </script>
 
-<div>
+<div class:relative>
 	<a href="https://allwecansave.earth" aria-label="The All We Can Save Project">
 		<svg
 			width="94"
@@ -87,10 +87,10 @@
 
 <style>
 	svg > path {
-		fill: var(--charcoal);
+		fill: var(--onyx);
 	}
 	svg.light > path {
-		fill: var(--cream);
+		fill: var(--cloud);
 	}
 	div {
 		display: block;
@@ -99,5 +99,12 @@
 		top: 30;
 		padding: 20px;
 		z-index: 10;
+	}
+	div.relative {
+		display: block;
+		position: relative;
+		left: 0;
+		top: 0;
+		padding: 0px;
 	}
 </style>

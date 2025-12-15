@@ -226,7 +226,7 @@
 	#ticks line,
 	#ticks polygon {
 		fill: none;
-		stroke: var(--charcoal);
+		stroke: var(--onyx);
 	}
 	line.dash {
 		stroke-dasharray: 1px;
@@ -234,22 +234,25 @@
 
 	/* ANSWER SHAPES */
 	path.answer {
-		fill: var(--mustard);
+		fill: var(--neon);
 		opacity: 0.5;
 	}
 	path.answer.transition {
 		transition: d 2s ease-in-out;
 	}
 	#answer circle {
-		fill: var(--mustard);
+		fill: var(--neon);
 	}
 	#answer text {
-		fill: var(--cream);
+		fill: var(--onyx);
 	}
 
 	.start path.answer,
 	.start #answer circle {
-		fill: var(--moss);
+		fill: var(--rust);
+	}
+	.start #answer text {
+		fill: var(--cloud);
 	}
 	.overlay.start path.answer {
 		opacity: 0.3;
@@ -267,16 +270,16 @@
 		text-align: center;
 	}
 	.label circle {
-		fill: var(--sky);
+		fill: var(--periwinkle);
 		transition: fill 0.2s linear;
-		stroke: var(--charcoal);
+		stroke: var(--onyx);
 		stroke-width: 1;
 	}
 	.overlay .label circle {
-		fill: var(--cream);
+		fill: var(--cloud);
 	}
 	.label.highlight circle {
-		fill: var(--charcoal);
+		fill: var(--onyx);
 	}
 	.label.highlight text {
 		fill: white;

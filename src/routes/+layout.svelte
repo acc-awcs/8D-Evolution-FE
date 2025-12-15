@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>The All We Can Save 8 Dynamics Quiz</title>
+	<title>Climate Wayfinding 8 Dynamics Quiz</title>
 	<meta name="description" content="Explore your dynamics of climate engagement" />
 	<!-- Image tag must be FQDN -->
 	<meta

@@ -51,13 +51,13 @@
 		box-sizing: border-box;
 	}
 	.tile {
-		width: 450px;
+		width: 500px;
 		max-width: 100%;
 		box-sizing: border-box;
 		padding: 30px;
 		box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
-		border-radius: 10px;
-		background-color: var(--sky);
+		border-radius: var(--br);
+		background-color: var(--periwinkle);
 		max-height: 95vh;
 		max-height: calc(100dvh - 20px);
 		overflow: auto;

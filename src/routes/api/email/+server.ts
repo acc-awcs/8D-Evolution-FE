@@ -7,7 +7,7 @@ const client = mailchimp(apiKey ?? '');
 
 export async function POST({ request }) {
 	try {
-		const { email, results_string } = await request.json();
+		const { email, resultCode } = await request.json();
 
 		// check for valid email
 		if (!EmailValidator.validate(email)) {
@@ -21,8 +21,12 @@ export async function POST({ request }) {
 			template_content: [
 				{
 					name: 'results_link',
-					content: `Thank you for spending some time with the 8 Dynamics of Climate Engagement! Your results are <a href="${env.BASE_URL}/results/${results_string}" style="color: #303326; text-decoration: underline">here</a>.`
+					content: `<p>Thank you for spending some time with the 8 Dynamics of Climate Engagement!</p><p>You can revisit your initial results here: <a href="${env.BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p><p>Your unique code is ...</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>`
 				}
+				// {
+				// 	name: 'results_code',
+				// 	content: `<strong style="font-size: 28px;">${resultCode}</strong>`
+				// }
 			],
 			message: {
 				from_email: 'info@allwecansave.earth',

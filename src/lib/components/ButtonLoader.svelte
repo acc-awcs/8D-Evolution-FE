@@ -22,8 +22,8 @@
 		position: relative;
 		top: 6px;
 		border-radius: 50%;
-		border: 4px solid var(--cream);
-		border-color: var(--cream) transparent var(--cream) transparent;
+		border: 4px solid var(--cloud);
+		border-color: var(--cloud) transparent var(--cloud) transparent;
 		box-sizing: border-box;
 		animation: moving-ring 1.2s linear infinite;
 	}

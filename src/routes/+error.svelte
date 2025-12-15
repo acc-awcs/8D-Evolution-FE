@@ -27,7 +27,7 @@
 		left: 0px;
 	}
 	main {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		padding: 3rem;
 		height: 100vh;
 		position: relative;
@@ -35,8 +35,8 @@
 		grid-template-columns: 1fr minmax(400px, 1fr);
 		grid-template-rows: min-content 1fr;
 		gap: 1em 3em;
-		background-image: url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'),
-			url('$lib/assets/cloud-5.png');
+		background-image:
+			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
 		background-repeat: no-repeat, no-repeat, no-repeat;
 		background-blend-mode: overlay, overlay, overlay;
 		background-position:

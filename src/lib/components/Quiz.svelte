@@ -125,7 +125,7 @@
 <main onscroll={(e) => (scrollY = (e.target as HTMLElement)?.scrollTop)}>
 	<Logo onDark={true} />
 	<section class="intro">
-		<div class="clouds-overlay-wrapper">
+		<!-- <div class="clouds-overlay-wrapper">
 			<div
 				class="clouds-overlay"
 				style="
@@ -136,7 +136,7 @@
 					left: {-OVERLAY_OFFSET_LEFT_PERCENT}%;
 					"
 			></div>
-		</div>
+		</div> -->
 		<div class="content">
 			<h1 class="title">8 Dynamics of Climate Engagement</h1>
 			<p>
@@ -194,10 +194,14 @@
 		scroll-padding: 2em;
 		outline: 0px;
 	}
+	.content .title {
+		font-size: 60px;
+	}
 	section.intro {
-		background-image: url('$lib/assets/cloud-hero-layer-1.jpg');
-		background-size: cover;
-		color: var(--cream);
+		/* background-image: url('$lib/assets/cloud-hero-layer-1.jpg');
+		background-size: cover; */
+		/* color: var(--cloud); */
+		background-color: var(--periwinkle);
 	}
 	section.intro .content {
 		width: var(--width-large);
@@ -208,10 +212,10 @@
 	}
 	.intro p {
 		text-align: center;
-		font-family: sans-serif;
-		font-size: 20px;
-		font-weight: 300;
-		line-height: 1.5;
+		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
+		font-size: 18px;
+		font-weight: 200;
+		/* line-height: 1.5; */
 		margin-bottom: 50px;
 	}
 	.clouds-overlay-wrapper {

@@ -27,14 +27,16 @@
 
 <style>
 	button {
-		padding: 10px;
+		padding: 20px 10px;
+		padding-bottom: 16px;
 		width: 300px;
 		/* line-height: 50px; */
+		/* line-height: 50px; */
 		font-size: 2.5rem;
-		font-family: 'General Grotesque', Helvetica, Arial, sans-serif;
+		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 		font-weight: 200;
-		color: var(--charcoal);
-		background-color: var(--sky);
+		color: var(--onyx);
+		background-color: var(--periwinkle);
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
@@ -49,14 +51,14 @@
 	}
 
 	button:focus-visible {
-		outline: 4px solid var(--mustard);
+		outline: 4px solid var(--neon);
 	}
 
 	.copy-note {
 		display: block;
 		font-size: 1rem;
 		font-style: italic;
-		margin-top: 16px;
-		margin: 8px 0px;
+		margin-top: 10px;
+		height: 20px;
 	}
 </style>

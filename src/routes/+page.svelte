@@ -34,7 +34,7 @@
 		left: 0px;
 	}
 	main {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		padding: 3rem;
 		height: 100vh;
 		position: relative;

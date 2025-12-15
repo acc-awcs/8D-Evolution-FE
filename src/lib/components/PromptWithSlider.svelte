@@ -77,10 +77,11 @@
 
 	label {
 		display: block;
-		font-family: 'adobe-garamond-pro', serif;
+		/* font-family: 'Instrument Serif', serif; */
 		font-weight: 400;
-		font-size: 26px;
-		font-style: italic;
+		font-size: 24px;
+		line-height: 40px;
+		/* font-style: italic; */
 		outline: none;
 		text-align: center;
 	}
@@ -97,7 +98,7 @@
 		font-size: 44px;
 		text-align: center;
 		font-weight: 600;
-		color: var(--mustard);
+		color: var(--periwinkle);
 		margin-bottom: 30px;
 		position: relative;
 		right: 2px;
@@ -145,12 +146,14 @@
 		margin: 0px 1rem;
 		height: 1px;
 		display: flex;
-		background: var(--charcoal);
+		background: var(--onyx);
 		cursor: pointer;
+		border: none;
+		padding: 0px;
 	}
 
 	.slider:has(:focus-visible) {
-		border: 4px solid var(--mustard);
+		border: 4px solid var(--periwinkle);
 	}
 
 	input[type='range']:focus {
@@ -162,7 +165,7 @@
 		height: 30px;
 		aspect-ratio: 1;
 		border-radius: 50%;
-		background-color: var(--mustard);
+		background-color: var(--periwinkle);
 		-webkit-appearance: none;
 		appearance: none;
 	}
@@ -173,7 +176,7 @@
 		width: 25px;
 		background: none;
 		border-radius: 50%;
-		background-color: var(--mustard);
+		background-color: var(--periwinkle);
 		-moz-appearance: none;
 		appearance: none;
 	}

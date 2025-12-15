@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import Logo from '$lib/components/Logo.svelte';
-	import { delay } from '$lib/helpers/general';
 	import { _checkStartCode } from './+page';
 
 	// Code form & state management
@@ -32,7 +30,10 @@
 
 	function handleCodeInputChange(evt: Event): void {
 		const input = evt.target as HTMLInputElement;
-		if (/^[0-9]+$/.test(input.value) && input.value.length <= 6) {
+		// 		if (/^[0-9]+$/.test(input.value) && input.value.length <= 6) {
+		// 	code = input.value;
+		// }
+		if (/^[a-zA-Z0-9]+$/.test(input.value) && input.value.length <= 6) {
 			code = input.value;
 		}
 	}
@@ -77,7 +78,6 @@
 								return;
 							}
 							codeCheckLoading = true;
-							await delay(1000);
 							const resp = await _checkStartCode(code);
 							if (resp.success) {
 								codeCheckSuccess = true;
@@ -95,7 +95,7 @@
 							><span>Your Starting Point Code</span>
 							<input
 								value={code}
-								type="number"
+								type="text"
 								placeholder="______"
 								oninput={handleCodeInputChange}
 								onkeydown={preventExtensiveLength}
@@ -145,10 +145,10 @@
 		margin-bottom: 40px;
 	}
 	.wrapper {
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		min-height: 100vh;
 		box-sizing: border-box;
-		background-color: var(--sky);
+		background-color: var(--periwinkle);
 		background-image:
 			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
 		background-repeat: no-repeat, no-repeat, no-repeat;
@@ -180,6 +180,12 @@
 		font-size: 1rem;
 	}
 
+	label {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
 	label > span {
 		margin-top: 20px;
 		display: block;
@@ -189,19 +195,20 @@
 
 	input {
 		padding: 10px;
-		padding-bottom: 16px;
+		padding-top: 16px;
 		width: 300px;
 		font-size: 2.5rem;
-		font-family: 'General Grotesque', Helvetica, Arial, sans-serif;
+		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 		font-weight: 200;
-		color: var(--charcoal);
-		background-color: var(--cream);
+		color: var(--onyx);
+		background-color: var(--cloud);
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
 		letter-spacing: 10px;
 		text-align: center;
 		margin-bottom: 20px;
+		text-transform: uppercase;
 	}
 
 	form {

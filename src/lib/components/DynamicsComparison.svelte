@@ -93,8 +93,8 @@
 		font-size: 1rem;
 	}
 	ol li:first-child {
-		font-family: 'adobe-garamond-pro', serif;
-		font-size: 20px;
+		font-family: 'Instrument Serif', serif;
+		font-size: 24px;
 	}
 	.index {
 		margin-right: 2px;
