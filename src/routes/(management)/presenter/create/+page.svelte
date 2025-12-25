@@ -20,7 +20,7 @@
 		};
 	}}
 >
-	<h1 class="title">Create Group Lead Account</h1>
+	<h1 class="title">Create Presenter Account</h1>
 	<p>
 		Help groups visualize their Climate Wayfinding progress through collective 8-Dynamics
 		assessments.
@@ -77,7 +77,6 @@
 		margin-top: 28px;
 		font-size: 14px;
 		text-align: center;
-		font-style: italic;
 		/* margin-bottom: 0px; */
 	}
 

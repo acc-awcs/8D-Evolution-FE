@@ -184,9 +184,10 @@
 					{onHover}
 					onLeave={startRotate}
 				/>
+				<p class="fade-in extra-delayed"><a href="#up_next">Scroll down for next steps ↓</a></p>
 			</div>
 		</section>
-		<section class="up-next">
+		<section id="up_next" class="up-next">
 			<div class="column">
 				<p class="pre-title">Next Steps</p>
 				<h1 class="title">Save Your Results Code</h1>
@@ -354,6 +355,12 @@
 
 	.delayed {
 		animation-delay: 0.5s;
+		animation-duration: 3s;
+	}
+
+	.extra-delayed {
+		margin-top: 40px;
+		animation-delay: 2s;
 	}
 
 	.conclusion {

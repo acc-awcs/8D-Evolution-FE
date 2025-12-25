@@ -1,0 +1,83 @@
+<script>
+	import SettingsButton from '$lib/components/SettingsButton.svelte';
+	import { COMPLETE, END, START } from '$lib/constants.js';
+	import { getStatus, getStatusColor } from '$lib/helpers/presenters';
+	import ActionBox from './ActionBox.svelte';
+	import GroupSettingsModal from './GroupSettingsModal.svelte';
+
+	let { data } = $props();
+	let group = $derived(data.group);
+	let status = $derived(getStatus(group));
+	let showSettingsModal = $state(false);
+</script>
+
+{#if showSettingsModal}
+	<GroupSettingsModal {data} onClose={() => (showSettingsModal = false)} />
+{/if}
+
+<a href="/presenter" class="back">← Back to all groups</a>
+<!-- {@const group = data.group} -->
+<div class="header">
+	<h1 class="title">{group.name}</h1>
+	<SettingsButton onClick={() => (showSettingsModal = true)} />
+</div>
+
+<div class="actions">
+	<ActionBox number={1} color={getStatusColor(START)} active={status === START}>
+		<h2>Map Collective Starting Point</h2>
+		<p>Begin a presentation to map your group's collective 8 Dynamics starting point.</p>
+		{#if status === START}
+			<a class="btn primary" href={`/presenter/group/${group._id}/start`}> Begin </a>
+		{:else}
+			<p class="note">The collective starting point has been recorded.</p>
+		{/if}
+	</ActionBox>
+	<ActionBox number={2} color={getStatusColor(END)} active={status === END}>
+		<h2>Map Collective Ending Point</h2>
+		<p>
+			Ready to see the results of your group's learnings? Begin the presentation to map your group’s
+			collective ending point.
+		</p>
+		{#if status === START}
+			<p class="note">Available once the collective starting point map has been completed.</p>
+		{:else if status === END}
+			<a class="btn primary" href="/presenter/group/"> Begin </a>
+		{/if}
+	</ActionBox>
+	<ActionBox number={3} color={getStatusColor(COMPLETE)} active={status === COMPLETE}>
+		<h2>Map Collective Starting Point</h2>
+		<p>Check out the collective shift between your group’s start and ending points.</p>
+		{#if status === COMPLETE}
+			<a class="btn primary" href="/presenter/group/"> View </a>
+		{:else}
+			<p class="note">Available once both mappings have been completed.</p>
+		{/if}
+	</ActionBox>
+</div>
+
+<style>
+	.back {
+		margin-top: 8px;
+	}
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	.note {
+		font-style: italic;
+	}
+
+	@media screen and (max-width: 600px) {
+		.title {
+			margin-right: auto;
+		}
+		.header {
+			flex-direction: column-reverse;
+			align-items: flex-end;
+			justify-content: flex-start;
+		}
+	}
+</style>

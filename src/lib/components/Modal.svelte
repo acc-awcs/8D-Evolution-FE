@@ -57,10 +57,15 @@
 		padding: 30px;
 		box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
 		border-radius: var(--br);
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		max-height: 95vh;
 		max-height: calc(100dvh - 20px);
 		overflow: auto;
 		margin: 10px 0px;
+	}
+	@media screen and (max-width: 600px) {
+		.tile {
+			padding: 30px 20px;
+		}
 	}
 </style>

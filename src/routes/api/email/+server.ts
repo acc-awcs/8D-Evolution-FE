@@ -1,6 +1,7 @@
 import mailchimp from '@mailchimp/mailchimp_transactional';
 import { env } from '$env/dynamic/private';
 import * as EmailValidator from 'email-validator';
+import { RESULTS_EMAIL_TEMPLATE } from '$lib/constants.js';
 
 const apiKey = env.MAILCHIMP_API_KEY;
 const client = mailchimp(apiKey ?? '');
@@ -17,16 +18,17 @@ export async function POST({ request }) {
 		}
 
 		const message = {
-			template_name: 'eight-dynamics',
+			template_name: RESULTS_EMAIL_TEMPLATE,
 			template_content: [
 				{
-					name: 'results_link',
-					content: `<p>Thank you for spending some time with the 8 Dynamics of Climate Engagement!</p><p>You can revisit your initial results here: <a href="${env.BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p><p>Your unique code is ...</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>`
+					name: 'content',
+					content: `
+					<p>Thank you for spending some time with the 8 Dynamics of Climate Engagement!</p>
+					<p>Your unique code is ...</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
+					<p>Want to revisit your results page? View your 8 Dynamics Web with the link below:</p>
+					<p><a href="${env.BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p>
+					`
 				}
-				// {
-				// 	name: 'results_code',
-				// 	content: `<strong style="font-size: 28px;">${resultCode}</strong>`
-				// }
 			],
 			message: {
 				from_email: 'info@allwecansave.earth',
@@ -37,7 +39,7 @@ export async function POST({ request }) {
 						name: ''
 					}
 				],
-				subject: 'Your 8 Dynamics Results'
+				subject: 'Your 8 Dynamics Results Code'
 			}
 		};
 

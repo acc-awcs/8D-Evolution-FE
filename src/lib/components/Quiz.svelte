@@ -10,8 +10,6 @@
 	let { data, isStart } = $props();
 	let loading = $state(false);
 
-	// console.log('START CODE?', data.startCode);
-
 	// Cloud parallax variables
 	let scrollY = $state(0);
 	let innerWidth = $state(0);
@@ -140,11 +138,16 @@
 		<div class="content">
 			<h1 class="title">8 Dynamics of Climate Engagement</h1>
 			<p>
-				Below, you’ll find each of the 8 Dynamics of Climate Engagement with a sliding bar. Take a
+				Below, you'll find each of the 8 Dynamics of Climate Engagement with a sliding bar. Take a
 				moment to reflect on each statement and respond on a spectrum from 1 (“not true for me”) to
-				5 (“extremely true for me”). Consider what’s true for you, right now.
+				5 (“extremely true for me”). Consider what's true for you, right now.
 			</p>
-			<a class="btn secondary" href="#section-0" onclick={(e) => scrollToSection(e, 0)}>Start</a>
+			<a
+				class="btn primary"
+				style="padding:20px 60px;"
+				href="#section-0"
+				onclick={(e) => scrollToSection(e, 0)}>Start</a
+			>
 		</div>
 	</section>
 

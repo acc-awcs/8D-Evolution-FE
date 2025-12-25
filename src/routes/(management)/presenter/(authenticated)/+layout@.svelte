@@ -3,20 +3,18 @@
 	import accountIcon from '$lib/assets/account.svg';
 	import Modal from '$lib/components/Modal.svelte';
 	import { enhance } from '$app/forms';
-	import { FACILITATOR, GROUP_LEAD } from '$lib/constants.js';
+	import { GROUP_LEAD } from '$lib/constants.js';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import Arrow from '$lib/components/Arrow.svelte';
 
 	let loading = $state(false);
 	let accountModalOpen = $state(false);
 	const closeModal = () => (accountModalOpen = false);
-	let { data } = $props();
+	let { data, children } = $props();
 </script>
 
 <div class="wrapper">
 	<nav>
 		<Logo relative={true} />
-		<!-- <a href="/presenter"> Home </a> -->
 		<div class="account-wrapper">
 			<button class="account-btn" type="button" onclick={() => (accountModalOpen = true)}>
 				<span class="visually-hidden">Account</span>
@@ -48,7 +46,7 @@
 				}}
 				action="api/logout"
 			>
-				<button class="btn primary" type="submit" disabled={loading}>
+				<button class="btn primary large" type="submit" disabled={loading}>
 					{#if loading}
 						<ButtonLoader />
 					{:else}
@@ -63,7 +61,7 @@
 	{/if}
 
 	<main>
-		<slot />
+		{@render children()}
 	</main>
 </div>
 
@@ -102,10 +100,16 @@
 		border-radius: 100%;
 		margin: 0px;
 		height: auto;
+		opacity: 1;
+		transition: opacity 0.1s linear;
 	}
 
 	.account-btn img {
 		display: block;
+	}
+
+	.account-btn:hover {
+		opacity: 0.9;
 	}
 
 	.account-wrapper {
@@ -116,7 +120,7 @@
 
 	.btn {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: center;
 		gap: 20px;
 		align-items: center;
 		min-width: 150px;
@@ -125,9 +129,9 @@
 	svg {
 		position: relative;
 		display: block;
-		margin: 0 auto;
+		/* margin: 0 auto; */
 		width: 30px;
-		height: 30px;
+		height: 20px;
 		margin-bottom: 4px;
 	}
 
@@ -149,5 +153,11 @@
 		min-height: 85vh;
 		margin-top: 10px;
 		border-radius: var(--br) var(--br) 0px 0px;
+	}
+
+	@media screen and (max-width: 600px) {
+		main {
+			padding: 20px 20px;
+		}
 	}
 </style>
