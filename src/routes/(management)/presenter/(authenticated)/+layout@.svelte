@@ -44,7 +44,7 @@
 						loading = false;
 					};
 				}}
-				action="api/logout"
+				action="/api/logout?/logout"
 			>
 				<button class="btn primary large" type="submit" disabled={loading}>
 					{#if loading}

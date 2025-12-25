@@ -1,7 +1,7 @@
 import { isRedirect, redirect } from '@sveltejs/kit';
 
 export const actions = {
-	default: async ({ cookies }) => {
+	logout: async ({ cookies }) => {
 		try {
 			cookies.delete('sessionToken', { path: '/' });
 
