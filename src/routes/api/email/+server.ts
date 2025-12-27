@@ -1,5 +1,5 @@
 import mailchimp from '@mailchimp/mailchimp_transactional';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import * as EmailValidator from 'email-validator';
 import { RESULTS_EMAIL_TEMPLATE } from '$lib/constants.js';
 
@@ -26,7 +26,7 @@ export async function POST({ request }) {
 					<p>Thank you for spending some time with the 8 Dynamics of Climate Engagement!</p>
 					<p>Your unique code is ...</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
 					<p>Want to revisit your results page? View your 8 Dynamics Web with the link below:</p>
-					<p><a href="${env.BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p>
+					<p><a href="${env.PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p>
 					`
 				}
 			],

@@ -10,6 +10,7 @@
 
 	/* Climate Wayfinding Guide Colors */
 	--cloud: #faf6f0;
+	--cloud-dark: #eae4db;
 	--onyx: #2f3325;
 	--soil: #d18856;
 	--canyon: #d15429;
@@ -169,6 +170,12 @@ a:focus-visible {
 .btn.large {
 	box-sizing: border-box;
 	width: 100%;
+}
+
+.btn.medium {
+	box-sizing: border-box;
+	width: 400px;
+	max-width: 100%;
 }
 
 .btn.primary {

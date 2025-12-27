@@ -74,7 +74,7 @@
 					<form
 						onsubmit={async (e) => {
 							if (code === '' || code.length < 6) {
-								codeError = 'Please enter a six-digit code';
+								codeError = 'Please enter a six-letter code';
 								return;
 							}
 							codeCheckLoading = true;
