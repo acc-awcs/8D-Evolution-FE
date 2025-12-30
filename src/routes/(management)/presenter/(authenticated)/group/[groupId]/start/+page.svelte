@@ -1,7 +1,8 @@
 <script>
 	import { browser } from '$app/environment';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import PresentationFooter from '$lib/components/PresentationFooter.svelte';
 	import { shortenUrl } from '$lib/helpers/general';
 	import { qr } from '@svelte-put/qr/svg';
 	import { onDestroy } from 'svelte';
@@ -24,7 +25,7 @@
 	// TODO: need to stop polling at some point, or nah?
 </script>
 
-<h1 class="title">Map Our Collective Starting Point</h1>
+<h1 class="title">Join Collective Starting Point Poll</h1>
 
 <div class="wrapper">
 	<div class="option">
@@ -47,6 +48,13 @@
 		<p class="code">{data.group.startingPointCode}</p>
 	</div>
 </div>
+
+<PresentationFooter
+	num={data.group.collectiveStartReady.length}
+	numLabel="Ready"
+	onNext={() => goto(`/presenter/group/${data.group._id}/start/chart`)}
+	onPrev={null}
+/>
 
 <style>
 	.wrapper {

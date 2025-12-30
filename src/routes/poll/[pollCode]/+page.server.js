@@ -5,17 +5,31 @@ import { fail, isRedirect, redirect } from '@sveltejs/kit';
 
 export async function load({ cookies, fetch, params }) {
 	try {
-		// const data = await request.json();
+		// Check to see if user already has a valid poll token
 		const pollToken = cookies.get('pollToken');
+		if (pollToken) {
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll/ready?pollToken=${pollToken}`, {
+				method: 'GET'
+			});
 
-		const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll/ready?pollToken=${pollToken}`, {
+			if (statusIsGood(response.status)) {
+				const body = await response.json();
+				redirect(303, `/poll/${body.pollCode}/ready`);
+			}
+		}
+
+		// If not, see if poll code is valid.
+		const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll?pollCode=${params.pollCode}`, {
 			method: 'GET'
 		});
 
 		if (statusIsGood(response.status)) {
-			const body = await response.json();
-			redirect(303, `/poll/${body.pollCode}/ready`);
+			return {
+				...params
+			};
 		}
+
+		redirect(303, '/poll');
 	} catch (error) {
 		if (isRedirect(error)) {
 			throw error;
@@ -25,10 +39,6 @@ export async function load({ cookies, fetch, params }) {
 			success: false
 		};
 	}
-
-	return {
-		...params
-	};
 }
 
 export const actions = {

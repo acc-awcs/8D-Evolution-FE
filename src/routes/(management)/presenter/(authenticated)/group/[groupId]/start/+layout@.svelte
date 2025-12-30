@@ -34,8 +34,8 @@
 
 <div class="wrapper">
 	<nav>
-		<a href={`/presenter/group/${data.group._id}`}> Exit </a>
-		<FullScreen {isFullScreen} onClick={toggleFullScreen}>Full Screen</FullScreen>
+		<a href={`/presenter/group/${data.groupId}`}> Exit </a>
+		<FullScreen {isFullScreen} onClick={toggleFullScreen}></FullScreen>
 	</nav>
 
 	<main>

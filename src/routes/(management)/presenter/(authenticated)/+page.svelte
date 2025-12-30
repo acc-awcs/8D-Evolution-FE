@@ -11,7 +11,7 @@
 	<NewGroupModal onClose={() => (showNewGroupModal = false)} {data} />
 {/if}
 
-<div>
+<div class="wrapper">
 	<h1 class="title">Your Groups</h1>
 	<div class="header">
 		<p>
@@ -42,6 +42,9 @@
 </div>
 
 <style>
+	.wrapper {
+		min-height: 85vh;
+	}
 	.header {
 		display: flex;
 		justify-content: space-between;

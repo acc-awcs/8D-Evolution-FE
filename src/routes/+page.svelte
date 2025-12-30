@@ -86,5 +86,14 @@
 		.links {
 			flex-direction: column;
 		}
+		section {
+			padding-top: 30px;
+		}
+
+		.logo-wrapper {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+		}
 	}
 </style>

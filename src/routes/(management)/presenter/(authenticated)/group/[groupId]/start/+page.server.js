@@ -1,11 +1,13 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
+// This function will be run on an interval to poll for registrant updates
 export async function load({ cookies, fetch, params }) {
 	const sessionToken = cookies.get('sessionToken');
+	const { groupId } = params;
 
-	const response = await fetch(`${PUBLIC_SERVER_URL}/api/account`, {
+	const response = await fetch(`${PUBLIC_SERVER_URL}/api/group?groupId=${groupId}`, {
 		headers: {
 			Authorization: `Bearer ${sessionToken}`
 		},
@@ -13,11 +15,7 @@ export async function load({ cookies, fetch, params }) {
 	});
 
 	if (!statusIsGood(response.status)) {
-		if (response.status === 401) {
-			redirect(303, '/presenter/login');
-		} else {
-			error(500);
-		}
+		error(500);
 	}
 
 	const data = await response.json();
@@ -26,8 +24,5 @@ export async function load({ cookies, fetch, params }) {
 		error(404, 'Not Found');
 	}
 
-	return {
-		...data,
-		...params
-	};
+	return data;
 }

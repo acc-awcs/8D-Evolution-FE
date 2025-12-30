@@ -7,7 +7,7 @@
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
 
-	let { data, isStart } = $props();
+	let { data, isStart, isPoll } = $props();
 	let loading = $state(false);
 
 	// Cloud parallax variables
@@ -121,7 +121,9 @@
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <main onscroll={(e) => (scrollY = (e.target as HTMLElement)?.scrollTop)}>
-	<Logo onDark={true} />
+	<div class="logo-wrapper">
+		<Logo onDark={true} />
+	</div>
 	<section class="intro">
 		<!-- <div class="clouds-overlay-wrapper">
 			<div
@@ -292,6 +294,11 @@
 			background-position:
 				top left 200px,
 				bottom center;
+		}
+		.logo-wrapper {
+			display: flex;
+			justify-content: center;
+			width: 100%;
 		}
 	}
 	img {
