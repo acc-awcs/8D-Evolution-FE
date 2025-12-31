@@ -50,7 +50,7 @@
 		{#if group.startPollCode && group.startPollInitiated}
 			<div class="buttons">
 				<button class="link-like" type="button" onclick={() => (showResetStartModal = true)}
-					>Retake</button
+					>Retake Poll</button
 				>
 				<a class="btn primary" href={`/presenter/group/${group._id}/start/review`}>
 					View Results
@@ -59,7 +59,7 @@
 		{:else}
 			<form method="POST" action="?/beginPoll">
 				<input type="hidden" name="isStart" value="true" />
-				<button class="btn primary" type="submit">Begin</button>
+				<button class="btn primary" type="submit">Begin Poll</button>
 			</form>
 		{/if}
 	</ActionBox>
@@ -74,14 +74,14 @@
 		{:else if group.endPollCode && group.endPollInitiated}
 			<div class="buttons">
 				<button class="link-like" type="button" onclick={() => (showResetEndModal = true)}
-					>Retake</button
+					>Retake Poll</button
 				>
 				<a class="btn primary" href={`/presenter/group/${group._id}/end/review`}> View Results </a>
 			</div>
 		{:else}
 			<form method="POST" action="?/beginPoll">
 				<input type="hidden" name="isStart" value="false" />
-				<button class="btn primary" type="submit">Begin</button>
+				<button class="btn primary" type="submit">Begin Poll</button>
 			</form>
 		{/if}
 	</ActionBox>
