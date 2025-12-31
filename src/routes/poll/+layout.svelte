@@ -8,11 +8,9 @@
 		<Logo />
 	</header>
 	<main>
-		<section>
-			<div class="column">
-				{@render children()}
-			</div>
-		</section>
+		<div class="column">
+			{@render children()}
+		</div>
 	</main>
 </div>
 
@@ -27,6 +25,7 @@
 		background-color: var(--cloud);
 		box-sizing: border-box;
 		padding: 20px 20px;
+		max-width: 100%;
 	}
 
 	main {
@@ -37,15 +36,11 @@
 		align-items: center;
 	}
 
-	section {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
 	.column {
+		box-sizing: border-box;
 		display: flex;
 		width: var(--width-medium);
+		max-width: 100%;
 		justify-content: center;
 		text-align: center;
 		flex-direction: column;

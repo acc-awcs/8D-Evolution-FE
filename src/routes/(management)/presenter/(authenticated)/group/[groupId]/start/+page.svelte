@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import { browser } from '$app/environment';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import PresentationFooter from '$lib/components/PresentationFooter.svelte';
 	import { shortenUrl } from '$lib/helpers/general';
@@ -21,8 +22,11 @@
 	}
 
 	let { data } = $props();
+	let formElement: HTMLFormElement;
 
-	// TODO: need to stop polling at some point, or nah?
+	function callActionFromScript() {
+		formElement.submit();
+	}
 </script>
 
 <h1 class="title">Join Collective Starting Point Poll</h1>
@@ -34,9 +38,7 @@
 		<svg
 			class="qrcode"
 			use:qr={{
-				data: `${PUBLIC_BASE_URL}/q/${data.group.startingPointCode}`
-				// logo: 'https://svelte-put.vnphanquang.com/images/svelte-put-logo.svg',
-				// shape: 'circle',
+				data: `${PUBLIC_BASE_URL}/q/${data.group.startPollCode}`
 			}}
 		/>
 	</div>
@@ -45,14 +47,22 @@
 		<h3>Visit</h3>
 		<p class="poll-link">{shortenUrl(`${PUBLIC_BASE_URL}/poll`)}</p>
 		<p>and enter code</p>
-		<p class="code">{data.group.startingPointCode}</p>
+		<p class="code">{data.group.startPollCode}</p>
 	</div>
 </div>
 
+<form
+	aria-hidden="true"
+	method="POST"
+	action="?/updateGroup"
+	use:enhance
+	bind:this={formElement}
+></form>
+
 <PresentationFooter
-	num={data.group.collectiveStartReady.length}
+	num={data.group.startPollReadyParticipants.length}
 	numLabel="Ready"
-	onNext={() => goto(`/presenter/group/${data.group._id}/start/chart`)}
+	onNext={data.group.startPollReadyParticipants.length > 0 ? callActionFromScript : null}
 	onPrev={null}
 />
 

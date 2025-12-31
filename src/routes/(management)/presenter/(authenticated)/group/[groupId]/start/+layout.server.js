@@ -2,6 +2,7 @@ import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
 import { error, redirect } from '@sveltejs/kit';
 
+// Need to have this again since we reset the layout
 export async function load({ cookies, fetch, params }) {
 	const sessionToken = cookies.get('sessionToken');
 

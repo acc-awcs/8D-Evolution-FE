@@ -4,4 +4,4 @@
 	let { data } = $props();
 </script>
 
-<Quiz {data} isStart={true} />
+<Quiz {data} pollCode={data.pollCode} />

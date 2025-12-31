@@ -1,11 +1,10 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
-import { error } from '@sveltejs/kit';
 import { fail, isRedirect, redirect } from '@sveltejs/kit';
 
 export async function load({ cookies, fetch, params }) {
 	try {
-		// Check to see if user already has a valid poll token
+		// Check to see if user already has a valid poll token, and redirect to the ready page if so
 		const pollToken = cookies.get('pollToken');
 		if (pollToken) {
 			const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll/ready?pollToken=${pollToken}`, {
@@ -14,22 +13,13 @@ export async function load({ cookies, fetch, params }) {
 
 			if (statusIsGood(response.status)) {
 				const body = await response.json();
-				redirect(303, `/poll/${body.pollCode}/ready`);
+				if (body.pollCode === params.pollCode) {
+					redirect(303, `/poll/${body.pollCode}/ready`);
+				}
 			}
 		}
 
-		// If not, see if poll code is valid.
-		const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll?pollCode=${params.pollCode}`, {
-			method: 'GET'
-		});
-
-		if (statusIsGood(response.status)) {
-			return {
-				...params
-			};
-		}
-
-		redirect(303, '/poll');
+		// Otherwise, do nothing!
 	} catch (error) {
 		if (isRedirect(error)) {
 			throw error;

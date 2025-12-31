@@ -9,6 +9,7 @@
 		onHover,
 		onLeave,
 		isStart,
+		isCollectivePoll,
 		skipHover,
 		isOverlay,
 		showHighlight
@@ -20,6 +21,7 @@
 		onHover: CallableFunction;
 		onLeave: CallableFunction;
 		isStart?: Boolean;
+		isCollectivePoll?: Boolean;
 		skipHover?: Boolean;
 		isOverlay?: Boolean;
 		showHighlight?: Boolean;
@@ -29,8 +31,6 @@
 	const features = $derived(Object.keys(answers));
 	let intervalId = $state<number>();
 	let firstRunComplete = $state(false);
-
-	// console.log('ANSWERS?', answers);
 
 	function startRotate() {
 		if (startAnswers) {
@@ -162,6 +162,7 @@
 		id="chart"
 		class:overlay={isOverlay}
 		class:start={isStart}
+		class:collective={isCollectivePoll}
 		width={config.d}
 		height={config.d}
 		aria-hidden="true"
@@ -196,7 +197,7 @@
 						aria-hidden="true"
 					>
 						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius}> </circle>
-						<text x={f.labelX} y={f.labelY}>{idx + 1}</text>
+						<text x={idx === 0 ? f.labelX + 1 : f.labelX - 0.5} y={f.labelY + 0.5}>{idx + 1}</text>
 					</g>
 				{/if}
 			{/each}
@@ -205,8 +206,14 @@
 			<g id="answer">
 				{#each formattedAnswers as ans}
 					<!-- note: adding 1px to radius to make same size as charcoal circle (with stroke of 1px) -->
-					<circle cx={ans.xCoord} cy={ans.yCoord} r={config.labelRadius + 1}></circle>
-					<text x={ans.xCoord} y={ans.yCoord}>{ans.answer}</text>
+					<circle
+						cx={ans.xCoord}
+						cy={ans.yCoord}
+						r={isCollectivePoll ? config.labelRadius + 2.5 : config.labelRadius + 1}
+					></circle>
+					<text x={isCollectivePoll ? ans.xCoord - 6.5 : ans.xCoord} y={ans.yCoord + 0.2}
+						>{isCollectivePoll ? ans.answer.toFixed(1) : ans.answer}</text
+					>
 				{/each}
 			</g>
 		{/if}
@@ -234,14 +241,20 @@
 
 	/* ANSWER SHAPES */
 	path.answer {
-		fill: var(--neon);
+		fill: var(--marigold);
 		opacity: 0.5;
+	}
+	.collective path.answer {
+		fill: var(--periwinkle);
 	}
 	path.answer.transition {
 		transition: d 2s ease-in-out;
 	}
 	#answer circle {
-		fill: var(--neon);
+		fill: var(--marigold);
+	}
+	.collective #answer circle {
+		fill: var(--periwinkle);
 	}
 	#answer text {
 		fill: var(--onyx);
@@ -262,7 +275,7 @@
 		/* all <text> elements live inside a circle */
 		transform: translate(-5px, 6px);
 		font-weight: 500;
-		font-size: 18px;
+		font-size: 16px;
 	}
 	/* LABELS */
 	.label text {
@@ -274,6 +287,9 @@
 		transition: fill 0.2s linear;
 		stroke: var(--onyx);
 		stroke-width: 1;
+	}
+	.collective .label circle {
+		fill: var(--cloud);
 	}
 	.overlay .label circle {
 		fill: var(--cloud);

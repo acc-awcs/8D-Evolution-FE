@@ -1,12 +1,9 @@
-import { PUBLIC_SERVER_URL } from '$env/static/public';
 import dynamics from '$lib/dynamics';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, fetch }) {
-	const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll?pollCode=${params.pollCode}`, {
-		method: 'GET'
-	});
+export function load({ params }) {
 	return {
+		...params,
 		dynamics
 	};
 }

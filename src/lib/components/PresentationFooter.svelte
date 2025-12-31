@@ -39,7 +39,7 @@
 		width: 48px;
 		height: 48px;
 		background-color: var(--cloud-dark);
-		border-radius: 100%;
+		border-radius: 48px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -57,8 +57,8 @@
 		align-items: center;
 	}
 	.ready div {
-		width: 48px;
-		height: 48px;
+		width: 52px;
+		height: 52px;
 		background-color: var(--cloud-dark);
 		border-radius: 100%;
 		display: flex;

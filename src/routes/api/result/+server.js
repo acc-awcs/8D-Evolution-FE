@@ -8,9 +8,7 @@ export async function POST({ request }) {
 		const response = await fetch(`${PUBLIC_SERVER_URL}/api/results`, {
 			method: 'POST',
 			body: JSON.stringify({
-				...data,
-				groupCode: '000000',
-				sessionId: '12345'
+				...data
 			}),
 			headers: {
 				'content-type': 'application/json'

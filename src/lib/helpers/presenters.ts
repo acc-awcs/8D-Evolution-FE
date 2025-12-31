@@ -1,10 +1,10 @@
 import { COMPLETE, END, START } from '$lib/constants';
 
 export function getStatus(group: any) {
-	if (group.collectiveEndData?.length > 0) {
+	if (group.endPollCode && group.endPollInitiated) {
 		return COMPLETE;
 	}
-	if (group.collectiveStartData?.length > 0) {
+	if (group.startPollCode && group.startPollInitiated) {
 		return END;
 	}
 	return START;

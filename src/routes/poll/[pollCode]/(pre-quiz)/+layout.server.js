@@ -1,0 +1,35 @@
+import { PUBLIC_SERVER_URL } from '$env/static/public';
+import { statusIsGood } from '$lib/helpers/general';
+import { isRedirect, redirect } from '@sveltejs/kit';
+
+// Check to make sure this poll exists, and return it.
+// If poll exists AND the quiz has started, go straight to the quiz page.
+// If poll doesn't exist, go to generic poll code entry page.
+export async function load({ fetch, params }) {
+	try {
+		const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll?pollCode=${params.pollCode}`, {
+			method: 'GET'
+		});
+
+		if (statusIsGood(response.status)) {
+			const body = await response.json();
+			if (body.pollHasBeenInitiated) {
+				redirect(303, `/poll/${params.pollCode}/quiz`);
+			}
+			return {
+				...params,
+				poll: body
+			};
+		}
+
+		redirect(303, '/poll');
+	} catch (error) {
+		if (isRedirect(error)) {
+			throw error;
+		}
+		console.error('An error occurred:', error);
+		return {
+			success: false
+		};
+	}
+}

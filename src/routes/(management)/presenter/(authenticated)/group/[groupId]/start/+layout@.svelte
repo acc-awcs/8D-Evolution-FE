@@ -1,23 +1,10 @@
 <script>
-	import Logo from '$lib/components/Logo.svelte';
-	import accountIcon from '$lib/assets/account.svg';
-	import Modal from '$lib/components/Modal.svelte';
-	import { enhance } from '$app/forms';
-	import { GROUP_LEAD } from '$lib/constants.js';
-	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import { onMount } from 'svelte';
 	import FullScreen from '$lib/components/FullScreen.svelte';
-	import { browser } from '$app/environment';
+	import { page } from '$app/state';
 
 	let { data, children } = $props();
 	let isFullScreen = $state(false);
-
-	const checkFullScreen = () => {
-		if (browser && document.fullscreenElement) {
-			return true;
-		}
-		return false;
-	};
+	const onReviewPage = page.url.pathname.includes('review');
 
 	const toggleFullScreen = () => {
 		if (document.fullscreenElement) {
@@ -34,7 +21,13 @@
 
 <div class="wrapper">
 	<nav>
-		<a href={`/presenter/group/${data.groupId}`}> Exit </a>
+		<a href={`/presenter/group/${data.groupId}`}>
+			{#if onReviewPage}
+				Close Review
+			{:else}
+				End Poll
+			{/if}
+		</a>
 		<FullScreen {isFullScreen} onClick={toggleFullScreen}></FullScreen>
 	</nav>
 

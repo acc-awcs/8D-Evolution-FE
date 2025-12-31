@@ -4,7 +4,6 @@
 
 	let { data } = $props();
 	let loading = $state(false);
-	console.log('DATA', data);
 </script>
 
 <h1 class="title">Sweet!</h1>

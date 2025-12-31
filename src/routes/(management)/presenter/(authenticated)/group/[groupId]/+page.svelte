@@ -4,15 +4,21 @@
 	import { getStatus, getStatusColor } from '$lib/helpers/presenters';
 	import ActionBox from './ActionBox.svelte';
 	import GroupSettingsModal from './GroupSettingsModal.svelte';
+	import ResetModal from './ResetModal.svelte';
 
 	let { data } = $props();
 	let group = $derived(data.group);
 	let status = $derived(getStatus(group));
 	let showSettingsModal = $state(false);
+	let showResetStartModal = $state(false);
 </script>
 
 {#if showSettingsModal}
 	<GroupSettingsModal {data} onClose={() => (showSettingsModal = false)} />
+{/if}
+
+{#if showResetStartModal}
+	<ResetModal startOrEnd="start" {data} onClose={() => (showResetStartModal = false)} />
 {/if}
 
 <a href="/presenter" class="back">← Back to all groups</a>
@@ -23,16 +29,26 @@
 </div>
 
 <div class="actions">
-	<ActionBox number={1} color={getStatusColor(START)} active={status === START}>
+	<ActionBox number={1} color={getStatusColor(START)} active={true}>
 		<h2>Map Collective Starting Point</h2>
 		<p>Begin a presentation to map your group's collective 8 Dynamics starting point.</p>
-		{#if status === START}
-			<a class="btn primary" href={`/presenter/group/${group._id}/start`}> Begin </a>
+		{#if group.startPollCode && group.startPollInitiated}
+			<div class="buttons">
+				<button class="link-like" type="button" onclick={() => (showResetStartModal = true)}
+					>Retake</button
+				>
+				<a class="btn primary" href={`/presenter/group/${group._id}/start/review`}>
+					View Results
+				</a>
+			</div>
 		{:else}
-			<p class="note">The collective starting point has been recorded.</p>
+			<form method="POST" action="?/beginPoll">
+				<input type="hidden" name="isStart" value="true" />
+				<button class="btn primary" type="submit">Begin</button>
+			</form>
 		{/if}
 	</ActionBox>
-	<ActionBox number={2} color={getStatusColor(END)} active={status === END}>
+	<ActionBox number={2} color={getStatusColor(END)} active={status !== COMPLETE}>
 		<h2>Map Collective Ending Point</h2>
 		<p>
 			Ready to see the results of your group's learnings? Begin the presentation to map your group’s
@@ -68,6 +84,16 @@
 	}
 	.note {
 		font-style: italic;
+	}
+	.buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		justify-content: center;
+		align-items: center;
+	}
+	.buttons .link-like {
+		font-size: 16px;
 	}
 
 	@media screen and (max-width: 600px) {

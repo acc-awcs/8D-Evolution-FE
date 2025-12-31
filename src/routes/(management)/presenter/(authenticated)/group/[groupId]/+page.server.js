@@ -103,5 +103,43 @@ export const actions = {
 				success: false
 			};
 		}
+	},
+
+	beginPoll: async ({ cookies, request, params }) => {
+		try {
+			const sessionToken = cookies.get('sessionToken');
+			const formData = await request.formData();
+			formData.append('groupId', params.groupId);
+			const isStart = formData.get('isStart') === 'true';
+			// @ts-ignore
+			formData.forEach((value, key) => (formData[key] = value));
+
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll/begin`, {
+				method: 'POST',
+				body: JSON.stringify(formData),
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${sessionToken}`
+				}
+			});
+
+			if (!statusIsGood(response.status)) {
+				const body = await response.json();
+				return fail(422, {
+					success: false,
+					message: body?.msg
+				});
+			}
+
+			redirect(303, `/presenter/group/${params.groupId}/${isStart ? 'start' : 'end'}`);
+		} catch (error) {
+			if (isRedirect(error)) {
+				throw error;
+			}
+			console.error('An error occurred:', error);
+			return {
+				success: false
+			};
+		}
 	}
 };
