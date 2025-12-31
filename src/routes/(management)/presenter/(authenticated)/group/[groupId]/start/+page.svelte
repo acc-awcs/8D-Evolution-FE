@@ -38,7 +38,7 @@
 		<svg
 			class="qrcode"
 			use:qr={{
-				data: `${PUBLIC_BASE_URL}/q/${data.group.startPollCode}`
+				data: `${PUBLIC_BASE_URL}/poll/${data.group.startPollCode}`
 			}}
 		/>
 	</div>

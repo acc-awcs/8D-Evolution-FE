@@ -1,5 +1,5 @@
 import mailchimp from '@mailchimp/mailchimp_transactional';
-import { env } from '$env/dynamic/public';
+import { env } from '$env/dynamic/private';
 import * as EmailValidator from 'email-validator';
 import { RESULTS_EMAIL_TEMPLATE } from '$lib/constants.js';
 
