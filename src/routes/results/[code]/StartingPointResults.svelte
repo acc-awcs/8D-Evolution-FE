@@ -360,7 +360,7 @@
 
 	.extra-delayed {
 		margin-top: 40px;
-		animation-delay: 2s;
+		animation-delay: 1.5s;
 	}
 
 	.conclusion {

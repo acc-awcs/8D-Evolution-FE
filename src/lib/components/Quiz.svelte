@@ -7,7 +7,7 @@
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
 
-	let { data, pollCode } = $props();
+	let { data, isStart, pollCode } = $props();
 	let loading = $state(false);
 
 	// Cloud parallax variables
@@ -109,6 +109,7 @@
 			}, {});
 			const resp = await _postResult({
 				...valuesByDynamic,
+				isStart,
 				startCode: data.startCode,
 				pollCode
 			});

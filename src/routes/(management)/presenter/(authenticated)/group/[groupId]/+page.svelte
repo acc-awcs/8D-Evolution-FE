@@ -11,6 +11,7 @@
 	let status = $derived(getStatus(group));
 	let showSettingsModal = $state(false);
 	let showResetStartModal = $state(false);
+	let showResetEndModal = $state(false);
 </script>
 
 {#if showSettingsModal}
@@ -18,7 +19,21 @@
 {/if}
 
 {#if showResetStartModal}
-	<ResetModal startOrEnd="start" {data} onClose={() => (showResetStartModal = false)} />
+	<ResetModal
+		startOrEnd="start"
+		hasEndData={group.endPollCode && group.endPollInitiated}
+		{data}
+		onClose={() => (showResetStartModal = false)}
+	/>
+{/if}
+
+{#if showResetEndModal}
+	<ResetModal
+		startOrEnd="end"
+		hasEndData={false}
+		{data}
+		onClose={() => (showResetEndModal = false)}
+	/>
 {/if}
 
 <a href="/presenter" class="back">← Back to all groups</a>
@@ -48,23 +63,35 @@
 			</form>
 		{/if}
 	</ActionBox>
-	<ActionBox number={2} color={getStatusColor(END)} active={status !== COMPLETE}>
+	<ActionBox number={2} color={getStatusColor(END)} active={status !== START}>
 		<h2>Map Collective Ending Point</h2>
 		<p>
-			Ready to see the results of your group's learnings? Begin the presentation to map your group’s
+			Ready to see the results of your group's learnings? Begin the presentation to map your group's
 			collective ending point.
 		</p>
 		{#if status === START}
 			<p class="note">Available once the collective starting point map has been completed.</p>
-		{:else if status === END}
-			<a class="btn primary" href="/presenter/group/"> Begin </a>
+		{:else if group.endPollCode && group.endPollInitiated}
+			<div class="buttons">
+				<button class="link-like" type="button" onclick={() => (showResetEndModal = true)}
+					>Retake</button
+				>
+				<a class="btn primary" href={`/presenter/group/${group._id}/end/review`}> View Results </a>
+			</div>
+		{:else}
+			<form method="POST" action="?/beginPoll">
+				<input type="hidden" name="isStart" value="false" />
+				<button class="btn primary" type="submit">Begin</button>
+			</form>
 		{/if}
 	</ActionBox>
 	<ActionBox number={3} color={getStatusColor(COMPLETE)} active={status === COMPLETE}>
-		<h2>Map Collective Starting Point</h2>
-		<p>Check out the collective shift between your group’s start and ending points.</p>
+		<h2>View Collective Shift</h2>
+		<p>View the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
-			<a class="btn primary" href="/presenter/group/"> View </a>
+			<a class="btn primary" href={`/presenter/group/${group._id}/end/review/comparison?sf=t`}>
+				View Shift
+			</a>
 		{:else}
 			<p class="note">Available once both mappings have been completed.</p>
 		{/if}

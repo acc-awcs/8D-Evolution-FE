@@ -13,10 +13,12 @@
 			<span aria-hidden="true">→</span>
 		</button>
 	</div>
-	<div class="ready">
-		{numLabel}
-		<div><span>{num}</span></div>
-	</div>
+	{#if numLabel}
+		<div class="ready">
+			{numLabel}
+			<div><span>{num}</span></div>
+		</div>
+	{/if}
 </footer>
 
 <style>

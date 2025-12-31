@@ -2,11 +2,9 @@
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import { FACILITATOR, GROUP_LEAD } from '$lib/constants';
 
-	let { startOrEnd, onClose, data } = $props();
+	let { startOrEnd, hasEndData, onClose, data } = $props();
 	let loading = $state(false);
-	console.log('DATA', data);
 </script>
 
 <Modal handleClose={onClose}>
@@ -27,7 +25,14 @@
 				};
 			}}
 		>
-			<p>This will clear out all previous data and begin a new poll with a new code.</p>
+			{#if hasEndData}
+				<p>This will clear out all previously submitted data and begin a new poll.</p>
+			{:else}
+				<p>
+					This will clear out all previously submitted data (including ending point data) and begin
+					a new poll.
+				</p>
+			{/if}
 			<input type="hidden" name="isStart" value="true" />
 			<div class="buttons">
 				<button class="btn secondary large" type="button" onclick={onClose}>Cancel</button>
@@ -42,9 +47,10 @@
 		</form>
 	{:else}
 		<div class="header">
-			<h1>Retake Collective Ending Point</h1>
+			<h1>Retake Poll</h1>
 			<button onclick={onClose} class="close link-like" type="button">Close</button>
 		</div>
+		<p>This will clear out all previously submitted ending point data and begin a new poll.</p>
 		<form
 			method="POST"
 			action="?/beginPoll"
@@ -57,16 +63,14 @@
 				};
 			}}
 		>
-			<input type="hidden" name="isStart" value="true" />
+			<input type="hidden" name="isStart" value="false" />
 			<div class="buttons">
-				<button class="btn secondary large" type="button" onclick={onClose}>
-					No, take me back
-				</button>
+				<button class="btn secondary large" type="button" onclick={onClose}> Cancel </button>
 				<button class="btn primary large" type="submit" disabled={loading}>
 					{#if loading}
 						<ButtonLoader />
 					{:else}
-						Yes, retake poll
+						Retake Poll
 					{/if}
 				</button>
 			</div>
