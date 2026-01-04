@@ -7,6 +7,9 @@
 	let { onClose, data } = $props();
 	let loading = $state(false);
 	const currentUTCYear = new Date().getUTCFullYear();
+	const startYear = 2025;
+	// Show year options starting from 2025 and ending two beyond the current year
+	const yearDiff = currentUTCYear + 2 - startYear;
 </script>
 
 <Modal handleClose={onClose}>
@@ -45,12 +48,17 @@
 				</select>
 			</label><label>
 				Year of Facilitation
-				<select required name="year">
-					<option value={currentUTCYear}>{currentUTCYear}</option>
-					<option value={currentUTCYear + 1}>{currentUTCYear + 1}</option>
+				<select required name="year" value={`${currentUTCYear}`}>
+					{#each { length: yearDiff } as _, i}
+						<option value={`${startYear + i}`}>{startYear + i}</option>
+					{/each}
 				</select>
 			</label>
 		{:else}
+			<p>
+				We recommend choosing a name for the specific session you'll be facilitating. For example,
+				"University of Michigan, Fall {currentUTCYear}".
+			</p>
 			<label>
 				Group Name
 				<input type="text" name="name" />

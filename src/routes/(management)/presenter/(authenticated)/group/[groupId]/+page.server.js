@@ -17,6 +17,8 @@ export async function load({ cookies, fetch, params }) {
 	});
 
 	if (!statusIsGood(response.status)) {
+		const errorBody = await response.text();
+		console.log('Error in group page server', response.status, errorBody);
 		error(500);
 	}
 
@@ -63,7 +65,7 @@ export const actions = {
 			if (isRedirect(error)) {
 				throw error;
 			}
-			console.error('An error occurred:', error);
+			console.error('An error occurred in group delete:', error);
 			return {
 				success: false
 			};
@@ -98,7 +100,7 @@ export const actions = {
 			if (isRedirect(error)) {
 				throw error;
 			}
-			console.error('An error occurred:', error);
+			console.error('An error occurred in group edit:', error);
 			return {
 				success: false
 			};
@@ -136,7 +138,7 @@ export const actions = {
 			if (isRedirect(error)) {
 				throw error;
 			}
-			console.error('An error occurred:', error);
+			console.error('An error occurred in beginPoll:', error);
 			return {
 				success: false
 			};

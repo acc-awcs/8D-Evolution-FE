@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 
@@ -18,18 +19,11 @@
 		};
 	}}
 >
-	<h1 class="title">Presenter Login</h1>
-	<p>
-		Help groups visualize their Climate Wayfinding progress through collective 8-Dynamics
-		assessments.
-	</p>
+	<h1 class="title">Forgot Password</h1>
+	<p>If you have an account, we'll send you an email to reset your password.</p>
 	<label>
 		Email
 		<input required class="large" type="email" name="email" />
-	</label>
-	<label>
-		Password
-		<input required class="large" type="password" name="password" />
 	</label>
 	{#if errorMessage}
 		<p class="error">{errorMessage}</p>
@@ -41,14 +35,12 @@
 			Submit
 		{/if}
 	</button>
-	<p class="note secondary"><a href="/reset-password">Forgot password</a></p>
-
 	<p class="note">Not signed up yet? <a href="/presenter/create">Create a presenter account</a></p>
 </form>
 
 <style>
 	.note {
-		margin-top: 0px;
+		margin-top: 28px;
 		font-size: 14px;
 		text-align: center;
 		margin-bottom: 10px;
@@ -56,10 +48,5 @@
 		justify-content: center;
 		gap: 6px;
 		flex-wrap: wrap;
-	}
-	.note.secondary {
-		margin-top: 28px;
-
-		font-style: normal;
 	}
 </style>

@@ -287,6 +287,9 @@
 		grid-row-start: 1;
 		grid-row-end: span 2;
 		margin-top: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	h1 {
 		margin: 0;

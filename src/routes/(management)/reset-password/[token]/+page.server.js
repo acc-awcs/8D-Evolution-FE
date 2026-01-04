@@ -1,20 +1,35 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
+import { ADMIN } from '$lib/constants.js';
 import { statusIsGood } from '$lib/helpers/general';
 import { fail, isRedirect, redirect } from '@sveltejs/kit';
 
+// Reset password
 export const actions = {
-	default: async ({ cookies, request, params }) => {
+	default: async ({ request, params }) => {
 		try {
-			console.log('DOING THIS?');
+			// const data = await request.json();
 			const formData = await request.formData();
+			formData.append('resetToken', params.token);
 			// @ts-ignore
 			formData.forEach((value, key) => (formData[key] = value));
 
-			const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll/ready`, {
+			if (!formData?.password || formData.password.length < 8) {
+				return fail(422, {
+					success: false,
+					message: 'Password must be at least 8 characters long'
+				});
+			}
+
+			if (formData?.confirmPassword !== formData?.password) {
+				return fail(422, {
+					success: false,
+					message: 'Password confirmation does not match password'
+				});
+			}
+
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/reset-password`, {
 				method: 'POST',
-				body: JSON.stringify({
-					pollCode: params.pollCode
-				}),
+				body: JSON.stringify(formData),
 				headers: {
 					'content-type': 'application/json'
 				}
@@ -29,18 +44,8 @@ export const actions = {
 			}
 
 			const body = await response.json();
-
-			cookies.set('pollToken', body.pollToken, {
-				httpOnly: true,
-				secure: process.env.NODE_ENV === 'production',
-				sameSite: 'strict',
-				path: '/',
-				maxAge: 60 * 60 * 24 // 1 day
-			});
-
-			console.log('GETTING HERE?', body.pollCode);
-			console.log('SUCCESSFULLY?');
-			redirect(303, `/poll/${body.pollCode}/ready`);
+			const role = body.role === ADMIN ? ADMIN : 'presenter';
+			redirect(303, `/reset-password/success/${role}`);
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;

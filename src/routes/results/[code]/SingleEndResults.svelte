@@ -7,8 +7,6 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import { prettyCode } from '$lib/helpers/results';
-	import CopyBox from '$lib/components/CopyBox.svelte';
 	import trackEvent from '$lib/custom-event';
 	import { enhance } from '$app/forms';
 
@@ -145,15 +143,6 @@
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
 			</div>
-			<!-- Error message -->
-			<!-- <h1 class="title">Oops!</h1>
-			<p>
-				Looks like something went wrong on our end and we couldn't send your email. Please try again
-				later.
-			</p>
-			<div class="buttons done">
-				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div> -->
 		{/if}
 	</Modal>
 {/if}
@@ -186,31 +175,6 @@
 				/>
 			</div>
 		</section>
-		<!-- <section class="up-next">
-			<div class="column">
-				<p class="pre-title">Next Steps</p>
-				<h1 class="title">Save Your Results Code</h1>
-				<div class="instructions">
-					<p>
-						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code ({data.code}) to reference these results later.
-					</p>
-					<p>
-						We recommend writing or storing your code somewhere secure. Try a password manager, a
-						favorite journal, or an email to yourself. If you email yourself your code with the
-						button below, your email will not be stored and your results will remain fully
-						anonymous.
-					</p>
-				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn primary"
-					>Email Your Results Code</button
-				>
-				<label>
-					<span>Your Unique Code</span>
-					<CopyBox text={prettyCode(data.code)} textToCopy={data.code} />
-				</label>
-			</div>
-		</section> -->
 		<section class="conclusion">
 			<div class="column">
 				<a class="fancy-link" href="/">← Return to Start</a>
@@ -286,6 +250,9 @@
 		grid-row-start: 1;
 		grid-row-end: span 2;
 		margin-top: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	h1 {
 		margin: 0;

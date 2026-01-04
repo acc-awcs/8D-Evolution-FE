@@ -12,7 +12,6 @@
 	method="POST"
 	use:enhance={() => {
 		loading = true;
-
 		return async ({ result, update }) => {
 			await update();
 			errorMessage = result?.data?.success === false ? result?.data?.message : null;
@@ -77,7 +76,10 @@
 		margin-top: 28px;
 		font-size: 14px;
 		text-align: center;
-		/* margin-bottom: 0px; */
+		display: flex;
+		justify-content: center;
+		gap: 6px;
+		flex-wrap: wrap;
 	}
 
 	.input-row {

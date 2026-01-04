@@ -11,7 +11,9 @@
 	let loading = $state(false);
 	let mode = $state('unselected');
 	const currentUTCYear = new Date().getUTCFullYear();
-	console.log('DATA', data);
+	const startYear = 2025;
+	// Show year options starting from 2025 and ending two beyond the current year
+	const yearDiff = currentUTCYear + 2 - startYear;
 </script>
 
 <Modal handleClose={onClose}>
@@ -60,9 +62,10 @@
 					</select>
 				</label><label>
 					Year of Facilitation
-					<select required name="year" value={`${data.group?.year}`}>
-						<option value={`${currentUTCYear}`}>{currentUTCYear}</option>
-						<option value={`${currentUTCYear + 1}`}>{currentUTCYear + 1}</option>
+					<select required name="year" value={`${data.group?.year || currentUTCYear}`}>
+						{#each { length: yearDiff } as _, i}
+							<option value={`${startYear + i}`}>{startYear + i}</option>
+						{/each}
 					</select>
 				</label>
 			{:else}

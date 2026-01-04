@@ -149,11 +149,7 @@
 				moment to reflect on each statement and respond on a spectrum from 1 (“not true for me”) to
 				5 (“extremely true for me”). Consider what's true for you, right now.
 			</p>
-			<a
-				class="btn primary"
-				style="padding:20px 60px;"
-				href="#section-0"
-				onclick={(e) => scrollToSection(e, 0)}>Start</a
+			<a class="btn primary short" href="#section-0" onclick={(e) => scrollToSection(e, 0)}>Start</a
 			>
 		</div>
 	</section>

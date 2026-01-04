@@ -67,6 +67,7 @@
 		margin-top: 0px;
 		margin-bottom: 40px;
 		font-size: 1rem;
+		text-align: center;
 	}
 
 	h1 {

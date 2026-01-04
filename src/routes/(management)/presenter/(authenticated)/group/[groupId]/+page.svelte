@@ -43,6 +43,10 @@
 	<SettingsButton onClick={() => (showSettingsModal = true)} />
 </div>
 
+<!-- <p class="intro">
+	Launch the next poll to collect and reflect on your group's 8 Dynamics assessment.
+</p> -->
+
 <div class="actions">
 	<ActionBox number={1} color={getStatusColor(START)} active={true}>
 		<h2>Map Collective Starting Point</h2>
@@ -86,11 +90,11 @@
 		{/if}
 	</ActionBox>
 	<ActionBox number={3} color={getStatusColor(COMPLETE)} active={status === COMPLETE}>
-		<h2>View Collective Shift</h2>
-		<p>View the collective shift between your group's starting and ending points.</p>
+		<h2>Review Collective Shift</h2>
+		<p>Revisit the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
-			<a class="btn primary" href={`/presenter/group/${group._id}/end/review/comparison?sf=t`}>
-				View Shift
+			<a class="btn primary" href={`/presenter/group/${group._id}/end/review/shift`}>
+				Review Shift
 			</a>
 		{:else}
 			<p class="note">Available once both mappings have been completed.</p>

@@ -6,9 +6,11 @@
 	let loading = $state(false);
 </script>
 
-<h1 class="title">Sweet!</h1>
-<p>We've connected to your group.</p>
-<p>Let your facilitator know you're ready to take the quiz by clicking the "Ready" button below.</p>
+<h1 class="title">Ready?</h1>
+<p>We've found your group.</p>
+<p>
+	Let your facilitator know you're ready to take the quiz by clicking the "I'm Ready" button below.
+</p>
 
 <form
 	method="POST"
@@ -20,12 +22,11 @@
 		};
 	}}
 >
-	<input type="hidden" name="pollCode" value={data.pollCode} />
 	<button class="btn primary medium" type="submit">
 		{#if loading}
 			<ButtonLoader />
 		{:else}
-			Ready <span>♥</span>
+			I'm Ready <span>♥</span>
 		{/if}</button
 	>
 </form>
@@ -33,5 +34,8 @@
 <style>
 	span {
 		margin-left: 2px;
+	}
+	button {
+		margin-top: 16px;
 	}
 </style>

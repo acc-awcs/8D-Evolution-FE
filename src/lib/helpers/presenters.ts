@@ -15,7 +15,7 @@ export function getStatusColor(status: any) {
 		return 'olive';
 	}
 	if (status === END) {
-		return 'periwinkle';
+		return 'periwinkle-dark';
 	}
 	return 'canyon';
 }

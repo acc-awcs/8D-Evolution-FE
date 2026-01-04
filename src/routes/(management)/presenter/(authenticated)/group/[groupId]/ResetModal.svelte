@@ -3,7 +3,7 @@
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 
-	let { startOrEnd, hasEndData, onClose, data } = $props();
+	let { startOrEnd, hasEndData, onClose } = $props();
 	let loading = $state(false);
 </script>
 
@@ -26,12 +26,12 @@
 			}}
 		>
 			{#if hasEndData}
-				<p>This will clear out all previously submitted data and begin a new poll.</p>
-			{:else}
 				<p>
 					This will clear out all previously submitted data (including ending point data) and begin
 					a new poll.
 				</p>
+			{:else}
+				<p>This will clear out all previously submitted data and begin a new poll.</p>
 			{/if}
 			<input type="hidden" name="isStart" value="true" />
 			<div class="buttons">

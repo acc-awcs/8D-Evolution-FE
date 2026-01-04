@@ -1,17 +1,34 @@
 <script>
-	let { num, numLabel, onNext, onPrev } = $props();
+	let {
+		num = null,
+		numLabel = null,
+		helper = null,
+		onNext = null,
+		nextLabel = null,
+		onPrev = null,
+		skipPrev = false
+	} = $props();
 </script>
 
 <footer>
-	<div class="buttons">
-		<button onclick={onPrev} disabled={!onPrev}>
-			<span class="visually-hidden">Previous</span>
-			<span aria-hidden="true">←</span>
-		</button>
-		<button onclick={onNext} disabled={!onNext}>
-			<span class="visually-hidden">Next</span>
-			<span aria-hidden="true">→</span>
-		</button>
+	<div class="buttons-wrapper">
+		{#if helper}
+			<pre class="helper">{helper}</pre>
+		{/if}
+		<div class="buttons">
+			{#if !skipPrev}
+				<button onclick={onPrev} disabled={!onPrev}>
+					<span class="visually-hidden">Previous</span>
+					<span aria-hidden="true">←</span>
+				</button>
+			{/if}
+			<button class="next" onclick={onNext} disabled={!onNext}>
+				{nextLabel}
+				{#if !(nextLabel.includes('End') || nextLabel.includes('Close'))}
+					<span aria-hidden="true">→</span>
+				{/if}
+			</button>
+		</div>
 	</div>
 	{#if numLabel}
 		<div class="ready">
@@ -23,7 +40,7 @@
 
 <style>
 	footer {
-		position: absolute;
+		position: fixed;
 		bottom: 0px;
 		left: 0px;
 		display: flex;
@@ -38,15 +55,22 @@
 		gap: 6px;
 	}
 	button {
-		width: 48px;
+		min-width: 48px;
 		height: 48px;
 		background-color: var(--cloud-dark);
 		border-radius: 48px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 2rem;
+		font-size: 18px;
 		border: 1px solid var(--onyx);
+		gap: 12px;
+		padding: 0px 16px;
+		box-sizing: border-box;
+	}
+	button span {
+		font-size: 2rem;
+		margin: 0px -5px;
 	}
 	button:disabled {
 		border: 1px solid var(--cloud-dark);
@@ -66,10 +90,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 2rem;
 	}
 	.ready div span {
 		position: relative;
 		top: 3px;
+		font-size: 2rem;
+	}
+	.helper {
+		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
+		line-height: 24px;
+		font-size: 15px;
+		opacity: 0.9;
 	}
 </style>

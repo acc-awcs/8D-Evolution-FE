@@ -2,7 +2,8 @@ import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
 import { error, redirect } from '@sveltejs/kit';
 
-export async function load({ cookies, fetch }) {
+// Need to have this again since we reset the layout
+export async function load({ cookies, fetch, params }) {
 	const sessionToken = cookies.get('sessionToken');
 
 	const response = await fetch(`${PUBLIC_SERVER_URL}/api/account`, {
@@ -17,7 +18,7 @@ export async function load({ cookies, fetch }) {
 			redirect(303, '/presenter/login');
 		} else {
 			const errorBody = await response.text();
-			console.log('Error in auth layout', response.status, errorBody);
+			console.log('Error in presentation layout load', response.status, errorBody);
 			error(500);
 		}
 	}
@@ -28,5 +29,8 @@ export async function load({ cookies, fetch }) {
 		error(404, 'Not Found');
 	}
 
-	return data;
+	return {
+		...data,
+		...params
+	};
 }
