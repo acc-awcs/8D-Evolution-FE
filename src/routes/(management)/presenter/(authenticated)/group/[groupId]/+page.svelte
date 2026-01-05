@@ -49,7 +49,7 @@
 
 <div class="actions">
 	<ActionBox number={1} color={getStatusColor(START)} active={true}>
-		<h2>Map Collective Starting Point</h2>
+		<h2 class="title small">Map Collective Starting Point</h2>
 		<p>Begin a presentation to map your group's collective 8 Dynamics starting point.</p>
 		{#if group.startPollCode && group.startPollInitiated}
 			<div class="buttons">
@@ -68,7 +68,7 @@
 		{/if}
 	</ActionBox>
 	<ActionBox number={2} color={getStatusColor(END)} active={status !== START}>
-		<h2>Map Collective Ending Point</h2>
+		<h2 class="title small">Map Collective Ending Point</h2>
 		<p>
 			Ready to see the results of your group's learnings? Begin the presentation to map your group's
 			collective ending point.
@@ -90,7 +90,7 @@
 		{/if}
 	</ActionBox>
 	<ActionBox number={3} color={getStatusColor(COMPLETE)} active={status === COMPLETE}>
-		<h2>Review Collective Shift</h2>
+		<h2 class="title small">Review Collective Shift</h2>
 		<p>Revisit the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
 			<a class="btn primary" href={`/presenter/group/${group._id}/end/review/shift`}>

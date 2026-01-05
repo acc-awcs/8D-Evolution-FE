@@ -10,7 +10,7 @@
 <Modal handleClose={onClose}>
 	{#if startOrEnd === 'start'}
 		<div class="header">
-			<h1>Retake Poll</h1>
+			<h1 class="title small">Retake Poll</h1>
 			<button onclick={onClose} class="close link-like" type="button">Close</button>
 		</div>
 		<form
@@ -47,7 +47,7 @@
 		</form>
 	{:else}
 		<div class="header">
-			<h1>Retake Poll</h1>
+			<h1 class="title small">Retake Poll</h1>
 			<button onclick={onClose} class="close link-like" type="button">Close</button>
 		</div>
 		<p>This will clear out all previously submitted ending point data and begin a new poll.</p>

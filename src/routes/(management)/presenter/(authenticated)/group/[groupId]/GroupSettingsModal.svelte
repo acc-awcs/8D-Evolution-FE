@@ -19,7 +19,7 @@
 <Modal handleClose={onClose}>
 	{#if mode === EDIT_NAME_MODE}
 		<div class="header">
-			<h1>
+			<h1 class="title small">
 				Edit Group {#if data.role === GROUP_LEAD}
 					Name
 				{:else}
@@ -89,7 +89,7 @@
 		</form>
 	{:else if mode === DELETE_MODE}
 		<div class="header">
-			<h1>Delete Group</h1>
+			<h1 class="title small">Delete Group</h1>
 			<button onclick={onClose} class="close link-like" type="button">Close</button>
 		</div>
 		<p>Are you sure you want to delete this group? This cannot be undone.</p>
@@ -120,7 +120,7 @@
 		</form>
 	{:else}
 		<div class="header">
-			<h1>Group Settings</h1>
+			<h1 class="title small">Group Settings</h1>
 			<button onclick={onClose} class="close link-like" type="button">Close</button>
 		</div>
 		<div class="buttons-init">

@@ -1,5 +1,4 @@
 <script>
-	import { page } from '$app/stores';
 	import Logo from '$lib/components/Logo.svelte';
 </script>
 

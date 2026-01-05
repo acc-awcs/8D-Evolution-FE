@@ -14,7 +14,7 @@
 
 <Modal handleClose={onClose}>
 	<div class="header">
-		<h1>Create New Group</h1>
+		<h1 class="title small">Create New Group</h1>
 		<button onclick={onClose} class="close link-like" type="button">Close</button>
 	</div>
 	<form
