@@ -31,7 +31,7 @@
 	{#if errorMessage}
 		<p class="error">{errorMessage}</p>
 	{/if}
-	<button class="btn primary large" disabled={loading}>
+	<button class="btn primary large" disabled={loading} class:loading>
 		{#if loading}
 			<ButtonLoader />
 		{:else}

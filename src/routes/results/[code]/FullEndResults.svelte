@@ -122,7 +122,12 @@
 					<button class="btn secondary" type="button" onclick={() => (showEmailModal = false)}
 						>Cancel</button
 					>
-					<button class="btn primary" class:loading={sendEmailLoading} type="submit">
+					<button
+						class="btn primary"
+						class:loading={sendEmailLoading}
+						type="submit"
+						disabled={sendEmailLoading}
+					>
 						{#if sendEmailLoading}
 							<ButtonLoader />
 						{:else}

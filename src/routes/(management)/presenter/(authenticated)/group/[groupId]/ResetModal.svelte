@@ -36,7 +36,7 @@
 			<input type="hidden" name="isStart" value="true" />
 			<div class="buttons">
 				<button class="btn secondary large" type="button" onclick={onClose}>Cancel</button>
-				<button class="btn primary large" type="submit" disabled={loading}>
+				<button class="btn primary large" type="submit" disabled={loading} class:loading>
 					{#if loading}
 						<ButtonLoader />
 					{:else}
@@ -66,7 +66,7 @@
 			<input type="hidden" name="isStart" value="false" />
 			<div class="buttons">
 				<button class="btn secondary large" type="button" onclick={onClose}> Cancel </button>
-				<button class="btn primary large" type="submit" disabled={loading}>
+				<button class="btn primary large" type="submit" disabled={loading} class:loading>
 					{#if loading}
 						<ButtonLoader />
 					{:else}

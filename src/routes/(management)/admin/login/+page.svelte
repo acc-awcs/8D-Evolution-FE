@@ -18,11 +18,8 @@
 		};
 	}}
 >
-	<h1 class="title">Presenter Login</h1>
-	<p>
-		Help groups visualize their Climate Wayfinding progress through collective 8 Dynamics
-		assessments.
-	</p>
+	<h1 class="title">Admin Login</h1>
+	<!-- <p>Review 8 Dynamics collective responses across all groups and facilitations.</p> -->
 	<label>
 		Email
 		<input required class="large" type="email" name="email" />
@@ -41,9 +38,7 @@
 			Submit
 		{/if}
 	</button>
-	<p class="note secondary"><a href="/presenter/reset-password">Forgot password</a></p>
-
-	<p class="note">Not signed up yet? <a href="/presenter/create">Create a presenter account</a></p>
+	<p class="note secondary"><a href="/admin/reset-password">Forgot password</a></p>
 </form>
 
 <style>

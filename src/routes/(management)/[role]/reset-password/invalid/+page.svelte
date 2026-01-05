@@ -1,3 +1,7 @@
+<script>
+	import { page } from '$app/stores';
+</script>
+
 <h1 class="title">Invalid Link</h1>
 
 <p>
@@ -7,4 +11,4 @@
 
 <br />
 
-<a href="/reset-password" class="btn primary"> Back to Forgot Password </a>
+<a href={`/${page.params.role}/reset-password`} class="btn primary"> Back to Forgot Password </a>

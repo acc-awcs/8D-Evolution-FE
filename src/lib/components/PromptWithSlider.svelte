@@ -54,7 +54,7 @@
 
 	{#if resultsLink}
 		<div class="finish">
-			<button class="btn secondary" onclick={loading ? null : onFinish}>
+			<button class="btn secondary" onclick={loading ? null : onFinish} class:loading>
 				{#if loading}
 					<ButtonLoader />
 				{:else}

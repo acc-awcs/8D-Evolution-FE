@@ -1,17 +1,21 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
-import { ADMIN } from '$lib/constants.js';
 import { statusIsGood } from '$lib/helpers/general';
 import { fail, isRedirect, redirect } from '@sveltejs/kit';
 
-// Reset password
 export const actions = {
-	default: async ({ request, params }) => {
+	default: async ({ cookies, request }) => {
 		try {
 			// const data = await request.json();
 			const formData = await request.formData();
-			formData.append('resetToken', params.token);
 			// @ts-ignore
 			formData.forEach((value, key) => (formData[key] = value));
+
+			if (!formData?.email || formData.email.length < 1) {
+				return fail(422, {
+					success: false,
+					message: 'Email is required'
+				});
+			}
 
 			if (!formData?.password || formData.password.length < 8) {
 				return fail(422, {
@@ -20,14 +24,7 @@ export const actions = {
 				});
 			}
 
-			if (formData?.confirmPassword !== formData?.password) {
-				return fail(422, {
-					success: false,
-					message: 'Password confirmation does not match password'
-				});
-			}
-
-			const response = await fetch(`${PUBLIC_SERVER_URL}/api/reset-password`, {
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/admin/login`, {
 				method: 'POST',
 				body: JSON.stringify(formData),
 				headers: {
@@ -44,8 +41,16 @@ export const actions = {
 			}
 
 			const body = await response.json();
-			const role = body.role === ADMIN ? ADMIN : 'presenter';
-			redirect(303, `/reset-password/success/${role}`);
+
+			cookies.set('sessionToken', body.token, {
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production',
+				sameSite: 'strict',
+				path: '/',
+				maxAge: 60 * 60 * 24 // 1 day
+			});
+
+			redirect(303, '/admin');
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;

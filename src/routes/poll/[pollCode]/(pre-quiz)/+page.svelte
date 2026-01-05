@@ -22,7 +22,7 @@
 		};
 	}}
 >
-	<button class="btn primary medium" type="submit">
+	<button class="btn primary medium" type="submit" disabled={loading} class:loading>
 		{#if loading}
 			<ButtonLoader />
 		{:else}

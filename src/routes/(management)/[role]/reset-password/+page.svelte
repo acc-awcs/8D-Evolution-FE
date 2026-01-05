@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import { ADMIN } from '$lib/constants';
 
 	let loading = $state(false); // This variable will track the loading state
 	let errorMessage = $state(null);
@@ -28,14 +30,21 @@
 	{#if errorMessage}
 		<p class="error">{errorMessage}</p>
 	{/if}
-	<button class="btn primary large" disabled={loading}>
+	<button class="btn primary large" disabled={loading} class:loading>
 		{#if loading}
 			<ButtonLoader />
 		{:else}
 			Submit
 		{/if}
 	</button>
-	<p class="note">Not signed up yet? <a href="/presenter/create">Create a presenter account</a></p>
+	{#if $page.params.role === ADMIN}
+		<p class="note"><a href="/admin/login">Back to Login</a></p>
+	{:else}
+		<p class="note"><a href="/presenter/login">Back to Login</a></p>
+		<p class="note short">
+			Not signed up yet? <a href="/presenter/create">Create a presenter account</a>
+		</p>
+	{/if}
 </form>
 
 <style>
@@ -48,5 +57,8 @@
 		justify-content: center;
 		gap: 6px;
 		flex-wrap: wrap;
+	}
+	.short {
+		margin-top: 12px;
 	}
 </style>

@@ -76,7 +76,12 @@
 		/>
 	</label>
 	<div class="buttons">
-		<button class="btn primary" class:loading={codeCheckLoading} type="submit">
+		<button
+			class="btn primary"
+			class:loading={codeCheckLoading}
+			type="submit"
+			disabled={codeCheckLoading}
+		>
 			{#if codeCheckLoading}
 				<ButtonLoader />
 			{:else}

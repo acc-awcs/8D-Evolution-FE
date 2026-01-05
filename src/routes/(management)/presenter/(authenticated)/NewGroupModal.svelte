@@ -64,7 +64,7 @@
 				<input type="text" name="name" />
 			</label>
 		{/if}
-		<button class="btn primary large" type="submit" disabled={loading}>
+		<button class="btn primary large" type="submit" disabled={loading} class:loading>
 			{#if loading}
 				<ButtonLoader />
 			{:else}
