@@ -50,6 +50,9 @@ export const actions = {
 				maxAge: 60 * 60 * 24 // 1 day
 			});
 
+			if (body.isAdmin) {
+				redirect(303, '/admin');
+			}
 			redirect(303, '/presenter');
 		} catch (error) {
 			if (isRedirect(error)) {

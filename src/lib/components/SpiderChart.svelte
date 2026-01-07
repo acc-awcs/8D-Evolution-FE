@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { line, scaleLinear } from 'd3';
-	import { onDestroy, onMount } from 'svelte';
 	let {
 		answers,
-		startAnswers,
 		highlight,
 		chartWidth,
 		onHover,
@@ -15,7 +13,6 @@
 		showHighlight
 	}: {
 		answers: Record<string, number>;
-		startAnswers?: Record<string, number>;
 		highlight: number;
 		chartWidth: number;
 		onHover: CallableFunction;
@@ -27,33 +24,7 @@
 		showHighlight?: Boolean;
 	} = $props();
 
-	let useStartData = $state(true);
 	const features = $derived(Object.keys(answers));
-	let intervalId = $state<number>();
-	let firstRunComplete = $state(false);
-
-	function startRotate() {
-		if (startAnswers) {
-			intervalId = setInterval(() => {
-				if (!firstRunComplete) {
-					firstRunComplete = true;
-				}
-				useStartData = !useStartData;
-			}, 3000);
-		}
-	}
-
-	function stopRotate() {
-		clearInterval(intervalId);
-		intervalId = undefined;
-	}
-
-	onMount(() => {
-		startRotate();
-	});
-	onDestroy(() => {
-		stopRotate();
-	});
 
 	const config = $derived({
 		d: chartWidth, // diameter of chart
@@ -147,7 +118,7 @@
 				feature,
 				idx
 			) => {
-				const answer = useStartData && startAnswers ? startAnswers[feature] : answers[feature];
+				const answer = answers[feature];
 				const coords = getCircleCoords({ answer, idx });
 				resultArray.push({ feature, answer, xCoord: coords.x, yCoord: coords.y, idx });
 				return resultArray;
@@ -167,13 +138,7 @@
 		height={config.d}
 		aria-hidden="true"
 	>
-		<path
-			class="answer"
-			class:transition={firstRunComplete}
-			stroke-width="3"
-			opacity="0.8"
-			d={`${drawAnswerShape(useStartData && startAnswers ? startAnswers : answers)}`}
-		/>
+		<path class="answer" stroke-width="3" opacity="0.8" d={`${drawAnswerShape(answers)}`} />
 		<g id="ticks">
 			{#each config.ticks as tick}
 				<!-- concentric octogons -->

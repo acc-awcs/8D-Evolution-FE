@@ -15,7 +15,7 @@
 <div class="wrapper">
 	<nav>
 		<Logo relative={true} />
-		<!-- <div class="home-label">Presenter</div> -->
+		<div class="home-label">Admin Dashboard</div>
 		<div class="account-wrapper">
 			<button class="account-btn" type="button" onclick={() => (accountModalOpen = true)}>
 				<span class="visually-hidden">Account</span>
@@ -39,13 +39,12 @@
 				method="POST"
 				use:enhance={() => {
 					loading = true;
-
 					return async ({ result, update }) => {
 						await update();
 						loading = false;
 					};
 				}}
-				action="/api/logout?/logout"
+				action="/api/logout?/adminLogout"
 			>
 				<button class="btn primary large" type="submit" disabled={loading} class:loading>
 					{#if loading}
@@ -74,7 +73,7 @@
 		margin-top: 6px;
 	}
 	.wrapper {
-		background-color: var(--periwinkle);
+		/* background-color: var(--cloud-dark); */
 		min-height: 100vh;
 		width: 100%;
 		display: flex;
@@ -88,6 +87,8 @@
 		justify-content: space-between;
 		padding: 16px;
 		align-items: flex-start;
+		border-bottom: 1px solid var(--onyx);
+		background-color: var(--cloud);
 	}
 
 	.header {
@@ -151,15 +152,14 @@
 	}
 
 	main {
-		width: 1200px;
+		width: 1300px;
 		max-width: 100%;
-		background-color: var(--cloud);
 		align-self: center;
-		padding: 20px 40px;
+		/* padding: 20px; */
 		box-sizing: border-box;
 		min-height: 85vh;
 		margin-top: 10px;
-		border-radius: var(--br) var(--br) 0px 0px;
+		border-radius: var(--br);
 	}
 
 	@media screen and (max-width: 600px) {

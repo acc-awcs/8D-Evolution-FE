@@ -29,6 +29,7 @@
 		position: absolute;
 		top: 20px;
 		left: 20px;
+		z-index: 0;
 	}
 
 	.tile {
@@ -39,5 +40,7 @@
 		max-width: 100%;
 		box-sizing: border-box;
 		box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+		z-index: 1;
+		position: relative;
 	}
 </style>

@@ -15,7 +15,7 @@ export async function load({ cookies, fetch }) {
 
 	if (!statusIsGood(response.status)) {
 		if (response.status === 401) {
-			redirect(303, '/presenter/login');
+			redirect(303, '/admin/login');
 		} else {
 			const errorBody = await response.text();
 			console.log('Error in auth layout', response.status, errorBody);
@@ -29,8 +29,10 @@ export async function load({ cookies, fetch }) {
 		error(404, 'Not Found');
 	}
 
-	if (data.role === ADMIN) {
-		redirect(303, '/admin');
+	console.log('DATA?', data);
+
+	if (data.role !== ADMIN) {
+		redirect(303, '/presenter');
 	}
 
 	return data;

@@ -244,7 +244,7 @@
 						Let me know whatever you want to be called out here! Can be a statistical insight on
 						their results, opportunities for further progress, etc.
 					</p>
-					<p>I can also remove the animation on the chart here and just do a static overlay.</p>
+					<!-- <p>I can also remove the animation on the chart here and just do a static overlay.</p> -->
 				</div>
 			</div>
 		</section>

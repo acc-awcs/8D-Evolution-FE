@@ -1,4 +1,6 @@
 <script>
+	import LoaderLink from '$lib/components/LoaderLink.svelte';
+	import OptimisticSubmitButton from '$lib/components/OptimisticSubmitButton.svelte';
 	import SettingsButton from '$lib/components/SettingsButton.svelte';
 	import { COMPLETE, END, START } from '$lib/constants.js';
 	import { getStatus, getStatusColor } from '$lib/helpers/presenters';
@@ -12,6 +14,7 @@
 	let showSettingsModal = $state(false);
 	let showResetStartModal = $state(false);
 	let showResetEndModal = $state(false);
+	let navigationLoading = $state(false);
 </script>
 
 {#if showSettingsModal}
@@ -63,7 +66,7 @@
 		{:else}
 			<form method="POST" action="?/beginPoll">
 				<input type="hidden" name="isStart" value="true" />
-				<button class="btn primary" type="submit">Begin Poll</button>
+				<OptimisticSubmitButton>Begin Poll</OptimisticSubmitButton>
 			</form>
 		{/if}
 	</ActionBox>
@@ -85,7 +88,7 @@
 		{:else}
 			<form method="POST" action="?/beginPoll">
 				<input type="hidden" name="isStart" value="false" />
-				<button class="btn primary" type="submit">Begin Poll</button>
+				<OptimisticSubmitButton>Begin Poll</OptimisticSubmitButton>
 			</form>
 		{/if}
 	</ActionBox>
@@ -93,9 +96,7 @@
 		<h2 class="title small">Review Collective Shift</h2>
 		<p>Revisit the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
-			<a class="btn primary" href={`/presenter/group/${group._id}/end/review/shift`}>
-				Review Shift
-			</a>
+			<LoaderLink href={`/presenter/group/${group._id}/end/review/shift`}>Review Shift</LoaderLink>
 		{:else}
 			<p class="note">Available once both mappings have been completed.</p>
 		{/if}

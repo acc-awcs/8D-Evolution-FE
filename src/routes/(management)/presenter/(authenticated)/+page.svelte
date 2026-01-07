@@ -32,7 +32,6 @@
 				>+ Create a new group</button
 			>
 		</div>
-		<!-- TODO: add "if no groups" welcome flow! -->
 		<div class="groups">
 			{#each data?.groups || [] as group}
 				{@const status = getStatus(group)}
