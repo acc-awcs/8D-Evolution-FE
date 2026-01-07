@@ -8,6 +8,7 @@
 
 	let loading = $state(false);
 	let accountModalOpen = $state(false);
+	let deleteAccountMode = $state(false);
 	const closeModal = () => (accountModalOpen = false);
 	let { data, children } = $props();
 </script>
@@ -26,38 +27,78 @@
 
 	{#if accountModalOpen}
 		<Modal handleClose={closeModal}>
-			<div class="header">
-				<h1 class="title small">Account</h1>
-				<button onclick={closeModal} class="close link-like" type="button">Close</button>
-			</div>
-			{#if data.role === GROUP_LEAD}
-				<p>Logged in as {data.email}.</p>
-			{:else}
-				<p>Logged in as {data.firstName} {data.lastName} ({data.email}).</p>
-			{/if}
-			<form
-				method="POST"
-				use:enhance={() => {
-					loading = true;
+			{#if deleteAccountMode}
+				<div class="header">
+					<h1 class="title small">Delete Account</h1>
+					<button onclick={closeModal} class="close link-like" type="button">Close</button>
+				</div>
+				<form
+					method="POST"
+					use:enhance={() => {
+						loading = true;
 
-					return async ({ result, update }) => {
-						await update();
-						loading = false;
-					};
-				}}
-				action="/api/logout?/logout"
-			>
-				<button class="btn primary large" type="submit" disabled={loading} class:loading>
-					{#if loading}
-						<ButtonLoader />
-					{:else}
-						Logout <svg viewBox="0 0 44 18" xmlns="http://www.w3.org/2000/svg">
-							<path d="M34.1477 1.39111L41.9321 9.17551L34.1477 16.9599"></path>
-							<path d="M1.19088 9.16982H40.6755"></path>
-						</svg>
-					{/if}
-				</button>
-			</form>
+						return async ({ result, update }) => {
+							await update();
+							loading = false;
+						};
+					}}
+					action="/api/delete-account?/delete"
+				>
+					<p>Are you sure you want to delete your account? This cannot be undone.</p>
+					<div class="buttons">
+						<button
+							class="btn secondary large"
+							type="button"
+							onclick={() => (deleteAccountMode = false)}
+						>
+							Cancel
+						</button>
+						<button class="btn primary large" type="submit" disabled={loading} class:loading>
+							{#if loading}
+								<ButtonLoader />
+							{:else}
+								Delete
+							{/if}
+						</button>
+					</div>
+				</form>
+			{:else}
+				<div class="header">
+					<h1 class="title small">Account</h1>
+					<button onclick={closeModal} class="close link-like" type="button">Close</button>
+				</div>
+				{#if data.role === GROUP_LEAD}
+					<p>Logged in as {data.email}.</p>
+				{:else}
+					<p>Logged in as {data.firstName} {data.lastName} ({data.email}).</p>
+				{/if}
+				<button class="link-like delete" type="button" onclick={() => (deleteAccountMode = true)}
+					>Delete account</button
+				>
+				<form
+					method="POST"
+					use:enhance={() => {
+						loading = true;
+
+						return async ({ result, update }) => {
+							await update();
+							loading = false;
+						};
+					}}
+					action="/api/logout?/logout"
+				>
+					<button class="btn primary large" type="submit" disabled={loading} class:loading>
+						{#if loading}
+							<ButtonLoader />
+						{:else}
+							Logout <svg viewBox="0 0 44 18" xmlns="http://www.w3.org/2000/svg">
+								<path d="M34.1477 1.39111L41.9321 9.17551L34.1477 16.9599"></path>
+								<path d="M1.19088 9.16982H40.6755"></path>
+							</svg>
+						{/if}
+					</button>
+				</form>
+			{/if}
 		</Modal>
 	{/if}
 
@@ -133,6 +174,14 @@
 		min-width: 150px;
 	}
 
+	.delete {
+		top: -2px;
+		position: relative;
+		font-size: 16px;
+		color: var(--rust);
+		margin-bottom: 16px;
+	}
+
 	svg {
 		position: relative;
 		display: block;
@@ -160,6 +209,15 @@
 		min-height: 85vh;
 		margin-top: 10px;
 		border-radius: var(--br) var(--br) 0px 0px;
+	}
+
+	.buttons {
+		display: flex;
+		gap: 6px;
+		flex-wrap: wrap;
+	}
+	.buttons button {
+		flex: 1;
 	}
 
 	@media screen and (max-width: 600px) {

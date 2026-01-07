@@ -6,8 +6,6 @@
 
 <h1 class="title">Facilition Data</h1>
 
-<a href="/admin/users">USERS</a>
-
 <Table
 	header={[
 		'Facilitation',
