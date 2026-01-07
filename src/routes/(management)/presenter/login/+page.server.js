@@ -36,7 +36,8 @@ export const actions = {
 				const body = await response.json();
 				return fail(422, {
 					success: false,
-					message: body?.msg
+					message: body?.msg,
+					admin: body?.admin
 				});
 			}
 
@@ -50,9 +51,6 @@ export const actions = {
 				maxAge: 60 * 60 * 24 // 1 day
 			});
 
-			if (body.isAdmin) {
-				redirect(303, '/admin');
-			}
 			redirect(303, '/presenter');
 		} catch (error) {
 			if (isRedirect(error)) {

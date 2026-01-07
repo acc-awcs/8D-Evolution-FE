@@ -241,6 +241,10 @@ a.short {
 	color: var(--canyon);
 }
 
+.error a {
+	color: var(--canyon);
+}
+
 .chart-fade-in {
 	transition: all 2s linear;
 	opacity: 0;

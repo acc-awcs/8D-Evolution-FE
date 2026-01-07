@@ -1,5 +1,5 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Logo from '$lib/components/Logo.svelte';
 </script>
 
@@ -8,7 +8,7 @@
 		<Logo />
 	</div>
 	<section>
-		{#if $page.status === 404}
+		{#if page.status === 404}
 			<h1 class="title">404</h1>
 			<p>The requested page could not be found.</p>
 		{:else}

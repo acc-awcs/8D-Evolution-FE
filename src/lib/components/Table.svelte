@@ -1,5 +1,5 @@
 <script>
-	let { rows, header } = $props();
+	let { rows, rowLinks, header } = $props();
 </script>
 
 <div class="table-wrapper">
@@ -12,10 +12,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each rows as row}
+			{#each rows as row, rowIdx}
 				<tr>
-					{#each row as item}
-						<td>{item}</td>
+					{#each row as item, itemIdx}
+						<td>
+							{#if rowLinks && itemIdx === 0}
+								<a href={rowLinks[rowIdx]}>{item}</a>
+							{:else}
+								{item}
+							{/if}
+						</td>
 					{/each}
 				</tr>
 			{/each}
@@ -43,7 +49,6 @@
 	}
 
 	thead tr {
-		padding-top: 2px;
 		border-top: none;
 	}
 
@@ -54,7 +59,8 @@
 
 	th,
 	td {
-		padding: 8px;
+		padding: 12px;
+		padding-top: 14px;
 		flex: 1;
 		text-align: center;
 	}

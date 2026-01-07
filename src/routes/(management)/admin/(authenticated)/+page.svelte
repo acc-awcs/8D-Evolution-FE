@@ -1,25 +1,26 @@
-<script>
+<script lang="ts">
 	import Table from '$lib/components/Table.svelte';
 
 	let { data } = $props();
-
-	console.log('DATA', data);
 </script>
 
 <h1 class="title">Facilition Data</h1>
 
+<a href="/admin/users">USERS</a>
+
 <Table
 	header={[
+		'Facilitation',
 		'Facilitator',
-		'Group',
 		'Start Poll Date',
 		'End Poll Date',
 		'Start Total Average',
 		'End Total Average'
 	]}
-	rows={data.stats.map((stat) => [
-		stat.group.creatorShortName,
+	rowLinks={data.stats.map((s: any) => `/admin/group/${s.group._id}`)}
+	rows={data.stats.map((stat: any) => [
 		stat.group.name,
+		stat.group.creatorShortName,
 		stat.group.startPollDate
 			? new Date(stat.group.startPollDate).toLocaleString('en-US', {
 					year: 'numeric',

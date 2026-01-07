@@ -1,8 +1,8 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { ADMIN } from '$lib/constants';
 
-	$: role = $page.params.role;
+	$: role = page.params.role;
 </script>
 
 <h1 class="title">Success!</h1>

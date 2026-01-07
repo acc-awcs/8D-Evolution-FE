@@ -4,6 +4,7 @@
 
 	let loading = $state(false); // This variable will track the loading state
 	let errorMessage = $state(null);
+	let presenterError = $state(false);
 </script>
 
 <form
@@ -14,6 +15,7 @@
 		return async ({ result, update }) => {
 			await update();
 			errorMessage = result?.data?.success === false ? result?.data?.message : null;
+			presenterError = result?.data?.success === false ? result?.data?.presenter : null;
 			loading = false;
 		};
 	}}
@@ -29,7 +31,12 @@
 		<input required class="large" type="password" name="password" />
 	</label>
 	{#if errorMessage}
-		<p class="error">{errorMessage}</p>
+		<p class="error">
+			{errorMessage}
+			{#if presenterError}
+				<a href="/presenter/login">Go to presenter login</a>
+			{/if}
+		</p>
 	{/if}
 	<button class="btn primary large" disabled={loading} class:loading>
 		{#if loading}

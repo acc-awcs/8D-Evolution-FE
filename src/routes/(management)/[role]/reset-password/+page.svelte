@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import { ADMIN } from '$lib/constants';
 
@@ -37,7 +37,7 @@
 			Submit
 		{/if}
 	</button>
-	{#if $page.params.role === ADMIN}
+	{#if page.params.role === ADMIN}
 		<p class="note"><a href="/admin/login">Back to Login</a></p>
 	{:else}
 		<p class="note"><a href="/presenter/login">Back to Login</a></p>

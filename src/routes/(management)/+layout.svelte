@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import Logo from '$lib/components/Logo.svelte';
 </script>
 
-<main class="wrapper">
+<main class="wrapper" class:admin={page.url.pathname?.includes('admin')}>
 	<nav>
 		<Logo relative={true} />
 	</nav>
@@ -25,11 +26,20 @@
 		position: relative;
 	}
 
+	.admin.wrapper {
+		background-color: var(--cloud);
+	}
+
 	nav {
 		position: absolute;
-		top: 20px;
-		left: 20px;
+		top: 0px;
+		left: 0px;
 		z-index: 0;
+		width: 100%;
+		padding: 20px;
+		display: flex;
+		justify-content: center;
+		box-sizing: border-box;
 	}
 
 	.tile {
@@ -42,5 +52,10 @@
 		box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 		z-index: 1;
 		position: relative;
+	}
+
+	.admin .tile {
+		border: 1px solid var(--onyx);
+		box-shadow: none;
 	}
 </style>
