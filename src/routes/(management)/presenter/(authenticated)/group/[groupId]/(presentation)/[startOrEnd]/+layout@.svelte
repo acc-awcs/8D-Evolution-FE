@@ -66,6 +66,7 @@
 		width: 1200px;
 		max-width: 100%;
 		align-self: center;
+		height: 100vh;
 		padding: 0px 40px;
 		box-sizing: border-box;
 		display: flex;
@@ -75,7 +76,7 @@
 
 	.children {
 		flex: 1;
-		max-height: 80vh;
+		max-height: 100vh;
 		overflow: visible;
 	}
 

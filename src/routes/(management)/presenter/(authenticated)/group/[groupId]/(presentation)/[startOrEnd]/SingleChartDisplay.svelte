@@ -21,26 +21,27 @@
 					onLeave={() => null}
 					highlight={12}
 					isCollectivePoll={true}
+					showTextLabels={true}
 				/>
 			</div>
 		{:else}
 			<p>Waiting for results to come in ...</p>
 		{/if}
 	</div>
-	{#if answers}
+	<!-- {#if answers}
 		<DynamicList />
-	{/if}
+	{/if} -->
 </div>
 
 <style>
 	.chart {
 		max-width: 100%;
-		width: 500px;
-		height: 500px;
+		width: 850px;
+		height: 570px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-bottom: 40px;
+		margin-top: 15px;
 	}
 
 	.chart p {

@@ -16,22 +16,22 @@
 	);
 </script>
 
-<h1 class="title">Our Collective Shift</h1>
-
-<div class="chart-wrapper">
-	{#if startAnswers && endAnswers}
-		<div class="chart chart-fade-in" aria-hidden="true" bind:clientWidth={startChartWidth}>
-			<h2>Start</h2>
-			<SpiderChart
-				answers={startAnswers}
-				chartWidth={startChartWidth}
-				onHover={() => null}
-				onLeave={() => null}
-				highlight={12}
-				isCollectivePoll={true}
-				isStart={true}
-			/>
-			<p>
+<div class="top-page">
+	<h1 class="title">Our Collective Shift</h1>
+	<div class="chart-wrapper">
+		{#if startAnswers && endAnswers}
+			<div class="chart chart-fade-in" aria-hidden="true" bind:clientWidth={startChartWidth}>
+				<h2>Start</h2>
+				<SpiderChart
+					answers={startAnswers}
+					chartWidth={startChartWidth}
+					onHover={() => null}
+					onLeave={() => null}
+					highlight={12}
+					isCollectivePoll={true}
+					isStart={true}
+				/>
+				<!-- <p>
 				Averaged results from {data.startMatchingResults?.length} response{data.startMatchingResults
 					?.length === 1
 					? ''
@@ -41,20 +41,20 @@
 					month: 'long',
 					day: 'numeric'
 				})}
-			</p>
-		</div>
-		<div class="chart chart-fade-in delayed" aria-hidden="true" bind:clientWidth={endChartWidth}>
-			<h2>End</h2>
+			</p> -->
+			</div>
+			<div class="chart chart-fade-in delayed" aria-hidden="true" bind:clientWidth={endChartWidth}>
+				<h2>End</h2>
 
-			<SpiderChart
-				answers={endAnswers}
-				chartWidth={endChartWidth}
-				onHover={() => null}
-				onLeave={() => null}
-				highlight={12}
-				isCollectivePoll={true}
-			/>
-			<p>
+				<SpiderChart
+					answers={endAnswers}
+					chartWidth={endChartWidth}
+					onHover={() => null}
+					onLeave={() => null}
+					highlight={12}
+					isCollectivePoll={true}
+				/>
+				<!-- <p>
 				Averaged results from {data.matchingResults?.length} response{data.matchingResults
 					?.length === 1
 					? ''
@@ -64,9 +64,10 @@
 					month: 'long',
 					day: 'numeric'
 				})}
-			</p>
-		</div>
-	{/if}
+			</p> -->
+			</div>
+		{/if}
+	</div>
 </div>
 
 <div class="dynamics-wrapper chart-fade-in delayed-extra">
@@ -98,6 +99,14 @@
 		font-size: 15px;
 	}
 
+	.top-page {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+
 	.chart-wrapper {
 		display: flex;
 		justify-content: center;
@@ -119,8 +128,9 @@
 	}
 
 	.dynamics-wrapper {
-		margin: 30px 0px;
+		margin: 20px 0px;
 		display: flex;
 		justify-content: center;
+		padding-bottom: 20vh;
 	}
 </style>

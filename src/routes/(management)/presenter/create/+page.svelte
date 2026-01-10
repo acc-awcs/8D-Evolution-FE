@@ -54,7 +54,7 @@
 			</label>
 		</div>
 		<label>
-			Organization (if applicable)
+			Organization or University
 			<input class="large" type="text" name="organization" />
 		</label>
 	{/if}

@@ -1,4 +1,6 @@
 <script>
+	import { FACILITATOR } from '$lib/constants';
+
 	let {
 		num = null,
 		numLabel = null,
@@ -6,13 +8,15 @@
 		onNext = null,
 		nextLabel = null,
 		onPrev = null,
-		skipPrev = false
+		skipPrev = false,
+		role = null
 	} = $props();
 </script>
 
 <footer>
 	<div class="buttons-wrapper">
-		{#if helper}
+		<!-- Skip helper text for facilitators (they will be trained) -->
+		{#if helper && role !== FACILITATOR}
 			<pre class="helper">{helper}</pre>
 		{/if}
 		<div class="buttons">
@@ -93,8 +97,8 @@
 	}
 	.ready div span {
 		position: relative;
-		top: 3px;
-		font-size: 2rem;
+		top: 2px;
+		font-size: 20px;
 	}
 	.helper {
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;

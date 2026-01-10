@@ -34,6 +34,7 @@
 <PresentationFooter
 	num={data.matchingResults.length}
 	numLabel="Responses"
+	role={data.role}
 	helper={`Currently, ${data.matchingResults.length} response${data.matchingResults.length !== 1 ? 's are' : ' is'} in.\nThis chart updates as responses are submitted.`}
 	onPrev={() => goto(`/presenter/group/${data.group._id}/${data.startOrEnd}`)}
 	nextLabel={data.isStart ? 'End Poll' : 'View Shift'}

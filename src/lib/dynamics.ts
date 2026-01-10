@@ -2,35 +2,43 @@
 const dynamics = [
 	{
 		short: 'Motivation',
-		full: 'I hold deep motivations to foster a just, life-giving future.'
+		full: 'I hold deep motivations to foster a just, life-giving future.',
+		lines: ['I hold deep motivations to ', 'foster a just, life-giving future.']
 	},
 	{
 		short: 'Connection',
-		full: 'I feel connected to Earth and kindred community.'
+		full: 'I feel connected to Earth and kindred community.',
+		lines: ['I feel connected to Earth', 'and kindred community.']
 	},
 	{
 		short: 'Story',
-		full: 'I can see myself in the unfolding, collective climate story.'
+		full: 'I can see myself in the unfolding, collective climate story.',
+		lines: ['I can see myself in', 'the unfolding, collective', 'climate story.']
 	},
 	{
 		short: 'Emotions',
-		full: 'I’m able to work with climate emotions and access healing and rest.'
+		full: 'I’m able to work with climate emotions and access healing and rest.',
+		lines: ['I’m able to work with', 'climate emotions and', 'access healing and rest.']
 	},
 	{
 		short: 'Understanding',
-		full: 'I understand climate truth, just solutions, and leverage points for change.'
+		full: 'I understand climate truth, just solutions, and leverage points for change.',
+		lines: ['I understand climate truth,', 'just solutions, and leverage', 'points for change.']
 	},
 	{
 		short: 'Clarity',
-		full: 'I have clarity around my contribution, while embracing its evolution.'
+		full: 'I have clarity around my contribution, while embracing its evolution.',
+		lines: ['I have clarity around', 'my contribution, while', 'embracing its evolution.']
 	},
 	{
 		short: 'Action',
-		full: 'I find footholds for meaningful action and collaboration.'
+		full: 'I find footholds for meaningful action and collaboration.',
+		lines: ['I find footholds for', 'meaningful action', 'and collaboration.']
 	},
 	{
 		short: 'Possibility',
-		full: 'I have a sense of possibility, authentic power, and joy in the work.'
+		full: 'I have a sense of possibility, authentic power, and joy in the work.',
+		lines: ['I have a sense of possibility,', 'authentic power and', 'joy in the work.']
 	}
 ];
 

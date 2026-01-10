@@ -69,6 +69,7 @@
 	num={numReady}
 	numLabel="Ready"
 	nextLabel={`Start Quiz For Participants`}
+	role={data.role}
 	helper={`Currently, ${numReady} participant${numReady !== 1 ? 's are' : ' is'} ready.\nOnce all participants are ready, start the quiz.`}
 	onNext={numReady > 0 ? callActionFromScript : null}
 />

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import dynamics from '$lib/dynamics';
 	import { line, scaleLinear } from 'd3';
 	let {
 		answers,
@@ -10,7 +11,8 @@
 		isCollectivePoll,
 		skipHover,
 		isOverlay,
-		showHighlight
+		showHighlight,
+		showTextLabels = false
 	}: {
 		answers: Record<string, number>;
 		highlight: number;
@@ -22,12 +24,15 @@
 		skipHover?: Boolean;
 		isOverlay?: Boolean;
 		showHighlight?: Boolean;
+		showTextLabels?: Boolean;
 	} = $props();
 
 	const features = $derived(Object.keys(answers));
 
+	const xOffset = $derived(showTextLabels ? 150 : 0);
+
 	const config = $derived({
-		d: chartWidth, // diameter of chart
+		d: chartWidth - xOffset * 2, // diameter of chart
 		labelRadius: 14, // radius of label circles
 		ticks: [1, 2, 3, 4, 5]
 	});
@@ -45,10 +50,10 @@
 
 	// given the precise angle in radians and value (1-5),
 	// returns {x, y} coordinate with padding accounted for
-	function angleToCoordinate(angle: number, value: number) {
+	function angleToCoordinate(angle: number, value: number, verticalValue?: number) {
 		// multiplying by -1 makes the math count clockwise
 		let x = Math.cos(angle) * radialScale(value) * -1;
-		let y = Math.sin(angle) * radialScale(value);
+		let y = Math.sin(angle) * radialScale(verticalValue || value);
 		return { x: config.d / 2 + x, y: config.d / 2 - y };
 	}
 
@@ -62,7 +67,7 @@
 				return angleToCoordinate(angle, tick);
 			})
 			.reduce((prev, curr) => {
-				return `${prev} ${curr.x} ${curr.y}`;
+				return `${prev} ${curr.x + xOffset} ${curr.y}`;
 			}, '')
 			.trim();
 		return numbers;
@@ -70,17 +75,31 @@
 
 	// `radialTickLines` calculates the lines from center of the octagons to create the web
 	const radialTickLines = $derived.by(() => {
-		let lines: { outerX: number; outerY: number; labelX: number; labelY: number }[] = [];
+		let lines: {
+			outerX: number;
+			outerY: number;
+			labelX: number;
+			labelY: number;
+			textX: number;
+			textY: number;
+		}[] = [];
 		for (var i = 0; i < features.length; i++) {
 			let pct = i / features.length;
 			let angle = Math.PI / 2 + 2 * Math.PI * pct;
 			const { x, y } = angleToCoordinate(angle, 5);
 			const lCoord = angleToCoordinate(angle, 6);
+			const tCoord = angleToCoordinate(
+				angle,
+				i === 2 ? 7.3 : i === 6 ? 7.1 : 8,
+				showTextLabels ? 6.2 : 0
+			);
 			lines.push({
 				outerX: x,
 				outerY: y,
 				labelX: lCoord.x,
-				labelY: lCoord.y
+				labelY: lCoord.y,
+				textX: tCoord.x,
+				textY: tCoord.y
 			});
 		}
 		return lines;
@@ -92,7 +111,7 @@
 			let ft_name = features[i];
 			let angle = Math.PI / 2 + (2 * Math.PI * i) / features.length;
 			let { x, y } = angleToCoordinate(angle, answers[ft_name]);
-			coordinates.push([x, y]);
+			coordinates.push([x + xOffset, y]);
 		}
 		return lineHelper(coordinates);
 	}
@@ -134,8 +153,8 @@
 		class:overlay={isOverlay}
 		class:start={isStart}
 		class:collective={isCollectivePoll}
-		width={config.d}
-		height={config.d}
+		width={config.d + xOffset * 2}
+		height={config.d + 20}
 		aria-hidden="true"
 	>
 		<path class="answer" stroke-width="3" opacity="0.8" d={`${drawAnswerShape(answers)}`} />
@@ -145,9 +164,37 @@
 				<polygon points={tickToPolygon(tick)} />
 			{/each}
 			{#each radialTickLines as f, idx}
-				<line x1={config.d / 2} y1={config.d / 2} x2={f.outerX} y2={f.outerY} />
-				<line class="dash" x1={f.outerX} y1={f.outerY} x2={f.labelX} y2={f.labelY} />
-				{#if skipHover && !showHighlight}
+				<line x1={config.d / 2 + xOffset} y1={config.d / 2} x2={f.outerX + xOffset} y2={f.outerY} />
+				{#if !showTextLabels}
+					<line
+						class="dash"
+						x1={f.outerX + xOffset}
+						y1={f.outerY}
+						x2={f.labelX + xOffset}
+						y2={f.labelY}
+					/>
+				{/if}
+				{#if showTextLabels}
+					{@const textX = dynamics[idx].lines.length === 2 ? f.textX + 50 : f.textX + 80}
+					<g
+						class="label"
+						class:highlight={highlight === idx}
+						ontouchstart={() => onHover(idx)}
+						onmouseenter={() => onHover(idx)}
+						onmouseleave={() => onLeave()}
+						aria-hidden="true"
+					>
+						<text class="dynamic" x={textX} y={f.textY - (idx === 0 ? 0 : 20)}>
+							<tspan x={textX}
+								><tspan class="dynamic-num">{idx + 1}.</tspan> {dynamics[idx].lines[0]}</tspan
+							>
+							<tspan x={textX} dy="1.2em">{dynamics[idx].lines[1]}</tspan>
+							{#if dynamics[idx].lines[2]}
+								<tspan x={textX} dy="1.2em">{dynamics[idx].lines[2]}</tspan>
+							{/if}
+						</text>
+					</g>
+				{:else if skipHover && !showHighlight}
 					<g class="label" aria-hidden="true">
 						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius}> </circle>
 						<text x={f.labelX} y={f.labelY}>{idx + 1}</text>
@@ -172,12 +219,13 @@
 				{#each formattedAnswers as ans}
 					<!-- note: adding 1px to radius to make same size as charcoal circle (with stroke of 1px) -->
 					<circle
-						cx={ans.xCoord}
+						cx={ans.xCoord + xOffset}
 						cy={ans.yCoord}
 						r={isCollectivePoll ? config.labelRadius + 2.5 : config.labelRadius + 1}
 					></circle>
-					<text x={isCollectivePoll ? ans.xCoord - 6.5 : ans.xCoord} y={ans.yCoord + 0.2}
-						>{isCollectivePoll ? ans.answer.toFixed(1) : ans.answer}</text
+					<text
+						x={(isCollectivePoll ? ans.xCoord - 6.5 : ans.xCoord) + xOffset}
+						y={ans.yCoord + 0.2}>{isCollectivePoll ? ans.answer.toFixed(1) : ans.answer}</text
 					>
 				{/each}
 			</g>
@@ -264,5 +312,8 @@
 	}
 	.label.highlight text {
 		fill: white;
+	}
+	.dynamic {
+		font-size: 14px;
 	}
 </style>
