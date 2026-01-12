@@ -14,7 +14,6 @@
 	let showSettingsModal = $state(false);
 	let showResetStartModal = $state(false);
 	let showResetEndModal = $state(false);
-	let navigationLoading = $state(false);
 </script>
 
 {#if showSettingsModal}
