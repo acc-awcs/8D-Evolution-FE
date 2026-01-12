@@ -1,7 +1,8 @@
 <script>
+	import { enhance } from '$app/forms';
 	import LoaderLink from '$lib/components/LoaderLink.svelte';
-	import OptimisticSubmitButton from '$lib/components/OptimisticSubmitButton.svelte';
 	import SettingsButton from '$lib/components/SettingsButton.svelte';
+	import SubmitButton from '$lib/components/SubmitButton.svelte';
 	import { COMPLETE, END, START } from '$lib/constants.js';
 	import { getStatus, getStatusColor } from '$lib/helpers/presenters';
 	import ActionBox from './ActionBox.svelte';
@@ -14,6 +15,7 @@
 	let showSettingsModal = $state(false);
 	let showResetStartModal = $state(false);
 	let showResetEndModal = $state(false);
+	let navigationLoading = $state(false);
 </script>
 
 {#if showSettingsModal}
@@ -63,9 +65,19 @@
 				</a>
 			</div>
 		{:else}
-			<form method="POST" action="?/beginPoll">
+			<form
+				method="POST"
+				action="?/beginPoll"
+				use:enhance={() => {
+					navigationLoading = true;
+					return async ({ update }) => {
+						await update();
+						navigationLoading = false;
+					};
+				}}
+			>
 				<input type="hidden" name="isStart" value="true" />
-				<OptimisticSubmitButton>Begin Poll</OptimisticSubmitButton>
+				<SubmitButton loading={navigationLoading}>Begin Poll</SubmitButton>
 			</form>
 		{/if}
 	</ActionBox>
@@ -85,9 +97,19 @@
 				<a class="btn primary" href={`/presenter/group/${group._id}/end/review`}> View Results </a>
 			</div>
 		{:else}
-			<form method="POST" action="?/beginPoll">
+			<form
+				method="POST"
+				action="?/beginPoll"
+				use:enhance={() => {
+					navigationLoading = true;
+					return async ({ update }) => {
+						await update();
+						navigationLoading = false;
+					};
+				}}
+			>
 				<input type="hidden" name="isStart" value="false" />
-				<OptimisticSubmitButton>Begin Poll</OptimisticSubmitButton>
+				<SubmitButton loading={navigationLoading}>Begin Poll</SubmitButton>
 			</form>
 		{/if}
 	</ActionBox>

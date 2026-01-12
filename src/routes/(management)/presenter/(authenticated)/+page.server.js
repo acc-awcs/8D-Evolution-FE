@@ -1,7 +1,15 @@
+import { MAILCHIMP_API_KEY } from '$env/static/private';
+import { NEW_GROUP_NOTIFICATION_EMAIL } from '$env/static/private';
 import { PUBLIC_SERVER_URL } from '$env/static/public';
+import { FACILITATOR } from '$lib/constants';
+import { AUTH_EMAIL_TEMPLATE } from '$lib/constants';
 import { statusIsGood } from '$lib/helpers/general';
+import Mailchimp from '@mailchimp/mailchimp_transactional';
 import { error } from '@sveltejs/kit';
 import { fail, isRedirect, redirect } from '@sveltejs/kit';
+
+const apiKey = MAILCHIMP_API_KEY;
+const client = Mailchimp(apiKey ?? '');
 
 export async function load({ cookies, fetch }) {
 	const sessionToken = cookies.get('sessionToken');
@@ -31,6 +39,7 @@ export async function load({ cookies, fetch }) {
 export const actions = {
 	default: async ({ cookies, request }) => {
 		try {
+			// Create a new group
 			const sessionToken = cookies.get('sessionToken');
 			const formData = await request.formData();
 			// @ts-ignore
@@ -54,9 +63,54 @@ export const actions = {
 				});
 			}
 
-			const newGroup = await response.json();
+			const { group, userName, userEmail } = await response.json();
 
-			redirect(303, `/presenter/group/${newGroup._id}`);
+			// After a new group is created for/by a facilitator, send an email to the provided notification emails if applicable
+			const emails = NEW_GROUP_NOTIFICATION_EMAIL
+				? NEW_GROUP_NOTIFICATION_EMAIL.replace(/ /g, '').split(',')
+				: null;
+			if (emails && group.creatorRole === FACILITATOR) {
+				const message = {
+					template_name: AUTH_EMAIL_TEMPLATE,
+					template_content: [
+						{
+							name: 'content',
+							content: `
+											<p>${userName} is getting ready for a facilitation!</p>
+											<p>If you'd like to reach out to them, here's their email: ${userEmail}</p>
+											<p>Facilitation Details:</p>
+											<ul>
+												<li><strong>Organization:</strong>${group.organization}</li>
+												<li><strong>Season:</strong>${group.season}</li>
+												<li><strong>Year:</strong>${group.year}</li>
+											</ul>
+											`
+						}
+					],
+					message: {
+						from_email: 'info@allwecansave.earth',
+						from_name: 'The All We Can Save Project',
+						to: emails.map((email) => ({
+							email: email,
+							name: ''
+						})),
+						subject: 'New Climate Wayfinding Group Created'
+					}
+				};
+
+				const mailchimpResp = await client.messages.sendTemplate(message);
+				if (Array.isArray(mailchimpResp)) {
+					const result = mailchimpResp[0];
+					if (result.status !== 'sent') {
+						return fail(422, {
+							success: false,
+							message: result.reject_reason
+						});
+					}
+				}
+			}
+
+			redirect(303, `/presenter/group/${group._id}`);
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;
