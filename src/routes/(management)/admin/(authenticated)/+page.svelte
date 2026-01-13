@@ -15,7 +15,7 @@
 		// 'Start Total Average',
 		// 'End Total Average'
 	]}
-	rowLinks={data.stats.map((s: any) => `/admin/group/${s.group._id}`)}
+	rowLinks={data.stats.map((s: any) => `/admin/facilitation/${s.group._id}`)}
 	rows={data.stats.map((stat: any) => [
 		stat.group.name,
 		stat.group.creatorShortName,

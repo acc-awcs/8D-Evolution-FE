@@ -5,6 +5,7 @@
 	import { enhance } from '$app/forms';
 	import { GROUP_LEAD } from '$lib/constants.js';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import { page } from '$app/state';
 
 	let loading = $state(false);
 	let accountModalOpen = $state(false);
@@ -22,6 +23,26 @@
 				<img src={accountIcon} alt="" />
 			</button>
 		</div>
+	</nav>
+	<nav class="subnav">
+		<ul>
+			<li>
+				<a href="/admin" class:active={page.url.pathname === '/admin'}>Facilitation Data</a>
+			</li>
+			<li>
+				<a href="/admin/group" class:active={page.url.pathname === '/admin/group'}>Group Data</a>
+			</li>
+			<li>
+				<a href="/admin/individual" class:active={page.url.pathname === '/admin/individual'}
+					>Individual User Data</a
+				>
+			</li>
+			<li>
+				<a href="/admin/users" class:active={page.url.pathname === '/admin/users'}
+					>User Management</a
+				>
+			</li>
+		</ul>
 	</nav>
 
 	{#if accountModalOpen}
@@ -68,7 +89,6 @@
 <style>
 	.home-label {
 		font-family: 'Instrument Serif', serif;
-		/* text-transform: uppercase; */
 		font-size: 26px;
 		margin-top: 6px;
 	}
@@ -121,7 +141,7 @@
 	}
 
 	.account-wrapper {
-		/* width: 100px; */
+		width: 134px;
 		display: flex;
 		justify-content: flex-end;
 	}
@@ -160,11 +180,48 @@
 		min-height: 85vh;
 		margin-top: 10px;
 		border-radius: var(--br);
+		padding: 0px 20px;
+		padding-bottom: 40px;
+	}
+
+	.subnav {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--cloud-dark);
+	}
+
+	.subnav ul,
+	.subnav li {
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.subnav a {
+		border-bottom: 1px solid transparent;
+		text-decoration: none;
+	}
+
+	.subnav a:hover {
+		border-bottom: 1px solid #0000005a;
+	}
+
+	.subnav a.active,
+	.subnav a.active:hover {
+		border-bottom: 1px solid var(--onyx);
+	}
+
+	.subnav ul {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 40px;
 	}
 
 	@media screen and (max-width: 600px) {
-		main {
-			padding: 20px 20px;
+		.home-label {
+			display: none;
 		}
 	}
 </style>

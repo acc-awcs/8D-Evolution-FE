@@ -32,7 +32,7 @@ export async function load({ cookies, fetch }) {
 	console.log('DATA?', data);
 
 	if (data.role !== ADMIN) {
-		redirect(303, '/presenter');
+		redirect(303, '/admin/login');
 	}
 
 	return data;

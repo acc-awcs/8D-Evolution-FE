@@ -11,13 +11,16 @@
 
 <br /><br />
 
-<a href="/admin/users">Back to all users</a>
+<a href="/admin/users">← Back to all users</a>
 
 <h1 class="title">User Details</h1>
 
 <p>Email: {data.user.email}</p>
 <p>Role: {ROLE_PRETTY_NAMES[data.user.role]}</p>
-{#if data.user.role !== GROUP_LEAD}
+{#if data.user.role === ADMIN}
+	<p>Receives New Group Emails: {data.user.receiveNewGroupEmails ? 'Yes' : 'No'}</p>
+{/if}
+{#if data.user.role !== GROUP_LEAD && data.user.firstName}
 	<p>Name: {data.user.firstName} {data.user.lastName}</p>
 	<p>Organization: {data.user.organization}</p>
 {/if}
@@ -37,6 +40,19 @@
 	>
 		<h2 class="title small">Edit User</h2>
 		<input type="hidden" name="userId" value={data.user?._id} />
+		{#if data.user?.role === ADMIN}
+			<label>
+				Receives New Group Emails
+				<select
+					required
+					name="receiveNewGroupEmails"
+					value={data.user?.receiveNewGroupEmails ? 'true' : 'false'}
+				>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				</select>
+			</label>
+		{/if}
 		<label>
 			Role
 			<select required name="role" value={data.user?.role}>

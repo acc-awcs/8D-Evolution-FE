@@ -1,6 +1,5 @@
 import { MAILCHIMP_API_KEY } from '$env/static/private';
-import { NEW_GROUP_NOTIFICATION_EMAIL } from '$env/static/private';
-import { PUBLIC_SERVER_URL } from '$env/static/public';
+import { PUBLIC_BASE_URL, PUBLIC_SERVER_URL } from '$env/static/public';
 import { FACILITATOR } from '$lib/constants';
 import { AUTH_EMAIL_TEMPLATE } from '$lib/constants';
 import { statusIsGood } from '$lib/helpers/general';
@@ -63,34 +62,40 @@ export const actions = {
 				});
 			}
 
-			const { group, userName, userEmail } = await response.json();
+			const { group, userName, userEmail, adminEmails } = await response.json();
 
 			// After a new group is created for/by a facilitator, send an email to the provided notification emails if applicable
-			const emails = NEW_GROUP_NOTIFICATION_EMAIL
-				? NEW_GROUP_NOTIFICATION_EMAIL.replace(/ /g, '').split(',')
-				: null;
-			if (emails && group.creatorRole === FACILITATOR) {
+			if (
+				Array.isArray(adminEmails) &&
+				adminEmails.length > 0 &&
+				group.creatorRole === FACILITATOR
+			) {
 				const message = {
 					template_name: AUTH_EMAIL_TEMPLATE,
 					template_content: [
 						{
 							name: 'content',
 							content: `
-											<p>${userName} is getting ready for a facilitation!</p>
+											<p>Heads up,</p>
+											<p><strong>${userName}</strong> is getting ready for a Climate Wayfinding facilitation!</p>
 											<p>If you'd like to reach out to them, here's their email: ${userEmail}</p>
 											<p>Facilitation Details:</p>
 											<ul>
-												<li><strong>Organization:</strong>${group.organization}</li>
-												<li><strong>Season:</strong>${group.season}</li>
-												<li><strong>Year:</strong>${group.year}</li>
+												<li><strong>Organization - </strong>${group.organization}</li>
+												<li><strong>Season - </strong>${group.season}</li>
+												<li><strong>Year - </strong>${group.year}</li>
 											</ul>
+											<br/>
+											<p><em>Sent from the Climate Wayfinding website. You can adjust the email preferences for any admin user on via the <a href="${PUBLIC_BASE_URL}/admin/users">Users</a> page.</em></p>
+											<br/>
+											<br/>
 											`
 						}
 					],
 					message: {
 						from_email: 'info@allwecansave.earth',
 						from_name: 'The All We Can Save Project',
-						to: emails.map((email) => ({
+						to: adminEmails.map((email) => ({
 							email: email,
 							name: ''
 						})),

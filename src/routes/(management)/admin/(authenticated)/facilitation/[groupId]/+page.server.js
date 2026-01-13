@@ -1,21 +1,28 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
-import { FACILITATOR } from '$lib/constants.js';
+import { FACILITATOR } from '$lib/constants';
 import { statusIsGood } from '$lib/helpers/general';
+import { isRedirect, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 
-export async function load({ cookies, fetch }) {
+// This function will be run on an interval to poll for registrant updates
+export async function load({ cookies, fetch, params }) {
 	const sessionToken = cookies.get('sessionToken');
+	const { groupId } = params;
 
-	const response = await fetch(`${PUBLIC_SERVER_URL}/api/group-results-page?role=${FACILITATOR}`, {
-		headers: {
-			Authorization: `Bearer ${sessionToken}`
-		},
-		method: 'GET'
-	});
+	const response = await fetch(
+		`${PUBLIC_SERVER_URL}/api/group-results-single?groupId=${groupId}&role=${FACILITATOR}`,
+		{
+			headers: {
+				Authorization: `Bearer ${sessionToken}`
+			},
+			method: 'GET'
+		}
+	);
 
 	if (!statusIsGood(response.status)) {
 		const errorBody = await response.text();
-		console.log('Error in auth server load admin', response.status, errorBody);
+		console.log('Error in presentation server load', response.status, errorBody);
 		error(500);
 	}
 
@@ -25,18 +32,25 @@ export async function load({ cookies, fetch }) {
 		error(404, 'Not Found');
 	}
 
-	return data;
+	return {
+		...data
+	};
 }
 
 // export const actions = {
-//   default: async ({ cookies, request }) => {
+//   updateGroup: async ({ cookies, request, params }) => {
 //     try {
 //       const sessionToken = cookies.get('sessionToken');
 //       const formData = await request.formData();
+//       const startOrEnd = params.startOrEnd;
+//       formData.append('groupId', params.groupId);
+//       formData.append('key', `${startOrEnd}PollInitiated`);
+//       formData.append('value', 'true');
+
 //       // @ts-ignore
 //       formData.forEach((value, key) => (formData[key] = value));
 
-//       const response = await fetch(`${PUBLIC_SERVER_URL}/api/new-group`, {
+//       const response = await fetch(`${PUBLIC_SERVER_URL}/api/update-group`, {
 //         method: 'POST',
 //         body: JSON.stringify(formData),
 //         headers: {
@@ -47,21 +61,18 @@ export async function load({ cookies, fetch }) {
 
 //       if (!statusIsGood(response.status)) {
 //         const body = await response.json();
-//         console.log('Error in auth server default', body);
 //         return fail(422, {
 //           success: false,
 //           message: body?.msg
 //         });
 //       }
 
-//       const newGroup = await response.json();
-
-//       redirect(303, `/presenter/group/${newGroup._id}`);
+//       redirect(303, `/presenter/group/${params.groupId}/${startOrEnd}/responses`);
 //     } catch (error) {
 //       if (isRedirect(error)) {
 //         throw error;
 //       }
-//       console.error('An error occurred in auth server default:', error);
+//       console.error('An error occurred:', error);
 //       return {
 //         success: false
 //       };

@@ -30,7 +30,7 @@ export async function load({ cookies, fetch }) {
 	}
 
 	if (data.role === ADMIN) {
-		redirect(303, '/admin');
+		redirect(303, '/presenter/login');
 	}
 
 	return data;
