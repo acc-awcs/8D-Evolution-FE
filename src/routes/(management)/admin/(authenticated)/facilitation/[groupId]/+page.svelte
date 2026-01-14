@@ -1,6 +1,7 @@
 <script>
 	import DynamicsSimpleComparison from '$lib/components/DynamicsSimpleComparison.svelte';
 	import SpiderChart from '$lib/components/SpiderChart.svelte';
+	import Table from '$lib/components/Table.svelte';
 	import { ROLE_PRETTY_NAMES } from '$lib/constants.js';
 	import { formatAnswers } from '$lib/helpers/results';
 
@@ -15,6 +16,10 @@
 	const endAnswers = $derived(
 		data.stats?.endResults?.length > 0 ? formatAnswers(data.stats?.endResults) : null
 	);
+
+	const isValid = (v) => v && !Array.isArray(v);
+
+	console.log('HUH', data);
 </script>
 
 <br /><br />
@@ -93,14 +98,44 @@
 		{/if}
 	</div>
 
-	<div class="dynamics-wrapper">
+	<!-- <div class="dynamics-wrapper">
 		<DynamicsSimpleComparison
 			startAnswers={startAnswers ? Object.values(startAnswers) : null}
 			endAnswers={endAnswers ? Object.values(endAnswers) : null}
 		/>
-	</div>
+	</div> -->
 {:else}
 	<p>No start or end data is available yet for this group.</p>
+{/if}
+
+<br /><br />
+
+{#if isValid(data?.stats?.averagedStartResults?.[0]) && isValid(data?.stats?.averagedEndResults?.[0])}
+	{@const startArray = data?.stats?.averagedStartResults}
+	{@const endArray = data?.stats?.averagedEndResults}
+	<Table
+		header={[
+			'',
+			'Dynamic 1',
+			'Dynamic 2',
+			'Dynamic 3',
+			'Dynamic 4',
+			'Dynamic 5',
+			'Dynamic 6',
+			'Dynamic 7',
+			'Dynamic 8'
+		]}
+		rows={[
+			['Start', ...startArray.map((v) => v.toFixed(2))],
+			['End', ...endArray.map((v) => v.toFixed(2))],
+			[
+				'Shift',
+				...startArray.map(
+					(s, i) => `${endArray?.[i] - s > 0 ? '+' : ''}${(endArray?.[i] - s)?.toFixed(2)}`
+				)
+			]
+		]}
+	/>
 {/if}
 
 <style>
