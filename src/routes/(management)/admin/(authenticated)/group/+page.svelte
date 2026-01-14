@@ -4,9 +4,9 @@
 	let { data } = $props();
 </script>
 
-<h1 class="title">Facilition Data</h1>
+<h1 class="title">Group Data</h1>
 
-<p>Browse data from collective polls run by <strong>trained facilitators</strong>.</p>
+<p>Browse data from collective polls run by <strong>group leads</strong>.</p>
 
 <h2 class="title small">Average Results By Dynamic</h2>
 
@@ -37,15 +37,15 @@
 		]}
 	/>
 {:else}
-	<p>No complete facilitations available to display statistics. Check back later!</p>
+	<p>No complete groups available to display statistics. Check back later!</p>
 {/if}
 
-<h2 class="title small">All Facilitations</h2>
+<h2 class="title small">All Groups</h2>
 {#if data?.stats?.length > 0}
 	<Table
 		header={[
 			'Facilitation',
-			'Facilitator',
+			'Group Lead Email',
 			'Start Poll Date',
 			'End Poll Date'
 			// 'Start Total Average',
@@ -54,7 +54,7 @@
 		rowLinks={data.stats.map((s: any) => `/admin/facilitation/${s.group._id}`)}
 		rows={data.stats.map((stat: any) => [
 			stat.group.name,
-			stat.group.creatorShortName,
+			stat.user?.email || 'N/A',
 			stat.group.startPollDate
 				? new Date(stat.group.startPollDate).toLocaleString('en-US', {
 						year: 'numeric',
@@ -74,7 +74,7 @@
 		])}
 	/>
 {:else}
-	<p>No facilitations to display.</p>
+	<p>No groups to display.</p>
 {/if}
 
 <div class="space"></div>

@@ -11,7 +11,7 @@
 
 <br /><br />
 
-<a href="/admin/users">← Back to all users</a>
+<a href="/admin/users">← All Users</a>
 
 <h1 class="title">User Details</h1>
 

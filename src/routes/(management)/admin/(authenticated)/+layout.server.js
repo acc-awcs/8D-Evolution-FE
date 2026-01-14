@@ -29,8 +29,6 @@ export async function load({ cookies, fetch }) {
 		error(404, 'Not Found');
 	}
 
-	console.log('DATA?', data);
-
 	if (data.role !== ADMIN) {
 		redirect(303, '/admin/login');
 	}

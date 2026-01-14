@@ -2,11 +2,11 @@
 	import dynamics from '$lib/dynamics';
 
 	let {
-		startAnswers,
-		endAnswers
+		startAnswers = null,
+		endAnswers = null
 	}: {
-		startAnswers: number[];
-		endAnswers: number[];
+		startAnswers?: number[] | null;
+		endAnswers?: number[] | null;
 	} = $props();
 </script>
 
@@ -26,9 +26,9 @@
 				{dynamic.full}
 			</div>
 			<div class="results">
-				<span class="s">{startAnswers[idx].toFixed(1)}</span>
+				<span class="s">{startAnswers?.[idx].toFixed(1) || ''}</span>
 				<span class="arrow">⟶</span>
-				<span class="c">{endAnswers[idx].toFixed(1)}</span>
+				<span class="c">{endAnswers?.[idx].toFixed(1) || ''}</span>
 			</div>
 		</li>
 	{/each}

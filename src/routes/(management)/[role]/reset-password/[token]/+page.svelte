@@ -11,7 +11,6 @@
 	use:enhance={() => {
 		loading = true;
 		return async ({ result, update }) => {
-			console.log('RESULT?', result);
 			await update();
 			errorMessage = result?.data?.success === false ? result?.data?.message : null;
 			loading = false;

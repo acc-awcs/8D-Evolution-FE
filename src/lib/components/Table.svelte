@@ -1,5 +1,5 @@
 <script>
-	let { rows, rowLinks, header } = $props();
+	let { rows, rowLinks = null, header } = $props();
 </script>
 
 <div class="table-wrapper">
