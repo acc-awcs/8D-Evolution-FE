@@ -20,14 +20,15 @@
 	--olive: #877b46;
 	--periwinkle: #a2b6fc;
 	--periwinkle-dark: #859bea;
+	--periwinkle-darker: #506ac8;
 	--neon: #e3ff6c;
 
 	/* Some guideline widths */
 	--width-large: 820px;
 	--width-medium: 700px;
 	--width-small: 610px;
-	--width-extra-small: 550px;
-	--br: 12px;
+	--width-extra-small: 600px;
+	--br: 10px;
 }
 
 /* Custom fonts */
@@ -73,7 +74,12 @@ body {
 .title {
 	font-family: 'Instrument Serif', serif;
 	font-weight: 400;
-	font-size: 50px;
+	font-size: 42px;
+	line-height: 1.2;
+}
+
+.title.large {
+	font-size: 60px;
 	line-height: 1.2;
 }
 
@@ -144,6 +150,7 @@ select {
 	box-sizing: border-box;
 	max-width: 100%;
 	border: 1px solid var(--onyx);
+	margin-top: 8px;
 }
 
 input.large,
@@ -194,10 +201,15 @@ a.short {
 	max-width: 100%;
 }
 
+.btn.small {
+	min-width: 60px;
+}
+
 .btn.primary {
 	font-family: 'Area Normal', sans-serif;
 	font-size: 18px;
-	border: 1px solid var(--onyx);
+	border: none;
+	/* border: 1px solid var(--onyx); */
 	color: var(--onyx);
 	background-color: var(--neon);
 }
@@ -222,6 +234,22 @@ a.short {
 
 .btn.secondary:hover {
 	background-color: var(--marigold);
+}
+
+.btn.tertiary {
+	border: none;
+	border-bottom: 1px solid var(--onyx);
+	background-color: transparent;
+	border-radius: 0px;
+	font-size: 16px;
+	text-wrap: nowrap;
+	padding: 6px 10px;
+	transition: all 0.2s linear;
+}
+
+.btn.tertiary:hover {
+	border-bottom: 3px solid var(--onyx);
+	padding-bottom: 3px;
 }
 
 .link-like {

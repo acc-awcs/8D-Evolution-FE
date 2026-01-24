@@ -6,7 +6,7 @@
 	let { data } = $props();
 </script>
 
-<h1 class="title">Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1>
+<!-- <h1 class="title">Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1> -->
 
 <SingleChartDisplay results={data.matchingResults} />
 

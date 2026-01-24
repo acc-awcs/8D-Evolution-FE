@@ -19,6 +19,16 @@ export async function load({ cookies, fetch, params, url }) {
 		if (statusIsGood(response.status)) {
 			const body = await response.json();
 			if (body.pollHasBeenInitiated && !body.alreadySubmitted) {
+				// Apply pollToken if one doesn't exist yet for this user and this quiz.
+				if (body.newPollToken) {
+					cookies.set('pollToken', body.newPollToken, {
+						httpOnly: true,
+						secure: process.env.NODE_ENV === 'production',
+						sameSite: 'strict',
+						path: '/',
+						maxAge: 60 * 60 * 24 // 1 day
+					});
+				}
 				redirect(303, `/poll/${params.pollCode}/quiz`);
 			}
 			if (body.tokenMatchesPoll) {

@@ -48,7 +48,7 @@
 		bottom: 0px;
 		left: 0px;
 		display: flex;
-		padding: 20px;
+		padding: 40px;
 		justify-content: space-between;
 		width: 100%;
 		box-sizing: border-box;
@@ -61,7 +61,7 @@
 	button {
 		min-width: 48px;
 		height: 48px;
-		background-color: var(--cloud-dark);
+		background-color: var(--cloud);
 		border-radius: 48px;
 		display: flex;
 		align-items: center;
@@ -89,7 +89,7 @@
 	.ready div {
 		width: 52px;
 		height: 52px;
-		background-color: var(--cloud-dark);
+		background-color: var(--periwinkle);
 		border-radius: 100%;
 		display: flex;
 		align-items: center;

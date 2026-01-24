@@ -22,33 +22,36 @@
 
 {#if data?.groups?.length > 0}
 	<div class="wrapper">
-		<h1 class="title">Your Groups</h1>
 		<div class="header">
-			<p>
-				Help groups visualize their Climate Wayfinding progress through collective 8 Dynamics
-				assessments.
-			</p>
-			<button class="link-like" onclick={() => (showNewGroupModal = true)}
-				>+ Create a new group</button
+			<h1 class="title large">Your Groups</h1>
+			<button class="btn tertiary" onclick={() => (showNewGroupModal = true)}
+				>Create a new Group +</button
 			>
 		</div>
+		<p class="context">
+			Help groups visualize their Climate Wayfinding progress through collective 8 Dynamics
+			assessments.
+		</p>
 		<div class="groups">
 			{#each data?.groups || [] as group}
 				{@const status = getStatus(group)}
 				<a
 					href={`/presenter/group/${group._id}`}
-					style={`background-color:var(--${getStatusColor(status)}); border: 1px solid var(--${getStatusColor(status)});`}
+					style={`background-color:var(--${getStatusColor(status)});`}
 				>
-					<img src={imagesByStatus[status]} alt="" />
-					<div class="overlay"></div>
-					<p class="group-title">{group.name}</p>
+					<!-- <img src={imagesByStatus[status]} alt="" /> -->
+					<!-- <div class="overlay"></div> -->
 					<div class="display">
-						{#if status !== COMPLETE}
-							<p class="up-next">Up Next</p>
-						{/if}
+						<div class="up-next-wrapper">
+							{#if status !== COMPLETE}
+								<p class="up-next">Up Next</p>
+							{/if}
+						</div>
+
 						<p class="status" style={`background-color:var(--${getStatusColor(status)});`}>
 							{status}
 						</p>
+						<p class="group-title">{group.name}</p>
 					</div>
 				</a>
 			{/each}
@@ -92,36 +95,41 @@
 	.wrapper {
 		min-height: 85vh;
 	}
+	.wrapper .title {
+		margin: 10px 0px;
+	}
 	.header {
+		margin-top: 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
 		gap: 16px;
 	}
-	.link-like {
-		font-size: 16px;
+	.context {
+		width: 521px;
+		max-width: 100%;
 	}
 	.groups {
 		display: flex;
 		gap: 26px;
+		row-gap: 40px;
 		flex-wrap: wrap;
-		margin-top: 20px;
+		margin-top: 40px;
+		padding-bottom: 50px;
 	}
 	.groups p {
 		margin: 0px;
 	}
 	.groups a {
-		width: 340px;
-		height: 260px;
+		width: 290px;
+		height: 300px;
 		max-width: 100%;
 		text-decoration: none;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		justify-content: flex-end;
 		background-color: #fff;
-		box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
-		padding: 16px;
+		/* box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1); */
 		box-sizing: border-box;
 		align-items: flex-start;
 		border-radius: var(--br);
@@ -130,22 +138,40 @@
 	}
 	.group-title {
 		font-family: 'Instrument Serif', serif;
-		font-size: 28px;
+		font-size: 22px;
 		line-height: 36px;
+		padding-top: 6px;
+		padding-bottom: 4px;
 	}
 	.groups a:hover .group-title {
 		text-decoration: underline;
 	}
+	.up-next-wrapper {
+		height: 28px;
+		width: 100%;
+	}
 	.up-next {
 		text-transform: uppercase;
-		font-size: 16px;
-		opacity: 0.8;
+		font-size: 12px;
+		font-weight: 500;
+		/* opacity: 0.8; */
 	}
 	.status {
 		padding: 1px 12px;
 		padding-top: 2px;
 		border-radius: 20px;
-		color: var(--cloud);
+		font-size: 14px;
+		font-weight: 700;
+		/* color: var(--cloud); */
+		display: inline-block;
+	}
+
+	.display {
+		background-color: var(--cloud);
+		padding: 12px;
+		padding-top: 8px;
+		width: 100%;
+		box-sizing: border-box;
 	}
 	.display,
 	.group-title {

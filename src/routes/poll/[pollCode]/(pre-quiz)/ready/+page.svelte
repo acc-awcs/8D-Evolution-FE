@@ -20,3 +20,13 @@
 <h1 class="title">Hang Tight ...</h1>
 <p>You're all set!</p>
 <p>Once your facilitator starts the session, this page will automatically update.</p>
+
+<style>
+	h1 {
+		margin: 40px 0px;
+	}
+	p {
+		margin: 0px;
+		margin-bottom: 12px;
+	}
+</style>

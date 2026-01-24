@@ -44,5 +44,7 @@
 		background: none;
 		border: none;
 		cursor: pointer;
+		margin: 0px;
+		padding: 0px;
 	}
 </style>

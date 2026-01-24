@@ -20,11 +20,19 @@
 	}}
 >
 	<h1 class="title">Create Presenter Account</h1>
-	<p>
+	<p class="intro">
 		Help groups visualize their Climate Wayfinding progress through collective 8-Dynamics
 		assessments.
 	</p>
-	<div class="input-row">
+	<label>
+		Email
+		<input required class="large" type="email" name="email" />
+	</label>
+	<label>
+		Password
+		<input required class="large" type="password" name="password" />
+	</label>
+	<!-- <div class="input-row">
 		<label>
 			Email
 			<input required class="large" type="email" name="email" />
@@ -33,7 +41,7 @@
 			Password
 			<input required class="large" type="password" name="password" />
 		</label>
-	</div>
+	</div> -->
 	<label>
 		Are you a Trained Facilitator or a Group Lead?
 		<select required name="accountType" bind:value={accountType}>
@@ -72,16 +80,6 @@
 </form>
 
 <style>
-	.note {
-		margin-top: 28px;
-		font-size: 14px;
-		text-align: center;
-		display: flex;
-		justify-content: center;
-		gap: 6px;
-		flex-wrap: wrap;
-	}
-
 	.input-row {
 		display: flex;
 		gap: 16px;
@@ -90,5 +88,27 @@
 
 	.input-row label {
 		flex: 1;
+	}
+
+	.title {
+		text-align: center;
+	}
+	.intro {
+		text-align: center;
+		margin-bottom: 42px;
+	}
+	label {
+		display: block;
+		margin-bottom: 24px;
+	}
+	.note {
+		margin-top: 28px;
+		font-size: 14px;
+		text-align: center;
+		margin-bottom: 10px;
+		display: flex;
+		justify-content: center;
+		gap: 6px;
+		flex-wrap: wrap;
 	}
 </style>

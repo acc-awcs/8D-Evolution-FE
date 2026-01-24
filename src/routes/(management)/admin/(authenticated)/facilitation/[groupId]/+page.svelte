@@ -18,8 +18,6 @@
 	);
 
 	const isValid = (v) => v && !Array.isArray(v);
-
-	console.log('HUH', data);
 </script>
 
 <br /><br />

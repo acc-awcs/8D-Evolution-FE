@@ -30,30 +30,46 @@
 			: data.group.endPollReadyParticipants.length
 	);
 
+	// const query = createQuery({
+	//   queryKey: ['live-data'],
+	//   queryFn: fetchData,
+	//   refetchInterval: 5000, // Polls every 5 seconds
+	//   // Add other options as needed, such as initialData, staleTime, etc.
+	// })
+
 	function callActionFromScript() {
 		formElement.submit();
 	}
 </script>
 
-<h1 class="title">Join Collective {data.isStart ? 'Starting' : 'Ending'} Point Poll</h1>
+<!-- {#if $countQuery.isLoading}
+    <span>Loading...</span>
+{:else if $countQuery.isError}
+    <span>Error: {$countQuery.error.message}</span>
+{:else}
+    <h1>Current Count: {$countQuery.data.dynamicCount}</h1>
+{/if} -->
+
+<h1 class="title large">Map Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1>
 
 <div class="wrapper">
-	<div class="option clear">
-		<h3>Scan QR Code</h3>
-
+	<div class="option qr">
 		<svg
 			class="qrcode"
 			use:qr={{
 				data: `${PUBLIC_BASE_URL}/poll/${data.pollCode}`
 			}}
 		/>
+		<p>Scan QR Code</p>
 	</div>
 	<div class="or">OR</div>
 	<div class="option visit">
-		<h3>Visit</h3>
+		<p>Visit</p>
 		<p class="poll-link">{shortenUrl(`${PUBLIC_BASE_URL}/poll`)}</p>
 		<p>and enter code</p>
-		<p class="code">{data.pollCode}</p>
+		<p class="code">
+			<span>{data.pollCode.slice(0, 3)}</span><span>{data.pollCode.slice(3, 6)}</span>
+		</p>
 	</div>
 </div>
 
@@ -89,50 +105,65 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 20px;
-		background-color: var(--cloud-light);
+		/* background-color: var(--cloud-light); */
 		padding: 40px 0px;
 		border-radius: var(--br);
-		border: 1px solid var(--cloud-dark);
+		border: 1px solid var(--periwinkle);
 	}
 	.visit {
 		justify-content: center;
-		gap: 36px;
+		gap: 12px;
+		border: 1px solid var(--onyx);
 	}
 	.title {
 		text-align: center;
 		margin-top: 0px;
 	}
+	.qr {
+		background-color: var(--periwinkle);
+	}
 	.qrcode {
-		width: 300px;
-		height: 300px;
+		width: 280px;
+		height: 280px;
+		padding: 10px;
+		background-color: var(--cloud);
+		border-radius: var(--br);
 	}
 	.or {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-weight: 1000;
-		font-size: 16px;
+		font-weight: 500;
+		font-size: 26px;
 	}
 	.poll-link {
-		font-size: 2rem;
+		font-size: 24px;
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
-		margin: 6px 0px;
+		margin-top: 8px;
+		margin-bottom: 30px;
 	}
 	.code {
-		padding: 20px 20px;
-		padding-bottom: 16px;
-		letter-spacing: 10px;
-		font-size: 2.5rem;
+		padding: 16px;
+		padding-bottom: 12px;
+		font-size: 26px;
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
-		font-weight: 1000;
+		font-weight: 700;
 		color: var(--onyx);
-		background-color: var(--cloud-dark);
+		background-color: var(--neon);
 		border-radius: 10px;
 		border: none;
 	}
-	p,
-	h3 {
+	.code span {
+		padding: 0px 4px;
+		letter-spacing: 4px;
+	}
+	p {
 		margin: 0px;
+	}
+	.qr p {
+		margin: 10px 0px;
+		font-size: 20px;
+		font-weight: 700;
 	}
 
 	@media screen and (max-width: 800px) {

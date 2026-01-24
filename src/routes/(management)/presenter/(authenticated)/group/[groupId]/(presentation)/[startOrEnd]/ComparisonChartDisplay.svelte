@@ -17,7 +17,7 @@
 </script>
 
 <div class="top-page">
-	<h1 class="title">Our Collective Shift</h1>
+	<h1 class="title large">Our Collective Shift</h1>
 	<div class="chart-wrapper">
 		{#if startAnswers && endAnswers}
 			<div class="chart chart-fade-in" aria-hidden="true" bind:clientWidth={startChartWidth}>
@@ -81,6 +81,7 @@
 	.title {
 		text-align: center;
 		margin-top: 0px;
+		margin-bottom: 10px;
 	}
 
 	.chart {

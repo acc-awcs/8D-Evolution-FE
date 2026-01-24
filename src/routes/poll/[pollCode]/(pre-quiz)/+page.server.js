@@ -5,7 +5,6 @@ import { fail, isRedirect, redirect } from '@sveltejs/kit';
 export const actions = {
 	default: async ({ cookies, request, params }) => {
 		try {
-			console.log('DOING THIS?');
 			const formData = await request.formData();
 			// @ts-ignore
 			formData.forEach((value, key) => (formData[key] = value));
@@ -38,8 +37,6 @@ export const actions = {
 				maxAge: 60 * 60 * 24 // 1 day
 			});
 
-			console.log('GETTING HERE?', body.pollCode);
-			console.log('SUCCESSFULLY?');
 			redirect(303, `/poll/${body.pollCode}/ready`);
 		} catch (error) {
 			if (isRedirect(error)) {

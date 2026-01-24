@@ -12,10 +12,10 @@ export function getStatus(group: any) {
 
 export function getStatusColor(status: any) {
 	if (status === COMPLETE) {
-		return 'olive';
+		return 'neon';
 	}
 	if (status === END) {
-		return 'periwinkle-dark';
+		return 'soil';
 	}
-	return 'canyon';
+	return 'periwinkle';
 }

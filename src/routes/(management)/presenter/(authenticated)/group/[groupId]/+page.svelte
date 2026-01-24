@@ -40,7 +40,9 @@
 	/>
 {/if}
 
-<a href="/presenter" class="back">← Back to all groups</a>
+<div class="back-wrapper">
+	<a href="/presenter" class="back">← Back to all groups</a>
+</div>
 <!-- {@const group = data.group} -->
 <div class="header">
 	<h1 class="title">{group.name}</h1>
@@ -52,8 +54,13 @@
 </p> -->
 
 <div class="actions">
-	<ActionBox number={1} color={getStatusColor(START)} active={true}>
-		<h2 class="title small">Map Collective Starting Point</h2>
+	<ActionBox
+		number={1}
+		color={getStatusColor(START)}
+		active={true}
+		title="Map Collective Starting Point"
+	>
+		<!-- <h2 class="title small">Map Collective Starting Point</h2> -->
 		<p>Begin a presentation to map your group's collective 8 Dynamics starting point.</p>
 		{#if group.startPollCode && group.startPollInitiated}
 			<div class="buttons">
@@ -81,8 +88,13 @@
 			</form>
 		{/if}
 	</ActionBox>
-	<ActionBox number={2} color={getStatusColor(END)} active={status !== START}>
-		<h2 class="title small">Map Collective Ending Point</h2>
+	<ActionBox
+		number={2}
+		color={getStatusColor(END)}
+		active={status !== START}
+		title="Map Collective Ending Point"
+	>
+		<!-- <h2 class="title small">Map Collective Ending Point</h2> -->
 		<p>
 			Ready to see the results of your group's learnings? Begin the presentation to map your group's
 			collective ending point.
@@ -113,8 +125,13 @@
 			</form>
 		{/if}
 	</ActionBox>
-	<ActionBox number={3} color={getStatusColor(COMPLETE)} active={status === COMPLETE}>
-		<h2 class="title small">Review Collective Shift</h2>
+	<ActionBox
+		number={3}
+		color={getStatusColor(COMPLETE)}
+		active={status === COMPLETE}
+		title="Review Collective Shift"
+	>
+		<!-- <h2 class="title small">Review Collective Shift</h2> -->
 		<p>Revisit the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
 			<LoaderLink href={`/presenter/group/${group._id}/end/review/shift`}>Review Shift</LoaderLink>
@@ -125,6 +142,9 @@
 </div>
 
 <style>
+	.back-wrapper {
+		padding-top: 20px;
+	}
 	.back {
 		margin-top: 8px;
 	}
@@ -149,10 +169,12 @@
 		font-size: 16px;
 	}
 
+	p {
+		width: 620px;
+		max-width: 100%;
+	}
+
 	@media screen and (max-width: 600px) {
-		.title {
-			margin-right: auto;
-		}
 		.header {
 			flex-direction: column-reverse;
 			align-items: flex-end;

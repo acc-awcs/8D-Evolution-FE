@@ -40,8 +40,8 @@
 	});
 </script>
 
-<h1 class="title">8 Dynamics Collective Poll</h1>
-<p>Enter the six-digit number provided by your facilitator:</p>
+<h1 class="title">8 Dynamics<br />Collective Poll</h1>
+<p>Enter the number provided by your facilitator:</p>
 {#if codeError.length > 0}
 	<p class="error">{codeError}</p>
 {/if}
@@ -77,7 +77,7 @@
 	</label>
 	<div class="buttons">
 		<button
-			class="btn primary"
+			class="btn primary small"
 			class:loading={codeCheckLoading}
 			type="submit"
 			disabled={codeCheckLoading}
@@ -110,14 +110,14 @@
 	}
 
 	input {
-		padding: 10px;
-		padding-top: 16px;
-		width: 300px;
-		font-size: 2.5rem;
+		padding: 20px;
+		padding-top: 24px;
+		width: 250px;
+		font-size: 32px;
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 		font-weight: 200;
 		color: var(--onyx);
-		background-color: var(--cloud-dark);
+		background-color: var(--cloud);
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
@@ -125,6 +125,13 @@
 		text-align: center;
 		margin-bottom: 20px;
 		text-transform: uppercase;
+		margin-top: 0px;
+	}
+
+	p {
+		padding: 0px 20px;
+		margin: 0px;
+		margin-top: 20px;
 	}
 
 	form {

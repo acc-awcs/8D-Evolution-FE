@@ -11,9 +11,9 @@
 	let loading = $state(false);
 	let mode = $state('unselected');
 	const currentUTCYear = new Date().getUTCFullYear();
-	const startYear = 2025;
+	const startYear = 2026;
 	// Show year options starting from 2025 and ending two beyond the current year
-	const yearDiff = currentUTCYear + 2 - startYear;
+	const yearDiff = currentUTCYear + 3 - startYear;
 </script>
 
 <Modal handleClose={onClose}>

@@ -6,6 +6,9 @@
 	import { shortenUrl } from '$lib/helpers/general';
 	import { onDestroy } from 'svelte';
 	import SingleChartDisplay from '../../SingleChartDisplay.svelte';
+	import QRCodeModal from './QRCodeModal.svelte';
+
+	let showModal = $state(false);
 
 	// Only run this on the client side
 	if (browser) {
@@ -21,13 +24,22 @@
 	}
 
 	let { data } = $props();
+	const pollCode = $derived(data.isStart ? data.group.startPollCode : data.group.endPollCode);
 </script>
 
+{#if showModal}
+	<QRCodeModal onClose={() => (showModal = false)} pollCode={data.pollCode} />
+{/if}
+
 <div class="join-note">
-	Still need to join? Visit <strong>{shortenUrl(PUBLIC_BASE_URL)}/poll</strong> and use code
-	<strong class="spaced">{data.isStart ? data.group.startPollCode : data.group.endPollCode}</strong>
+	<strong>Still need to join?</strong> Go to <strong>{shortenUrl(PUBLIC_BASE_URL)}/poll</strong> and
+	enter
+	<strong class="spaced"
+		><span>{pollCode.slice(0, 3)}</span><span>{pollCode.slice(3, 6)}</span></strong
+	>.
+	<button class="link-like" onclick={() => (showModal = true)}>Show QR</button>
 </div>
-<h1 class="title">Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1>
+<!-- <h1 class="title">Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1> -->
 
 <SingleChartDisplay results={data.matchingResults} />
 
@@ -48,17 +60,25 @@
 		text-align: center;
 		position: relative;
 		top: -10px;
-		margin-top: -20px;
+		margin-top: 0px;
+		margin-bottom: 30px;
 	}
 	.join-note strong {
-		background-color: var(--cloud-dark);
+		/* background-color: var(--cloud-dark);
 		padding: 6px 6px;
 		padding-bottom: 4px;
 		border-radius: 4px;
-		letter-spacing: 0.5px;
+		letter-spacing: 0.5px; */
 	}
 	.spaced {
-		letter-spacing: 1px;
+		/* letter-spacing: 1px; */
+	}
+	.spaced span {
+		display: inline-flex;
+		gap: 4px;
+	}
+	.link-like {
+		color: var(--periwinkle-darker);
 	}
 	.title {
 		text-align: center;

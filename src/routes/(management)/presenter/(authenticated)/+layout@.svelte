@@ -5,6 +5,17 @@
 	import { enhance } from '$app/forms';
 	import { GROUP_LEAD } from '$lib/constants.js';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	onMount(() => {
+		if (browser) {
+			document.body.style.backgroundColor = 'var(--cloud)';
+		}
+	});
+
+	const queryClient = new QueryClient();
 
 	let loading = $state(false);
 	let accountModalOpen = $state(false);
@@ -13,99 +24,101 @@
 	let { data, children } = $props();
 </script>
 
-<div class="wrapper">
-	<nav>
-		<Logo relative={true} />
-		<!-- <div class="home-label">Presenter</div> -->
-		<div class="account-wrapper">
-			<button class="account-btn" type="button" onclick={() => (accountModalOpen = true)}>
-				<span class="visually-hidden">Account</span>
-				<img src={accountIcon} alt="" />
-			</button>
-		</div>
-	</nav>
+<QueryClientProvider client={queryClient}>
+	<div class="wrapper">
+		<nav>
+			<Logo relative={true} />
+			<!-- <div class="home-label">Presenter</div> -->
+			<div class="account-wrapper">
+				<button class="account-btn" type="button" onclick={() => (accountModalOpen = true)}>
+					<span class="visually-hidden">Account</span>
+					<img src={accountIcon} alt="" />
+				</button>
+			</div>
+		</nav>
 
-	{#if accountModalOpen}
-		<Modal handleClose={closeModal}>
-			{#if deleteAccountMode}
-				<div class="header">
-					<h1 class="title small">Delete Account</h1>
-					<button onclick={closeModal} class="close link-like" type="button">Close</button>
-				</div>
-				<form
-					method="POST"
-					use:enhance={() => {
-						loading = true;
+		{#if accountModalOpen}
+			<Modal handleClose={closeModal}>
+				{#if deleteAccountMode}
+					<div class="header">
+						<h1 class="title small">Delete Account</h1>
+						<button onclick={closeModal} class="close link-like" type="button">Close</button>
+					</div>
+					<form
+						method="POST"
+						use:enhance={() => {
+							loading = true;
 
-						return async ({ result, update }) => {
-							await update();
-							loading = false;
-						};
-					}}
-					action="/api/delete-account?/delete"
-				>
-					<p>Are you sure you want to delete your account? This cannot be undone.</p>
-					<div class="buttons">
-						<button
-							class="btn secondary large"
-							type="button"
-							onclick={() => (deleteAccountMode = false)}
-						>
-							Cancel
-						</button>
+							return async ({ result, update }) => {
+								await update();
+								loading = false;
+							};
+						}}
+						action="/api/delete-account?/delete"
+					>
+						<p>Are you sure you want to delete your account? This cannot be undone.</p>
+						<div class="buttons">
+							<button
+								class="btn secondary large"
+								type="button"
+								onclick={() => (deleteAccountMode = false)}
+							>
+								Cancel
+							</button>
+							<button class="btn primary large" type="submit" disabled={loading} class:loading>
+								{#if loading}
+									<ButtonLoader />
+								{:else}
+									Delete
+								{/if}
+							</button>
+						</div>
+					</form>
+				{:else}
+					<div class="header">
+						<h1 class="title small">Account</h1>
+						<button onclick={closeModal} class="close link-like" type="button">Close</button>
+					</div>
+					{#if data.role === GROUP_LEAD}
+						<p>Logged in as {data.email}.</p>
+					{:else}
+						<p>Logged in as {data.firstName} {data.lastName} ({data.email}).</p>
+					{/if}
+					<button class="link-like delete" type="button" onclick={() => (deleteAccountMode = true)}
+						>Delete account</button
+					>
+					<form
+						method="POST"
+						use:enhance={() => {
+							loading = true;
+
+							return async ({ result, update }) => {
+								await update();
+								loading = false;
+							};
+						}}
+						action="/api/logout?/logout"
+					>
 						<button class="btn primary large" type="submit" disabled={loading} class:loading>
 							{#if loading}
 								<ButtonLoader />
 							{:else}
-								Delete
+								Logout <svg viewBox="0 0 44 18" xmlns="http://www.w3.org/2000/svg">
+									<path d="M34.1477 1.39111L41.9321 9.17551L34.1477 16.9599"></path>
+									<path d="M1.19088 9.16982H40.6755"></path>
+								</svg>
 							{/if}
 						</button>
-					</div>
-				</form>
-			{:else}
-				<div class="header">
-					<h1 class="title small">Account</h1>
-					<button onclick={closeModal} class="close link-like" type="button">Close</button>
-				</div>
-				{#if data.role === GROUP_LEAD}
-					<p>Logged in as {data.email}.</p>
-				{:else}
-					<p>Logged in as {data.firstName} {data.lastName} ({data.email}).</p>
+					</form>
 				{/if}
-				<button class="link-like delete" type="button" onclick={() => (deleteAccountMode = true)}
-					>Delete account</button
-				>
-				<form
-					method="POST"
-					use:enhance={() => {
-						loading = true;
+			</Modal>
+		{/if}
 
-						return async ({ result, update }) => {
-							await update();
-							loading = false;
-						};
-					}}
-					action="/api/logout?/logout"
-				>
-					<button class="btn primary large" type="submit" disabled={loading} class:loading>
-						{#if loading}
-							<ButtonLoader />
-						{:else}
-							Logout <svg viewBox="0 0 44 18" xmlns="http://www.w3.org/2000/svg">
-								<path d="M34.1477 1.39111L41.9321 9.17551L34.1477 16.9599"></path>
-								<path d="M1.19088 9.16982H40.6755"></path>
-							</svg>
-						{/if}
-					</button>
-				</form>
-			{/if}
-		</Modal>
-	{/if}
-
-	<main>
-		{@render children()}
-	</main>
-</div>
+		<main>
+			{@render children()}
+		</main>
+	</div>
+</QueryClientProvider>
 
 <style>
 	.home-label {
@@ -115,7 +128,7 @@
 		margin-top: 6px;
 	}
 	.wrapper {
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		min-height: 100vh;
 		width: 100%;
 		display: flex;
@@ -200,11 +213,11 @@
 	}
 
 	main {
-		width: 1200px;
+		width: 1026px;
 		max-width: 100%;
-		background-color: var(--cloud);
+		background-color: #fff;
 		align-self: center;
-		padding: 20px 40px;
+		padding: 10px 50px;
 		box-sizing: border-box;
 		min-height: 85vh;
 		margin-top: 10px;

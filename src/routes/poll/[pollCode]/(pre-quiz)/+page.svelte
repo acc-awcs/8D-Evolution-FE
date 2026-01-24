@@ -2,7 +2,6 @@
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 
-	let { data } = $props();
 	let loading = $state(false);
 </script>
 
