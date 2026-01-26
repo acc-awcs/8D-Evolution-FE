@@ -49,8 +49,19 @@
 </form>
 
 <style>
+	.title {
+		text-align: center;
+	}
+	.intro {
+		text-align: center;
+		margin-bottom: 42px;
+	}
+	label {
+		display: block;
+		margin-bottom: 24px;
+	}
 	.note {
-		margin-top: 0px;
+		margin-top: 28px;
 		font-size: 14px;
 		text-align: center;
 		margin-bottom: 10px;
@@ -60,7 +71,7 @@
 		flex-wrap: wrap;
 	}
 	.note.secondary {
-		margin-top: 28px;
+		margin-top: 20px;
 
 		font-style: normal;
 	}

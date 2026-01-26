@@ -1,6 +1,13 @@
 <script>
+	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import Logo from '$lib/components/Logo.svelte';
+
+	function reloadPage() {
+		if (browser) {
+			location.reload();
+		}
+	}
 </script>
 
 <main>
@@ -14,9 +21,8 @@
 		{:else}
 			<h1 class="title">Oops!</h1>
 			<p>Something went wrong. Let's try that again.</p>
+			<button class="btn secondary" onclick={reloadPage}>Refresh</button>
 		{/if}
-
-		<a href="/" class="btn secondary">Return to the Tool</a>
 	</section>
 </main>
 

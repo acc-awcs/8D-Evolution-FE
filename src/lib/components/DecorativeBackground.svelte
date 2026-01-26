@@ -20,15 +20,17 @@
 </div>
 
 <style>
-	.wrapper {
+	/* .wrapper {
 		width: 100%;
 		height: 100vh;
 		overflow: hidden;
 		position: absolute;
-	}
+		top: 0px;
+		left: 0px;
+	} */
 	img {
 		position: fixed;
-		z-index: 0;
+		/* z-index: 0; */
 	}
 
 	.square {

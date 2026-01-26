@@ -6,11 +6,19 @@
 	import { GROUP_LEAD } from '$lib/constants.js';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	let loading = $state(false);
 	let accountModalOpen = $state(false);
 	const closeModal = () => (accountModalOpen = false);
 	let { data, children } = $props();
+
+	onMount(() => {
+		if (browser) {
+			document.body.style.backgroundColor = 'var(--cloud)';
+		}
+	});
 </script>
 
 <div class="wrapper">

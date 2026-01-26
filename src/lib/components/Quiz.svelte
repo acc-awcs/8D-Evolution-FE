@@ -6,6 +6,7 @@
 	import illustrations from '$lib/illustrations';
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	let { data, isStart, pollCode } = $props();
 	let loading = $state(false);
@@ -47,6 +48,10 @@
 	};
 
 	onMount(() => {
+		// if (browser) {
+		// 	document.body.style.backgroundColor = 'var(--cloud)';
+		// }
+
 		const observer = new IntersectionObserver(intersectionCallback, {
 			threshold: 0.1 // Trigger when 10% of the section is visible
 		});
@@ -129,6 +134,7 @@
 	<div class="logo-wrapper">
 		<Logo onDark={true} />
 	</div>
+	<div class="sticky-offset"></div>
 	<section class="intro">
 		<!-- <div class="clouds-overlay-wrapper">
 			<div
@@ -187,6 +193,7 @@
 		scroll-behavior: smooth;
 		overscroll-behavior: contain;
 		position: relative;
+		background-color: var(--cloud);
 	}
 	section {
 		padding: 2rem;
@@ -207,7 +214,7 @@
 		/* background-image: url('$lib/assets/cloud-hero-layer-1.jpg');
 		background-size: cover; */
 		/* color: var(--cloud); */
-		background-color: var(--periwinkle);
+		/* background-color: var(--periwinkle); */
 	}
 	section.intro .content {
 		width: var(--width-large);
@@ -282,6 +289,17 @@
 	}
 	img.visible {
 		opacity: 1;
+	}
+	.logo-wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		position: sticky;
+		top: 0px;
+		left: 0px;
+		background: linear-gradient(var(--cloud), var(--cloud), #faf6f000);
+		height: 80px;
+		z-index: 5;
 	}
 	@media (max-width: 850px) {
 		/* reducing the opacing when the images overlap with the section text

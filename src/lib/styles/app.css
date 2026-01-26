@@ -69,6 +69,7 @@ body {
 	color: var(--charcoal);
 	background-color: var(--cloud);
 	margin: 0px;
+	/* overflow: hidden; */
 }
 
 .title {

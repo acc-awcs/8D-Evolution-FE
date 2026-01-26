@@ -2,7 +2,8 @@
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import { FACILITATOR, GROUP_LEAD } from '$lib/constants';
+	import { FACILITATOR, GROUP_LEAD, GROUP_START_YEAR } from '$lib/constants';
+	import { getYearDiff } from '$lib/helpers/general';
 
 	const DELETE_MODE = 'delete';
 	const EDIT_NAME_MODE = 'edit-name';
@@ -11,9 +12,8 @@
 	let loading = $state(false);
 	let mode = $state('unselected');
 	const currentUTCYear = new Date().getUTCFullYear();
-	const startYear = 2026;
 	// Show year options starting from 2025 and ending two beyond the current year
-	const yearDiff = currentUTCYear + 3 - startYear;
+	const yearDiff = getYearDiff();
 </script>
 
 <Modal handleClose={onClose}>
@@ -51,20 +51,27 @@
 						placeholder="University of XYZ, etc."
 					/>
 				</label><label>
-					Season of Facilitation
-					<!-- <input type="text" name="season" /> -->
-					<select required name="season" value={data.group?.season}>
-						<option value="">Select season</option>
-						<option value="Spring">Spring</option>
-						<option value="Summer">Summer</option>
-						<option value="Fall">Fall</option>
-						<option value="Winter">Winter</option>
+					Month of Facilitation
+					<select required name="month" value={data.group?.month}>
+						<option value="">Select month</option>
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
 					</select>
 				</label><label>
 					Year of Facilitation
 					<select required name="year" value={`${data.group?.year || currentUTCYear}`}>
 						{#each { length: yearDiff } as _, i}
-							<option value={`${startYear + i}`}>{startYear + i}</option>
+							<option value={`${GROUP_START_YEAR + i}`}>{GROUP_START_YEAR + i}</option>
 						{/each}
 					</select>
 				</label>

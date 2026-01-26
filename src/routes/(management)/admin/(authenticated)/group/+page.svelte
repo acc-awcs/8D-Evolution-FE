@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Table from '$lib/components/Table.svelte';
 
-	let { data } = $props();
+	// let { data } = $props();
 </script>
 
 <h1 class="title">Group Data</h1>
 
 <p>Browse data from collective polls run by <strong>group leads</strong>.</p>
 
-<h2 class="title small">Average Results By Dynamic</h2>
+<p class="note">Will populate this once the facilitator interface is finished & approved!</p>
+
+<!-- <h2 class="title small">Average Results By Dynamic</h2>
 
 {#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
 	<p class="note">TODO: Add date range? What are helpful pre-defined ranges?</p>
@@ -75,7 +77,7 @@
 	/>
 {:else}
 	<p>No groups to display.</p>
-{/if}
+{/if} -->
 
 <div class="space"></div>
 

@@ -40,3 +40,16 @@ export const formatAnswers = (resultsArray: any) => {
 		[[], [], [], [], [], [], [], []]
 	);
 };
+
+export const formatAveragedAnsers = (meanAns: any) => {
+	return {
+		A: meanAns[0],
+		B: meanAns[1],
+		C: meanAns[2],
+		D: meanAns[3],
+		E: meanAns[4],
+		F: meanAns[5],
+		G: meanAns[6],
+		H: meanAns[7]
+	};
+};

@@ -4,9 +4,7 @@
 	import DecorativeBackground from '$lib/components/DecorativeBackground.svelte';
 	import Logo from '$lib/components/Logo.svelte';
 	let { children } = $props();
-	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
-	const queryClient = new QueryClient();
 
 	let bgColor = $state('var(--periwinkle)');
 
@@ -25,30 +23,28 @@
 	<DecorativeBackground />
 {/if}
 
-<QueryClientProvider client={queryClient}>
-	<div class="wrapper" style={`background-color: ${bgColor};`}>
-		<header class="logo">
-			<Logo relative={true} />
-			{#if page.url.pathname.includes('ready')}
-				<p>Group</p>
-				<p class="code">
-					<span>{page.params.pollCode?.slice(0, 3)}</span><span
-						>{page.params.pollCode?.slice(3, 6)}</span
-					>
-				</p>
-			{/if}
-		</header>
-		<main>
-			<div class="column">
-				{@render children()}
-			</div>
-		</main>
-		<div
-			class="offset"
-			style={`height: ${page.url.pathname.includes('ready') ? '180px' : '20px'};`}
-		></div>
-	</div>
-</QueryClientProvider>
+<div class="wrapper" style={`background-color: ${bgColor};`}>
+	<header class="logo">
+		<Logo relative={true} />
+		{#if page.url.pathname.includes('ready')}
+			<p>Group</p>
+			<p class="code">
+				<span>{page.params.pollCode?.slice(0, 3)}</span><span
+					>{page.params.pollCode?.slice(3, 6)}</span
+				>
+			</p>
+		{/if}
+	</header>
+	<main>
+		<div class="column">
+			{@render children()}
+		</div>
+	</main>
+	<div
+		class="offset"
+		style={`height: ${page.url.pathname.includes('ready') ? '180px' : '20px'};`}
+	></div>
+</div>
 
 <style>
 	.offset {

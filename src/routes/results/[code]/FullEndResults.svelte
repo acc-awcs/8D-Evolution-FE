@@ -194,6 +194,7 @@
 						answers={data.current?.object}
 						{highlight}
 						{chartWidth}
+						isStart={false}
 						{onHover}
 						onLeave={startRotate}
 						skipHover={true}
@@ -201,6 +202,8 @@
 					/>
 				</div>
 			</div>
+		</section>
+		<section class="nums-wrapper">
 			<div class="results fade-in">
 				<DynamicsComparison
 					{highlight}
@@ -217,25 +220,25 @@
 				<div class="charts">
 					<div class="absolute-wrapper">
 						<SpiderChart
-							answers={data.start?.object}
+							answers={data.current?.object}
+							startAnswers={data.start?.object}
 							{highlight}
 							{chartWidth}
 							{onHover}
 							onLeave={startRotate}
 							skipHover={true}
 							isOverlay={true}
-							isStart={true}
 						/>
 					</div>
 					<SpiderChart
-						answers={data.current?.object}
-						startAnswers={data.start?.object}
+						answers={data.start?.object}
 						{highlight}
 						{chartWidth}
 						{onHover}
 						onLeave={startRotate}
 						skipHover={true}
 						isOverlay={true}
+						isStart={true}
 					/>
 				</div>
 				<div class="text">
@@ -275,12 +278,12 @@
 		text-align: center;
 	}
 	.outer {
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		min-height: 100vh;
 		box-sizing: border-box;
 	}
 	.clouds {
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		background-image:
 			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
 		background-repeat: no-repeat, no-repeat, no-repeat;
@@ -293,7 +296,7 @@
 		background-size: 1000px, 1000px, 1000px;
 		position: relative;
 		padding: 20px 20px;
-		padding-bottom: 40px;
+		/* padding-bottom: 40px; */
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
@@ -374,12 +377,9 @@
 		left: 0px;
 	}
 
-	.pre-title {
-		font-family: 'Instrument Serif', serif;
-		font-weight: 400;
-		font-size: 26px;
-		line-height: 1.4;
-		margin: 0;
+	.nums-wrapper {
+		padding: 40px 0px;
+		background-color: var(--periwinkle);
 	}
 
 	.up-next {

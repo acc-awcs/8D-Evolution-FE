@@ -14,3 +14,20 @@ export const RESULTS_EMAIL_TEMPLATE = '8d-evolution-results';
 export const START = 'Map Collective Start';
 export const END = 'Map Collective End';
 export const COMPLETE = 'Complete';
+
+export const GROUP_START_YEAR = 2026;
+
+export const MONTHS = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];

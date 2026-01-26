@@ -7,7 +7,11 @@
 
 	onMount(() => {
 		if (browser) {
-			document.body.style.backgroundColor = 'var(--periwinkle)';
+			if (page.url.pathname?.includes('admin')) {
+				document.body.style.backgroundColor = 'var(--cloud)';
+			} else {
+				document.body.style.backgroundColor = 'var(--periwinkle)';
+			}
 		}
 	});
 </script>
@@ -19,11 +23,11 @@
 		<Logo relative={true} />
 	</nav>
 
-	<div class="tile">
-		<slot />
+	<div class="tile-wrapper">
+		<div class="tile">
+			<slot />
+		</div>
 	</div>
-
-	<div></div>
 </main>
 
 <style>
@@ -34,14 +38,14 @@
 		padding: 30px 20px;
 		box-sizing: border-box;
 		background-color: var(--periwinkle);
-		justify-content: space-between;
+		/* justify-content: space-between; */
 		align-items: center;
 		position: relative;
 		flex-direction: column;
 	}
 
 	.admin.wrapper {
-		background-color: var(--cloud);
+		background-color: var(--soil);
 	}
 
 	nav {
@@ -70,78 +74,16 @@
 		position: relative;
 	}
 
-	.admin .tile {
+	.tile-wrapper {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: 100%;
+	}
+
+	/* .admin .tile {
 		border: 1px solid var(--onyx);
 		box-shadow: none;
-	}
-
-	img {
-		position: absolute;
-		z-index: 0;
-	}
-
-	.square {
-		z-index: 1;
-		bottom: 0px;
-		left: 40px;
-		width: 235px;
-		height: 148px;
-	}
-
-	.square-2 {
-		right: 0px;
-		top: 80px;
-		width: 134px;
-		height: 230px;
-	}
-
-	.arc-side {
-		left: 0px;
-		top: 80px;
-		width: 203px;
-		height: 336px;
-	}
-
-	.arc-corner {
-		bottom: 0px;
-		right: 0px;
-		width: 235px;
-		height: 240px;
-	}
-
-	.mag-square {
-		bottom: 0px;
-		left: 0px;
-		width: 228px;
-		height: 304px;
-	}
-
-	.mag-long {
-		right: 0px;
-		top: 180px;
-		width: 103px;
-		height: 322px;
-	}
-
-	.square,
-	.square-2 {
-		opacity: 1;
-		transition: opacity 0.2s ease;
-	}
-
-	@media screen and (max-width: 800px) {
-		.square,
-		.square-2 {
-			opacity: 0.6;
-		}
-	}
-
-	@media screen and (max-width: 600px) {
-		.arc-corner {
-			right: -20px;
-		}
-		.square {
-			left: -80px;
-		}
-	}
+	} */
 </style>

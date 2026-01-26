@@ -254,34 +254,34 @@
 
 	/* ANSWER SHAPES */
 	path.answer {
-		fill: var(--marigold);
+		fill: var(--rust);
 		opacity: 0.5;
 	}
 	.collective path.answer {
-		fill: var(--periwinkle);
+		fill: var(--rust);
 	}
 	path.answer.transition {
 		transition: d 2s ease-in-out;
 	}
 	#answer circle {
-		fill: var(--marigold);
+		fill: var(--rust);
 	}
 	.collective #answer circle {
-		fill: var(--periwinkle);
+		fill: var(--rust);
 	}
 	#answer text {
-		fill: var(--onyx);
+		fill: var(--cloud);
 	}
 
 	.start path.answer,
 	.start #answer circle {
-		fill: var(--rust);
+		fill: var(--periwinkle);
 	}
 	.start #answer text {
-		fill: var(--cloud);
+		fill: var(--onyx);
 	}
-	.overlay.start path.answer {
-		opacity: 0.3;
+	.overlay path.answer {
+		opacity: 1;
 	}
 
 	text {
@@ -296,7 +296,7 @@
 		text-align: center;
 	}
 	.label circle {
-		fill: var(--periwinkle);
+		fill: var(--cloud);
 		transition: fill 0.2s linear;
 		stroke: var(--onyx);
 		stroke-width: 1;

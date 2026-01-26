@@ -82,7 +82,7 @@ export const actions = {
 											<p>Facilitation Details:</p>
 											<ul>
 												<li><strong>Organization - </strong>${group.organization}</li>
-												<li><strong>Season - </strong>${group.season}</li>
+												<li><strong>Month - </strong>${group.month}</li>
 												<li><strong>Year - </strong>${group.year}</li>
 											</ul>
 											<br/>
