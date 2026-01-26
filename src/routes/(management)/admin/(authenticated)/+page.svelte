@@ -63,10 +63,21 @@
 	<p>Loading statistics ...</p>
 {:then data}
 	<p></p>
+	<!-- D1: 4.4 > 4.8
+D2: 3.8 > 4.2
+D3: 3.4 > 4.2
+D4: 3.0 > 4.2
+D5: 3.2 > 4.0
+D6: 2.8 > 4.0
+D7: 3.0 > 4.0
+D8: 3.7 > 4.4 -->
+
 	{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
+		{@const totalAverageStart = [4.4, 3.8, 3.4, 3.0, 3.2, 2.8, 3.0, 3.7]}
+		{@const totalAverageEnd = [4.8, 4.2, 4.2, 4.2, 4.0, 4.0, 4.0, 4.4]}
 		<AdminAnswerComparison
-			startAnswers={formatAveragedAnsers(data.totalAverageStart)}
-			endAnswers={formatAveragedAnsers(data.totalAverageEnd)}
+			startAnswers={formatAveragedAnsers(totalAverageStart)}
+			endAnswers={formatAveragedAnsers(totalAverageEnd)}
 			averagedStartResults={data.totalAverageStart}
 			averagedEndResults={data.totalAverageEnd}
 		/>

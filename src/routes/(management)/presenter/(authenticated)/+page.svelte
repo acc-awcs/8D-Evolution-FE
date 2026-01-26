@@ -68,7 +68,7 @@
 			For each group you facilitate, you'll be able to visually compare the growth before and after
 			your work together.
 		</p>
-		<img class="intro" src={charts} alt="Two spider charts, showing growth" />
+		<img class="intro chart-fade-in" src={charts} alt="Two spider charts, showing growth" />
 		<button class="btn primary" onclick={() => (showNewGroupModal = true)}
 			>Create Your First Group</button
 		>
@@ -77,7 +77,8 @@
 
 <style>
 	.intro-wrapper {
-		min-height: 87vh;
+		padding: 60px 0px;
+		/* height: 88vh; */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -87,7 +88,7 @@
 		margin-top: 0px;
 	}
 	img.intro {
-		width: 600px;
+		width: 800px;
 		max-width: 100%;
 		margin: 20px 0px;
 		margin-bottom: 40px;

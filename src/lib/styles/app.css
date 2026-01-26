@@ -10,6 +10,7 @@
 
 	/* Climate Wayfinding Guide Colors */
 	--cloud: #faf6f0;
+	/* --cloud: #faf6f0; */
 	--cloud-light: #fdfbf7;
 	--cloud-dark: #eae4db;
 	--onyx: #2f3325;
@@ -245,12 +246,14 @@ a.short {
 	font-size: 16px;
 	text-wrap: nowrap;
 	padding: 6px 10px;
-	transition: all 0.2s linear;
+	font-style: normal;
+	/* transition: all 0.2s linear; */
 }
 
 .btn.tertiary:hover {
-	border-bottom: 3px solid var(--onyx);
-	padding-bottom: 3px;
+	font-style: italic;
+	/* border-bottom: 3px solid var(--onyx);
+	padding-bottom: 3px; */
 }
 
 .link-like {
