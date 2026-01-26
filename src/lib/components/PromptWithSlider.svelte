@@ -73,17 +73,20 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		gap: 30px;
 	}
 
 	label {
 		display: block;
 		/* font-family: 'Instrument Serif', serif; */
-		font-weight: 400;
-		font-size: 24px;
-		line-height: 40px;
+		/* font-weight: 400; */
+		font-size: 20px;
+		line-height: 150%;
 		/* font-style: italic; */
 		outline: none;
 		text-align: center;
+		width: 500px;
+		max-width: 100%;
 	}
 
 	.input-wrapper {
@@ -97,7 +100,7 @@
 	.value {
 		font-size: 44px;
 		text-align: center;
-		font-weight: 600;
+		/* font-weight: 600; */
 		color: var(--periwinkle);
 		margin-bottom: 30px;
 		position: relative;
@@ -112,15 +115,17 @@
 		border-radius: 28px;
 		transition: border 0.2s linear;
 		box-sizing: border-box;
-		font-size: 24px;
-		font-weight: 600;
+		font-size: 26px;
+		gap: 8px;
+		margin-bottom: -2px;
+		/* font-weight: 600; */
 	}
 
 	.descriptions {
 		display: flex;
 		justify-content: space-between;
 		font-size: 16px;
-		font-weight: 600;
+		/* font-weight: 600; */
 		line-height: 1.6;
 	}
 
@@ -135,7 +140,7 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		margin-top: 2rem;
+		/* margin-top: 2rem; */
 	}
 
 	input[type='range'] {

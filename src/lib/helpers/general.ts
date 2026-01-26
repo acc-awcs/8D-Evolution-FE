@@ -21,3 +21,11 @@ export const getCurrentMonth = () => {
 	console.log('U', currentMonth);
 	return MONTHS[currentMonth];
 };
+
+// export const getBiggestShift = (startAnswers, endAnswers) => {
+// 	return startAnswers.reduce(([maxShiftIndex, maxShiftValue], startAnswer, i) => {
+// 		if (startAnswer.value) {
+
+// 		}
+// 	}, [0, 0])
+// }

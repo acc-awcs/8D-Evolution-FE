@@ -81,11 +81,11 @@
 		margin-top: 20px;
 		margin-bottom: 40px;
 		font-size: 20px;
-		line-height: 150%;
+		line-height: 160%;
 		text-align: center;
 		width: 670px;
 		max-width: 100%;
-		font-weight: 600;
+		/* font-weight: 600; */
 	}
 
 	h1 {

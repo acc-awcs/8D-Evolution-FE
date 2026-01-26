@@ -1,25 +1,22 @@
 <script lang="ts">
-	import DynamicSlider from '$lib/components/DynamicSlider.svelte';
 	import Logo from '$lib/components/Logo.svelte';
 	import SpiderChart from '$lib/components/SpiderChart.svelte';
 	import { _sendEmail } from './+page';
-	import { rotateDynamic } from '$lib/dynamics';
-	import { onDestroy, onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import { prettyCode } from '$lib/helpers/results';
-	import CopyBox from '$lib/components/CopyBox.svelte';
 	import trackEvent from '$lib/custom-event';
 	import { enhance } from '$app/forms';
 	import DynamicsComparison from '$lib/components/DynamicsComparison.svelte';
+	import cloudBg from '$lib/assets/cloud-bg.jpg';
 
-	const INTERVAL = 1500;
 	const BREAKPOINT = 900;
 	let innerWidth = $state(500);
 	let { data } = $props();
 	let highlight = $state(0);
-	let intervalId = $state<number>();
 	let chartWidth = $state(100);
+	let chartWidthUpNext = $state(100);
+
+	console.log('DATA', data);
 
 	// Email form & query state management
 	let email = $state('');
@@ -28,34 +25,6 @@
 	let sendEmailFinished = $state<boolean>(false);
 	let sendEmailSuccess = $state<boolean>(false);
 	let emailError = $state<string>('');
-
-	function startRotate() {
-		// if (innerWidth < BREAKPOINT) {
-		// 	// If the screen is mobile width, we don't want to automatically highlight the dynamics
-		// 	return;
-		// }
-		// if (!intervalId) {
-		// 	intervalId = setInterval(() => {
-		// 		highlight = rotateDynamic(highlight, 1);
-		// 	}, INTERVAL);
-		// }
-	}
-	function stopRotate() {
-		clearInterval(intervalId);
-		intervalId = undefined;
-	}
-
-	function onHover(select: number) {
-		highlight = select;
-		// stopRotate();
-	}
-
-	onMount(() => {
-		startRotate();
-	});
-	onDestroy(() => {
-		stopRotate();
-	});
 
 	function handleEmailChange(evt: Event): void {
 		const input = evt.target as HTMLInputElement;
@@ -144,27 +113,21 @@
 				<button class="btn primary" onclick={closeModal}>Done</button>
 			</div>
 		{:else}
-			<h1 class="title">Need MailChimp Auth</h1>
-			<p>
-				Emi here - I'll need to grab the MailChimp API key from Amy (we can find this together!)
-			</p>
-			<div class="buttons done">
-				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div>
 			<!-- Error message -->
-			<!-- <h1 class="title">Oops!</h1>
+			<h1 class="title">Oops!</h1>
 			<p>
 				Looks like something went wrong on our end and we couldn't send your email. Please try again
 				later.
 			</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div> -->
+			</div>
 		{/if}
 	</Modal>
 {/if}
 
 <div class="outer">
+	<img class="cloud-bg" src={cloudBg} alt="" />
 	<header class="logo">
 		<Logo />
 	</header>
@@ -176,27 +139,23 @@
 			</div>
 			<div class="side-by-side">
 				<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
-					<h2>Start</h2>
+					<h2 class="uppercase-title">Starting Point</h2>
 					<SpiderChart
 						answers={data.start?.object}
 						{highlight}
 						{chartWidth}
-						{onHover}
 						isStart={true}
-						onLeave={startRotate}
 						skipHover={true}
 						showHighlight={innerWidth < BREAKPOINT}
 					/>
 				</div>
 				<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
-					<h2>End</h2>
+					<h2 class="uppercase-title">Ending Point</h2>
 					<SpiderChart
 						answers={data.current?.object}
 						{highlight}
 						{chartWidth}
 						isStart={false}
-						{onHover}
-						onLeave={startRotate}
 						skipHover={true}
 						showHighlight={innerWidth < BREAKPOINT}
 					/>
@@ -209,23 +168,20 @@
 					{highlight}
 					startAnswers={data.start?.answers.map((a) => a.value)}
 					endAnswers={data.current?.answers.map((a) => a.value)}
-					{onHover}
-					onLeave={startRotate}
+					onLeave={() => null}
 				/>
 			</div>
 		</section>
 		<section class="up-next">
 			<div class="charts-overlaid">
 				<!-- Overlaid version -->
-				<div class="charts">
+				<div class="charts" bind:clientWidth={chartWidthUpNext}>
 					<div class="absolute-wrapper">
 						<SpiderChart
 							answers={data.current?.object}
 							startAnswers={data.start?.object}
 							{highlight}
-							{chartWidth}
-							{onHover}
-							onLeave={startRotate}
+							chartWidth={chartWidthUpNext}
 							skipHover={true}
 							isOverlay={true}
 						/>
@@ -233,20 +189,17 @@
 					<SpiderChart
 						answers={data.start?.object}
 						{highlight}
-						{chartWidth}
-						{onHover}
-						onLeave={startRotate}
+						chartWidth={chartWidthUpNext}
+						onLeave={() => null}
 						skipHover={true}
 						isOverlay={true}
 						isStart={true}
 					/>
 				</div>
 				<div class="text">
-					<h2>Next Steps</h2>
-					<p>
-						Let me know whatever you want to be called out here! Can be a statistical insight on
-						their results, opportunities for further progress, etc.
-					</p>
+					<div class="uppercase-title">Your Biggest Shift</div>
+					<h2 class="title">Example Dynamic</h2>
+					<p>Todo: Confirm with AWCS team on content for this section.</p>
 					<!-- <p>I can also remove the animation on the chart here and just do a static overlay.</p> -->
 				</div>
 			</div>
@@ -257,18 +210,6 @@
 			</div>
 		</section>
 	</main>
-	<!-- <footer>
-		© 2024 The All We Can Save Project. Developers <a
-			href="https://github.com/chelshaw"
-			target="_blank"
-			rel="noopener nofollow">Chelsea Shaw</a
-		>,
-		<a href="https://github.com/emikjackson" target="_blank" rel="noopener nofollow">Emi Jackson</a
-		>, and
-		<a href="https://www.linkedin.com/in/li-helen" target="_blank" rel="noopener nofollow"
-			>Helen Li</a
-		> brought this interactive tool to life.
-	</footer> -->
 </div>
 
 <style>
@@ -282,21 +223,20 @@
 		min-height: 100vh;
 		box-sizing: border-box;
 	}
+	.cloud-bg {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+	}
+	.title {
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
 	.clouds {
-		background-color: var(--cloud);
-		background-image:
-			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
-		background-repeat: no-repeat, no-repeat, no-repeat;
-		background-blend-mode: overlay, overlay, overlay;
-		background-position:
-			bottom left,
-			bottom 0 right -100px,
-			bottom right;
-		/* background-size: 485px, 504px, 503px; */
-		background-size: 1000px, 1000px, 1000px;
 		position: relative;
 		padding: 20px 20px;
-		/* padding-bottom: 40px; */
+		padding-top: 0px;
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
@@ -306,12 +246,13 @@
 	.side-by-side {
 		display: flex;
 		justify-content: center;
-		gap: 100px;
+		gap: 40px;
 		margin: 40px 0px;
 	}
 	.chart {
 		flex: 1;
-		max-width: 500px;
+		width: 560px;
+		max-width: 100%;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
@@ -319,11 +260,13 @@
 		text-align: center;
 	}
 	h2 {
-		font-family: 'Instrument Serif', serif;
+		margin-bottom: 40px;
 	}
 	.logo {
-		height: 120px;
+		height: 100px;
 		position: relative;
+		display: flex;
+		justify-content: center;
 	}
 	.intro {
 		margin: 0px 20px;
@@ -351,21 +294,28 @@
 		align-items: center;
 		gap: 80px;
 		width: 1000px;
+		max-width: 100%;
 	}
 
 	.charts {
 		/* width: 50%; */
+		/* width: 500px; */
+		/* max-width: 100%; */
+		width: 500px;
+		max-width: 100%;
+		flex: 1;
 		position: relative;
 	}
 
 	.text {
+		flex: 1;
 		padding: 20px;
 	}
 
-	.text h2 {
+	/* .text h2 {
 		font-family: 'Instrument Serif', serif;
 		font-size: 32px;
-	}
+	} */
 
 	.text p {
 		font-size: 1rem;
@@ -394,7 +344,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: var(--width-large);
+		width: 1000px;
 		text-align: center;
 		max-width: 100%;
 		margin: 40px 0px;
@@ -485,10 +435,23 @@
 		}
 	}
 
+	@media screen and (max-width: 1180px) {
+		.chart {
+			max-width: 500px;
+		}
+	}
+
+	@media screen and (max-width: 1000px) {
+		.chart {
+			max-width: 400px;
+		}
+	}
+
 	@media screen and (max-width: 800px) {
 		.side-by-side {
 			flex-direction: column;
 			gap: 60px;
+			align-items: center;
 		}
 		.charts-overlaid {
 			flex-direction: column;
@@ -499,6 +462,12 @@
 		.clouds {
 			padding: 10px;
 			padding-bottom: 20px;
+		}
+		.chart {
+			width: 100%;
+		}
+		.charts {
+			width: 100%;
 		}
 	}
 </style>

@@ -51,7 +51,7 @@
 		<section>
 			<div class="column">
 				{#if codeCheckSuccess}
-					<h1 class="title">Got it!</h1>
+					<h1 class="title large">Got it!</h1>
 					<p style="margin-bottom:40px;">
 						Amazing, we've got your starting point results. Let's jump into the 8 Dynamics of
 						Climate Engagement, round two. On the next page, we'll ask you to fill out your 8
@@ -80,10 +80,14 @@
 							codeCheckLoading = true;
 							const resp = await _checkStartCode(code);
 							if (resp.success) {
-								codeCheckSuccess = true;
+								if (resp.redirectCode) {
+									goto(`/results/${resp.redirectCode}`);
+								} else {
+									codeCheckSuccess = true;
+								}
 							} else if (resp.notFound) {
 								codeError =
-									"We couldn't find a matching entry with that code. Please double check your entry.";
+									"We couldn't find a starting point entry with that code. Please double check your entry.";
 							} else {
 								codeError =
 									'Having trouble identifying that code, please refresh your page and try again.';

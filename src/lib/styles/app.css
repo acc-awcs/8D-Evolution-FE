@@ -26,8 +26,8 @@
 
 	/* Some guideline widths */
 	--width-large: 820px;
-	--width-medium: 700px;
-	--width-small: 610px;
+	--width-medium: 750px;
+	--width-small: 685px;
 	--width-extra-small: 600px;
 	--br: 10px;
 }
@@ -36,13 +36,13 @@
 @font-face {
 	font-family: 'Area Normal';
 	src: url('/fonts/AreaNormal-Medium.woff2') format('woff2');
-	font-weight: 400;
+	font-weight: 500;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Area Normal';
 	src: url('/fonts/AreaNormal-MediumItalic.woff2') format('woff2');
-	font-weight: 400;
+	font-weight: 500;
 	font-style: italic;
 }
 /* @font-face {
@@ -102,6 +102,15 @@ h2 {
 	text-transform: uppercase;
 	font-size: 20px;
 	line-height: 1.4;
+	margin: 0;
+}
+
+.uppercase-title {
+	font-family: 'Area Normal', Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 140%;
 	margin: 0;
 }
 
@@ -172,10 +181,10 @@ a:focus-visible {
 
 .btn {
 	font-size: 18px;
-	line-height: 30px;
+	line-height: 140%;
 	text-decoration: none;
 	border-radius: 50px;
-	padding: 12px 30px;
+	padding: 12px 25px;
 	padding-top: 14px;
 	transition: all 0.1s linear;
 	/* fixes for discrepancies between .btn on <a> and <button> */
@@ -217,15 +226,15 @@ a.short {
 }
 
 .btn.primary:hover {
-	background-color: var(--marigold);
+	background-color: var(--cloud);
 }
 
 .btn.primary.loading {
-	background-color: var(--marigold);
+	background-color: var(--cloud);
 }
 
 .btn.primary.loading:hover {
-	background-color: var(--marigold);
+	background-color: var(--cloud);
 }
 
 .btn.secondary {
@@ -235,7 +244,8 @@ a.short {
 }
 
 .btn.secondary:hover {
-	background-color: var(--marigold);
+	background-color: var(--periwinkle);
+	border-color: var(--periwinkle);
 }
 
 .btn.tertiary {

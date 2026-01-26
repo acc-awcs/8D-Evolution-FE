@@ -1,6 +1,7 @@
 <script lang="ts">
 	import dynamics, { rotateDynamic } from '$lib/dynamics';
 	import Arrow from './Arrow.svelte';
+	import LongArrow from './LongArrow.svelte';
 
 	let {
 		highlight = 0,
@@ -22,7 +23,7 @@
 	}
 </script>
 
-<div class="mobile">
+<!-- <div class="mobile">
 	<div class="interactive">
 		<Arrow direction="left" onClick={() => onArrowClick(-1)} />
 		{highlight + 1}
@@ -34,28 +35,27 @@
 			>Your Shift: {startAnswers[highlight]} to {endAnswers[highlight]}</span
 		>
 	</p>
-</div>
+</div> -->
 <!-- non-mobile -->
 <ol>
 	<li>
-		<div>Dynamic</div>
-		<div class="results">
-			<span class="s">Start</span>
-			<span class="arrow"></span>
-			<span class="e">End</span>
+		<div class="uppercase-title">Your 8 Dynamic Shifts</div>
+		<div class="labels">
+			<span class="s">Starting Point</span>
+			<span class="e">Ending Point</span>
 		</div>
 		<!-- <span class="visually-hidden">Your Shift: {startAnswers[idx]} to {endAnswers[highlight]}</span> -->
 	</li>
 	{#each dynamics as dynamic, idx}
 		<li>
-			<div>
+			<div class="dynamic">
 				<span class="index">{idx + 1}.</span>
 				{dynamic.full}
 			</div>
 			<div class="results">
-				<span class="s">{startAnswers[idx]}</span>
-				<span class="arrow">⟶</span>
-				<span class="c">{endAnswers[idx]}</span>
+				<span class="start-num">{startAnswers[idx]}</span>
+				<span class="arrow"><LongArrow /></span>
+				<span class="end-num">{endAnswers[idx]}</span>
 			</div>
 			<!-- <span class="visually-hidden">Your Shift: {startAnswers[idx]} to {endAnswers[highlight]}</span> -->
 		</li>
@@ -63,64 +63,89 @@
 </ol>
 
 <style>
-	.mobile {
-		font-size: 24px;
-		text-align: center;
-		font-weight: 600;
-		margin: 2em 0;
-	}
-	.mobile div {
-		display: flex;
-		justify-content: center;
-		gap: 20px;
-		margin: 0.5em auto;
-	}
-	.mobile p {
-		font-size: 16px;
-		line-height: 1.4;
-		max-width: 300px;
-		margin: 0 auto;
-	}
 	ol {
-		display: none;
+		display: block;
 		padding: 0 1.4em;
-		width: var(--width-large);
+		width: 1200px;
+		max-width: 100%;
+		padding-bottom: 40px;
 	}
 	ol li {
-		margin-bottom: 1em;
 		display: flex;
 		justify-content: space-between;
 		font-size: 1rem;
+		gap: 80px;
 	}
 	ol li:first-child {
-		font-family: 'Instrument Serif', serif;
-		font-size: 24px;
+		/* font-family: 'Instrument Serif', serif; */
+		font-size: 16px;
+		margin-bottom: 26px;
 	}
 	.index {
 		margin-right: 2px;
 	}
 	.results {
+		max-width: 100%;
+		width: 300px;
 		display: flex;
 		gap: 2px;
 		align-items: center;
+		justify-content: space-between;
 	}
-	.arrow,
-	.s,
-	.c {
-		display: block;
-		width: 30px;
-		text-align: center;
+
+	.labels {
+		max-width: 100%;
+		display: flex;
+		gap: 10px;
+		justify-content: space-between;
+		width: 300px;
 	}
-	.arrow {
-		font-size: 1rem;
-		width: 50px;
+
+	.start-num,
+	.end-num {
+		font-size: 26px;
 	}
-	@media screen and (min-width: 900px) {
-		.mobile {
+
+	.start-num {
+		padding-left: 40px;
+	}
+
+	.end-num {
+		padding-right: 40px;
+	}
+
+	.dynamic {
+		padding: 26px 0px;
+		flex: 1;
+		border-top: 1px solid var(--onyx);
+	}
+
+	li:last-of-type .dynamic {
+		border-bottom: 1px solid var(--onyx);
+	}
+
+	@media screen and (max-width: 900px) {
+		ol li {
+			flex-direction: column;
+			gap: 0px;
+			padding-bottom: 26px;
+			border-bottom: 1px solid var(--onyx);
+		}
+		ol li:first-child {
+			margin-bottom: 0px;
+		}
+		.start-num,
+		.end-num {
+			padding: 0px;
+		}
+		.labels {
 			display: none;
 		}
-		ol {
-			display: block;
+		.dynamic {
+			border: none;
+		}
+		li:last-of-type .dynamic {
+			border: none;
 		}
 	}
 </style>

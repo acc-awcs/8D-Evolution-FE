@@ -5,8 +5,8 @@
 		answers,
 		highlight,
 		chartWidth,
-		onHover,
-		onLeave,
+		onHover = () => null,
+		onLeave = () => null,
 		isStart,
 		isCollectivePoll,
 		skipHover,
@@ -80,6 +80,8 @@
 			outerY: number;
 			labelX: number;
 			labelY: number;
+			dashX: number;
+			dashY: number;
 			textX: number;
 			textY: number;
 		}[] = [];
@@ -88,6 +90,7 @@
 			let angle = Math.PI / 2 + 2 * Math.PI * pct;
 			const { x, y } = angleToCoordinate(angle, 5);
 			const lCoord = angleToCoordinate(angle, 6);
+			const dCoord = angleToCoordinate(angle, 6 - config.labelRadius * 2 * (6.5 / chartWidth));
 			const tCoord = angleToCoordinate(
 				angle,
 				i === 2 ? 7.3 : i === 6 ? 7.1 : 8,
@@ -96,6 +99,8 @@
 			lines.push({
 				outerX: x,
 				outerY: y,
+				dashX: dCoord.x,
+				dashY: dCoord.y,
 				labelX: lCoord.x,
 				labelY: lCoord.y,
 				textX: tCoord.x,
@@ -170,8 +175,8 @@
 						class="dash"
 						x1={f.outerX + xOffset}
 						y1={f.outerY}
-						x2={f.labelX + xOffset}
-						y2={f.labelY}
+						x2={f.dashX + xOffset}
+						y2={f.dashY}
 					/>
 				{/if}
 				{#if showTextLabels}
@@ -254,20 +259,20 @@
 
 	/* ANSWER SHAPES */
 	path.answer {
-		fill: var(--rust);
+		fill: var(--soil);
 		opacity: 0.5;
 	}
 	.collective path.answer {
-		fill: var(--rust);
+		fill: var(--soil);
 	}
 	path.answer.transition {
 		transition: d 2s ease-in-out;
 	}
 	#answer circle {
-		fill: var(--rust);
+		fill: var(--soil);
 	}
 	.collective #answer circle {
-		fill: var(--rust);
+		fill: var(--soil);
 	}
 	#answer text {
 		fill: var(--cloud);
@@ -296,16 +301,16 @@
 		text-align: center;
 	}
 	.label circle {
-		fill: var(--cloud);
+		fill: transparent;
 		transition: fill 0.2s linear;
 		stroke: var(--onyx);
 		stroke-width: 1;
 	}
 	.collective .label circle {
-		fill: var(--cloud);
+		fill: transparent;
 	}
 	.overlay .label circle {
-		fill: var(--cloud);
+		fill: transparent;
 	}
 	.label.highlight circle {
 		fill: var(--onyx);

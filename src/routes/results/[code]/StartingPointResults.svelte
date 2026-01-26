@@ -11,6 +11,7 @@
 	import CopyBox from '$lib/components/CopyBox.svelte';
 	import trackEvent from '$lib/custom-event';
 	import { enhance } from '$app/forms';
+	import cloudBg from '$lib/assets/cloud-bg.jpg';
 
 	const INTERVAL = 1500;
 	const BREAKPOINT = 900;
@@ -143,34 +144,28 @@
 				<button class="btn primary" onclick={closeModal}>Done</button>
 			</div>
 		{:else}
-			<h1 class="title">Need MailChimp Auth</h1>
-			<p>
-				Emi here - I'll need to grab the MailChimp API key from Amy (we can find this together!)
-			</p>
-			<div class="buttons done">
-				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div>
 			<!-- Error message -->
-			<!-- <h1 class="title">Oops!</h1>
+			<h1 class="title">Oops!</h1>
 			<p>
 				Looks like something went wrong on our end and we couldn't send your email. Please try again
 				later.
 			</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div> -->
+			</div>
 		{/if}
 	</Modal>
 {/if}
 
 <div class="outer">
+	<img class="cloud-bg" src={cloudBg} alt="" />
 	<header class="logo">
 		<Logo />
 	</header>
 	<main>
 		<section class="clouds">
 			<div class="intro fade-in">
-				<a onclick={() => trackEvent('click_retake_quiz')} href="/">← Retake the Quiz</a>
+				<p class="uppercase-title">8 Dynamics Assessment</p>
 				<h1 class="title">Your Starting Point Results</h1>
 			</div>
 			<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
@@ -180,6 +175,7 @@
 					{chartWidth}
 					{onHover}
 					onLeave={startRotate}
+					isStart={true}
 				/>
 			</div>
 			<div class="results fade-in">
@@ -195,11 +191,14 @@
 		<section id="up_next" class="up-next">
 			<div class="column">
 				<p class="pre-title">Next Steps</p>
-				<h1 class="title">Save Your Results Code</h1>
+				<h1 class="title large">Save Your Results Code</h1>
 				<div class="instructions">
 					<p>
 						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code ({data.resultCode}) to reference these results later.
+						generated you a unique code (<span style="padding-right: 2px;"
+							>{data.resultCode?.slice(0, 3)}</span
+						><span style="padding-left: 2px;">{data.resultCode?.slice(3, 6)}</span>) to reference
+						these results later.
 					</p>
 					<p>
 						We recommend writing or storing your code somewhere secure. Try a password manager, a
@@ -209,7 +208,7 @@
 					</p>
 				</div>
 				<button onclick={() => (showEmailModal = true)} class="btn primary"
-					>Email Your Results Code</button
+					>Email Yourself Your Code</button
 				>
 				<label>
 					<span>Your Unique Code</span>
@@ -238,46 +237,33 @@
 </div>
 
 <style>
-	.intro a {
-		color: var(--onyx);
-		font-weight: 300;
-		text-decoration: none;
-		font-style: normal;
-		z-index: 1;
-	}
-	.intro a:hover,
-	.intro a:active,
-	.intro a:focus-visible {
-		font-weight: 500;
-	}
 	.outer {
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		min-height: 100vh;
 		box-sizing: border-box;
+		position: relative;
+	}
+	.cloud-bg {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
 	}
 	.clouds {
-		background-color: var(--periwinkle);
-		background-image:
-			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
-		background-repeat: no-repeat, no-repeat, no-repeat;
-		background-blend-mode: overlay, overlay, overlay;
-		background-position:
-			bottom left,
-			bottom 0 right -100px,
-			bottom right;
-		background-size: 485px, 504px, 503px;
+		/* background-color: var(--cloud); */
 		position: relative;
-		padding: 1rem;
 		grid-template-columns: 1fr minmax(400px, 1fr);
 		grid-template-rows: 1fr 2fr;
 		gap: 1em 3em;
-		padding: 20px 20px;
+		padding: 0px 20px;
 		padding-bottom: 40px;
 		box-sizing: border-box;
 	}
 	.logo {
-		height: 120px;
+		height: 100px;
 		position: relative;
+		display: flex;
+		justify-content: center;
 	}
 	.intro {
 		margin: 0px 20px;
@@ -306,7 +292,7 @@
 	.up-next {
 		display: flex;
 		justify-content: center;
-		background-color: var(--cloud);
+		background-color: var(--periwinkle);
 		padding: 60px 20px;
 	}
 
@@ -354,6 +340,10 @@
 		margin-bottom: 20px;
 	}
 
+	.results {
+		margin-top: 30px;
+	}
+
 	.fade-in {
 		transition: all 2s linear;
 		opacity: 0;
@@ -369,10 +359,11 @@
 	.extra-delayed {
 		margin-top: 40px;
 		animation-delay: 1.5s;
+		text-align: center;
 	}
 
 	.conclusion {
-		background-color: var(--periwinkle);
+		background-color: var(--soil);
 		padding: 40px;
 		display: flex;
 		justify-content: center;
@@ -422,6 +413,9 @@
 		}
 		.intro {
 			margin: 0px;
+		}
+		.extra-delayed {
+			text-align: left;
 		}
 	}
 

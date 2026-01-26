@@ -22,8 +22,8 @@
 		position: relative;
 		top: 6px;
 		border-radius: 50%;
-		border: 4px solid var(--cloud);
-		border-color: var(--cloud) transparent var(--cloud) transparent;
+		border: 4px solid var(--soil);
+		border-color: var(--soil) transparent var(--soil) transparent;
 		box-sizing: border-box;
 		animation: moving-ring 1.2s linear infinite;
 	}

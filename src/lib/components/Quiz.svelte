@@ -6,9 +6,8 @@
 	import illustrations from '$lib/illustrations';
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
 
-	let { data, isStart, pollCode } = $props();
+	let { data, isStart, pollCode = null } = $props();
 	let loading = $state(false);
 
 	// Cloud parallax variables
@@ -48,10 +47,6 @@
 	};
 
 	onMount(() => {
-		// if (browser) {
-		// 	document.body.style.backgroundColor = 'var(--cloud)';
-		// }
-
 		const observer = new IntersectionObserver(intersectionCallback, {
 			threshold: 0.1 // Trigger when 10% of the section is visible
 		});
@@ -132,9 +127,16 @@
 
 <main onscroll={(e) => (scrollY = (e.target as HTMLElement)?.scrollTop)}>
 	<div class="logo-wrapper">
-		<Logo onDark={true} />
+		<div class="page-offset" class:start={isStart}></div>
+		<Logo onDark={true} relative={true} />
+		<div class="page-name">
+			{#if isStart}
+				Starting Point Quiz
+			{:else}
+				Ending Point Quiz
+			{/if}
+		</div>
 	</div>
-	<div class="sticky-offset"></div>
 	<section class="intro">
 		<!-- <div class="clouds-overlay-wrapper">
 			<div
@@ -292,15 +294,30 @@
 	}
 	.logo-wrapper {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
+		align-items: center;
 		width: 100%;
 		position: sticky;
 		top: 0px;
 		left: 0px;
 		background: linear-gradient(var(--cloud), var(--cloud), #faf6f000);
-		height: 80px;
 		z-index: 5;
+		padding: 30px 60px;
+		box-sizing: border-box;
+		gap: 20px;
 	}
+	.page-offset.start {
+		width: 162px;
+		height: 2px;
+	}
+	.page-offset {
+		width: 150px;
+		height: 2px;
+	}
+	.page-name {
+		text-transform: uppercase;
+	}
+
 	@media (max-width: 850px) {
 		/* reducing the opacing when the images overlap with the section text
 		for better readability */

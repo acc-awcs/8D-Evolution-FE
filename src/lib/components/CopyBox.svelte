@@ -27,8 +27,8 @@
 
 <style>
 	button {
-		padding: 20px 10px;
-		padding-bottom: 16px;
+		padding: 30px 10px;
+		padding-bottom: 12px;
 		width: 300px;
 		/* line-height: 50px; */
 		/* line-height: 50px; */
@@ -36,14 +36,14 @@
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 		font-weight: 200;
 		color: var(--onyx);
-		background-color: var(--periwinkle);
+		background-color: var(--cloud);
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
 	}
 
 	button:hover {
-		opacity: 0.9;
+		background-color: var(--cloud-light);
 	}
 
 	button:focus {
@@ -57,7 +57,7 @@
 	.copy-note {
 		display: block;
 		font-size: 1rem;
-		font-style: italic;
+		/* font-style: italic; */
 		margin-top: 10px;
 		height: 20px;
 	}
