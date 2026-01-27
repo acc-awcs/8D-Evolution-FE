@@ -117,6 +117,8 @@
 		flex-wrap: wrap;
 		margin-top: 40px;
 		padding-bottom: 50px;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 	.groups p {
 		margin: 0px;

@@ -17,7 +17,7 @@
 </script>
 
 <main class="wrapper" class:admin={page.url.pathname?.includes('admin')}>
-	<DecorativeBackground />
+	<DecorativeBackground opacity={true} />
 
 	<nav>
 		<Logo relative={true} />
@@ -82,8 +82,9 @@
 		max-width: 100%;
 	}
 
-	/* .admin .tile {
-		border: 1px solid var(--onyx);
-		box-shadow: none;
-	} */
+	@media screen and (max-width: 600px) {
+		.tile {
+			padding: 24px 26px;
+		}
+	}
 </style>

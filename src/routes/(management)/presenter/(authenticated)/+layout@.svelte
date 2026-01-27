@@ -135,6 +135,8 @@
 		flex-direction: column;
 		align-items: space-around;
 		justify-content: flex-start;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	nav {
@@ -142,6 +144,8 @@
 		justify-content: space-between;
 		padding: 16px;
 		align-items: flex-start;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.header {
@@ -175,7 +179,7 @@
 
 	.account-wrapper {
 		/* width: 100px; */
-		display: flex;
+		display: inline-flex;
 		justify-content: flex-end;
 	}
 
