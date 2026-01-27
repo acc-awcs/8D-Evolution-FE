@@ -383,6 +383,10 @@
 		text-decoration: underline;
 	}
 
+	label {
+		max-width: 100%;
+	}
+
 	label > span {
 		display: block;
 		margin-bottom: 10px;

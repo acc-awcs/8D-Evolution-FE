@@ -40,6 +40,8 @@
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
+		box-sizing: border-box;
+		max-width: 100%;
 	}
 
 	button:hover {

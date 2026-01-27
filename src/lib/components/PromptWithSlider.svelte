@@ -125,6 +125,7 @@
 		display: flex;
 		justify-content: space-between;
 		font-size: 16px;
+		gap: 20px;
 		/* font-weight: 600; */
 		line-height: 1.6;
 	}
@@ -184,5 +185,14 @@
 		background-color: var(--periwinkle);
 		-moz-appearance: none;
 		appearance: none;
+	}
+
+	@media (max-width: 400px) {
+		.descriptions {
+			font-size: 14px;
+		}
+		.descriptions div:last-child {
+			text-align: right;
+		}
 	}
 </style>

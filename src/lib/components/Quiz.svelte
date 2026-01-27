@@ -214,10 +214,7 @@
 		font-size: 60px;
 	}
 	section.intro {
-		/* background-image: url('$lib/assets/cloud-hero-layer-1.jpg');
-		background-size: cover; */
-		/* color: var(--cloud); */
-		/* background-color: var(--periwinkle); */
+		padding-top: 100px;
 	}
 	section.intro .content {
 		width: var(--width-large);
@@ -317,6 +314,14 @@
 	}
 	.page-name {
 		text-transform: uppercase;
+		text-align: right;
+	}
+	img {
+		opacity: 0;
+		transition:
+			opacity 0.6s ease,
+			transform 0.6s ease;
+		transform: translateY(20px);
 	}
 
 	@media (max-width: 850px) {
@@ -332,17 +337,28 @@
 				top left 200px,
 				bottom center;
 		}
+		section.intro {
+			padding-top: 120px;
+		}
 		.logo-wrapper {
 			display: flex;
-			justify-content: center;
+			/* flex-direction: column; */
+			/* justify-content: center; */
 			width: 100%;
+			padding: 20px;
+			gap: 16px;
+		}
+		.page-offset {
+			display: none;
+		}
+		.page-name {
+			font-size: 12px;
 		}
 	}
-	img {
-		opacity: 0;
-		transition:
-			opacity 0.6s ease,
-			transform 0.6s ease;
-		transform: translateY(20px);
+
+	@media (max-width: 400px) {
+		.intro p {
+			font-size: 16px;
+		}
 	}
 </style>

@@ -12,10 +12,15 @@
 	});
 </script>
 
+<div class="backdrop" />
+
+<DecorativeBackground opacity={true} />
+
+<div class="logo-wrapper">
+	<Logo liveLink={true} relative={true} />
+</div>
+
 <main>
-	<div class="logo-wrapper">
-		<Logo liveLink={true} />
-	</div>
 	<section>
 		<h1 class="title large">Welcome, Climate Wayfinder</h1>
 		<p>
@@ -30,21 +35,29 @@
 	</section>
 </main>
 
-<DecorativeBackground />
-
 <style>
-	.logo-wrapper {
-		position: absolute;
+	.backdrop {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background-color: var(--periwinkle);
 		top: 0px;
 		left: 0px;
+	}
+	.logo-wrapper {
+		/* position: sticky;
+		top: 0px;
+		left: 0px; */
+		padding: 20px 0px;
 		width: 100%;
 		display: flex;
 		justify-content: center;
 	}
 	main {
-		background-color: var(--periwinkle);
+		z-index: 10;
 		padding: 3rem;
-		height: 100vh;
+		padding-top: 1rem;
+		min-height: calc(100vh - 80px);
 		position: relative;
 		box-sizing: border-box;
 		grid-template-columns: 1fr minmax(400px, 1fr);
@@ -62,6 +75,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
 		max-width: 100%;
 	}
 
@@ -112,6 +126,17 @@
 			display: flex;
 			justify-content: center;
 			width: 100%;
+		}
+		main {
+			padding: 20px;
+			padding-bottom: 40px;
+		}
+	}
+
+	@media screen and (max-width: 400px) {
+		main,
+		.logo-wrapper {
+			background-color: #a2b5fc7e;
 		}
 	}
 </style>

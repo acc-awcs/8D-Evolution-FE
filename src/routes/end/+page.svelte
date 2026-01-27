@@ -45,7 +45,7 @@
 
 <div class="wrapper">
 	<header class="logo">
-		<Logo />
+		<Logo relative={true} />
 	</header>
 	<main>
 		<section>
@@ -149,9 +149,10 @@
 		min-width: 200px;
 	}
 	.logo {
-		height: 120px;
 		position: relative;
 		margin-bottom: 40px;
+		display: flex;
+		justify-content: center;
 	}
 	.wrapper {
 		background-color: var(--periwinkle);

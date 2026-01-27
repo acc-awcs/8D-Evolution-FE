@@ -65,10 +65,11 @@
 <style>
 	ol {
 		display: block;
-		padding: 0 1.4em;
+		padding: 0px 20px;
 		width: 1200px;
 		max-width: 100%;
 		padding-bottom: 40px;
+		box-sizing: border-box;
 	}
 	ol li {
 		display: flex;

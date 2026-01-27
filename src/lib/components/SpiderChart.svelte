@@ -201,7 +201,7 @@
 					</g>
 				{:else if skipHover && !showHighlight}
 					<g class="label" aria-hidden="true">
-						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius}> </circle>
+						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius - 1}> </circle>
 						<text x={f.labelX} y={f.labelY}>{idx + 1}</text>
 					</g>
 				{:else}
@@ -213,7 +213,7 @@
 						onmouseleave={() => onLeave()}
 						aria-hidden="true"
 					>
-						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius}> </circle>
+						<circle cx={f.labelX} cy={f.labelY} r={config.labelRadius - 1}> </circle>
 						<text x={idx === 0 ? f.labelX + 1 : f.labelX - 0.5} y={f.labelY + 0.5}>{idx + 1}</text>
 					</g>
 				{/if}
