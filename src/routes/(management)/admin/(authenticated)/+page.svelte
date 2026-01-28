@@ -3,14 +3,8 @@
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Table from '$lib/components/Table.svelte';
 	import { formatAveragedAnsers } from '$lib/helpers/results.js';
-	import { useQuery } from '@sveltestack/svelte-query';
 
 	let { data } = $props();
-	console.log('DATA?', data);
-
-	const queryResult = useQuery('repoData', async () => {
-		return fetch('https://api.github.com/repos/SvelteStack/svelte-query').then((res) => res.json());
-	});
 </script>
 
 <h1 class="title">Facilition Data</h1>
