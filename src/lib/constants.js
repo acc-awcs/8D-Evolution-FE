@@ -15,6 +15,10 @@ export const START = 'Map Collective Start';
 export const END = 'Map Collective End';
 export const COMPLETE = 'Complete';
 
+export const POLLING_INTERVAL_MS = 3000;
+export const POLLING_COUNT_MAX_MS = 1000 * 60 * 15; // pause after 15 minutes of polling
+export const POLLING_COUNT_MAX = POLLING_COUNT_MAX_MS / POLLING_INTERVAL_MS;
+
 export const GROUP_START_YEAR = 2026;
 
 export const MONTHS = [

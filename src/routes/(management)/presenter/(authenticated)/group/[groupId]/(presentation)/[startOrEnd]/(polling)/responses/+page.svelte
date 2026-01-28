@@ -1,58 +1,93 @@
 <script>
-	import { browser } from '$app/environment';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import PresentationFooter from '$lib/components/PresentationFooter.svelte';
 	import { shortenUrl } from '$lib/helpers/general';
-	import { onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import SingleChartDisplay from '../../SingleChartDisplay.svelte';
 	import QRCodeModal from './QRCodeModal.svelte';
+	import { FACILITATOR, POLLING_COUNT_MAX } from '$lib/constants';
+	import StillPollingModal from '../StillPollingModal.svelte';
 
 	let showModal = $state(false);
+	let { data: loadData } = $props();
+	let intervalId = $state(null);
 
-	// Only run this on the client side
-	if (browser) {
-		const interval = setInterval(() => {
-			console.log('Polling for new data...');
-			invalidateAll();
-		}, 3000); // Polls every 3 seconds
+	const startOrEnd = loadData?.startOrEnd;
+	const groupId = loadData?.groupId;
+	const isStart = loadData?.isStart;
+	const role = loadData?.role;
 
-		// Clean up the interval when the component is destroyed
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+	let data = $state(loadData);
+	let intervalCount = $state(0);
+	let showContinuePrompt = $state(false);
+
+	async function fetchData() {
+		if (intervalCount < POLLING_COUNT_MAX) {
+			try {
+				const response = await fetch(`/api/poll/${groupId}/${startOrEnd}`);
+				if (response.ok) {
+					const result = await response.json();
+					data = result.data;
+				} else {
+					console.error('Failed to fetch data');
+				}
+			} catch (error) {
+				console.error('Error during fetch:', error);
+			}
+			intervalCount += 1;
+		} else {
+			if (!showContinuePrompt) {
+				showContinuePrompt = true;
+			}
+		}
 	}
 
-	let { data } = $props();
-	const pollCode = $derived(data.isStart ? data.group.startPollCode : data.group.endPollCode);
+	// Start polling
+	onMount(() => {
+		fetchData();
+		intervalId = setInterval(fetchData, 5000);
+		return () => clearInterval(intervalId);
+	});
+
+	const pollCode = $derived(isStart ? data.group?.startPollCode : data.group?.endPollCode);
 </script>
 
 {#if showModal}
-	<QRCodeModal onClose={() => (showModal = false)} pollCode={data.pollCode} />
+	<QRCodeModal onClose={() => (showModal = false)} {pollCode} />
+{/if}
+
+{#if showContinuePrompt}
+	<StillPollingModal
+		onClose={() => {
+			intervalCount = 0;
+			showContinuePrompt = false;
+		}}
+		{pollCode}
+	/>
 {/if}
 
 <div class="join-note">
 	<strong>Still need to join?</strong> Go to <strong>{shortenUrl(PUBLIC_BASE_URL)}/poll</strong> and
 	enter
 	<strong class="spaced"
-		><span>{pollCode.slice(0, 3)}</span><span>{pollCode.slice(3, 6)}</span></strong
+		><span>{pollCode?.slice(0, 3)}</span><span>{pollCode?.slice(3, 6)}</span></strong
 	>.
 	<button class="link-like" onclick={() => (showModal = true)}>Show QR</button>
 </div>
-<!-- <h1 class="title">Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1> -->
 
 <SingleChartDisplay results={data.matchingResults} />
 
 <PresentationFooter
-	num={data.matchingResults.length}
+	num={data?.matchingResults.length || 0}
 	numLabel="Responses"
-	role={data.role}
-	helper={`Currently, ${data.matchingResults.length} response${data.matchingResults.length !== 1 ? 's are' : ' is'} in.\nThis chart updates as responses are submitted.`}
-	onPrev={() => goto(`/presenter/group/${data.group._id}/${data.startOrEnd}`)}
-	nextLabel={data.isStart ? 'End Poll' : 'View Shift'}
-	onNext={data.isStart
-		? () => goto(`/presenter/group/${data.group._id}`)
-		: () => goto(`/presenter/group/${data.group._id}/end/comparison`)}
+	role={role || FACILITATOR}
+	helper={`Currently, ${data?.matchingResults.length || 0} response${data?.matchingResults.length !== 1 ? 's are' : ' is'} in. This chart updates as responses are submitted.`}
+	onPrev={() => (data?.group ? goto(`/presenter/group/${groupId}/${startOrEnd}`) : null)}
+	nextLabel={isStart ? 'End Poll' : 'View Shift'}
+	onNext={isStart
+		? () => goto(`/presenter/group/${groupId}`)
+		: () => goto(`/presenter/group/${groupId}/end/comparison`)}
 />
 
 <style>
@@ -74,15 +109,10 @@
 		/* letter-spacing: 1px; */
 	}
 	.spaced span {
-		display: inline-flex;
-		gap: 4px;
+		margin: 0px 2px;
 	}
 	.link-like {
 		color: var(--periwinkle-darker);
-	}
-	.title {
-		text-align: center;
-		margin-top: 10px;
 	}
 
 	@keyframes fadeIn {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { invalidateAll } from '$app/navigation';
+	import DecorativeBackground from '$lib/components/DecorativeBackground.svelte';
 	import { onDestroy } from 'svelte';
 
 	// Only run this on the client side
@@ -16,6 +17,8 @@
 		});
 	}
 </script>
+
+<DecorativeBackground opacity={true} />
 
 <h1 class="title">Hang Tight ...</h1>
 <p>You're all set!</p>

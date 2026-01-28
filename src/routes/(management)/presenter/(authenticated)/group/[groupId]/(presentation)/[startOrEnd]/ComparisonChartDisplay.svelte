@@ -21,7 +21,7 @@
 	<div class="chart-wrapper">
 		{#if startAnswers && endAnswers}
 			<div class="chart chart-fade-in" aria-hidden="true" bind:clientWidth={startChartWidth}>
-				<h2>Start</h2>
+				<h2 class="uppercase-title">Starting Point</h2>
 				<SpiderChart
 					answers={startAnswers}
 					chartWidth={startChartWidth}
@@ -44,7 +44,7 @@
 			</p> -->
 			</div>
 			<div class="chart chart-fade-in delayed" aria-hidden="true" bind:clientWidth={endChartWidth}>
-				<h2>End</h2>
+				<h2 class="uppercase-title">Ending Point</h2>
 
 				<SpiderChart
 					answers={endAnswers}
@@ -125,7 +125,8 @@
 	}
 
 	h2 {
-		font-family: 'Instrument Serif', serif;
+		margin-bottom: 26px;
+		margin-top: 26px;
 	}
 
 	.dynamics-wrapper {

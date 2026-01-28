@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import DecorativeBackground from '$lib/components/DecorativeBackground.svelte';
 
 	let loading = $state(false);
 </script>
+
+<DecorativeBackground opacity={true} />
 
 <h1 class="title">Ready?</h1>
 <p>We've found your group.</p>

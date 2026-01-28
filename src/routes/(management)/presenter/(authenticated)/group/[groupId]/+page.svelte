@@ -60,7 +60,6 @@
 		active={true}
 		title="Map Collective Starting Point"
 	>
-		<!-- <h2 class="title small">Map Collective Starting Point</h2> -->
 		<p>Begin a presentation to map your group's collective 8 Dynamics starting point.</p>
 		{#if group.startPollCode && group.startPollInitiated}
 			<div class="buttons">
@@ -94,7 +93,6 @@
 		active={status !== START}
 		title="Map Collective Ending Point"
 	>
-		<!-- <h2 class="title small">Map Collective Ending Point</h2> -->
 		<p>
 			Ready to see the results of your group's learnings? Begin the presentation to map your group's
 			collective ending point.
@@ -131,7 +129,6 @@
 		active={status === COMPLETE}
 		title="Review Collective Shift"
 	>
-		<!-- <h2 class="title small">Review Collective Shift</h2> -->
 		<p>Revisit the collective shift between your group's starting and ending points.</p>
 		{#if status === COMPLETE}
 			<LoaderLink href={`/presenter/group/${group._id}/end/review/shift`}>Review Shift</LoaderLink>

@@ -1,63 +1,84 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import PresentationFooter from '$lib/components/PresentationFooter.svelte';
+	import { POLLING_COUNT_MAX } from '$lib/constants.js';
 	import { shortenUrl } from '$lib/helpers/general';
 	import { qr } from '@svelte-put/qr/svg';
-	import { onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
+	import StillPollingModal from './(polling)/StillPollingModal.svelte';
 
-	// Only run this on the client side
-	if (browser) {
-		const interval = setInterval(() => {
-			console.log('Polling for new data...');
-			invalidateAll();
-		}, 3000); // Polls every 3 seconds
+	let { data: loadData } = $props();
+	let intervalId = $state(undefined);
+	let data = $state(loadData);
+	let intervalCount = $state(0);
+	let showContinuePrompt = $state(false);
 
-		// Clean up the interval when the component is destroyed
-		onDestroy(() => {
-			clearInterval(interval);
-		});
+	const groupId = loadData?.groupId;
+	const isStart = loadData?.isStart;
+	const role = loadData?.role;
+
+	async function fetchData() {
+		if (intervalCount < POLLING_COUNT_MAX) {
+			try {
+				const response = await fetch(`/api/poll/${groupId}`);
+				if (response.ok) {
+					const result = await response.json();
+					data = result.data;
+				} else {
+					console.error('Failed to fetch data');
+				}
+			} catch (error) {
+				console.error('Error during fetch:', error);
+			}
+			intervalCount += 1;
+		} else {
+			if (!showContinuePrompt) {
+				showContinuePrompt = true;
+			}
+		}
 	}
 
-	let { data } = $props();
+	// Start polling
+	onMount(() => {
+		fetchData();
+		intervalId = setInterval(fetchData, 5000);
+		return () => clearInterval(intervalId);
+	});
+
 	let formElement: HTMLFormElement;
 
 	let numReady = $derived(
-		data.isStart
+		isStart
 			? data.group.startPollReadyParticipants.length
 			: data.group.endPollReadyParticipants.length
 	);
 
-	// const query = createQuery({
-	//   queryKey: ['live-data'],
-	//   queryFn: fetchData,
-	//   refetchInterval: 5000, // Polls every 5 seconds
-	//   // Add other options as needed, such as initialData, staleTime, etc.
-	// })
+	let pollCode = $derived(isStart ? data.group.startPollCode : data.group.endPollCode);
 
 	function callActionFromScript() {
 		formElement.submit();
 	}
 </script>
 
-<!-- {#if $countQuery.isLoading}
-    <span>Loading...</span>
-{:else if $countQuery.isError}
-    <span>Error: {$countQuery.error.message}</span>
-{:else}
-    <h1>Current Count: {$countQuery.data.dynamicCount}</h1>
-{/if} -->
+{#if showContinuePrompt}
+	<StillPollingModal
+		onClose={() => {
+			intervalCount = 0;
+			showContinuePrompt = false;
+		}}
+		{pollCode}
+	/>
+{/if}
 
-<h1 class="title large">Map Our Collective {data.isStart ? 'Starting' : 'Ending'} Point</h1>
+<h1 class="title large">Map Our Collective {isStart ? 'Starting' : 'Ending'} Point</h1>
 
 <div class="wrapper">
 	<div class="option qr">
 		<svg
 			class="qrcode"
 			use:qr={{
-				data: `${PUBLIC_BASE_URL}/poll/${data.pollCode}`
+				data: `${PUBLIC_BASE_URL}/poll/${pollCode}`
 			}}
 		/>
 		<p>Scan QR Code</p>
@@ -68,7 +89,7 @@
 		<p class="poll-link">{shortenUrl(`${PUBLIC_BASE_URL}/poll`)}</p>
 		<p>and enter code</p>
 		<p class="code">
-			<span>{data.pollCode.slice(0, 3)}</span><span>{data.pollCode.slice(3, 6)}</span>
+			<span>{pollCode?.slice(0, 3)}</span><span>{pollCode?.slice(3, 6)}</span>
 		</p>
 	</div>
 </div>
@@ -85,8 +106,8 @@
 	num={numReady}
 	numLabel="Ready"
 	nextLabel={`Start Quiz For Participants`}
-	role={data.role}
-	helper={`Currently, ${numReady} participant${numReady !== 1 ? 's are' : ' is'} ready.\nOnce all participants are ready, start the quiz.`}
+	{role}
+	helper={`Currently, ${numReady} participant${numReady !== 1 ? 's are' : ' is'} ready. Once all participants are ready, start the quiz.`}
 	onNext={numReady > 0 ? callActionFromScript : null}
 />
 
