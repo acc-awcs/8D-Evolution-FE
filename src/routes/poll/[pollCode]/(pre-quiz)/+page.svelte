@@ -40,4 +40,9 @@
 	button {
 		margin-top: 16px;
 	}
+	form {
+		max-width: 100%;
+		position: relative;
+		z-index: 10;
+	}
 </style>

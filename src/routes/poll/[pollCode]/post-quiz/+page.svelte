@@ -5,8 +5,11 @@
 <img src={glyph} alt="" />
 
 <h1 class="title">Submitted!</h1>
-<p>We've recorded your 8 Dynamics evaluation.</p>
-<p>Shift your attention to the presentation and see the combined results for your group.</p>
+<p>Here's your current 8 Dynamics web.</p>
+
+<p>You see the combined results for your group update live on the shared presentation.</p>
+
+<div></div>
 
 <style>
 	img {

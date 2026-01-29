@@ -115,7 +115,7 @@
 			});
 			const newResult = resp.data;
 			if (pollCode) {
-				goto(`/poll/${pollCode}/post-quiz`);
+				goto(`/poll/${pollCode}/post-quiz/${newResult.resultCode}`);
 			} else {
 				goto(`/results/${newResult?.resultCode}`);
 			}

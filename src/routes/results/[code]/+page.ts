@@ -1,47 +1,6 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
-import { statusIsGood } from '$lib/helpers/general';
+import { statusIsGood, transformResults } from '$lib/helpers/general';
 import { error } from '@sveltejs/kit';
-
-const dbKeysToToolKeys: any = {
-	d1: 'A',
-	d2: 'B',
-	d3: 'C',
-	d4: 'D',
-	d5: 'E',
-	d6: 'F',
-	d7: 'G',
-	d8: 'H'
-};
-
-const transformResults = (data: any) => {
-	if (!data) {
-		return null;
-	}
-
-	const answers = Object.keys(data)
-		.filter((k) => dbKeysToToolKeys[k])
-		.map((k) => ({
-			key: dbKeysToToolKeys[k],
-			value: data[k]
-		}));
-
-	const object = {
-		A: data.d1,
-		B: data.d2,
-		C: data.d3,
-		D: data.d4,
-		E: data.d5,
-		F: data.d6,
-		G: data.d7,
-		H: data.d8
-	};
-
-	return {
-		answers,
-		object,
-		isStart: data?.isStart
-	};
-};
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, fetch }: { params: { code: string }; fetch: any }) {

@@ -19,11 +19,13 @@
 	});
 </script>
 
+<div class="backdrop" style={`background-color: ${bgColor};`}></div>
+
 {#if page.url.pathname === '/poll'}
 	<DecorativeBackground />
 {/if}
 
-<div class="wrapper" style={`background-color: ${bgColor};`}>
+<div class="wrapper">
 	<header class="logo">
 		<Logo relative={true} />
 		{#if page.url.pathname.includes('ready')}
@@ -47,6 +49,14 @@
 </div>
 
 <style>
+	.backdrop {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background-color: var(--periwinkle);
+		top: 0px;
+		left: 0px;
+	}
 	.offset {
 		width: 100%;
 		height: 100px;

@@ -3,7 +3,7 @@
 	import { line, scaleLinear } from 'd3';
 	let {
 		answers,
-		highlight,
+		highlight = 20,
 		chartWidth,
 		onHover = () => null,
 		onLeave = () => null,
@@ -15,10 +15,10 @@
 		showTextLabels = false
 	}: {
 		answers: Record<string, number>;
-		highlight: number;
+		highlight?: number;
 		chartWidth: number;
-		onHover: CallableFunction;
-		onLeave: CallableFunction;
+		onHover?: CallableFunction;
+		onLeave?: CallableFunction;
 		isStart?: Boolean;
 		isCollectivePoll?: Boolean;
 		skipHover?: Boolean;

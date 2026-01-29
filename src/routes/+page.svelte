@@ -12,7 +12,7 @@
 	});
 </script>
 
-<div class="backdrop" />
+<div class="backdrop"></div>
 
 <DecorativeBackground opacity={true} />
 
