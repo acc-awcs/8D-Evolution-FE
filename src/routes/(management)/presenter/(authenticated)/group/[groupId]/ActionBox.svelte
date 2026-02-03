@@ -3,7 +3,7 @@
 </script>
 
 <div class="action" class:active style={`background-color:var(--${color});`}>
-	<span style={`background-color:var(--${color});`}>
+	<span class="title" style={`background-color:var(--${color});`}>
 		{number}
 	</span>
 	<h2 class="title small">{title}</h2>
@@ -36,18 +36,18 @@
 	}
 	span {
 		position: absolute;
-		width: 40px;
-		height: 40px;
+		/* width: 40px;
+		height: 40px; */
 		border-radius: 30px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 20px;
-		left: 20px;
+		top: 5px;
+		left: 10px;
 		font-weight: 800;
 		line-height: normal;
 		/* font-family: Arial, Helvetica, sans-serif; */
-		font-size: 24px;
+		font-size: 28px;
 		color: var(--onyx);
 	}
 	.content {
@@ -68,11 +68,12 @@
 	}
 	.title {
 		padding: 0px 16px;
+		margin: 20px 0px;
 	}
 	@media screen and (max-width: 550px) {
 		span {
-			left: 8px;
-			top: 16px;
+			left: 6px;
+			top: 0px;
 		}
 		.action {
 			padding-top: 46px;

@@ -29,8 +29,8 @@
 		</p>
 
 		<div class="links">
-			<a href="/start" class="btn primary">Take the Starting Point Quiz <ButtonArrow /></a>
-			<a href="/end" class="btn primary">Take the Ending Point Quiz <ButtonArrow /></a>
+			<a href="/start" class="btn quaternary">Take the Starting Point Quiz <ButtonArrow /></a>
+			<a href="/end" class="btn quaternary">Take the Ending Point Quiz <ButtonArrow /></a>
 		</div>
 	</section>
 </main>

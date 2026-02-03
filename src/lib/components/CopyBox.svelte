@@ -34,7 +34,8 @@
 		/* line-height: 50px; */
 		font-size: 2.5rem;
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
-		font-weight: 200;
+		font-weight: 700;
+		letter-spacing: 1px;
 		color: var(--onyx);
 		background-color: var(--cloud);
 		border-radius: 10px;
@@ -62,5 +63,6 @@
 		/* font-style: italic; */
 		margin-top: 10px;
 		height: 20px;
+		font-weight: 400;
 	}
 </style>

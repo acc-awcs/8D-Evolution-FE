@@ -24,7 +24,7 @@
 		};
 	}}
 >
-	<button class="btn primary medium" type="submit" disabled={loading} class:loading>
+	<button class="btn quaternary medium" type="submit" disabled={loading} class:loading>
 		{#if loading}
 			<ButtonLoader />
 		{:else}

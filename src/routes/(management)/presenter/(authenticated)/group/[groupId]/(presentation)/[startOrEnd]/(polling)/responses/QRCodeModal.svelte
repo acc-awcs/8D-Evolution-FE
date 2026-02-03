@@ -19,7 +19,7 @@
 			}}
 		/>
 	</div>
-	<button class="btn primary large" type="button" onclick={onClose}> Done </button>
+	<button class="btn large primary" type="button" onclick={onClose}> Done </button>
 </Modal>
 
 <style>

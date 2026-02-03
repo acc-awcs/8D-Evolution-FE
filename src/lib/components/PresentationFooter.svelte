@@ -23,13 +23,13 @@
 			{#if !skipPrev}
 				<button onclick={onPrev} disabled={!onPrev}>
 					<span class="visually-hidden">Previous</span>
-					<span aria-hidden="true">←</span>
+					<span aria-hidden="true" class="arrow">←</span>
 				</button>
 			{/if}
 			<button class="next" onclick={onNext} disabled={!onNext}>
 				{nextLabel}
 				{#if !(nextLabel.includes('End') || nextLabel.includes('Close'))}
-					<span aria-hidden="true">→</span>
+					<span aria-hidden="true" class="arrow">→</span>
 				{/if}
 			</button>
 		</div>
@@ -70,15 +70,27 @@
 		border: 1px solid var(--onyx);
 		gap: 12px;
 		padding: 0px 16px;
+		padding-bottom: 4px;
 		box-sizing: border-box;
+		position: relative;
+		transition: all 0.1s linear;
+	}
+	button:hover {
+		background-color: var(--periwinkle);
+		border-color: var(--periwinkle);
 	}
 	button span {
 		font-size: 2rem;
 		margin: 0px -5px;
+		position: relative;
+		top: -5px;
 	}
 	button:disabled {
 		border: 1px solid var(--cloud-dark);
 		cursor: auto;
+	}
+	button:disabled:hover {
+		background-color: var(--cloud);
 	}
 	.ready {
 		display: flex;
@@ -97,7 +109,7 @@
 	}
 	.ready div span {
 		position: relative;
-		top: 2px;
+		top: -2px;
 		font-size: 20px;
 	}
 	.helper {

@@ -21,23 +21,18 @@
 			return;
 		}
 		if (event.target?.value?.length > 5) {
-			event.preventDefault(); // Stop the character from being entered
+			if (event.key !== 'Enter') {
+				event.preventDefault(); // Stop the character from being entered
+			}
 		}
 	}
 
 	function handleCodeInputChange(evt: Event): void {
 		const input = evt.target as HTMLInputElement;
-		// 		if (/^[0-9]+$/.test(input.value) && input.value.length <= 6) {
-		// 	code = input.value;
-		// }
 		if (/^[a-zA-Z0-9]+$/.test(input.value) && input.value.length <= 6) {
 			code = input.value;
 		}
 	}
-
-	const handleContinue = $derived(() => {
-		goto(`/end/${code}`);
-	});
 </script>
 
 <h1 class="title">8 Dynamics<br />Collective Poll</h1>
@@ -77,7 +72,7 @@
 	</label>
 	<div class="buttons">
 		<button
-			class="btn primary small"
+			class="btn quaternary small"
 			class:loading={codeCheckLoading}
 			type="submit"
 			disabled={codeCheckLoading}
@@ -115,7 +110,7 @@
 		width: 250px;
 		font-size: 32px;
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
-		font-weight: 200;
+		font-weight: 700;
 		color: var(--onyx);
 		background-color: var(--cloud);
 		border-radius: 10px;

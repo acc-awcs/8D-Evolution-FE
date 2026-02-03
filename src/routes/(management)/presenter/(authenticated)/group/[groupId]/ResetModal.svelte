@@ -66,7 +66,7 @@
 			<input type="hidden" name="isStart" value="false" />
 			<div class="buttons">
 				<button class="btn secondary large" type="button" onclick={onClose}> Cancel </button>
-				<button class="btn primary large" type="submit" disabled={loading} class:loading>
+				<button class="btn large primary" type="submit" disabled={loading} class:loading>
 					{#if loading}
 						<ButtonLoader />
 					{:else}
@@ -84,18 +84,9 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	input,
-	select {
-		background-color: #fff;
-	}
-	.buttons-init {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		margin-top: 16px;
-	}
 	.buttons {
 		display: flex;
 		gap: 10px;
+		margin-top: 36px;
 	}
 </style>

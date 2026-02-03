@@ -40,7 +40,7 @@
 			onmouseenter={() => onHover(idx)}
 			onmouseleave={() => onLeave()}
 		>
-			{dynamic.full}
+			<span class="dynamic">{dynamic.full}</span>
 			<span class="visually-hidden">Your answer: {answers[idx]} out of 5</span>
 		</li>
 	{/each}
@@ -71,9 +71,19 @@
 	}
 	ol li {
 		margin-bottom: 1em;
+		cursor: default;
 	}
-	li.highlight {
-		font-weight: bold;
+	li .dynamic {
+		padding: 0px 3px;
+		margin: 0px -3px;
+		/* border-radius: var(--br); */
+		border-bottom: 2px solid transparent;
+	}
+	li.highlight .dynamic {
+		border-bottom: 2px solid var(--periwinkle);
+
+		/* background-color: var(--neon); */
+		/* font-weight: bold; */
 	}
 	@media screen and (min-width: 900px) {
 		.mobile {

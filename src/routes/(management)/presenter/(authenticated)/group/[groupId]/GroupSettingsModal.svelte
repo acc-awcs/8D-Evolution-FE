@@ -85,7 +85,7 @@
 				<button class="btn secondary large" type="button" onclick={() => (mode = 'unselected')}>
 					← Back
 				</button>
-				<button class="btn primary large" type="submit" disabled={loading} class:loading>
+				<button class="btn large primary" type="submit" disabled={loading} class:loading>
 					{#if loading}
 						<ButtonLoader />
 					{:else}

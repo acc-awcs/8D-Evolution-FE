@@ -12,6 +12,7 @@
 	--cloud: #faf6f0;
 	/* --cloud: #faf6f0; */
 	--cloud-light: #fdfbf7;
+	--cloud-faded: #faf6f09c;
 	--cloud-dark: #eae4db;
 	--onyx: #2f3325;
 	--soil: #d18856;
@@ -39,12 +40,36 @@
 	font-weight: 500;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'Area Normal';
 	src: url('/fonts/AreaNormal-MediumItalic.woff2') format('woff2');
 	font-weight: 500;
 	font-style: italic;
 }
+
+@font-face {
+	font-family: 'Area Normal';
+	src:
+		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
+			format('woff2'),
+		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
+			format('woff'),
+		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
+			format('opentype');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 400;
+	font-stretch: normal;
+	line-height: 140%;
+}
+
+/* font-family: "area-normal";
+    src: url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+    font-display: auto;
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal; */
 /* @font-face {
 	font-family: 'Instrument Serif';
 	src: url('/fonts/InstrumentSerif-Regular.ttf') format('ttf');
@@ -149,9 +174,10 @@ label {
 }
 
 input,
-select {
-	padding: 16px 10px;
-	padding-bottom: 14px;
+select,
+textarea {
+	padding: 14px 10px;
+	padding-top: 10px;
 	display: block;
 	font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 	background-color: var(--cloud);
@@ -185,7 +211,7 @@ a:focus-visible {
 	text-decoration: none;
 	border-radius: 50px;
 	padding: 12px 25px;
-	padding-top: 14px;
+	padding-bottom: 15px;
 	transition: all 0.1s linear;
 	/* fixes for discrepancies between .btn on <a> and <button> */
 	font-family: 'Area Normal', Helvetica, Arial, sans-serif;
@@ -220,20 +246,47 @@ a.short {
 	font-family: 'Area Normal', sans-serif;
 	font-size: 18px;
 	border: none;
-	/* border: 1px solid var(--onyx); */
+	border: 1px solid var(--onyx);
 	color: var(--onyx);
 	background-color: var(--neon);
 }
 
 .btn.primary:hover {
-	background-color: var(--cloud);
+	border-color: var(--periwinkle);
+	background-color: var(--periwinkle);
 }
 
 .btn.primary.loading {
-	background-color: var(--cloud);
+	border-color: var(--periwinkle);
+	background-color: var(--periwinkle);
 }
 
 .btn.primary.loading:hover {
+	border-color: var(--periwinkle);
+	background-color: var(--periwinkle);
+}
+
+.btn.quaternary {
+	font-family: 'Area Normal', sans-serif;
+	font-size: 18px;
+	border: none;
+	/* border: 1px solid var(--onyx); */
+	color: var(--onyx);
+	background-color: var(--neon);
+}
+
+.btn.quaternary:hover {
+	border-color: var(--cloud);
+	background-color: var(--cloud);
+}
+
+.btn.quaternary.loading {
+	border-color: var(--cloud);
+	background-color: var(--cloud);
+}
+
+.btn.quaternary.loading:hover {
+	border-color: var(--cloud);
 	background-color: var(--cloud);
 }
 
@@ -261,7 +314,9 @@ a.short {
 }
 
 .btn.tertiary:hover {
-	font-style: italic;
+	background-color: var(--neon);
+	border-radius: var(--br) var(--br) 0px 0px;
+	/* font-style: italic; */
 	/* border-bottom: 3px solid var(--onyx);
 	padding-bottom: 3px; */
 }

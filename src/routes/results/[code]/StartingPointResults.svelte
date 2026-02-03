@@ -207,7 +207,7 @@
 						anonymous.
 					</p>
 				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn primary"
+				<button onclick={() => (showEmailModal = true)} class="btn quaternary"
 					>Email Yourself Your Code</button
 				>
 				<label>
@@ -406,7 +406,20 @@
 		}
 	}
 
+	.uppercase-title {
+		text-align: center;
+	}
+	.title {
+		text-align: center;
+	}
+
 	@media screen and (min-width: 900px) {
+		.uppercase-title {
+			text-align: left;
+		}
+		.title {
+			text-align: left;
+		}
 		.clouds {
 			display: grid;
 			padding: 20px 60px;

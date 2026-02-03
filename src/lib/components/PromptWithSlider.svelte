@@ -12,6 +12,14 @@
 	export let loading: Boolean;
 </script>
 
+<div class="illustrations-wrapper">
+	{#each section.bgImages as o}
+		<div class="img-wrapper" style={`${o?.dir}: ${o?.offset || '0px'}; top: ${o?.top}%;`}>
+			<img src={o?.img} class:top={o?.top < 50} alt="" />
+		</div>
+	{/each}
+</div>
+
 <div class="wrapper">
 	<label for={section.key}>{section.dynamic}</label>
 
@@ -74,6 +82,9 @@
 		align-items: center;
 		justify-content: center;
 		gap: 30px;
+		position: relative;
+		padding: 2rem;
+		box-sizing: border-box;
 	}
 
 	label {
@@ -100,7 +111,7 @@
 	.value {
 		font-size: 44px;
 		text-align: center;
-		/* font-weight: 600; */
+		font-weight: 700;
 		color: var(--periwinkle);
 		margin-bottom: 30px;
 		position: relative;
@@ -187,12 +198,39 @@
 		appearance: none;
 	}
 
+	.illustrations-wrapper {
+		height: 100vh;
+		width: 100%;
+		z-index: -2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+	}
+	.illustrations-wrapper .img-wrapper {
+		position: absolute;
+	}
+
 	@media (max-width: 400px) {
 		.descriptions {
 			font-size: 14px;
 		}
 		.descriptions div:last-child {
 			text-align: right;
+		}
+	}
+
+	@media (max-width: 850px) {
+		/* reducing the opacing when the images overlap with the section text
+		for better readability */
+		img {
+			opacity: 0.15;
+			position: relative;
+			top: 11vh;
+		}
+
+		img.top {
+			top: -11vh;
 		}
 	}
 </style>

@@ -6,6 +6,18 @@
 	import flowers from '$lib/assets/flowers.png';
 	import butterfly from '$lib/assets/butterfly.png';
 	import charts from '$lib/assets/charts.png';
+	import { getIntFromID } from '$lib/helpers/general';
+	import tile1 from '$lib/assets/wayfinding/tiles/tile1.png';
+	import tile2 from '$lib/assets/wayfinding/tiles/tile2.png';
+	import tile3 from '$lib/assets/wayfinding/tiles/tile3.png';
+	import tile4 from '$lib/assets/wayfinding/tiles/tile4.png';
+	import tile5 from '$lib/assets/wayfinding/tiles/tile5.png';
+	import tile6 from '$lib/assets/wayfinding/tiles/tile6.png';
+	import tile7 from '$lib/assets/wayfinding/tiles/tile7.png';
+	import tile8 from '$lib/assets/wayfinding/tiles/tile8.png';
+
+	// Pretty backgrounds from the design team, should be unique to group (using uid)
+	const tileBackgroundOptions = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8];
 
 	let showNewGroupModal = $state(false);
 	let { data } = $props();
@@ -35,11 +47,12 @@
 		<div class="groups">
 			{#each data?.groups || [] as group}
 				{@const status = getStatus(group)}
-				<a
+				<!-- <a
 					href={`/presenter/group/${group._id}`}
 					style={`background-color:var(--${getStatusColor(status)});`}
-				>
-					<!-- <img src={imagesByStatus[status]} alt="" /> -->
+				> -->
+				<a href={`/presenter/group/${group._id}`}>
+					<img src={tileBackgroundOptions[getIntFromID(group._id) % 8]} alt="" />
 					<!-- <div class="overlay"></div> -->
 					<div class="display">
 						<div class="up-next-wrapper">
@@ -49,7 +62,7 @@
 						</div>
 
 						<p class="status" style={`background-color:var(--${getStatusColor(status)});`}>
-							{status}
+							<span>{status}</span>
 						</p>
 						<p class="group-title">{group.name}</p>
 					</div>
@@ -131,8 +144,8 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		background-color: #fff;
-		/* box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1); */
+		background-color: var(--neon);
+		transition: box-shadow 0.2s ease;
 		box-sizing: border-box;
 		align-items: flex-start;
 		border-radius: var(--br);
@@ -145,9 +158,15 @@
 		line-height: 36px;
 		padding-top: 6px;
 		padding-bottom: 4px;
+		transition: text-decoration-color 0.2s ease;
+		text-decoration: underline;
+		text-decoration-color: transparent;
 	}
 	.groups a:hover .group-title {
-		text-decoration: underline;
+		text-decoration-color: var(--onyx);
+	}
+	.groups a:hover {
+		box-shadow: 0px 0px 10px 0px rgba(14, 41, 157, 0.2);
 	}
 	.up-next-wrapper {
 		height: 28px;
@@ -160,13 +179,18 @@
 		/* opacity: 0.8; */
 	}
 	.status {
-		padding: 1px 12px;
-		padding-top: 2px;
+		padding: 0px 12px;
+
 		border-radius: 20px;
 		font-size: 14px;
 		font-weight: 700;
 		/* color: var(--cloud); */
 		display: inline-block;
+	}
+
+	.status span {
+		position: relative;
+		top: 2px;
 	}
 
 	.display {
@@ -184,9 +208,10 @@
 
 	.groups img {
 		position: absolute;
-		width: 120px;
+		width: 100%;
 		right: 0px;
-		top: 100px;
+		top: 0px;
+		/* top: 100px; */
 		opacity: 1;
 	}
 
