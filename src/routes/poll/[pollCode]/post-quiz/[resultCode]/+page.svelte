@@ -63,8 +63,8 @@
 				</button>
 			</form>
 		{:else}
-			<img class="waves" src={waves} alt="" />
-			<p class="tall">Thank you!</p>
+			<img class="waves chart-fade-in" src={waves} alt="" />
+			<p class="tall chart-fade-in">Thank you!</p>
 			<!-- <p class="tall">We've recorded your response.</p> -->
 		{/if}
 	</div>
