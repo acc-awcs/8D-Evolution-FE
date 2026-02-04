@@ -13,7 +13,7 @@
 
 <p>Browse data from collective polls run by <strong>trained facilitators</strong>.</p>
 
-<h2 class="title small">Beep</h2>
+<!-- <h2 class="title small">Beep</h2> -->
 
 {#await data.chartData}
 	<p>Loading statistics ...</p>
