@@ -233,6 +233,7 @@
 		padding: 30px 60px;
 		box-sizing: border-box;
 		gap: 20px;
+		margin-top: -100px;
 	}
 	.page-offset.start {
 		width: 162px;

@@ -172,9 +172,8 @@
 				/>
 			</div>
 		</section>
-		<section class="up-next">
+		<!-- <section class="up-next">
 			<div class="charts-overlaid">
-				<!-- Overlaid version -->
 				<div class="charts" bind:clientWidth={chartWidthUpNext}>
 					<div class="absolute-wrapper">
 						<SpiderChart
@@ -200,10 +199,9 @@
 					<div class="uppercase-title">Your Biggest Shift</div>
 					<h2 class="title">Example Dynamic</h2>
 					<p>Todo: Confirm with AWCS team on content for this section.</p>
-					<!-- <p>I can also remove the animation on the chart here and just do a static overlay.</p> -->
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<section class="conclusion">
 			<div class="column">
 				<a class="fancy-link" href="/">← Return to Start</a>
@@ -383,7 +381,7 @@
 	}
 
 	.conclusion {
-		background-color: var(--periwinkle);
+		background-color: var(--soil);
 		padding: 40px;
 		display: flex;
 		justify-content: center;

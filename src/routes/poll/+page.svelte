@@ -6,6 +6,7 @@
 	// Code form & state management
 	let code = $state('');
 	let codeCheckLoading = $state<boolean>(false);
+		let success = $state<boolean>(false);
 	let codeError = $state<string>('');
 
 	function preventExtensiveLength(event: KeyboardEvent) {
@@ -49,6 +50,7 @@
 		codeCheckLoading = true;
 		const resp = await _getPoll(code);
 		if (resp.success) {
+			success = true;
 			goto(`/poll/${code}`);
 		} else if (resp.notFound) {
 			codeError =
@@ -73,7 +75,7 @@
 	<div class="buttons">
 		<button
 			class="btn quaternary small"
-			class:loading={codeCheckLoading}
+			class:loading={codeCheckLoading || success}
 			type="submit"
 			disabled={codeCheckLoading}
 		>
@@ -87,6 +89,12 @@
 </form>
 
 <style>
+	.error {
+		background-color: var(--cloud-faded);
+		padding: 4px 16px;
+		border-radius: var(--br);
+		padding-top: 6px;
+	}
 	button {
 		min-width: 200px;
 	}

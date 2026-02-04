@@ -21,7 +21,7 @@
 		<SpiderChart answers={data.current?.object} {chartWidth} isStart={true} />
 	</div>
 
-	<div class="chart-fade-in">
+	<div class="chart-fade-in chart-intro">
 		<p>Here's the 8 Dynamics web from your individual submission.</p>
 
 		{#if !data?.showEndingSurvey}
@@ -71,6 +71,9 @@
 {/if}
 
 <style>
+	.chart-intro {
+		margin-top: 16px;
+	}
 	img {
 		margin-top: 12px;
 		width: 91px;

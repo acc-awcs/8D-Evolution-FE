@@ -24,7 +24,9 @@
 			return;
 		}
 		if (event.target?.value?.length > 5) {
-			event.preventDefault(); // Stop the character from being entered
+			if (event.key !== 'Enter') {
+				event.preventDefault(); // Stop the character from being entered
+			}
 		}
 	}
 
@@ -67,7 +69,9 @@
 						our website, check for an email with the subject “Your 8 Dynamics Code”
 					</p>
 					{#if codeError.length > 0}
-						<p class="error">{codeError}</p>
+						<div class="error-wrapper">
+							<p class="error">{codeError}</p>
+						</div>
 					{/if}
 					<!-- data-sveltekit-noscroll -->
 					<!-- use:enhance -->
@@ -145,6 +149,19 @@
 </div>
 
 <style>
+	.error-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+	.error {
+		display: inline-block;
+		background-color: var(--cloud-faded);
+		padding: 4px 16px;
+		border-radius: var(--br);
+		padding-top: 6px;
+		margin: 0px;
+	}
+
 	button {
 		min-width: 200px;
 	}

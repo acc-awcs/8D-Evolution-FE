@@ -32,7 +32,13 @@ export async function load({ cookies, url, fetch }) {
 
 	return {
 		...data,
-		slowData: fetch(`${PUBLIC_SERVER_URL}/api/group-results-aggregate?role=${FACILITATOR}`, {
+		chartData: fetch(`${PUBLIC_SERVER_URL}/api/chart?role=${FACILITATOR}`, {
+			headers: {
+				Authorization: `Bearer ${sessionToken}`
+			},
+			method: 'GET'
+		}).then((res) => res.json()),
+		aggregateData: fetch(`${PUBLIC_SERVER_URL}/api/group-results-aggregate?role=${FACILITATOR}`, {
 			headers: {
 				Authorization: `Bearer ${sessionToken}`
 			},

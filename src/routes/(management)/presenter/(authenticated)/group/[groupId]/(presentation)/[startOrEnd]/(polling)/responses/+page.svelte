@@ -68,7 +68,7 @@
 {/if}
 
 <div class="join-note">
-	<strong>Still need to join?</strong> Go to <strong>{shortenUrl(PUBLIC_BASE_URL)}/poll</strong> and
+	Still need to join? Go to <strong>{shortenUrl(PUBLIC_BASE_URL)}/poll</strong> and
 	enter
 	<strong class="spaced"
 		><span>{pollCode?.slice(0, 3)}</span><span>{pollCode?.slice(3, 6)}</span></strong
@@ -94,9 +94,9 @@
 	.join-note {
 		text-align: center;
 		position: relative;
-		top: -10px;
+		/* top: -10px; */
 		margin-top: 0px;
-		margin-bottom: 30px;
+		margin-bottom: 20px;
 	}
 	.join-note strong {
 		/* background-color: var(--cloud-dark);
