@@ -70,7 +70,7 @@
 		border: 1px solid var(--onyx);
 		gap: 12px;
 		padding: 0px 16px;
-		padding-bottom: 4px;
+		padding-top: 2px;
 		box-sizing: border-box;
 		position: relative;
 		transition: all 0.1s linear;
@@ -83,7 +83,7 @@
 		font-size: 2rem;
 		margin: 0px -5px;
 		position: relative;
-		top: -5px;
+		/* top: -5px; */
 	}
 	button:disabled {
 		border: 1px solid var(--cloud-dark);
@@ -109,13 +109,18 @@
 	}
 	.ready div span {
 		position: relative;
-		top: -2px;
+		top: 2px;
 		font-size: 20px;
 	}
 	.helper {
 		font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 		line-height: 24px;
-		font-size: 15px;
-		opacity: 0.9;
+		font-size: 14px;
+		opacity: 0.8;
+		padding: 2px;
+		margin: 0px;
+		margin-bottom: 4px;
+		background-color: var(--cloud);
+		border-radius: var(--br);
 	}
 </style>

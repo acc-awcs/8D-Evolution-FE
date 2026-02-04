@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      8-dynamics:
+        specifier: 'link:'
+        version: 'link:'
       '@mailchimp/mailchimp_transactional':
         specifier: ^1.0.59
         version: 1.1.2

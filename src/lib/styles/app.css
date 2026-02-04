@@ -48,7 +48,7 @@
 	font-style: italic;
 }
 
-@font-face {
+/* @font-face {
 	font-family: 'Area Normal';
 	src:
 		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
@@ -62,7 +62,7 @@
 	font-weight: 400;
 	font-stretch: normal;
 	line-height: 140%;
-}
+} */
 
 /* font-family: "area-normal";
     src: url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
@@ -176,8 +176,8 @@ label {
 input,
 select,
 textarea {
-	padding: 14px 10px;
-	padding-top: 10px;
+	padding: 12px 10px;
+	padding-top: 14px;
 	display: block;
 	font-family: 'Area Normal', Helvetica, Arial, sans-serif;
 	background-color: var(--cloud);
@@ -210,8 +210,8 @@ a:focus-visible {
 	line-height: 140%;
 	text-decoration: none;
 	border-radius: 50px;
-	padding: 12px 25px;
-	padding-bottom: 15px;
+	padding: 11px 25px;
+	padding-top: 14px;
 	transition: all 0.1s linear;
 	/* fixes for discrepancies between .btn on <a> and <button> */
 	font-family: 'Area Normal', Helvetica, Arial, sans-serif;
