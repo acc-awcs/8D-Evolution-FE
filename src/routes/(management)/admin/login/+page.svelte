@@ -34,7 +34,7 @@
 		<p class="error">
 			{errorMessage}
 			{#if presenterError}
-				<a href="/presenter/login">Go to presenter login</a>
+				<a href="/groups/login">Go to presenter login</a>
 			{/if}
 		</p>
 	{/if}

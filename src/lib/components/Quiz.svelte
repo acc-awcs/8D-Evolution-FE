@@ -7,6 +7,14 @@
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
 	import s1l2 from '$lib/assets/wayfinding/slides/s1l2.png';
+	import intro1 from '$lib/assets/wayfinding/intro/1.png';
+	import intro2 from '$lib/assets/wayfinding/intro/2.png';
+	import intro3 from '$lib/assets/wayfinding/intro/3.png';
+	import intro4 from '$lib/assets/wayfinding/intro/4.png';
+	import intro5 from '$lib/assets/wayfinding/intro/5.png';
+	import intro6 from '$lib/assets/wayfinding/intro/6.png';
+	import intro7 from '$lib/assets/wayfinding/intro/7.png';
+	import intro8 from '$lib/assets/wayfinding/intro/8.png';
 	import { browser } from '$app/environment';
 
 	let { data, isStart, pollCode = null } = $props();
@@ -133,24 +141,36 @@
 
 <main onscroll={(e) => (scrollY = (e.target as HTMLElement)?.scrollTop)}>
 	<div class="logo-wrapper">
-		<div class="page-offset" class:start={isStart}></div>
 		<Logo onDark={true} relative={true} />
-		<div class="page-name">
+		<!-- <div class="page-name">
 			{#if isStart}
 				Starting Point Quiz
 			{:else}
 				Ending Point Quiz
 			{/if}
-		</div>
+		</div> -->
 	</div>
 	<section class="intro">
+		<div class="intro-img-wrapper left">
+			<img class="intro-img" src={intro2} alt="" />
+			<img class="intro-img" src={intro3} alt="" />
+			<img class="intro-img" src={intro6} alt="" />
+			<img class="intro-img" src={intro8} alt="" />
+		</div>
+		<div class="intro-img-wrapper right">
+			<img class="intro-img" src={intro1} alt="" />
+			<img class="intro-img" src={intro4} alt="" />
+			<img class="intro-img" src={intro5} alt="" />
+			<img class="intro-img" src={intro7} alt="" />
+		</div>
 		<div class="content">
 			<h1 class="title">8 Dynamics of Climate Engagement</h1>
 
 			<p>
-				Below, you'll find each of the 8 Dynamics of Climate Engagement with a sliding bar. Take a
-				moment to reflect on each statement and respond on a spectrum from 1 (“not true for me”) to
-				5 (“extremely true for me”). Consider what's true for you, right now.
+				Below, you'll find each of the 8 Dynamics with a sliding bar. Take a moment to reflect on
+				each statement and consider what is real for you, right now. Respond on a spectrum from 1 (<i
+					>that's not true for me</i
+				>) to 5 (<i>that's extremely true for me</i>).
 			</p>
 			<a class="btn secondary short" href="#section-0" onclick={(e) => scrollToSection(e, 0)}
 				>Start</a
@@ -179,6 +199,7 @@
 	main {
 		overflow: scroll;
 		height: 100vh;
+		height: 100dvh;
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 		overscroll-behavior: contain;
@@ -187,6 +208,7 @@
 	}
 	section {
 		height: 100vh;
+		height: 100dvh;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: center;
@@ -201,8 +223,7 @@
 		font-size: 60px;
 	}
 	section.intro {
-		padding: 2rem;
-
+		padding: 2rem 200px;
 		padding-top: 100px;
 	}
 	section.intro .content {
@@ -222,7 +243,7 @@
 	}
 	.logo-wrapper {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		width: 100%;
 		position: sticky;
@@ -235,43 +256,42 @@
 		gap: 20px;
 		margin-top: -100px;
 	}
-	.page-offset.start {
-		width: 162px;
-		height: 2px;
+	.intro-img {
+		position: relative;
 	}
-	.page-offset {
-		width: 150px;
-		height: 2px;
-	}
-	.page-name {
-		text-transform: uppercase;
-		text-align: right;
+	.intro-img-wrapper {
+		position: absolute;
+		top: 0px;
+		height: 100vh;
+		height: 100dvh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 16px;
 	}
 
-	img.visible {
-		opacity: 1;
+	.intro-img-wrapper.left {
+		left: 0px;
 	}
-	/* img {
-		opacity: 0;
-		transition:
-			opacity 0.6s ease,
-			transform 0.6s ease;
-		transform: translateY(20px);
-	} */
+
+	.intro-img-wrapper.right {
+		right: 0px;
+		align-items: flex-end;
+	}
 
 	@media (max-width: 850px) {
 		/* reducing the opacing when the images overlap with the section text
 		for better readability */
-		img.visible {
-			opacity: 0.5;
+		.intro-img-wrapper {
+			opacity: 0.1;
 		}
-		/* ensure top clouds don't overlap with logo */
-		.clouds-overlay {
-			background-size: 120%, 100%;
-			background-position:
-				top left 200px,
-				bottom center;
+
+		section.intro {
+			padding: 2rem 60px;
+			padding-top: 100px;
 		}
+
 		section.intro {
 			padding-top: 120px;
 		}
@@ -283,17 +303,19 @@
 			padding: 20px;
 			gap: 16px;
 		}
-		.page-offset {
-			display: none;
-		}
-		.page-name {
-			font-size: 12px;
-		}
 	}
 
-	@media (max-width: 400px) {
+	@media (max-width: 450px) {
 		.intro p {
 			font-size: 16px;
+			background-color: var(--cloud-faded);
+			padding: 10px 3px;
+			border-radius: var(--br);
+		}
+
+		section.intro {
+			padding: 2rem 20px;
+			padding-top: 100px;
 		}
 	}
 </style>

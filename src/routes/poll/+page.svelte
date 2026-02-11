@@ -6,7 +6,7 @@
 	// Code form & state management
 	let code = $state('');
 	let codeCheckLoading = $state<boolean>(false);
-		let success = $state<boolean>(false);
+	let success = $state<boolean>(false);
 	let codeError = $state<string>('');
 
 	function preventExtensiveLength(event: KeyboardEvent) {
@@ -36,8 +36,8 @@
 	}
 </script>
 
-<h1 class="title">8 Dynamics<br />Collective Poll</h1>
-<p>Enter the number provided by your facilitator:</p>
+<h1 class="title">Let's Map Our Collective Starting Point</h1>
+<p>Enter Code</p>
 {#if codeError.length > 0}
 	<p class="error">{codeError}</p>
 {/if}
@@ -110,6 +110,11 @@
 		display: block;
 		margin-bottom: 10px;
 		font-size: 1rem;
+	}
+
+	.title {
+		width: 360px;
+		max-width: 100%;
 	}
 
 	input {

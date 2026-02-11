@@ -67,7 +67,7 @@ export async function load({ cookies, fetch, params }) {
 //         });
 //       }
 
-//       redirect(303, `/presenter/group/${params.groupId}/${startOrEnd}/responses`);
+//       redirect(303, `/groups/g/${params.groupId}/${startOrEnd}/responses`);
 //     } catch (error) {
 //       if (isRedirect(error)) {
 //         throw error;

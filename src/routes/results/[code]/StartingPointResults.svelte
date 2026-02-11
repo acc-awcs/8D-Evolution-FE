@@ -138,7 +138,7 @@
 			</form>
 		{:else if sendEmailSuccess === true}
 			<!-- Success message -->
-			<h1 class="title">Email sent</h1>
+			<h1 class="title">Email Sent</h1>
 			<p>Your email is on its way! Check your inbox for your results link.</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
@@ -160,7 +160,7 @@
 <div class="outer">
 	<img class="cloud-bg" src={cloudBg} alt="" />
 	<header class="logo">
-		<Logo />
+		<Logo liveLink={true} />
 	</header>
 	<main>
 		<section class="clouds">
@@ -222,24 +222,13 @@
 			</div>
 		</section>
 	</main>
-	<!-- <footer>
-		© 2024 The All We Can Save Project. Developers <a
-			href="https://github.com/chelshaw"
-			target="_blank"
-			rel="noopener nofollow">Chelsea Shaw</a
-		>,
-		<a href="https://github.com/emikjackson" target="_blank" rel="noopener nofollow">Emi Jackson</a
-		>, and
-		<a href="https://www.linkedin.com/in/li-helen" target="_blank" rel="noopener nofollow"
-			>Helen Li</a
-		> brought this interactive tool to life.
-	</footer> -->
 </div>
 
 <style>
 	.outer {
 		background-color: var(--cloud);
 		min-height: 100vh;
+		min-height: 100dvh;
 		box-sizing: border-box;
 		position: relative;
 	}

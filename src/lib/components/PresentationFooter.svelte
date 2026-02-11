@@ -1,5 +1,6 @@
 <script>
 	import { FACILITATOR } from '$lib/constants';
+	import ButtonLoader from './ButtonLoader.svelte';
 
 	let {
 		num = null,
@@ -11,6 +12,8 @@
 		skipPrev = false,
 		role = null
 	} = $props();
+
+	let loading = $state(false);
 </script>
 
 <footer>
@@ -26,12 +29,24 @@
 					<span aria-hidden="true" class="arrow">←</span>
 				</button>
 			{/if}
-			<button class="next" onclick={onNext} disabled={!onNext}>
+			<button
+				class="next"
+				onclick={() => {
+					onNext();
+					loading = true;
+				}}
+				disabled={!onNext || loading}
+			>
 				{nextLabel}
 				{#if !(nextLabel.includes('End') || nextLabel.includes('Close'))}
 					<span aria-hidden="true" class="arrow">→</span>
 				{/if}
 			</button>
+			{#if loading}
+				<div class="button-loader-wrapper static-fade-in">
+					<ButtonLoader />
+				</div>
+			{/if}
 		</div>
 	</div>
 	{#if numLabel}
@@ -122,5 +137,11 @@
 		margin-bottom: 4px;
 		background-color: var(--cloud);
 		border-radius: var(--br);
+	}
+	.button-loader-wrapper {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 6px;
 	}
 </style>

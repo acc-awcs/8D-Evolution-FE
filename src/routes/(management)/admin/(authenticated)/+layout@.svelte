@@ -23,7 +23,7 @@
 
 <div class="wrapper">
 	<nav>
-		<Logo relative={true} />
+		<Logo relative={true} liveLink={true} />
 		<div class="home-label">Admin Dashboard</div>
 		<div class="account-wrapper">
 			<button class="account-btn" type="button" onclick={() => (accountModalOpen = true)}>
@@ -38,7 +38,7 @@
 				<a href="/admin" class:active={page.url.pathname === '/admin'}>Facilitation Data</a>
 			</li>
 			<li>
-				<a href="/admin/group" class:active={page.url.pathname === '/admin/group'}>Group Data</a>
+				<a href="/admin/g" class:active={page.url.pathname === '/admin/g'}>Group Data</a>
 			</li>
 			<li>
 				<a href="/admin/individual" class:active={page.url.pathname === '/admin/individual'}
@@ -103,6 +103,7 @@
 	.wrapper {
 		/* background-color: var(--cloud-dark); */
 		min-height: 100vh;
+		min-height: 100dvh;
 		width: 100%;
 		display: flex;
 		flex-direction: column;

@@ -12,7 +12,7 @@
 
 <main>
 	<div class="logo-wrapper">
-		<Logo />
+		<Logo liveLink={true} />
 	</div>
 	<section>
 		{#if page.status === 404}
@@ -36,6 +36,7 @@
 		background-color: var(--periwinkle);
 		padding: 3rem;
 		height: 100vh;
+		height: 100dvh;
 		position: relative;
 		box-sizing: border-box;
 		grid-template-columns: 1fr minmax(400px, 1fr);

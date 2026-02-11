@@ -174,6 +174,7 @@
 	.wrapper {
 		background-color: var(--periwinkle);
 		min-height: 100vh;
+		min-height: 100dvh;
 		box-sizing: border-box;
 		background-color: var(--periwinkle);
 		background-image:

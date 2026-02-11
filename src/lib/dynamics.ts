@@ -27,8 +27,8 @@ const dynamics = [
 	},
 	{
 		short: 'Clarity',
-		full: 'I have clarity around my contribution, while embracing its evolution.',
-		lines: ['I have clarity around', 'my contribution, while', 'embracing its evolution.']
+		full: 'I have clarity around my contribution while embracing its evolution.',
+		lines: ['I have clarity around', 'my contribution while', 'embracing its evolution.']
 	},
 	{
 		short: 'Action',

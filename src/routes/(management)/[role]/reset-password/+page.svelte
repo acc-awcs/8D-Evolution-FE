@@ -40,9 +40,9 @@
 	{#if page.params.role === ADMIN}
 		<p class="note"><a href="/admin/login">Back to Login</a></p>
 	{:else}
-		<p class="note"><a href="/presenter/login">Back to Login</a></p>
+		<p class="note"><a href="/groups/login">Back to Login</a></p>
 		<p class="note short">
-			Not signed up yet? <a href="/presenter/create">Create a presenter account</a>
+			Not signed up yet? <a href="/groups/create">Create a presenter account</a>
 		</p>
 	{/if}
 </form>

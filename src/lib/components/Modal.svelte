@@ -62,6 +62,7 @@
 		max-height: calc(100dvh - 20px);
 		overflow: auto;
 		margin: 10px 0px;
+		padding-bottom: 36px;
 	}
 	@media screen and (max-width: 600px) {
 		.tile {

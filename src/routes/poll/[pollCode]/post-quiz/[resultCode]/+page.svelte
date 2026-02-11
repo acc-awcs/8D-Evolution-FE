@@ -14,7 +14,7 @@
 <div class="wrapper">
 	<img src={glyph} alt="" />
 
-	<h1 class="title">Your 8 Dynamics Web</h1>
+	<h1 class="title">Your {data.showEndingSurvey ? 'Ending' : 'Starting'} Point</h1>
 	<!-- <Spi -->
 
 	<div class="chart chart-fade-in" aria-hidden="true" bind:clientWidth={chartWidth}>
@@ -22,19 +22,22 @@
 	</div>
 
 	<div class="chart-fade-in chart-intro">
-		<p>Here's the 8 Dynamics web from your individual submission.</p>
+		<p>Here's your personal 8 Dynamics “web.”</p>
 
-		{#if !data?.showEndingSurvey}
+		<p>
+			Take a screenshot if you'd like. Then, shift your attention to the group's collective map.
+		</p>
+
+		<!-- {#if !data?.showEndingSurvey}
 			<p>
-				Shift your attention to the presentation to see the averaged results for your group come in.
+				Take a screenshot if you'd like. Then, shift your attention to the group's collective map.
 			</p>
-		{/if}
+		{/if} -->
 	</div>
 </div>
 
 {#if data?.showEndingSurvey}
 	<div class="survey" class:complete={submitted}>
-		<h2 class="title small">Closing Survey</h2>
 		{#if !submitted}
 			<form
 				method="POST"
@@ -50,6 +53,8 @@
 					};
 				}}
 			>
+				<h2 class="title small">One last question from the Climate Wayfinding team…</h2>
+
 				<label>
 					<span>What did you gain from participating in this experience?</span>
 					<textarea required class="large" type="password" name="text"></textarea>

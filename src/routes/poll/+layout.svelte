@@ -74,6 +74,7 @@
 		padding: 20px 20px;
 		max-width: 100%;
 		min-height: 100vh;
+		min-height: 100dvh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -81,8 +82,6 @@
 	}
 
 	main {
-		/* height: 90vh;
-		height: calc(100vh - 350px); */
 		flex: 1;
 		display: flex;
 		justify-content: center;

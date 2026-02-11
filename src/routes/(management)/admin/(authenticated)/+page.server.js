@@ -78,7 +78,7 @@ export async function load({ cookies, url, fetch }) {
 
 //       const newGroup = await response.json();
 
-//       redirect(303, `/presenter/group/${newGroup._id}`);
+//       redirect(303, `/groups/g/${newGroup._id}`);
 //     } catch (error) {
 //       if (isRedirect(error)) {
 //         throw error;

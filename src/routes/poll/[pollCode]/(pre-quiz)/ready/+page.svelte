@@ -20,9 +20,8 @@
 
 <DecorativeBackground opacity={true} />
 
-<h1 class="title">Hang Tight ...</h1>
-<p>You're all set!</p>
-<p>Once your facilitator starts the session, this page will automatically update.</p>
+<h1 class="title">You're All Set!</h1>
+<p>Hang tight for a minute. Once everyone is aboard, this page will automatically update.</p>
 
 <style>
 	h1 {

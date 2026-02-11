@@ -23,7 +23,7 @@ export const actions = {
 				});
 			}
 
-			redirect(303, `/presenter/login`);
+			redirect(303, `/groups/login`);
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;

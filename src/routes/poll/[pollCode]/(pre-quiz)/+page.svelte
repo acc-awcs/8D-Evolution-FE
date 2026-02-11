@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import DecorativeBackground from '$lib/components/DecorativeBackground.svelte';
+	import Heart from '$lib/components/Heart.svelte';
 
 	let loading = $state(false);
 </script>
@@ -9,10 +10,8 @@
 <DecorativeBackground opacity={true} />
 
 <h1 class="title">Ready?</h1>
-<p>We've found your group.</p>
-<p>
-	Let your facilitator know you're ready to take the quiz by clicking the "I'm Ready" button below.
-</p>
+<p>We've found your group!</p>
+<p>Let everyone know you’re here by clicking this button:</p>
 
 <form
 	method="POST"
@@ -28,14 +27,16 @@
 		{#if loading}
 			<ButtonLoader />
 		{:else}
-			I'm Ready <span>♥</span>
+			I'm Ready <span><Heart /></span>
 		{/if}</button
 	>
 </form>
 
 <style>
 	span {
-		margin-left: 2px;
+		margin-left: 3px;
+		position: relative;
+		top: 2px;
 	}
 	button {
 		margin-top: 16px;

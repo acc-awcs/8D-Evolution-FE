@@ -5,7 +5,7 @@ export const actions = {
 		try {
 			cookies.delete('sessionToken', { path: '/' });
 
-			redirect(303, '/presenter');
+			redirect(303, '/groups');
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;

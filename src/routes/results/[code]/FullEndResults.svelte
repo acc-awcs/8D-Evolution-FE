@@ -107,7 +107,7 @@
 			</form>
 		{:else if sendEmailSuccess === true}
 			<!-- Success message -->
-			<h1 class="title">Email sent</h1>
+			<h1 class="title">Email Sent</h1>
 			<p>Your email is on its way! Check your inbox for your results link.</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
@@ -129,7 +129,7 @@
 <div class="outer">
 	<img class="cloud-bg" src={cloudBg} alt="" />
 	<header class="logo">
-		<Logo />
+		<Logo liveLink={true} />
 	</header>
 	<main>
 		<section class="clouds">
@@ -219,6 +219,7 @@
 	.outer {
 		background-color: var(--cloud);
 		min-height: 100vh;
+		min-height: 100dvh;
 		box-sizing: border-box;
 	}
 	.cloud-bg {

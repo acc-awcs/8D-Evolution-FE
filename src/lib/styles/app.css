@@ -30,7 +30,7 @@
 	--width-large: 820px;
 	--width-medium: 750px;
 	--width-small: 685px;
-	--width-extra-small: 600px;
+	--width-extra-small: 630px;
 	--br: 10px;
 }
 
@@ -48,41 +48,6 @@
 	font-weight: 500;
 	font-style: italic;
 }
-
-/* @font-face {
-	font-family: 'Area Normal';
-	src:
-		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
-			format('woff2'),
-		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
-			format('woff'),
-		url('https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3')
-			format('opentype');
-	font-display: auto;
-	font-style: normal;
-	font-weight: 400;
-	font-stretch: normal;
-	line-height: 140%;
-} */
-
-/* font-family: "area-normal";
-    src: url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/911b4f/0000000000000000774b9fbd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
-    font-display: auto;
-    font-style: normal;
-    font-weight: 400;
-    font-stretch: normal; */
-/* @font-face {
-	font-family: 'Instrument Serif';
-	src: url('/fonts/InstrumentSerif-Regular.ttf') format('ttf');
-	font-weight: 400;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'Instrument Serif';
-	src: url('/fonts/InstrumentSerif-Italic.ttf') format('ttf');
-	font-weight: 400;
-	font-style: italic;
-} */
 
 html {
 	scroll-behavior: smooth;
@@ -351,6 +316,12 @@ a.short {
 	animation-delay: 0.2s;
 }
 
+.static-fade-in {
+	opacity: 0;
+	animation: simpleFadeIn 1s ease 0s 1 forwards;
+	animation-delay: 0.1s;
+}
+
 @keyframes chartFadeIn {
 	0% {
 		opacity: 0;
@@ -360,5 +331,15 @@ a.short {
 	100% {
 		opacity: 1;
 		transform: translateY(0px);
+	}
+}
+
+@keyframes simpleFadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
 	}
 }

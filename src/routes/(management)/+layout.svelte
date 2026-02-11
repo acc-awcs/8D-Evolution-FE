@@ -20,7 +20,7 @@
 	<DecorativeBackground opacity={true} />
 
 	<nav>
-		<Logo relative={true} />
+		<Logo relative={true} liveLink={true} />
 	</nav>
 
 	<div class="tile-wrapper">
@@ -34,6 +34,7 @@
 	.wrapper {
 		display: flex;
 		min-height: 100vh;
+		min-height: 100dvh;
 		width: 100%;
 		padding: 30px 20px;
 		box-sizing: border-box;
