@@ -6,7 +6,6 @@
 	import illustrations from '$lib/illustrations';
 	import { _postResult } from '../../routes/api/result/+page';
 	import { goto } from '$app/navigation';
-	import s1l2 from '$lib/assets/wayfinding/slides/s1l2.png';
 	import intro1 from '$lib/assets/wayfinding/intro/1.png';
 	import intro2 from '$lib/assets/wayfinding/intro/2.png';
 	import intro3 from '$lib/assets/wayfinding/intro/3.png';
@@ -151,13 +150,13 @@
 		</div> -->
 	</div>
 	<section class="intro">
-		<div class="intro-img-wrapper left">
+		<div class="intro-img-wrapper static-fade-in left">
 			<img class="intro-img" src={intro2} alt="" />
 			<img class="intro-img" src={intro3} alt="" />
 			<img class="intro-img" src={intro6} alt="" />
 			<img class="intro-img" src={intro8} alt="" />
 		</div>
-		<div class="intro-img-wrapper right">
+		<div class="intro-img-wrapper static-fade-in right">
 			<img class="intro-img" src={intro1} alt="" />
 			<img class="intro-img" src={intro4} alt="" />
 			<img class="intro-img" src={intro5} alt="" />
@@ -269,6 +268,7 @@
 		justify-content: center;
 		align-items: flex-start;
 		gap: 16px;
+		animation-delay: 0.25s;
 	}
 
 	.intro-img-wrapper.left {
