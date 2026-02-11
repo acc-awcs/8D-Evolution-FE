@@ -44,7 +44,7 @@ export const actions = {
 			}
 
 			const body = await response.json();
-			const role = body.role === ADMIN ? ADMIN : 'presenter';
+			const role = body.role === ADMIN ? ADMIN : 'groups';
 			redirect(303, `/${role}/reset-password/success`);
 		} catch (error) {
 			if (isRedirect(error)) {

@@ -42,7 +42,7 @@
 	{:else}
 		<p class="note"><a href="/groups/login">Back to Login</a></p>
 		<p class="note short">
-			Not signed up yet? <a href="/groups/create">Create a presenter account</a>
+			Not signed up yet? <a href="/groups/create">Create an account</a>
 		</p>
 	{/if}
 </form>

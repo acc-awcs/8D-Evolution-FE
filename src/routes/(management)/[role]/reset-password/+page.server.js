@@ -32,7 +32,7 @@ export const actions = {
 				}
 			});
 
-			let role = 'presenter';
+			let role = 'groups';
 
 			if (!statusIsGood(response.status)) {
 				const body = await response.json();

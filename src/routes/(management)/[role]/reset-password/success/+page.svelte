@@ -11,4 +11,4 @@
 
 <br />
 
-<a href="/{role === ADMIN ? 'admin' : 'presenter'}/login" class="btn primary"> Back to Login </a>
+<a href="/{role === ADMIN ? 'admin' : 'groups'}/login" class="btn primary"> Back to Login </a>

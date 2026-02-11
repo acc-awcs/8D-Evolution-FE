@@ -75,7 +75,7 @@
 				}}
 				action="/api/logout?/adminLogout"
 			>
-				<button class="btn large primary" type="submit" disabled={loading} class:loading>
+				<button class="btn primary" type="submit" disabled={loading} class:loading>
 					{#if loading}
 						<ButtonLoader />
 					{:else}
