@@ -3,6 +3,8 @@
 	import { page } from '$app/state';
 	import Logo from '$lib/components/Logo.svelte';
 
+	const onPresenterUrl = $derived(page.url.pathname.includes('presenter'));
+
 	function reloadPage() {
 		if (browser) {
 			location.reload();
@@ -16,8 +18,17 @@
 	</div>
 	<section>
 		{#if page.status === 404}
-			<h1 class="title">404</h1>
-			<p>The requested page could not be found.</p>
+			{#if onPresenterUrl}
+				<h1 class="title">We've Switched Things Up</h1>
+				<p>
+					Hi, it looks like you're looking for a "/presenter" page - we've moved these pages to
+					"/groups"!
+				</p>
+				<a class="btn quaternary" href="/groups">Go to Groups</a>
+			{:else}
+				<h1 class="title">404</h1>
+				<p>The requested page could not be found.</p>
+			{/if}
 		{:else}
 			<h1 class="title">Oops!</h1>
 			<p>Something went wrong. Let's try that again.</p>
