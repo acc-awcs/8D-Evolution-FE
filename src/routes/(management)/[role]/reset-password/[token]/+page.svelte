@@ -38,3 +38,9 @@
 		{/if}
 	</button>
 </form>
+
+<style>
+	form {
+		margin-bottom: 20px;
+	}
+</style>
