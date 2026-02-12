@@ -38,7 +38,7 @@
 		<p class="context">
 			Access the 8 Dynamics polls and maps for all of your Climate Wayfinding groups.
 		</p>
-		<div class="groups">
+		<div class="groups static-fade-in">
 			{#each data?.groups || [] as group}
 				{@const status = getStatus(group)}
 				<a href={`/groups/g/${group._id}`}>
@@ -128,6 +128,7 @@
 		padding-bottom: 50px;
 		max-width: 100%;
 		box-sizing: border-box;
+		animation-delay: 0.2s;
 	}
 	.groups p {
 		margin: 0px;
