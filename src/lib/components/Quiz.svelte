@@ -268,7 +268,7 @@
 		justify-content: center;
 		align-items: flex-start;
 		gap: 16px;
-		animation-delay: 0.25s;
+		animation-delay: 0.3s;
 	}
 
 	.intro-img-wrapper.left {
@@ -284,7 +284,8 @@
 		/* reducing the opacing when the images overlap with the section text
 		for better readability */
 		.intro-img-wrapper {
-			opacity: 0.1;
+			animation: partialOpacityFadeIn 1s ease 0s 1 forwards;
+			animation-delay: 0.4s;
 		}
 
 		section.intro {
@@ -316,6 +317,15 @@
 		section.intro {
 			padding: 2rem 20px;
 			padding-top: 100px;
+		}
+	}
+
+	@keyframes partialOpacityFadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0.1;
 		}
 	}
 </style>
