@@ -218,6 +218,10 @@
 		position: relative;
 	}
 
+	.btn.large.primary {
+		height: 52.2px;
+	}
+
 	.buttons {
 		display: flex;
 		gap: 6px;

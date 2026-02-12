@@ -12,3 +12,9 @@
 <br />
 
 <a href="/{role === ADMIN ? 'admin' : 'groups'}/login" class="btn primary"> Back to Login </a>
+
+<style>
+	a {
+		margin-bottom: 20px;
+	}
+</style>

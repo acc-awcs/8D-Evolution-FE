@@ -228,6 +228,10 @@
 		gap: 40px;
 	}
 
+	.btn.large.primary {
+		height: 52.2px;
+	}
+
 	@media screen and (max-width: 600px) {
 		.home-label {
 			display: none;
