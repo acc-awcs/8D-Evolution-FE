@@ -228,7 +228,7 @@
 		gap: 40px;
 	}
 
-	.btn.large.primary {
+	.btn.primary {
 		height: 52.2px;
 	}
 
