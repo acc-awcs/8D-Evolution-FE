@@ -60,7 +60,7 @@
 						Dynamics of Climate Engagement again, reflecting on how you feel today.
 					</p>
 					<div class="buttons">
-						<button class="btn primary" onclick={handleContinue} type="button">Let's Go</button>
+						<button class="btn quaternary" onclick={handleContinue} type="button">Let's Go</button>
 					</div>
 				{:else}
 					<h1 class="title">Add Your Starting Point Code</h1>
@@ -112,7 +112,7 @@
 						</label>
 						<div class="buttons">
 							<button
-								class="btn primary"
+								class="btn quaternary"
 								class:loading={codeCheckLoading}
 								type="submit"
 								disabled={codeCheckLoading}
