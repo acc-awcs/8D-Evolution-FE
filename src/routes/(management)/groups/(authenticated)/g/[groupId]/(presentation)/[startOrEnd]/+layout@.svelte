@@ -90,6 +90,7 @@
 		padding: 16px 40px;
 		align-items: flex-start;
 		box-sizing: border-box;
+		z-index: 10;
 	}
 
 	main {
@@ -132,6 +133,18 @@
 	@media screen and (max-width: 600px) {
 		main {
 			padding: 20px 20px;
+			height: auto;
+			max-height: none;
+		}
+		.children {
+			max-height: none;
+			height: auto;
+			justify-content: flex-start;
+			padding-top: 100px;
+		}
+		.outer-wrapper {
+			max-height: none;
+			height: auto;
 		}
 	}
 </style>

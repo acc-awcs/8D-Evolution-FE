@@ -72,12 +72,6 @@
 		flex-direction: column;
 	}
 
-	.chart p {
-		margin-top: 20px;
-		margin-bottom: 10px;
-		font-size: 15px;
-	}
-
 	.top-page {
 		height: 100vh;
 		min-height: 100vh;
@@ -116,5 +110,13 @@
 		display: flex;
 		justify-content: center;
 		padding-bottom: 20vh;
+	}
+
+	@media screen and (max-width: 800px) {
+		.chart-wrapper {
+			padding-top: 200px;
+			flex-direction: column;
+			/* padding: 0px; */
+		}
 	}
 </style>

@@ -27,9 +27,11 @@
 		showTextLabels?: Boolean;
 	} = $props();
 
+	const showTextLabelsVerified = $derived(showTextLabels && chartWidth > 500);
+
 	const features = $derived(Object.keys(answers));
 
-	const xOffset = $derived(showTextLabels ? 150 : 0);
+	const xOffset = $derived(showTextLabelsVerified ? 150 : 0);
 
 	const config = $derived({
 		d: chartWidth - xOffset * 2, // diameter of chart
@@ -94,7 +96,7 @@
 			const tCoord = angleToCoordinate(
 				angle,
 				i === 2 ? 7.3 : i === 6 ? 7.1 : 8,
-				showTextLabels ? 6.2 : 0
+				showTextLabelsVerified ? 6.2 : 0
 			);
 			lines.push({
 				outerX: x,
@@ -170,7 +172,7 @@
 			{/each}
 			{#each radialTickLines as f, idx}
 				<line x1={config.d / 2 + xOffset} y1={config.d / 2} x2={f.outerX + xOffset} y2={f.outerY} />
-				{#if !showTextLabels}
+				{#if !showTextLabelsVerified}
 					<line
 						class="dash"
 						x1={f.outerX + xOffset}
@@ -179,7 +181,7 @@
 						y2={f.dashY}
 					/>
 				{/if}
-				{#if showTextLabels}
+				{#if showTextLabelsVerified}
 					{@const textX = dynamics[idx].lines.length === 2 ? f.textX + 50 : f.textX + 80}
 					<g
 						class="label"

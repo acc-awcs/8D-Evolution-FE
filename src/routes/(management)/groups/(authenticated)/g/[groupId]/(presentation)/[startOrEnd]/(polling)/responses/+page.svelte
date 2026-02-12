@@ -152,4 +152,14 @@
 			transform: translateY(0px);
 		}
 	}
+
+	@media screen and (max-width: 800px) {
+		.join-note {
+			position: relative;
+			right: auto;
+			padding-top: 0px;
+			margin-bottom: 30px;
+			margin-top: -20px;
+		}
+	}
 </style>

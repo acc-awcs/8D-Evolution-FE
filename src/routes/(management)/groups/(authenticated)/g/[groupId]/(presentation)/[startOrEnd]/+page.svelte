@@ -197,6 +197,7 @@
 	@media screen and (max-width: 800px) {
 		.wrapper {
 			flex-direction: column;
+			padding: 0px;
 		}
 	}
 </style>
