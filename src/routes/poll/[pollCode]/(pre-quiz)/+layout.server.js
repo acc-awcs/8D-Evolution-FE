@@ -41,6 +41,7 @@ export async function load({ cookies, fetch, params, url }) {
 			}
 
 			return {
+				pollToken,
 				...params
 			};
 		} else {
@@ -56,31 +57,3 @@ export async function load({ cookies, fetch, params, url }) {
 		};
 	}
 }
-// export async function load({ fetch, params }) {
-// 	try {
-// 		const response = await fetch(`${PUBLIC_SERVER_URL}/api/poll?pollCode=${params.pollCode}`, {
-// 			method: 'GET'
-// 		});
-
-// 		if (statusIsGood(response.status)) {
-// 			const body = await response.json();
-// 			if (body.pollHasBeenInitiated) {
-// 				redirect(303, `/poll/${params.pollCode}/quiz`);
-// 			}
-// 			return {
-// 				...params,
-// 				poll: body
-// 			};
-// 		}
-
-// 		redirect(303, '/poll');
-// 	} catch (error) {
-// 		if (isRedirect(error)) {
-// 			throw error;
-// 		}
-// 		console.error('An error occurred:', error);
-// 		return {
-// 			success: false
-// 		};
-// 	}
-// }

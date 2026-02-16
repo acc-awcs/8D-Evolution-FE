@@ -5,12 +5,12 @@
 
 <Modal handleClose={onClose}>
 	<div class="header">
-		<h1 class="title small">Paused for Inactivity</h1>
+		<h1 class="title small">Resume Session</h1>
 		<button onclick={onClose} class="close link-like" type="button">Close</button>
 	</div>
-	<p>To keep things efficient, we've temporarily paused the polling.</p>
+	<p>We've paused searching for a poll due to inactivity.</p>
 	<div class="buttons">
-		<button class="btn large primary" type="button" onclick={onClose}>Resume</button>
+		<button class="btn large primary" type="button" onclick={onClose}>Continue</button>
 	</div>
 </Modal>
 

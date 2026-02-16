@@ -8,7 +8,6 @@
 	import QRCodeModal from './QRCodeModal.svelte';
 	import { FACILITATOR, POLLING_COUNT_MAX } from '$lib/constants';
 	import StillPollingModal from '../StillPollingModal.svelte';
-	import { forceCenter, text } from 'd3';
 
 	let showModal = $state(false);
 	let { data: loadData } = $props();
