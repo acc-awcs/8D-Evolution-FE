@@ -1,6 +1,5 @@
 export async function POST({ request, cookies }) {
 	const { data } = await request.json();
-	console.log('NEW POLL TOKEN', data.newPollToken);
 	cookies.set('pollToken', data.newPollToken, {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production',

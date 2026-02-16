@@ -36,7 +36,7 @@
 						goto(`/poll/${loadData.pollCode}/quiz`);
 					}
 				} else {
-					console.error('Failed to fetch data');
+					goto(`/poll`);
 				}
 			} catch (error) {
 				console.error('Error during fetch:', error);
