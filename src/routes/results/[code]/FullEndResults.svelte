@@ -16,8 +16,6 @@
 	let chartWidth = $state(100);
 	let chartWidthUpNext = $state(100);
 
-	console.log('DATA', data);
-
 	// Email form & query state management
 	let email = $state('');
 	let showEmailModal = $state<boolean>(false);

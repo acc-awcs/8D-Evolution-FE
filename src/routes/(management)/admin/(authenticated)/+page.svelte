@@ -6,7 +6,6 @@
 	import { formatAveragedAnsers } from '$lib/helpers/results.js';
 
 	let { data } = $props();
-	console.log('DATA', data);
 </script>
 
 <h1 class="title">Facilition Data</h1>

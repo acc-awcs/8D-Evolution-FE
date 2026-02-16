@@ -113,7 +113,7 @@
 	numLabel="Ready!"
 	nextLabel={`Begin Poll`}
 	{role}
-	helper={`${numReady} participant${numReady !== 1 ? 's are' : ' is'} ready. Once all participants are ready, start the quiz.`}
+	helper={`${numReady} participant${numReady !== 1 ? 's are' : ' is'} ready. Once all participants are ready, begin the poll.`}
 	onNext={numReady > 0 ? callActionFromScript : null}
 />
 
