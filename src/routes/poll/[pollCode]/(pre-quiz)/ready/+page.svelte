@@ -82,8 +82,10 @@
 <DecorativeBackground opacity={true} />
 
 <h1 class="title">You're All Set!</h1>
-<!-- TODO: Recommend changing this wording -->
-<p>Hang tight for a minute. Once everyone is aboard, this page will automatically update.</p>
+<p>
+	Hang tight for a minute. Once everyone is aboard and your facilitator begins the poll, this page
+	will automatically update.
+</p>
 
 <style>
 	h1 {
