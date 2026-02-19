@@ -164,8 +164,8 @@
 	<main>
 		<section class="clouds">
 			<div class="intro fade-in">
-				<p class="uppercase-title">8 Dynamics Assessment</p>
-				<h1 class="title">Your Ending Point Results</h1>
+				<p class="uppercase-title">Ending Point</p>
+				<h1 class="title">Your 8 Dynamics Results</h1>
 			</div>
 			<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
 				<SpiderChart
