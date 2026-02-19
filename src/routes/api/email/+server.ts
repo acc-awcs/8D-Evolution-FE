@@ -1,9 +1,10 @@
 import mailchimp from '@mailchimp/mailchimp_transactional';
-import { env } from '$env/dynamic/private';
 import * as EmailValidator from 'email-validator';
 import { RESULTS_EMAIL_TEMPLATE } from '$lib/constants.js';
+import { PUBLIC_BASE_URL } from '$env/static/public';
+import { MAILCHIMP_API_KEY } from '$env/static/private';
 
-const apiKey = env.MAILCHIMP_API_KEY;
+const apiKey = MAILCHIMP_API_KEY;
 const client = mailchimp(apiKey ?? '');
 
 export async function POST({ request }) {
@@ -26,7 +27,7 @@ export async function POST({ request }) {
 					<p> Thanks for mapping your 8 Dynamics of Climate Engagement at the start of your <i>Climate Wayfinding</i> journey.</p>
 					<p>Your unique code is:</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
 					<p>To revisit your original “web” at any point along the way, simply click the link below.</p>
-					<p><a href="${env.PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Starting Point</a></p>
+					<p><a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Starting Point</a></p>
 					`
 				}
 			],
