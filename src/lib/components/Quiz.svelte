@@ -163,7 +163,7 @@
 			<img class="intro-img" src={intro7} alt="" />
 		</div>
 		<div class="content">
-			<h1 class="title">8 Dynamics of Climate Engagement</h1>
+			<h1 class="title">8 Dynamics Quiz</h1>
 
 			<p>
 				Below, you'll find each of the 8 Dynamics with a sliding bar. Take a moment to reflect on

@@ -11,7 +11,7 @@
 
 <h1 class="title">Ready?</h1>
 <p>We've found your group!</p>
-<p>Let everyone know you’re here by clicking this button:</p>
+<p>Let everyone know you're here by clicking this button:</p>
 
 <form
 	method="POST"

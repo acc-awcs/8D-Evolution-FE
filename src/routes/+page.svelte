@@ -22,15 +22,16 @@
 
 <main>
 	<section>
-		<h1 class="title large">Welcome, Climate Wayfinder</h1>
-		<p>
-			Are you a Climate Wayfinding reader? You've made it to the right place to reflect with the 8
-			Dynamics of Climate Engagement quiz.
+		<h1 class="title large">Welcome, Climate Wayfinder!</h1>
+		<p>You've made it to the 8 Dynamics Quiz. We're so glad you're here.</p>
+		<p class="second">
+			If you are reading “Getting Our Bearings,” you'll want to “Map Your Starting Point.” If you
+			are reading “Journeying Onward,” you'll want to “Map Your Ending Point.”
 		</p>
 
 		<div class="links">
-			<a href="/start" class="btn quaternary">Take the Starting Point Quiz <ButtonArrow /></a>
-			<a href="/end" class="btn quaternary">Take the Ending Point Quiz <ButtonArrow /></a>
+			<a href="/start" class="btn quaternary">Map Your Starting Point <ButtonArrow /></a>
+			<a href="/end" class="btn quaternary">Map Your Ending Point <ButtonArrow /></a>
 		</div>
 	</section>
 </main>
@@ -93,14 +94,18 @@
 	}
 
 	p {
-		margin-top: 20px;
-		margin-bottom: 40px;
+		margin-top: 24px;
+		margin-bottom: 0px;
 		font-size: 20px;
 		line-height: 160%;
 		text-align: center;
 		width: 670px;
 		max-width: 100%;
 		/* font-weight: 600; */
+	}
+
+	p.second {
+		margin-bottom: 60px;
 	}
 
 	h1 {

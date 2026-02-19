@@ -23,10 +23,10 @@ export async function POST({ request }) {
 				{
 					name: 'content',
 					content: `
-					<p>Thank you for spending some time with the 8 Dynamics of Climate Engagement!</p>
-					<p>Your unique code is ...</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
-					<p>Want to revisit your results page? View your 8 Dynamics Web with the link below:</p>
-					<p><a href="${env.PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8-Dynamics of Climate Engagement Starting Point</a></p>
+					<p> Thanks for mapping your 8 Dynamics of Climate Engagement at the start of your <i>Climate Wayfinding</i> journey.</p>
+					<p>Your unique code is:</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
+					<p>To revisit your original “web” at any point along the way, simply click the link below.</p>
+					<p><a href="${env.PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Starting Point</a></p>
 					`
 				}
 			],

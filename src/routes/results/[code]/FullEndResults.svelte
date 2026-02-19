@@ -125,14 +125,13 @@
 {/if}
 
 <div class="outer">
-	<img class="cloud-bg" src={cloudBg} alt="" />
+	<img class="cloud-bg static-fade-in" src={cloudBg} alt="" />
 	<header class="logo">
 		<Logo liveLink={true} />
 	</header>
 	<main>
 		<section class="clouds">
 			<div class="intro fade-in">
-				<!-- <a onclick={() => trackEvent('click_retake_quiz')} href="/">← Retake the Quiz</a> -->
 				<h1 class="title">Your 8 Dynamics Shift</h1>
 			</div>
 			<div class="side-by-side">
@@ -147,7 +146,12 @@
 						showHighlight={innerWidth < BREAKPOINT}
 					/>
 				</div>
-				<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
+				<div
+					class="chart fade-in delayed"
+					style="animation-delay: 1.5s;"
+					aria-hidden="true"
+					bind:clientWidth={chartWidth}
+				>
 					<h2 class="uppercase-title">Ending Point</h2>
 					<SpiderChart
 						answers={data.current?.object}
@@ -157,6 +161,15 @@
 						skipHover={true}
 						showHighlight={innerWidth < BREAKPOINT}
 					/>
+				</div>
+			</div>
+			<div class="reflect">
+				<div class="column fade-in" style="animation-delay: 2.5s;">
+					<p>
+						Compare where you started this journey and where you find yourself now. Notice where
+						you've grown and where you'd like to grow further. Notice: What's shifted? Where have
+						you grown? Where would you like to grow further, with intention?
+					</p>
 				</div>
 			</div>
 		</section>
@@ -202,7 +215,7 @@
 		</section> -->
 		<section class="conclusion">
 			<div class="column">
-				<a class="fancy-link" href="/">← Return to Start</a>
+				<a class="fancy-link" href="/">Close</a>
 			</div>
 		</section>
 	</main>
@@ -245,6 +258,13 @@
 		justify-content: center;
 		gap: 40px;
 		margin: 40px 0px;
+	}
+	.reflect {
+		display: flex;
+		justify-content: center;
+	}
+	.reflect .column {
+		margin: 20px;
 	}
 	.chart {
 		flex: 1;

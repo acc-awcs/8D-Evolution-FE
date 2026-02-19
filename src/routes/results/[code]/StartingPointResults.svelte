@@ -81,10 +81,10 @@
 	<Modal handleClose={closeModal}>
 		{#if !sendEmailFinished}
 			<!-- Email form -->
-			<h1 class="title modal-title">Email Your Code</h1>
+			<h1 class="title modal-title">Email Code</h1>
 			<p>
-				We'll send you an email with your results code for safekeeping. We'll also include a link to
-				return to these results. Your email will not be stored.
+				We'll email you your code, along with a link to return to these results. Your email address
+				will not be stored by The All We Can Save Project.
 			</p>
 			{#if emailError.length > 0}
 				<p class="error">{emailError}</p>
@@ -110,12 +110,12 @@
 					}
 				}}
 			>
-				<label class="visually-hidden" for="email">Your email address</label>
+				<label class="visually-hidden" for="email">Your Email Address</label>
 				<input
 					value={email}
 					type="text"
 					oninput={handleEmailChange}
-					placeholder="Your email address"
+					placeholder="Your Email Address"
 					id="email"
 				/>
 				<div class="buttons">
@@ -139,7 +139,7 @@
 		{:else if sendEmailSuccess === true}
 			<!-- Success message -->
 			<h1 class="title">Email Sent</h1>
-			<p>Your email is on its way! Check your inbox for your results link.</p>
+			<p>Your email is on its way!</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
 			</div>
@@ -158,15 +158,15 @@
 {/if}
 
 <div class="outer">
-	<img class="cloud-bg" src={cloudBg} alt="" />
+	<img class="cloud-bg static-fade-in" src={cloudBg} alt="" />
 	<header class="logo">
 		<Logo liveLink={true} />
 	</header>
 	<main>
 		<section class="clouds">
 			<div class="intro fade-in">
-				<p class="uppercase-title">8 Dynamics Assessment</p>
-				<h1 class="title">Your Starting Point Results</h1>
+				<p class="uppercase-title">Starting Point Assessment</p>
+				<h1 class="title">Your 8 Dynamics Results</h1>
 			</div>
 			<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
 				<SpiderChart
@@ -191,24 +191,22 @@
 		<section id="up_next" class="up-next">
 			<div class="column">
 				<p class="pre-title">Next Steps</p>
-				<h1 class="title large">Save Your Results Code</h1>
+				<h1 class="title large">Save Your Results</h1>
 				<div class="instructions">
 					<p>
-						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code (<span style="padding-right: 2px;"
-							>{data.resultCode?.slice(0, 3)}</span
-						><span style="padding-left: 2px;">{data.resultCode?.slice(3, 6)}</span>) to reference
-						these results later.
+						At the end of your <i>Climate Wayfinding</i> journey, you'll return to your starting "web"
+						and reflect on how your 8 Dynamics have shifted.
 					</p>
 					<p>
-						We recommend writing or storing your code somewhere secure. Try a password manager, a
-						favorite journal, or an email to yourself. If you email yourself your code with the
-						button below, your email will not be stored and your results will remain fully
-						anonymous.
+						Your unique code lets you revisit this web anytime. Be sure to save it somewhere easy to
+						access — perhaps in a password manager or a favorite journal.
+					</p>
+					<p>
+						The simplest and safest way to store your code is to click the button below and email it
+						to yourself.
 					</p>
 				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn quaternary"
-					>Email Yourself Your Code</button
+				<button onclick={() => (showEmailModal = true)} class="btn quaternary">Email My Code</button
 				>
 				<label>
 					<span>Your Unique Code</span>

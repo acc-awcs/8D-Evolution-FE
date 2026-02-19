@@ -7,11 +7,10 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import { prettyCode } from '$lib/helpers/results';
-	import CopyBox from '$lib/components/CopyBox.svelte';
 	import trackEvent from '$lib/custom-event';
 	import { enhance } from '$app/forms';
 	import cloudBg from '$lib/assets/cloud-bg.jpg';
+	import ButtonArrow from '$lib/components/ButtonArrow.svelte';
 
 	const INTERVAL = 1500;
 	const BREAKPOINT = 900;
@@ -158,7 +157,7 @@
 {/if}
 
 <div class="outer">
-	<img class="cloud-bg" src={cloudBg} alt="" />
+	<img class="cloud-bg static-fade-in" src={cloudBg} alt="" />
 	<header class="logo">
 		<Logo liveLink={true} />
 	</header>
@@ -185,55 +184,14 @@
 					{onHover}
 					onLeave={startRotate}
 				/>
-				<!-- <p class="fade-in extra-delayed"><a href="#up_next">Scroll down for next steps ↓</a></p> -->
-			</div>
-		</section>
-		<!-- <section id="up_next" class="up-next">
-			<div class="column">
-				<p class="pre-title">Next Steps</p>
-				<h1 class="title large">Save Your Results Code</h1>
-				<div class="instructions">
-					<p>
-						In order to visualize shift at the end of your Climate Wayfinding journey, we’ve
-						generated you a unique code (<span style="padding-right: 2px;"
-							>{data.resultCode?.slice(0, 3)}</span
-						><span style="padding-left: 2px;">{data.resultCode?.slice(3, 6)}</span>) to reference
-						these results later.
-					</p>
-					<p>
-						We recommend writing or storing your code somewhere secure. Try a password manager, a
-						favorite journal, or an email to yourself. If you email yourself your code with the
-						button below, your email will not be stored and your results will remain fully
-						anonymous.
-					</p>
-				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn primary"
-					>Email Yourself Your Code</button
-				>
-				<label>
-					<span>Your Unique Code</span>
-					<CopyBox text={prettyCode(data.resultCode)} textToCopy={data.resultCode} />
-				</label>
-			</div>
-		</section> -->
-		<section class="conclusion">
-			<div class="column">
-				<a class="fancy-link" href="/">← Return to Start</a>
+				<p class="fade-in extra-delayed">
+					<a class="btn primary" href={`/end/${data.resultCode}`}
+						>Trace Your Shifts <ButtonArrow /></a
+					>
+				</p>
 			</div>
 		</section>
 	</main>
-	<!-- <footer>
-		© 2024 The All We Can Save Project. Developers <a
-			href="https://github.com/chelshaw"
-			target="_blank"
-			rel="noopener nofollow">Chelsea Shaw</a
-		>,
-		<a href="https://github.com/emikjackson" target="_blank" rel="noopener nofollow">Emi Jackson</a
-		>, and
-		<a href="https://www.linkedin.com/in/li-helen" target="_blank" rel="noopener nofollow"
-			>Helen Li</a
-		> brought this interactive tool to life.
-	</footer> -->
 </div>
 
 <style>
