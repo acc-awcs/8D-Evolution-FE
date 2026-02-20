@@ -19,9 +19,9 @@
 	<section>
 		{#if page.status === 404}
 			{#if onPresenterUrl}
-				<h1 class="title">We've Switched Things Up</h1>
+				<h1 class="title">We’ve Switched Things Up</h1>
 				<p>
-					Hi, it looks like you're looking for a "/presenter" page - we've moved these pages to
+					Hi, it looks like you’re looking for a "/presenter" page - we’ve moved these pages to
 					"/groups"!
 				</p>
 				<a class="btn quaternary" href="/groups">Go to Groups</a>

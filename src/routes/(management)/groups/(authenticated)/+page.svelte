@@ -70,7 +70,7 @@
 
 		<p>This tool equips you to do live polling with the 8 Dynamics framework.</p>
 		<p class="secondary">
-			For each group you lead, you'll be able to map the shifts people experience through Climate
+			For each group you lead, you’ll be able to map the shifts people experience through Climate
 			Wayfinding.
 		</p>
 		<button class="btn primary" onclick={() => (showNewGroupModal = true)}

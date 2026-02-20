@@ -63,7 +63,7 @@
 			</label>
 		{:else}
 			<p>
-				We recommend choosing a name for the specific session you'll be facilitating. For example,
+				We recommend choosing a name for the specific session you’ll be facilitating. For example,
 				"University of Michigan, Fall {currentUTCYear}".
 			</p>
 			<label>

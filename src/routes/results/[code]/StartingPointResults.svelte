@@ -83,7 +83,7 @@
 			<!-- Email form -->
 			<h1 class="title modal-title">Email Code</h1>
 			<p>
-				We'll email you your code, along with a link to return to these results. Your email address
+				We’ll email you your code, along with a link to return to these results. Your email address
 				will not be stored by The All We Can Save Project.
 			</p>
 			{#if emailError.length > 0}
@@ -166,7 +166,7 @@
 		<section class="clouds">
 			<div class="intro fade-in">
 				<p class="uppercase-title">Starting Point</p>
-				<h1 class="title">Here's Your Personal 8 Dynamics “Web”</h1>
+				<h1 class="title">Here's Your Personal 8 Dynamics “Web.”</h1>
 			</div>
 			<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
 				<SpiderChart

@@ -25,14 +25,8 @@
 		<p>Here's your personal 8 Dynamics “web.”</p>
 
 		<p>
-			Take a screenshot if you'd like. Then, shift your attention to the group's collective map.
+			Take a screenshot if you’d like. Then, shift your attention to the group's collective map.
 		</p>
-
-		<!-- {#if !data?.showEndingSurvey}
-			<p>
-				Take a screenshot if you'd like. Then, shift your attention to the group's collective map.
-			</p>
-		{/if} -->
 	</div>
 </div>
 

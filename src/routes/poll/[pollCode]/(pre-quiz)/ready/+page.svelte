@@ -81,7 +81,7 @@
 
 <DecorativeBackground opacity={true} />
 
-<h1 class="title">You're All Set!</h1>
+<h1 class="title">You’re All Set!</h1>
 <p>
 	Hang tight for a minute. Once everyone is aboard and your facilitator begins the poll, this page
 	will automatically update.
