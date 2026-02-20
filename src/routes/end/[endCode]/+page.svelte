@@ -52,7 +52,7 @@
 				</p>
 				<p>
 					You may have it written down or saved it digitally. If you emailed it to yourself, check
-					for a message with the subject line “Your 8 Dynamics Code.”
+					for a message with the subject line “Your 8 Dynamics Results Code”
 				</p>
 				{#if codeError.length > 0}
 					<div class="error-wrapper">
@@ -66,13 +66,12 @@
 							return;
 						}
 						codeCheckLoading = true;
-						console.log('END CODE', data.endCode);
 						const resp = await _checkStartCode(code, data.endCode);
 						if (resp.success) {
 							goto(`/results/${data.endCode}`);
 						} else if (resp.notFound) {
 							codeError =
-								"We couldn't find a starting point entry with that code. Please double check your entry.";
+								'We couldn’t find a starting point entry with that code. Please double check your entry.';
 						} else {
 							codeError =
 								'Having trouble identifying that code, please refresh your page and try again.';
@@ -108,7 +107,7 @@
 				</form>
 
 				<p class="note">
-					Don't have the code? Without it, we unfortunately won't be able to map your shifts.
+					Don’t have the code? Without it, we unfortunately won’t be able to map your shifts.
 				</p>
 			</div>
 		</section>

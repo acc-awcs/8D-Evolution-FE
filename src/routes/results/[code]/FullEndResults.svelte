@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Logo from '$lib/components/Logo.svelte';
 	import SpiderChart from '$lib/components/SpiderChart.svelte';
-	import { _sendEmail } from './+page';
+	import { _sendShiftsEmail } from './+page';
 	import Modal from '$lib/components/Modal.svelte';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
 	import trackEvent from '$lib/custom-event';
@@ -48,10 +48,10 @@
 	<Modal handleClose={closeModal}>
 		{#if !sendEmailFinished}
 			<!-- Email form -->
-			<h1 class="title modal-title">Email Your Code</h1>
+			<h1 class="title modal-title">Email Your Shifts</h1>
 			<p>
-				We'll send you an email with your results code for safekeeping. We'll also include a link to
-				return to these results. Your email will not be stored.
+				Email yourself a link to your starting and ending “webs,” so you can reference your shifts
+				anytime.
 			</p>
 			{#if emailError.length > 0}
 				<p class="error">{emailError}</p>
@@ -64,7 +64,7 @@
 						emailError = 'Please enter an email address';
 					} else if (!sendEmailLoading) {
 						sendEmailLoading = true;
-						const resp = await _sendEmail(email, data.resultCode);
+						const resp = await _sendShiftsEmail(email, data.resultCode);
 						sendEmailLoading = false;
 						if (resp.invalidFormat) {
 							emailError = 'Please enter a valid email';
@@ -106,7 +106,7 @@
 		{:else if sendEmailSuccess === true}
 			<!-- Success message -->
 			<h1 class="title">Email Sent</h1>
-			<p>Your email is on its way! Check your inbox for your results link.</p>
+			<p>Your email is on its way!</p>
 			<div class="buttons done">
 				<button class="btn primary" onclick={closeModal}>Done</button>
 			</div>
@@ -132,7 +132,7 @@
 	<main>
 		<section class="clouds">
 			<div class="intro fade-in">
-				<h1 class="title">Your 8 Dynamics Shift</h1>
+				<h1 class="title">Your 8 Dynamics Shifts</h1>
 			</div>
 			<div class="side-by-side">
 				<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
@@ -166,10 +166,17 @@
 			<div class="reflect">
 				<div class="column fade-in" style="animation-delay: 2.5s;">
 					<p>
-						Compare where you started this journey and where you find yourself now. Notice where
-						you've grown and where you'd like to grow further. Notice: What's shifted? Where have
-						you grown? Where would you like to grow further, with intention?
+						Compare where you started this journey and where you find yourself now. Notice: <i
+							>What’s shifted? Where have you grown? Where would you like to grow further, with
+							intention?</i
+						>
 					</p>
+
+					<div class="fade-in" style="animation-delay: 3.5s; margin-top: 20px;">
+						<button onclick={() => (showEmailModal = true)} class="btn primary"
+							>Email Your Shifts</button
+						>
+					</div>
 				</div>
 			</div>
 		</section>

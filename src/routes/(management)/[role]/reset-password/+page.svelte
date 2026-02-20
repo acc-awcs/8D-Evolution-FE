@@ -22,7 +22,7 @@
 	}}
 >
 	<h1 class="title">Forgot Password</h1>
-	<p>If you have an account, we'll send you an email to reset your password.</p>
+	<p>If you have an account, we’ll send you an email to reset your password.</p>
 	<label>
 		Email
 		<input required class="large" type="email" name="email" />

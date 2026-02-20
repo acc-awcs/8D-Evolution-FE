@@ -57,5 +57,33 @@ export async function _sendEmail(
 	}
 }
 
+export async function _sendShiftsEmail(
+	email: string,
+	resultCode: string
+): Promise<{ success: boolean; message?: string; invalidFormat?: boolean }> {
+	try {
+		const response = await fetch('/api/shifts-email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email, resultCode })
+		});
+
+		if (!response.ok) {
+			// bad request
+			if (response.status === 400) {
+				return { success: false, invalidFormat: true };
+			} else {
+				throw new Error('Failed to send email');
+			}
+		} else {
+			return { success: true };
+		}
+	} catch (err: Error) {
+		return { success: false, message: err.message };
+	}
+}
+
 export const csr = true;
 export const prerender = false;

@@ -73,10 +73,8 @@
 	method="POST"
 	use:enhance={(data) => {
 		codeCheckLoading = true;
-		console.log('DATA', data);
 		return async ({ result, update }) => {
 			await update();
-			// loading = false;
 		};
 	}}
 	action={`/api/check-start?/checkStartCode`}

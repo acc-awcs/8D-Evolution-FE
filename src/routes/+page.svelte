@@ -23,11 +23,11 @@
 <main>
 	<section>
 		<h1 class="title large">Welcome, Climate Wayfinder!</h1>
-		<p>You've made it to the 8 Dynamics Quiz. We're so glad you're here.</p>
-		<p class="second">
-			If you are reading “Getting Our Bearings,” you'll want to “Map Your Starting Point.” If you
-			are reading “Journeying Onward,” you'll want to “Map Your Ending Point.”
-		</p>
+		<p class="second">You’ve made it to the 8 Dynamics Quiz. We’re so glad you’re here.</p>
+		<!-- <p class="second">
+			If you are reading “Getting Our Bearings,” you’ll want to “Map Your Starting Point.” If you
+			are reading “Journeying Onward,” you’ll want to “Map Your Ending Point.”
+		</p> -->
 
 		<div class="links">
 			<a href="/start" class="btn quaternary">Map Your Starting Point <ButtonArrow /></a>
@@ -105,7 +105,7 @@
 	}
 
 	p.second {
-		margin-bottom: 60px;
+		margin-bottom: 48px;
 	}
 
 	h1 {

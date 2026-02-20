@@ -24,11 +24,11 @@ export async function POST({ request }) {
 				{
 					name: 'content',
 					content: `
-					<p> Thanks for mapping your 8 Dynamics of Climate Engagement at the start of your <i>Climate Wayfinding</i> journey.</p>
-					<p>Your unique code is:</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
-					<p>You’ll use this code to look back at your “web” later in the journey. To revisit it at any point along the way, simply click the link below.</p>
-					<p><a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Starting Point</a></p>
-					`
+          <p>Thank you for returning to the 8 Dynamics of Climate Engagement at the close of this  <i>Climate Wayfinding</i> journey.</p>
+          <p>You can view how you shifted here: <a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Shifts</a></p>
+          <p>This is a tool to return to again and again. It can be useful to self-assess when starting something new or after a key experience, to make shifts visible. You can use it alone or with others—in a class or team, for example. We hope you’ll find it to be a touchstone for your climate journey.</p>
+          <p>Wishing you possibility, power, and joy in the work!</p>
+          `
 				}
 			],
 			message: {
@@ -40,7 +40,7 @@ export async function POST({ request }) {
 						name: ''
 					}
 				],
-				subject: 'Your 8 Dynamics Results Code'
+				subject: 'Your 8 Dynamics Shifts'
 			}
 		};
 

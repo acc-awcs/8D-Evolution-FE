@@ -31,7 +31,7 @@ export async function _checkStartCode(
 ): Promise<{ success: boolean; message?: string; notFound?: boolean; redirectCode?: string }> {
 	try {
 		const response = await fetch(
-			`${PUBLIC_SERVER_URL}/api/results?resultCode=${startCode}&startOnly=true&endCode=${endCode}`,
+			`${PUBLIC_SERVER_URL}/api/results?resultCode=${startCode.toUpperCase()}&startOnly=true&endCode=${endCode.toUpperCase()}`,
 			{
 				method: 'GET'
 			}

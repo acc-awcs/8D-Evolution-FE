@@ -194,7 +194,7 @@
 				<h1 class="title large">Save Your Results</h1>
 				<div class="instructions">
 					<p>
-						At the end of your <i>Climate Wayfinding</i> journey, you'll return to your starting "web"
+						At the end of your <i>Climate Wayfinding</i> journey, you’ll return to your starting “web”
 						and reflect on how your 8 Dynamics have shifted.
 					</p>
 					<p>
@@ -206,7 +206,8 @@
 						to yourself.
 					</p>
 				</div>
-				<button onclick={() => (showEmailModal = true)} class="btn quaternary">Email My Code</button
+				<button onclick={() => (showEmailModal = true)} class="btn quaternary"
+					>Email Your Code</button
 				>
 				<label>
 					<span>Your Unique Code</span>
