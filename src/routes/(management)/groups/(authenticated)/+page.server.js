@@ -78,7 +78,7 @@ export const actions = {
 							content: `
 											<p>Heads up,</p>
 											<p><strong>${userName}</strong> is getting ready for a Climate Wayfinding facilitation!</p>
-											<p>If you’d like to reach out to them, here's their email: ${userEmail}</p>
+											<p>If you’d like to reach out to them, here’s their email: ${userEmail}</p>
 											<p>Facilitation Details:</p>
 											<ul>
 												<li><strong>Organization - </strong>${group.organization}</li>
