@@ -41,7 +41,7 @@ export const formatAnswers = (resultsArray: any) => {
 	);
 };
 
-export const formatAveragedAnsers = (meanAns: any) => {
+export const formatAveragedAnswers = (meanAns: any) => {
 	return {
 		A: meanAns[0],
 		B: meanAns[1],
@@ -51,5 +51,18 @@ export const formatAveragedAnsers = (meanAns: any) => {
 		F: meanAns[5],
 		G: meanAns[6],
 		H: meanAns[7]
+	};
+};
+
+export const formatManualAnswers = (manualAns: any) => {
+	return {
+		A: parseFloat(manualAns['d1']),
+		B: parseFloat(manualAns['d2']),
+		C: parseFloat(manualAns['d3']),
+		D: parseFloat(manualAns['d4']),
+		E: parseFloat(manualAns['d5']),
+		F: parseFloat(manualAns['d6']),
+		G: parseFloat(manualAns['d7']),
+		H: parseFloat(manualAns['d8'])
 	};
 };

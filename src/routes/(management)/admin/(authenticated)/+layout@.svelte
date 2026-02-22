@@ -35,10 +35,15 @@
 	<nav class="subnav">
 		<ul>
 			<li>
-				<a href="/admin" class:active={page.url.pathname === '/admin'}>Facilitation Data</a>
+				<a href="/admin" class:active={page.url.pathname === '/admin'}>Trained Facilitator Data</a>
 			</li>
 			<li>
-				<a href="/admin/g" class:active={page.url.pathname === '/admin/g'}>Group Data</a>
+				<a href="/admin/g" class:active={page.url.pathname === '/admin/g'}>Group Lead Data</a>
+			</li>
+			<li>
+				<a href="/admin/survey" class:active={page.url.pathname === '/admin/survey'}
+					>Survey Responses</a
+				>
 			</li>
 			<li>
 				<a href="/admin/individual" class:active={page.url.pathname === '/admin/individual'}

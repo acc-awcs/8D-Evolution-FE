@@ -12,8 +12,16 @@
 		startPollDate = null,
 		endPollDate = null,
 		startResults = null,
-		endResults = null
+		endResults = null,
+		group = null
 	} = $props();
+
+	const startParticipants = $derived(
+		group?.manualEntry ? group.manualNumParticipants : startResults?.length
+	);
+	const endParticipants = $derived(
+		group?.manualEntry ? group.manualNumParticipants : endResults?.length
+	);
 
 	const isValid = (v) => v && !Array.isArray(v);
 </script>
@@ -34,9 +42,8 @@
 				/>
 				{#if startPollDate}
 					<p>
-						Averaged results from {startResults?.length} response{startResults?.length === 1
-							? ''
-							: 's'} on {new Date(startPollDate).toLocaleString('en-US', {
+						Averaged results from {startParticipants} response{startParticipants === 1 ? '' : 's'} on
+						{new Date(startPollDate).toLocaleString('en-US', {
 							// weekday: 'long',
 							year: 'numeric',
 							month: 'long',
@@ -60,7 +67,7 @@
 				/>
 				{#if endPollDate}
 					<p>
-						Averaged results from {endResults?.length} response{endResults?.length === 1 ? '' : 's'} on
+						Averaged results from {endParticipants} response{endParticipants === 1 ? '' : 's'} on
 						{new Date(endPollDate).toLocaleString('en-US', {
 							// weekday: 'long',
 							year: 'numeric',
@@ -97,9 +104,16 @@
 			['Start', ...startArray.map((v) => v.toFixed(2))],
 			['End', ...endArray.map((v) => v.toFixed(2))],
 			[
-				'Shift',
+				'Change',
 				...startArray.map(
 					(s, i) => `${endArray?.[i] - s > 0 ? '+' : ''}${(endArray?.[i] - s)?.toFixed(2)}`
+				)
+			],
+			[
+				'% Change',
+				...startArray.map(
+					(s, i) =>
+						`${endArray?.[i] - s > 0 ? '+' : ''}${(((endArray?.[i] - s) / s) * 100)?.toFixed(1)}%`
 				)
 			]
 		]}

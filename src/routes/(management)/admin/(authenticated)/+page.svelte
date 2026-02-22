@@ -3,32 +3,60 @@
 	import LineChart from '$lib/components/LineChart.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Table from '$lib/components/Table.svelte';
-	import { formatAveragedAnsers } from '$lib/helpers/results.js';
+	import TimeRangePicker from '$lib/components/TimeRangePicker.svelte';
+	import { formatAveragedAnswers } from '$lib/helpers/results.js';
 
 	let { data } = $props();
+	console.log('DAT', data);
 </script>
 
-<h1 class="title">Facilition Data</h1>
+<h1 class="title large">Trained Facilitator Data</h1>
 
 <p>Browse data from collective polls run by <strong>trained facilitators</strong>.</p>
+
+<TimeRangePicker {data} />
 
 <!-- <h2 class="title small">Beep</h2> -->
 
 {#await data.chartData}
 	<p>Loading statistics ...</p>
 {:then data}
-	{@const cool = console.log('CD', data)}
 	<LineChart {data} />
 {/await}
 
-<h2 class="title small">All Facilitations</h2>
+<hr />
+
+<h2 class="title small">Aggregated Stats</h2>
+
+{#await data.aggregateData}
+	<p>Loading statistics ...</p>
+{:then data}
+	<p></p>
+	{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
+		{@const totalAverageStart = [4.4, 3.8, 3.4, 3.0, 3.2, 2.8, 3.0, 3.7]}
+		{@const totalAverageEnd = [4.8, 4.2, 4.2, 4.2, 4.0, 4.0, 4.0, 4.4]}
+		<AdminAnswerComparison
+			startAnswers={formatAveragedAnswers(totalAverageStart)}
+			endAnswers={formatAveragedAnswers(totalAverageEnd)}
+			averagedStartResults={data.totalAverageStart}
+			averagedEndResults={data.totalAverageEnd}
+		/>
+	{:else}
+		<p>No complete facilitations available to display statistics. Check back later!</p>
+	{/if}
+{/await}
+
+<div class="space"></div>
+
+<h2 class="title large">All Facilitations</h2>
 {#if data?.paginatedGroups?.length > 0}
 	<Table
-		header={['Facilitation', 'Facilitator', 'Start Poll Date', 'End Poll Date']}
+		header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
 		rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
 		rows={data.paginatedGroups.map((group: any) => [
 			group.name,
 			group.creatorShortName,
+			group.numParticipants,
 			group.startPollDate
 				? new Date(group.startPollDate).toLocaleString('en-US', {
 						year: 'numeric',
@@ -49,30 +77,6 @@
 {:else}
 	<p>No facilitations to display.</p>
 {/if}
-
-<hr />
-
-<h2 class="title small">Aggregated Stats</h2>
-
-{#await data.aggregateData}
-	<p>Loading statistics ...</p>
-{:then data}
-	<p></p>
-	{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
-		{@const totalAverageStart = [4.4, 3.8, 3.4, 3.0, 3.2, 2.8, 3.0, 3.7]}
-		{@const totalAverageEnd = [4.8, 4.2, 4.2, 4.2, 4.0, 4.0, 4.0, 4.4]}
-		<AdminAnswerComparison
-			startAnswers={formatAveragedAnsers(totalAverageStart)}
-			endAnswers={formatAveragedAnsers(totalAverageEnd)}
-			averagedStartResults={data.totalAverageStart}
-			averagedEndResults={data.totalAverageEnd}
-		/>
-	{:else}
-		<p>No complete facilitations available to display statistics. Check back later!</p>
-	{/if}
-{/await}
-
-<div class="space"></div>
 
 <style>
 	.title.small {

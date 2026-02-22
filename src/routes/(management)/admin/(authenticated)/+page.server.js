@@ -7,9 +7,12 @@ export async function load({ cookies, url, fetch }) {
 	const sessionToken = cookies.get('sessionToken');
 
 	const page = url.searchParams.get('p') || 0;
+	const timeRange = url.searchParams.get('tr') || 'all';
+	const startDate = url.searchParams.get('s') || null;
+	const endDate = url.searchParams.get('e') || null;
 
 	const response = await fetch(
-		`${PUBLIC_SERVER_URL}/api/group-results-page?role=${FACILITATOR}&page=${page}`,
+		`${PUBLIC_SERVER_URL}/api/group-results-page?role=${FACILITATOR}&page=${page}&tr=${timeRange}&s=${startDate}&e=${endDate}`,
 		{
 			headers: {
 				Authorization: `Bearer ${sessionToken}`
@@ -32,12 +35,15 @@ export async function load({ cookies, url, fetch }) {
 
 	return {
 		...data,
-		chartData: fetch(`${PUBLIC_SERVER_URL}/api/chart?role=${FACILITATOR}`, {
-			headers: {
-				Authorization: `Bearer ${sessionToken}`
-			},
-			method: 'GET'
-		}).then((res) => res.json()),
+		chartData: fetch(
+			`${PUBLIC_SERVER_URL}/api/chart?role=${FACILITATOR}&tr=${timeRange}&s=${startDate}&e=${endDate}`,
+			{
+				headers: {
+					Authorization: `Bearer ${sessionToken}`
+				},
+				method: 'GET'
+			}
+		).then((res) => res.json()),
 		aggregateData: fetch(`${PUBLIC_SERVER_URL}/api/group-results-aggregate?role=${FACILITATOR}`, {
 			headers: {
 				Authorization: `Bearer ${sessionToken}`
@@ -45,7 +51,10 @@ export async function load({ cookies, url, fetch }) {
 			method: 'GET'
 		}).then((res) => res.json()),
 		query: {
-			page: data.validPage
+			page: data.validPage,
+			timeRange,
+			startDate,
+			endDate
 		}
 	};
 }

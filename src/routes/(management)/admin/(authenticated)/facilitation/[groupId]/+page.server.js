@@ -33,49 +33,83 @@ export async function load({ cookies, fetch, params }) {
 	}
 
 	return {
-		...data
+		...data,
+		groupId
 	};
 }
 
-// export const actions = {
-//   updateGroup: async ({ cookies, request, params }) => {
-//     try {
-//       const sessionToken = cookies.get('sessionToken');
-//       const formData = await request.formData();
-//       const startOrEnd = params.startOrEnd;
-//       formData.append('groupId', params.groupId);
-//       formData.append('key', `${startOrEnd}PollInitiated`);
-//       formData.append('value', 'true');
+export const actions = {
+	delete: async ({ cookies, request }) => {
+		try {
+			const sessionToken = cookies.get('sessionToken');
 
-//       // @ts-ignore
-//       formData.forEach((value, key) => (formData[key] = value));
+			// const data = await request.json();
+			const formData = await request.formData();
+			// @ts-ignore
+			formData.forEach((value, key) => (formData[key] = value));
 
-//       const response = await fetch(`${PUBLIC_SERVER_URL}/api/update-group`, {
-//         method: 'POST',
-//         body: JSON.stringify(formData),
-//         headers: {
-//           'content-type': 'application/json',
-//           Authorization: `Bearer ${sessionToken}`
-//         }
-//       });
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/delete-group`, {
+				method: 'POST',
+				body: JSON.stringify(formData),
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${sessionToken}`
+				}
+			});
 
-//       if (!statusIsGood(response.status)) {
-//         const body = await response.json();
-//         return fail(422, {
-//           success: false,
-//           message: body?.msg
-//         });
-//       }
+			if (!statusIsGood(response.status)) {
+				const body = await response.json();
+				return fail(422, {
+					success: false,
+					message: body?.msg
+				});
+			}
 
-//       redirect(303, `/groups/g/${params.groupId}/${startOrEnd}/responses`);
-//     } catch (error) {
-//       if (isRedirect(error)) {
-//         throw error;
-//       }
-//       console.error('An error occurred:', error);
-//       return {
-//         success: false
-//       };
-//     }
-//   }
-// };
+			const deletedGroup = await response.json();
+			redirect(303, `/admin`);
+		} catch (error) {
+			if (isRedirect(error)) {
+				throw error;
+			}
+			console.error('An error occurred in group delete:', error);
+			return {
+				success: false
+			};
+		}
+	}
+
+	// Edit group
+	// edit: async ({ cookies, request }) => {
+	// 	try {
+	// 		const sessionToken = cookies.get('sessionToken');
+	// 		const formData = await request.formData();
+	// 		// @ts-ignore
+	// 		formData.forEach((value, key) => (formData[key] = value));
+
+	// 		const response = await fetch(`${PUBLIC_SERVER_URL}/api/edit-group`, {
+	// 			method: 'POST',
+	// 			body: JSON.stringify(formData),
+	// 			headers: {
+	// 				'content-type': 'application/json',
+	// 				Authorization: `Bearer ${sessionToken}`
+	// 			}
+	// 		});
+
+	// 		if (!statusIsGood(response.status)) {
+	// 			const body = await response.json();
+	// 			return fail(422, {
+	// 				success: false,
+	// 				message: body?.msg
+	// 			});
+	// 		}
+	// 	} catch (error) {
+	// 		if (isRedirect(error)) {
+	// 			throw error;
+	// 		}
+	// 		console.error('An error occurred in group edit:', error);
+	// 		return {
+	// 			success: false
+	// 		};
+	// 	}
+	// },
+};
