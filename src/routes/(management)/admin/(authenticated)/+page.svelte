@@ -101,7 +101,7 @@
 		margin: 0px;
 	}
 	h2 {
-		margin-top: 90px;
+		margin-top: 60px;
 	}
 	.space {
 		width: 100%;
