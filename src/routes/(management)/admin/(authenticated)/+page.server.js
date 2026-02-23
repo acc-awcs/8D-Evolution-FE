@@ -8,7 +8,7 @@ export async function load({ cookies, url, fetch }) {
 	const sessionToken = cookies.get('sessionToken');
 
 	const page = url.searchParams.get('p') || 0;
-	const timeRange = url.searchParams.get('tr') || 'all';
+	const timeRange = url.searchParams.get('tr') || 'year';
 	const startDate = url.searchParams.get('s') || null;
 	const endDate = url.searchParams.get('e') || null;
 

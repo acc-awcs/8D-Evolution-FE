@@ -30,6 +30,7 @@
 			value={timeRange}
 			onchange={(e) => updateQueryParam('tr', e.target?.value)}
 		>
+			<option value="year">Last Year</option>
 			<option value="all">All Time</option>
 			<option value="custom">Custom</option>
 		</select>
