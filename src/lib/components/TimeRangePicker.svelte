@@ -6,6 +6,9 @@
 
 	function updateQueryParam(key: string, value: string) {
 		const newSearchParams = new URLSearchParams(page.url.searchParams);
+		if (key !== 'p') {
+			newSearchParams.delete('p');
+		}
 		if (value) {
 			newSearchParams.set(key, value);
 		} else {
@@ -17,8 +20,6 @@
 	const timeRange = $derived(data.query.timeRange);
 	const startDate = $derived(data.query.startDate);
 	const endDate = $derived(data.query.endDate);
-
-	// const currentPage = $derived(parseInt(data.query.page));
 </script>
 
 <div class="date-select">
@@ -35,7 +36,7 @@
 	</label>
 	{#if timeRange === 'custom'}
 		<label>
-			Start Date (Inclusive)
+			Start Date (inclusive, based on Start Poll Date)
 			<input
 				type="date"
 				value={startDate}
@@ -43,7 +44,7 @@
 			/>
 		</label>
 		<label>
-			End Date (Inclusive)
+			End Date (inclusive, based on Start Poll Date)
 			<input type="date" value={endDate} onchange={(e) => updateQueryParam('e', e.target?.value)} />
 		</label>
 	{/if}
@@ -53,9 +54,21 @@
 	.date-select {
 		display: flex;
 		gap: 20px;
+		margin-bottom: 40px;
+		/* position: sticky; */
+		/* top: 10px; */
+		background-color: var(--periwinkle);
+		/* border: 1px solid var(--onyx); */
+		border-radius: var(--br);
+		/* border-bottom: 1px solid var(--onyx); */
+		z-index: 20;
+		padding: 14px 14px;
+		margin-left: -14px;
+		margin-right: -14px;
 	}
 	.date-select label {
 		flex: 1;
+		margin: 0px 0px;
 	}
 	.date-select label input,
 	.date-select label select {

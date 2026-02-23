@@ -1,17 +1,12 @@
 <script lang="ts">
-	import AdminAnswerComparison from '$lib/components/AdminAnswerComparison.svelte';
-	import LineChart from '$lib/components/LineChart.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Table from '$lib/components/Table.svelte';
-	import { formatAveragedAnswers } from '$lib/helpers/results.js';
-
 	let { data } = $props();
-	console.log('DAT', data);
 </script>
 
 <h1 class="title large">Individual User Data</h1>
 
 <p>Browse data submitted from <strong>individual users</strong>.</p>
+
+<p>Coming soon!</p>
 
 <!-- <h2 class="title small">Beep</h2> -->
 
@@ -44,36 +39,6 @@
 {/await} -->
 
 <div class="space"></div>
-
-<h2 class="title large">All Facilitations</h2>
-{#if data?.paginatedGroups?.length > 0}
-	<Table
-		header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
-		rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
-		rows={data.paginatedGroups.map((group: any) => [
-			group.name,
-			group.creatorShortName,
-			group.numParticipants,
-			group.startPollDate
-				? new Date(group.startPollDate).toLocaleString('en-US', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					})
-				: 'N/A',
-			group.endPollDate
-				? new Date(group.endPollDate).toLocaleString('en-US', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					})
-				: 'N/A'
-		])}
-	/>
-	<Pagination {data} />
-{:else}
-	<p>No facilitations to display.</p>
-{/if}
 
 <style>
 	.title.small {

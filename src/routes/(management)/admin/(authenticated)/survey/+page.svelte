@@ -1,1 +1,3 @@
-<h1>Survey Responses</h1>
+<h1 class="title large">Survey Responses</h1>
+
+<p>Coming soon!</p>

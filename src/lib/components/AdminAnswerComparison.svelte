@@ -28,9 +28,9 @@
 
 {#if startAnswers || endAnswers}
 	<div class="chart-wrapper">
-		{#if startAnswers}
+		{#if startAnswers && startAnswers['A'] && !Array.isArray(startAnswers['A'])}
 			<div class="chart" aria-hidden="true" bind:clientWidth={startChartWidth}>
-				<h2>Start</h2>
+				<h3 class="uppercase-title">Starting Point</h3>
 				<SpiderChart
 					answers={startAnswers}
 					chartWidth={startChartWidth}
@@ -53,9 +53,9 @@
 				{/if}
 			</div>
 		{/if}
-		{#if endAnswers}
+		{#if endAnswers && endAnswers['A'] && !Array.isArray(endAnswers['A'])}
 			<div class="chart" aria-hidden="true" bind:clientWidth={endChartWidth}>
-				<h2>End</h2>
+				<h3 class="uppercase-title">Ending Point</h3>
 
 				<SpiderChart
 					answers={endAnswers}
@@ -118,6 +118,22 @@
 			]
 		]}
 	/>
+{:else if isValid(averagedStartResults?.[0])}
+	{@const startArray = averagedStartResults}
+	<Table
+		header={[
+			'',
+			'Dynamic 1',
+			'Dynamic 2',
+			'Dynamic 3',
+			'Dynamic 4',
+			'Dynamic 5',
+			'Dynamic 6',
+			'Dynamic 7',
+			'Dynamic 8'
+		]}
+		rows={[['Start', ...startArray.map((v) => v.toFixed(2))]]}
+	/>
 {/if}
 
 <style>
@@ -144,8 +160,7 @@
 		max-width: 100%;
 		gap: 80px;
 	}
-
-	h2 {
-		font-family: 'Instrument Serif', serif;
+	h3 {
+		margin: 30px 0px;
 	}
 </style>

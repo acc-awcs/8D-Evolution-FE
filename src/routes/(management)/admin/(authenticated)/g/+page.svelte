@@ -1,92 +1,119 @@
 <script lang="ts">
+	import AdminAnswerComparison from '$lib/components/AdminAnswerComparison.svelte';
+	import LineChart from '$lib/components/LineChart.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
 	import Table from '$lib/components/Table.svelte';
-
-	// let { data } = $props();
+	import TimeRangePicker from '$lib/components/TimeRangePicker.svelte';
+	import { formatAveragedAnswers } from '$lib/helpers/results.js';
+	let { data } = $props();
 </script>
 
-<h1 class="title">Group Data</h1>
+<h1 class="title large">Group Lead Data</h1>
 
-<p>Browse data from collective polls run by <strong>group leads</strong>.</p>
+<p>Browse data from 8 Dynamics polls run by <strong>group leads</strong>.</p>
 
-<p class="note">Will populate this once the facilitator interface is finished & approved!</p>
+<TimeRangePicker {data} />
 
-<!-- <h2 class="title small">Average Results By Dynamic</h2>
-
-{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
-	<p class="note">TODO: Add date range? What are helpful pre-defined ranges?</p>
-	<Table
-		header={[
-			'',
-			'Dynamic 1',
-			'Dynamic 2',
-			'Dynamic 3',
-			'Dynamic 4',
-			'Dynamic 5',
-			'Dynamic 6',
-			'Dynamic 7',
-			'Dynamic 8'
-		]}
-		rows={[
-			['Start', ...data.totalAverageStart.map((v) => v.toFixed(2))],
-			['End', ...data.totalAverageEnd.map((v) => v.toFixed(2))],
-			[
-				'Shift',
-				...data.totalAverageStart.map(
-					(s, i) =>
-						`${data.totalAverageEnd?.[i] - s > 0 ? '+' : ''}${(data.totalAverageEnd?.[i] - s)?.toFixed(2)}`
-				)
-			]
-		]}
-	/>
+{#if data?.invalidTimes}
+	<p>{data.msg}</p>
 {:else}
-	<p>No complete groups available to display statistics. Check back later!</p>
+	{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
+		<h2 class="title">Activity</h2>
+		<div class="wrapper">
+			<div class="callout">
+				<div class="item">
+					<h3 class="uppercase-title">Total Participants</h3>
+					<p class="title large">{data.totalParticipants}</p>
+				</div>
+				<div class="item">
+					<h3 class="uppercase-title">Groups Created</h3>
+					<p class="title large">{data.totalNewGroups}</p>
+				</div>
+			</div>
+			{#if data?.participantsByMonth?.length > 1}
+				{#key `${data.query.startDate} ${data.query.endDate} ${data.query.timeRange}`}
+					<LineChart data={data?.participantsByMonth} />
+				{/key}
+			{/if}
+		</div>
+		<h2 class="title">Shifts</h2>
+		<div class="wrapper">
+			<AdminAnswerComparison
+				startAnswers={formatAveragedAnswers(data.totalAverageStart)}
+				endAnswers={formatAveragedAnswers(data.totalAverageEnd)}
+				averagedStartResults={data.totalAverageStart}
+				averagedEndResults={data.totalAverageEnd}
+			/>
+		</div>
+	{:else}
+		<p>No complete facilitations available to display statistics. Check back later!</p>
+	{/if}
+
+	<h2 class="title">Groups</h2>
+	<div class="wrapper">
+		{#if data?.paginatedGroups?.length > 0}
+			<Table
+				header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
+				rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
+				rows={data.paginatedGroups.map((group: any) => [
+					group.name,
+					group.creatorShortName,
+					group.numParticipants,
+					group.startPollDate
+						? new Date(group.startPollDate).toLocaleString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})
+						: 'N/A',
+					group.endPollDate
+						? new Date(group.endPollDate).toLocaleString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})
+						: 'N/A'
+				])}
+			/>
+			<Pagination {data} />
+		{:else}
+			<p>No facilitations to display.</p>
+		{/if}
+	</div>
 {/if}
-
-<h2 class="title small">All Groups</h2>
-{#if data?.stats?.length > 0}
-	<Table
-		header={[
-			'Facilitation',
-			'Group Lead Email',
-			'Start Poll Date',
-			'End Poll Date'
-			// 'Start Total Average',
-			// 'End Total Average'
-		]}
-		rowLinks={data.stats.map((s: any) => `/admin/facilitation/${s.group._id}`)}
-		rows={data.stats.map((stat: any) => [
-			stat.group.name,
-			stat.user?.email || 'N/A',
-			stat.group.startPollDate
-				? new Date(stat.group.startPollDate).toLocaleString('en-US', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					})
-				: 'N/A',
-			stat.group.endPollDate
-				? new Date(stat.group.endPollDate).toLocaleString('en-US', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					})
-				: 'N/A'
-			// stat.singleValueAverageStart ? stat.singleValueAverageStart.toFixed(2) : 'N/A',
-			// stat.singleValueAverageEnd ? stat.singleValueAverageEnd.toFixed(2) : 'N/A'
-		])}
-	/>
-{:else}
-	<p>No groups to display.</p>
-{/if} -->
 
 <div class="space"></div>
 
 <style>
-	.title.small {
-		margin-top: 60px;
+	.callout {
+		display: flex;
+		justify-content: space-around;
+	}
+	.item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		margin: 30px;
+		/* gap: 30px; */
+	}
+	.item p {
+		margin: 0px;
+	}
+	h2 {
+		margin-top: 90px;
 	}
 	.space {
 		width: 100%;
 		padding-bottom: 100px;
+	}
+	.wrapper {
+		margin-bottom: 80px;
+		background-color: var(--cloud-light);
+		/* border: 1px solid var(--cloud-darker); */
+		border-radius: var(--br);
+		padding: 12px;
+		margin-left: -12px;
+		margin-right: -12px;
 	}
 </style>
