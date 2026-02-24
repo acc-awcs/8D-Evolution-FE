@@ -5,10 +5,6 @@
 	import { _sendEmail } from './+page';
 	import { rotateDynamic } from '$lib/dynamics';
 	import { onDestroy, onMount } from 'svelte';
-	import Modal from '$lib/components/Modal.svelte';
-	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
-	import trackEvent from '$lib/custom-event';
-	import { enhance } from '$app/forms';
 	import cloudBg from '$lib/assets/cloud-bg.jpg';
 	import ButtonArrow from '$lib/components/ButtonArrow.svelte';
 
@@ -19,14 +15,6 @@
 	let highlight = $state(0);
 	let intervalId = $state<number>();
 	let chartWidth = $state(500);
-
-	// Email form & query state management
-	let email = $state('');
-	let showEmailModal = $state<boolean>(false);
-	let sendEmailLoading = $state<boolean>(false);
-	let sendEmailFinished = $state<boolean>(false);
-	let sendEmailSuccess = $state<boolean>(false);
-	let emailError = $state<string>('');
 
 	function startRotate() {
 		if (innerWidth < BREAKPOINT) {
@@ -55,106 +43,9 @@
 	onDestroy(() => {
 		stopRotate();
 	});
-
-	function handleEmailChange(evt: Event): void {
-		const input = evt.target as HTMLInputElement;
-		email = input.value;
-	}
-
-	function openModal(): void {
-		showEmailModal = true;
-		trackEvent('click_email_prompt');
-	}
-
-	function closeModal(): void {
-		email = '';
-		emailError = '';
-		sendEmailFinished = false;
-		showEmailModal = false;
-	}
 </script>
 
 <svelte:window bind:innerWidth />
-
-{#if showEmailModal}
-	<Modal handleClose={closeModal}>
-		{#if !sendEmailFinished}
-			<!-- Email form -->
-			<h1 class="title modal-title">Email Your Code</h1>
-			<p>
-				We’ll send you an email with your results code for safekeeping. We’ll also include a link to
-				return to these results. Your email will not be stored.
-			</p>
-			{#if emailError.length > 0}
-				<p class="error">{emailError}</p>
-			{/if}
-			<form
-				data-sveltekit-noscroll
-				use:enhance
-				onsubmit={async (e) => {
-					if (email === '') {
-						emailError = 'Please enter an email address';
-					} else if (!sendEmailLoading) {
-						sendEmailLoading = true;
-						const resp = await _sendEmail(email, data.resultCode);
-						sendEmailLoading = false;
-						if (resp.invalidFormat) {
-							emailError = 'Please enter a valid email';
-						} else {
-							sendEmailFinished = true;
-							sendEmailSuccess = resp.success;
-							email = '';
-							trackEvent('click_email_send_success');
-						}
-					}
-				}}
-			>
-				<label class="visually-hidden" for="email">Your email address</label>
-				<input
-					value={email}
-					type="text"
-					oninput={handleEmailChange}
-					placeholder="Your email address"
-					id="email"
-				/>
-				<div class="buttons">
-					<button class="btn secondary" type="button" onclick={() => (showEmailModal = false)}
-						>Cancel</button
-					>
-					<button
-						class="btn primary"
-						class:loading={sendEmailLoading}
-						type="submit"
-						disabled={sendEmailLoading}
-					>
-						{#if sendEmailLoading}
-							<ButtonLoader />
-						{:else}
-							Send
-						{/if}
-					</button>
-				</div>
-			</form>
-		{:else if sendEmailSuccess === true}
-			<!-- Success message -->
-			<h1 class="title">Email Sent</h1>
-			<p>Your email is on its way!</p>
-			<div class="buttons done">
-				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div>
-		{:else}
-			<!-- Error message -->
-			<h1 class="title">Oops!</h1>
-			<p>
-				Looks like something went wrong on our end and we couldn't send your email. Please try again
-				later.
-			</p>
-			<div class="buttons done">
-				<button class="btn primary" onclick={closeModal}>Done</button>
-			</div>
-		{/if}
-	</Modal>
-{/if}
 
 <div class="outer">
 	<img class="cloud-bg static-fade-in" src={cloudBg} alt="" />

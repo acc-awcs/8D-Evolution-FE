@@ -23,6 +23,7 @@
 
 	// Email form & query state management
 	let email = $state('');
+	let addToNewsletter = $state(false);
 	let showEmailModal = $state<boolean>(false);
 	let sendEmailLoading = $state<boolean>(false);
 	let sendEmailFinished = $state<boolean>(false);
@@ -97,7 +98,7 @@
 						emailError = 'Please enter an email address';
 					} else if (!sendEmailLoading) {
 						sendEmailLoading = true;
-						const resp = await _sendEmail(email, data.resultCode);
+						const resp = await _sendEmail(email, data.resultCode, addToNewsletter);
 						sendEmailLoading = false;
 						if (resp.invalidFormat) {
 							emailError = 'Please enter a valid email';
@@ -111,6 +112,10 @@
 				}}
 			>
 				<label class="visually-hidden" for="email">Your Email Address</label>
+				<label class="newsletter">
+					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
+					Sign me up for the Climate Wayfinding newsletter
+				</label>
 				<input
 					value={email}
 					type="text"
@@ -290,6 +295,18 @@
 		text-align: center;
 		max-width: 100%;
 		margin: 40px 0px;
+	}
+	.newsletter {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 8px;
+		cursor: pointer;
+	}
+	.newsletter input {
+		width: auto;
+		padding: 0px;
+		margin: 0px;
 	}
 
 	.instructions {

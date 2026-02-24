@@ -31,7 +31,8 @@ export async function load({ params, fetch }: { params: { code: string }; fetch:
 
 export async function _sendEmail(
 	email: string,
-	resultCode: string
+	resultCode: string,
+	addToNewsletter: boolean
 ): Promise<{ success: boolean; message?: string; invalidFormat?: boolean }> {
 	try {
 		const response = await fetch('/api/email', {
@@ -39,7 +40,7 @@ export async function _sendEmail(
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email, resultCode })
+			body: JSON.stringify({ email, resultCode, addToNewsletter })
 		});
 
 		if (!response.ok) {
@@ -59,7 +60,8 @@ export async function _sendEmail(
 
 export async function _sendShiftsEmail(
 	email: string,
-	resultCode: string
+	resultCode: string,
+	addToNewsletter: boolean
 ): Promise<{ success: boolean; message?: string; invalidFormat?: boolean }> {
 	try {
 		const response = await fetch('/api/shifts-email', {
@@ -67,7 +69,7 @@ export async function _sendShiftsEmail(
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email, resultCode })
+			body: JSON.stringify({ email, resultCode, addToNewsletter })
 		});
 
 		if (!response.ok) {

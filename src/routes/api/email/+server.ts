@@ -1,21 +1,44 @@
 import mailchimp from '@mailchimp/mailchimp_transactional';
+import CryptoJS from 'crypto-js';
+import mailchimpMarketing from '@mailchimp/mailchimp_marketing';
 import * as EmailValidator from 'email-validator';
 import { RESULTS_EMAIL_TEMPLATE } from '$lib/constants.js';
 import { PUBLIC_BASE_URL } from '$env/static/public';
 import { MAILCHIMP_API_KEY } from '$env/static/private';
+import { MAILCHIMP_NEWSLETTER_ID } from '$env/static/private';
+import { MAILCHIMP_MARKETING_API_KEY } from '$env/static/private';
 
 const apiKey = MAILCHIMP_API_KEY;
 const client = mailchimp(apiKey ?? '');
 
+mailchimpMarketing.setConfig({
+	apiKey: MAILCHIMP_MARKETING_API_KEY,
+	server: 'us1'
+});
+
 export async function POST({ request }) {
 	try {
-		const { email, resultCode } = await request.json();
+		const { email, resultCode, addToNewsletter } = await request.json();
 
 		// check for valid email
 		if (!EmailValidator.validate(email)) {
 			return new Response(JSON.stringify({ error: `Invalid email` }), {
 				status: 400
 			});
+		}
+
+		if (addToNewsletter) {
+			try {
+				const subscriberHash = CryptoJS.MD5(email.toLowerCase()).toString();
+				const newsletterResp = await mailchimpMarketing.lists.setListMember(
+					MAILCHIMP_NEWSLETTER_ID,
+					subscriberHash,
+					{ email_address: email, status_if_new: 'subscribed' }
+				);
+				console.log('Added to newsletter');
+			} catch (e) {
+				console.log('Something went wrong while updating mailchimp newsletter audience', e);
+			}
 		}
 
 		const message = {

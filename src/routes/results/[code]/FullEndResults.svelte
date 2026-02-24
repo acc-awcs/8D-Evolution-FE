@@ -18,6 +18,7 @@
 
 	// Email form & query state management
 	let email = $state('');
+	let addToNewsletter = $state(false);
 	let showEmailModal = $state<boolean>(false);
 	let sendEmailLoading = $state<boolean>(false);
 	let sendEmailFinished = $state<boolean>(false);
@@ -58,13 +59,12 @@
 			{/if}
 			<form
 				data-sveltekit-noscroll
-				use:enhance
 				onsubmit={async (e) => {
 					if (email === '') {
 						emailError = 'Please enter an email address';
 					} else if (!sendEmailLoading) {
 						sendEmailLoading = true;
-						const resp = await _sendShiftsEmail(email, data.resultCode);
+						const resp = await _sendShiftsEmail(email, data.resultCode, addToNewsletter);
 						sendEmailLoading = false;
 						if (resp.invalidFormat) {
 							emailError = 'Please enter a valid email';
@@ -85,6 +85,10 @@
 					placeholder="Your email address"
 					id="email"
 				/>
+				<label class="newsletter">
+					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
+					Sign me up for the Climate Wayfinding newsletter
+				</label>
 				<div class="buttons">
 					<button class="btn secondary" type="button" onclick={() => (showEmailModal = false)}
 						>Cancel</button
@@ -190,36 +194,6 @@
 				/>
 			</div>
 		</section>
-		<!-- <section class="up-next">
-			<div class="charts-overlaid">
-				<div class="charts" bind:clientWidth={chartWidthUpNext}>
-					<div class="absolute-wrapper">
-						<SpiderChart
-							answers={data.current?.object}
-							startAnswers={data.start?.object}
-							{highlight}
-							chartWidth={chartWidthUpNext}
-							skipHover={true}
-							isOverlay={true}
-						/>
-					</div>
-					<SpiderChart
-						answers={data.start?.object}
-						{highlight}
-						chartWidth={chartWidthUpNext}
-						onLeave={() => null}
-						skipHover={true}
-						isOverlay={true}
-						isStart={true}
-					/>
-				</div>
-				<div class="text">
-					<div class="uppercase-title">Your Biggest Shift</div>
-					<h2 class="title">Example Dynamic</h2>
-					<p>Todo: Confirm with AWCS team on content for this section.</p>
-				</div>
-			</div>
-		</section> -->
 		<section class="conclusion">
 			<div class="column">
 				<a class="fancy-link" href="/">Close</a>
@@ -311,56 +285,21 @@
 		margin-bottom: 40px;
 	}
 
-	.charts-overlaid {
-		position: relative;
+	.newsletter {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-items: center;
-		gap: 80px;
-		width: 1000px;
-		max-width: 100%;
+		gap: 8px;
+		cursor: pointer;
 	}
-
-	.charts {
-		/* width: 50%; */
-		/* width: 500px; */
-		/* max-width: 100%; */
-		width: 500px;
-		max-width: 100%;
-		flex: 1;
-		position: relative;
+	.newsletter input {
+		width: auto;
+		padding: 0px;
+		margin: 0px;
 	}
-
-	.text {
-		flex: 1;
-		padding: 20px;
-	}
-
-	/* .text h2 {
-		font-family: 'Instrument Serif', serif;
-		font-size: 32px;
-	} */
-
-	.text p {
-		font-size: 1rem;
-	}
-
-	.absolute-wrapper {
-		position: absolute;
-		top: 0px;
-		left: 0px;
-	}
-
 	.nums-wrapper {
 		padding: 40px 0px;
 		background-color: var(--periwinkle);
-	}
-
-	.up-next {
-		display: flex;
-		justify-content: center;
-		background-color: var(--cloud);
-		padding: 60px 20px;
 	}
 
 	.column {
