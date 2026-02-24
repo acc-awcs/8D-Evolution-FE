@@ -65,7 +65,6 @@ export const actions = {
 				});
 			}
 
-			const deletedGroup = await response.json();
 			redirect(303, `/admin`);
 		} catch (error) {
 			if (isRedirect(error)) {
@@ -76,40 +75,46 @@ export const actions = {
 				success: false
 			};
 		}
-	}
+	},
 
 	// Edit group
-	// edit: async ({ cookies, request }) => {
-	// 	try {
-	// 		const sessionToken = cookies.get('sessionToken');
-	// 		const formData = await request.formData();
-	// 		// @ts-ignore
-	// 		formData.forEach((value, key) => (formData[key] = value));
+	edit: async ({ cookies, request }) => {
+		try {
+			const sessionToken = cookies.get('sessionToken');
+			const formData = await request.formData();
+			// @ts-ignore
+			formData.forEach((value, key) => (formData[key] = value));
+			console.log('EDIGINT??');
 
-	// 		const response = await fetch(`${PUBLIC_SERVER_URL}/api/edit-group`, {
-	// 			method: 'POST',
-	// 			body: JSON.stringify(formData),
-	// 			headers: {
-	// 				'content-type': 'application/json',
-	// 				Authorization: `Bearer ${sessionToken}`
-	// 			}
-	// 		});
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/admin-update-group`, {
+				method: 'POST',
+				body: JSON.stringify(formData),
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${sessionToken}`
+				}
+			});
 
-	// 		if (!statusIsGood(response.status)) {
-	// 			const body = await response.json();
-	// 			return fail(422, {
-	// 				success: false,
-	// 				message: body?.msg
-	// 			});
-	// 		}
-	// 	} catch (error) {
-	// 		if (isRedirect(error)) {
-	// 			throw error;
-	// 		}
-	// 		console.error('An error occurred in group edit:', error);
-	// 		return {
-	// 			success: false
-	// 		};
-	// 	}
-	// },
+			if (!statusIsGood(response.status)) {
+				const body = await response.json();
+				console.log('BODY');
+				return fail(422, {
+					success: false,
+					message: body?.msg
+				});
+			}
+
+			return {
+				success: true
+			};
+		} catch (error) {
+			if (isRedirect(error)) {
+				throw error;
+			}
+			console.error('An error occurred in group edit:', error);
+			return {
+				success: false
+			};
+		}
+	}
 };

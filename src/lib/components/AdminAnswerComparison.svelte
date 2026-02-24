@@ -1,6 +1,7 @@
 <script>
 	import SpiderChart from '$lib/components/SpiderChart.svelte';
 	import Table from '$lib/components/Table.svelte';
+	import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 	let startChartWidth = $state(450);
 	let endChartWidth = $state(450);
@@ -162,5 +163,11 @@
 	}
 	h3 {
 		margin: 30px 0px;
+	}
+	@media screen and (max-width: 600px) {
+		.chart-wrapper {
+			flex-direction: column;
+			gap: 30px;
+		}
 	}
 </style>

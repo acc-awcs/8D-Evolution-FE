@@ -230,7 +230,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 40px;
+		flex-wrap: wrap;
+		row-gap: 10px;
+		column-gap: 40px;
 	}
 
 	.btn.primary {
@@ -240,6 +242,9 @@
 	@media screen and (max-width: 600px) {
 		.home-label {
 			display: none;
+		}
+		.subnav ul {
+			column-gap: 20px;
 		}
 	}
 </style>

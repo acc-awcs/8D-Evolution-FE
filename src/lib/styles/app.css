@@ -16,6 +16,7 @@
 	--cloud-dark: #eae4db;
 	--cloud-darker: #d3cabe;
 	--onyx: #2f3325;
+	--soil-light: #e19f73;
 	--soil: #d18856;
 	--soil-dark: #bc703e;
 	--canyon: #d15429;
@@ -295,6 +296,7 @@ a.short {
 	border-radius: 100%;
 	text-decoration: underline;
 	border-radius: 1px;
+	color: var(--onyx);
 }
 
 /* .btn.secondary:focus-visible {

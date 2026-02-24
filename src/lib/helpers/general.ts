@@ -22,14 +22,6 @@ export const getCurrentMonth = () => {
 	return MONTHS[currentMonth];
 };
 
-// export const getBiggestShift = (startAnswers, endAnswers) => {
-// 	return startAnswers.reduce(([maxShiftIndex, maxShiftValue], startAnswer, i) => {
-// 		if (startAnswer.value) {
-
-// 		}
-// 	}, [0, 0])
-// }
-
 export const dbKeysToToolKeys: any = {
 	d1: 'A',
 	d2: 'B',
@@ -79,4 +71,33 @@ export const getIntFromID = (str: string) => {
 		hash |= 0; // Convert to 32bit integer
 	}
 	return Math.abs(hash);
+};
+
+const convertJsonToCsv = (rows: any) => {
+	const replacer = (key: string, value: any) => (value === null ? '' : value);
+	const header = Object.keys(rows[0]);
+
+	let csv = rows.map((row: any) =>
+		header.map((fieldName) => JSON.stringify(row[fieldName], replacer)).join(',')
+	);
+	csv.unshift(header.join(','));
+	csv = csv.join('\n');
+
+	return csv;
+};
+
+export const exportAndDownloadCsv = (rows: any, fileName: string) => {
+	const csvData = convertJsonToCsv(rows);
+	const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+	const url = URL.createObjectURL(blob);
+
+	const downloadLink = document.createElement('a');
+	downloadLink.href = url;
+	downloadLink.download = fileName;
+
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
+	document.body.removeChild(downloadLink);
+
+	URL.revokeObjectURL(url);
 };

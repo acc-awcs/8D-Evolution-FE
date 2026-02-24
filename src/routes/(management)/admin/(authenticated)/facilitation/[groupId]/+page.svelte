@@ -4,10 +4,12 @@
 	import { formatAnswers, formatManualAnswers } from '$lib/helpers/results';
 	import DeleteGroupModal from './DeleteGroupModal.svelte';
 	import cloudBg from '$lib/assets/cloud-bg.jpg';
+	import EditModal from './EditModal.svelte';
 
 	let { data } = $props();
 
 	let showDeleteModal = $state(false);
+	let showTestModal = $state(false);
 
 	const group = $derived(data.stats?.group);
 	const startResults = $derived(data.stats?.startResults);
@@ -32,13 +34,20 @@
 	<DeleteGroupModal {data} onClose={() => (showDeleteModal = false)} />
 {/if}
 
+{#if showTestModal}
+	<EditModal data={{ group }} onClose={() => (showTestModal = false)} />
+{/if}
+
 <br /><br />
 
 <a href="/admin">← Back </a>
 
 <div class="header">
 	<h1 class="title large">{data.stats?.group?.name}</h1>
-	<button class="btn secondary" onclick={() => (showDeleteModal = true)}>Delete</button>
+	<div class="buttons">
+		<button class="btn secondary" onclick={() => (showTestModal = true)}>Edit</button>
+		<button class="btn secondary" onclick={() => (showDeleteModal = true)}>Delete</button>
+	</div>
 </div>
 
 {#if data.stats?.user}
@@ -64,6 +73,16 @@
 			{/if}
 		</em>
 	</p>
+{/if}
+
+{#if data.stats?.group?.isTest}
+	<div class="test-note">
+		<p>
+			<strong>Please note:</strong> This has been marked as a test faciliation. Results from this
+			facilitation are not included in generated statistics.
+			<button class="link-like" onclick={() => (showTestModal = true)}>Edit</button>
+		</p>
+	</div>
 {/if}
 
 <h2 class="title">Shifts</h2>
@@ -108,6 +127,10 @@
 <div class="spacer"></div>
 
 <style>
+	.buttons {
+		display: flex;
+		gap: 8px;
+	}
 	.spacer {
 		width: 100%;
 		height: 100px;
@@ -191,5 +214,20 @@
 		left: 0px;
 		width: 100%;
 		/* mix-blend-mode: overlay; */
+	}
+
+	.test-note {
+		background-color: var(--soil-light);
+		display: inline-block;
+		padding: 12px 20px;
+		border-radius: var(--br);
+	}
+
+	.test-note .link-like {
+		font-size: 16px;
+	}
+
+	.test-note p {
+		margin: 0px;
 	}
 </style>
