@@ -21,7 +21,7 @@
 	<p>{data.msg}</p>
 {:else if data?.totalSurveys > 0}
 	<h2 class="title prompt">“What did you gain from participating in this experience?”</h2>
-	<div class="btn-wrapper">
+	<!-- <div class="btn-wrapper">
 		{#if showDelete}
 			<button class="link-like" onclick={() => (showDelete = false)}>
 				<Eye visible={true} />
@@ -32,7 +32,7 @@
 				<Eye visible={false} />Show delete option</button
 			>
 		{/if}
-	</div>
+	</div> -->
 	<div class="alt-wrapper">
 		{#if data?.paginatedSurveys?.length > 0}
 			<SurveyTable
