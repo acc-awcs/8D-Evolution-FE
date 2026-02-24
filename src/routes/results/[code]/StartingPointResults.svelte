@@ -166,7 +166,7 @@
 		<section class="clouds">
 			<div class="intro fade-in">
 				<p class="uppercase-title">Starting Point</p>
-				<h1 class="title">Here’s Your Personal 8 Dynamics “Web.”</h1>
+				<h1 class="title">Here’s your personal 8 Dynamics “web.”</h1>
 			</div>
 			<div class="chart fade-in delayed" aria-hidden="true" bind:clientWidth={chartWidth}>
 				<SpiderChart
@@ -191,19 +191,16 @@
 		<section id="up_next" class="up-next">
 			<div class="column">
 				<p class="pre-title">Next Steps</p>
-				<h1 class="title large">Save Your Results</h1>
+				<h1 class="title large">Save Your Results!</h1>
 				<div class="instructions">
 					<p>
-						At the end of your <i>Climate Wayfinding</i> journey, you’ll return to your starting “web”
-						and reflect on how your 8 Dynamics have shifted.
-					</p>
-					<p>
-						Your unique code lets you revisit this web anytime. Be sure to save it somewhere easy to
-						access — perhaps in a password manager or a favorite journal.
+						At the end of your Climate Wayfinding journey, you’ll return to the 8 Dynamics Quiz to
+						see what’s shifted. This code will let you compare your unique starting and ending
+						“webs.”
 					</p>
 					<p>
 						The simplest and safest way to store your code is to click the button below and email it
-						to yourself.
+						to yourself. You can also save it in a password manager or jot it down in your journal.
 					</p>
 				</div>
 				<button onclick={() => (showEmailModal = true)} class="btn quaternary"

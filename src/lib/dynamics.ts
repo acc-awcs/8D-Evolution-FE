@@ -17,8 +17,8 @@ const dynamics = [
 	},
 	{
 		short: 'Emotions',
-		full: "I'm able to work with climate emotions and access healing and rest.",
-		lines: ["I'm able to work with', 'climate emotions and', 'access healing and rest."]
+		full: 'I’m able to work with climate emotions and access healing and rest.',
+		lines: ["I’m able to work with', 'climate emotions and', 'access healing and rest."]
 	},
 	{
 		short: 'Understanding',

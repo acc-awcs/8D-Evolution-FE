@@ -1,7 +1,6 @@
 import { PUBLIC_SERVER_URL } from '$env/static/public';
 import { statusIsGood } from '$lib/helpers/general';
 
-// TODO: Make this not an api call
 export async function POST({ request, cookies }) {
 	try {
 		const pollToken = cookies.get('pollToken');

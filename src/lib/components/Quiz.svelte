@@ -124,7 +124,8 @@
 				...valuesByDynamic,
 				isStart,
 				startCode: data.startCode,
-				pollCode
+				pollCode,
+				individual: pollCode ? false : true
 			});
 			const newResult = resp.data;
 			if (pollCode) {
@@ -173,11 +174,9 @@
 
 			<p>
 				Below, you’ll find each of the 8 Dynamics with a sliding bar. Take a moment to reflect on
-				each statement and consider what is real for you, right now.
-				<br />
-				For each dynamic, mark your response from 1 (<i>not true for me</i>) to 5 (<i
-					>extremely true for me</i
-				>).
+				each statement and consider what is real for you, right now. Respond on a spectrum from 1 (<i
+					>that’s not true for me</i
+				>) to 5 (<i>that’s extremely true for me</i>).
 			</p>
 			<a class="btn secondary short" href="#section-0" onclick={(e) => scrollToSection(e, 0)}
 				>Start</a

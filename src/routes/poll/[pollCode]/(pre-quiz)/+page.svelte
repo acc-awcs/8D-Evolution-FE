@@ -27,7 +27,7 @@
 		{#if loading}
 			<ButtonLoader />
 		{:else}
-			I'm Ready <span><Heart /></span>
+			I’m Ready <span><Heart /></span>
 		{/if}</button
 	>
 </form>

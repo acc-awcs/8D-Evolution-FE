@@ -39,7 +39,7 @@
 <!-- non-mobile -->
 <ol>
 	<li>
-		<div class="uppercase-title">Your 8 Dynamic Shifts</div>
+		<div class="uppercase-title">Your 8 Dynamics Shifts</div>
 		<div class="labels">
 			<span class="s">Starting Point</span>
 			<span class="e">Ending Point</span>

@@ -22,8 +22,8 @@
 
 <main>
 	<section>
-		<h1 class="title large">Welcome, Climate Wayfinder!</h1>
-		<p class="second">You’ve made it to the 8 Dynamics Quiz. We’re so glad you’re here.</p>
+		<h1 class="title large">Welcome to the 8 Dynamics Quiz!</h1>
+		<p class="second">Let’s map your Climate Wayfinding journey.</p>
 		<!-- <p class="second">
 			If you are reading “Getting Our Bearings,” you’ll want to “Map Your Starting Point.” If you
 			are reading “Journeying Onward,” you’ll want to “Map Your Ending Point.”
