@@ -45,14 +45,15 @@
 	<main>
 		<section>
 			<div class="column">
-				<h1 class="title large">Trace Your Shifts</h1>
+				<h1 class="title large">Map Your Shifts</h1>
 				<p>
-					To compare where you started this journey and where you find yourself now, enter the
-					unique code you received at the beginning of your Climate Wayfinding journey.
+					To compare where you started and where you are now, enter the code you received at the
+					beginning of your Climate Wayfinding journey.
 				</p>
 				<p>
-					You may have it written down or saved it digitally. If you emailed it to yourself, check
-					for a message with the subject line “Your 8 Dynamics Results Code.”
+					If you emailed it to yourself, search for the subject line “Climate Wayfinding: Your 8
+					Dynamics Code.” You may also have it saved in a password manager or jotted down in your
+					journal.
 				</p>
 				{#if codeError.length > 0}
 					<div class="error-wrapper">
@@ -107,7 +108,7 @@
 				</form>
 
 				<p class="note">
-					Don’t have the code? Without it, we unfortunately won’t be able to map your shifts.
+					Don’t have the code? Unfortunately, we won’t be able to map your shifts without it.
 				</p>
 			</div>
 		</section>

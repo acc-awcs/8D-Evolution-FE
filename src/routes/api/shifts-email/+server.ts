@@ -49,9 +49,10 @@ export async function POST({ request }) {
 				{
 					name: 'content',
 					content: `
-          <p>Thank you for returning to the 8 Dynamics of Climate Engagement at the close of this  <i>Climate Wayfinding</i> journey.</p>
-          <p>You can view how you shifted here: <a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Shifts</a></p>
-          <p>This is a tool to return to again and again. It can be useful to self-assess when starting something new or after a key experience, to make shifts visible. You can use it alone or with others—in a class or team, for example. We hope you’ll find it to be a touchstone for your climate journey.</p>
+          <p>Thanks for returning to the 8 Dynamics Quiz! We hope it sheds some light on where you’re ending this journey and what has shifted.</p>
+					<p>To revisit your results, simply click the link below.</p>
+          <a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Shifts</a></p>
+					<p>Remember, you can return to the 8 Dynamics again and again to check in with yourself: <i>Where am I now on my climate journey?</i> You can use it alone or with others. We hope it will be a touchstone along the way.</p>
           <p>Wishing you possibility, power, and joy in the work!</p>
           `
 				}
@@ -65,7 +66,7 @@ export async function POST({ request }) {
 						name: ''
 					}
 				],
-				subject: 'Your 8 Dynamics Shifts'
+				subject: 'Climate Wayfinding: Your 8 Dynamics Shifts'
 			}
 		};
 

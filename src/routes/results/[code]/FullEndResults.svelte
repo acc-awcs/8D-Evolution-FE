@@ -50,10 +50,7 @@
 		{#if !sendEmailFinished}
 			<!-- Email form -->
 			<h1 class="title modal-title">Email Your Shifts</h1>
-			<p>
-				Email yourself a link to your starting and ending “webs,” so you can reference your shifts
-				anytime.
-			</p>
+			<p>We’ll email you a link to return to these results.</p>
 			{#if emailError.length > 0}
 				<p class="error">{emailError}</p>
 			{/if}

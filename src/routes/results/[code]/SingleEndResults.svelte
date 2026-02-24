@@ -78,7 +78,7 @@
 				/>
 				<p class="fade-in extra-delayed">
 					<a class="btn primary" href={`/end/${data.resultCode}`}
-						>Trace Your Shifts <ButtonArrow /></a
+						>See What Shifted <ButtonArrow /></a
 					>
 				</p>
 			</div>

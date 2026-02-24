@@ -1,6 +1,5 @@
 <script lang="ts">
 	import dynamics, { rotateDynamic } from '$lib/dynamics';
-	import Arrow from './Arrow.svelte';
 	import LongArrow from './LongArrow.svelte';
 
 	let {
@@ -23,20 +22,6 @@
 	}
 </script>
 
-<!-- <div class="mobile">
-	<div class="interactive">
-		<Arrow direction="left" onClick={() => onArrowClick(-1)} />
-		{highlight + 1}
-		<Arrow direction="right" onClick={() => onArrowClick(1)} />
-	</div>
-	<p>
-		{dynamics[highlight].full}
-		<span class="visually-hidden"
-			>Your Shift: {startAnswers[highlight]} to {endAnswers[highlight]}</span
-		>
-	</p>
-</div> -->
-<!-- non-mobile -->
 <ol>
 	<li>
 		<div class="uppercase-title">Your 8 Dynamics Shifts</div>

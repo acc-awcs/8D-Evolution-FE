@@ -83,10 +83,7 @@
 		{#if !sendEmailFinished}
 			<!-- Email form -->
 			<h1 class="title modal-title">Email Code</h1>
-			<p>
-				We’ll email you your code, along with a link to return to these results. Your email address
-				will not be stored by The All We Can Save Project.
-			</p>
+			<p>We’ll email you your code, along with a link to return to these results.</p>
 			{#if emailError.length > 0}
 				<p class="error">{emailError}</p>
 			{/if}

@@ -47,10 +47,14 @@ export async function POST({ request }) {
 				{
 					name: 'content',
 					content: `
-					<p> Thanks for mapping your 8 Dynamics of Climate Engagement at the start of your <i>Climate Wayfinding</i> journey.</p>
+					<p><b>Thanks for taking the 8 Dynamics Quiz! </b></p>
+					<p>We hope it sheds some light on where you’re beginning this journey.</p>
 					<p>Your unique code is:</p><p><strong style="font-size: 28px;">${resultCode}</strong></p>
-					<p>You’ll use this code to look back at your “web” later in the journey. To revisit it at any point along the way, simply click the link below.</p>
+					<p>At the end of your Climate Wayfinding journey, you’ll return to the 8 Dynamics Quiz to see what’s shifted. This code will let you compare your unique starting and ending “webs.”</p>
+					<p>To revisit your results, simply click the link below.</p>
 					<p><a href="${PUBLIC_BASE_URL}/results/${resultCode}" style="color: #303326; text-decoration: underline">Your 8 Dynamics Starting Point</a></p>
+					<p>Please be sure to save this email.</p>
+					<p>Wishing you a rich journey ahead!</p>
 					`
 				}
 			],
@@ -63,7 +67,7 @@ export async function POST({ request }) {
 						name: ''
 					}
 				],
-				subject: 'Your 8 Dynamics Results Code'
+				subject: 'Climate Wayfinding: Your 8 Dynamics Code'
 			}
 		};
 
