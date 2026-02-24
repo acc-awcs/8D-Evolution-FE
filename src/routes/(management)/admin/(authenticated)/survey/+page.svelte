@@ -22,7 +22,7 @@
 	<div class="alt-wrapper">
 		{#if data?.paginatedSurveys?.length > 0}
 			<Table
-				header={['Response', 'Facilitation', 'Results Link']}
+				header={['Response', 'Facilitation', 'Results Link', 'Date']}
 				secondRowLinks={data.paginatedSurveys.map((resp: any) =>
 					resp.facilitationId ? `/admin/facilitation/${resp.facilitationId}` : null
 				)}
@@ -31,8 +31,9 @@
 				)}
 				rows={data.paginatedSurveys.map((resp: any) => [
 					resp.text,
-					resp.facilitationName ? resp.facilitationName : 'This facilitation may have been deleted',
-					'View Web'
+					resp.facilitationName ? resp.facilitationName : 'Not available',
+					'View Web',
+					resp.createdDate
 				])}
 			/>
 			<Pagination {data} />
