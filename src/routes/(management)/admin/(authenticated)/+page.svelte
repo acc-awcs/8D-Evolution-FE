@@ -50,7 +50,7 @@
 	{/if}
 
 	<h2 class="title">Groups</h2>
-	<div class="wrapper">
+	<div class="alt-wrapper">
 		{#if data?.paginatedGroups?.length > 0}
 			<Table
 				header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
@@ -107,10 +107,13 @@
 		width: 100%;
 		padding-bottom: 100px;
 	}
+	.alt-wrapper {
+		padding: 12px 0px;
+	}
 	.wrapper {
 		margin-bottom: 80px;
-		background-color: var(--cloud-light);
-		/* border: 1px solid var(--cloud-darker); */
+		/* background-color: var(--cloud-light); */
+		border: 1px solid var(--cloud-darker);
 		border-radius: var(--br);
 		padding: 12px;
 		margin-left: -12px;

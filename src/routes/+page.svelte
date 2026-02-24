@@ -33,6 +33,10 @@
 			<a href="/start" class="btn quaternary">Map Your Starting Point <ButtonArrow /></a>
 			<a href="/end" class="btn quaternary">Map Your Ending Point <ButtonArrow /></a>
 		</div>
+
+		<p class="note">
+			If you're not doing Climate Wayfinding, you can still take the quiz <a href="/quiz">here</a>.
+		</p>
 	</section>
 </main>
 
@@ -104,8 +108,15 @@
 		/* font-weight: 600; */
 	}
 
+	p.note {
+		font-style: italic;
+		font-size: 18px;
+		margin-bottom: 0px;
+		margin-top: 50px;
+	}
+
 	p.second {
-		margin-bottom: 48px;
+		margin-bottom: 42px;
 	}
 
 	h1 {

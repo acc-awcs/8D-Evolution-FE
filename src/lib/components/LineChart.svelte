@@ -2,7 +2,19 @@
 	import Chart from 'chart.js/auto';
 	import { onMount } from 'svelte';
 
-	let { data } = $props();
+	let {
+		data,
+		keys = [
+			{
+				label: 'Participants',
+				id: 'participants'
+			},
+			{
+				label: 'Groups',
+				id: 'groups'
+			}
+		]
+	} = $props();
 
 	onMount(async (promise) => {
 		new Chart(document.getElementById('chart'), {
@@ -11,14 +23,14 @@
 				labels: data.map((row) => row.month),
 				datasets: [
 					{
-						label: 'Participants',
-						data: data.map((row) => row.participants),
+						label: keys[0].label,
+						data: data.map((row) => row[keys[0].id]),
 						backgroundColor: '#859bea',
 						borderColor: '#a2b6fc'
 					},
 					{
-						label: 'Groups',
-						data: data.map((row) => row.groups),
+						label: keys[1].label,
+						data: data.map((row) => row[keys[1].id]),
 						backgroundColor: '#bc703e',
 						borderColor: '#d18856'
 					}
@@ -35,10 +47,6 @@
 					legend: {
 						position: 'top'
 					}
-					// title: {
-					// 	display: true,
-					// 	text: 'Chart.js Line Chart'
-					// }
 				}
 			}
 		});

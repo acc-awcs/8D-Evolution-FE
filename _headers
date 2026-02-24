@@ -1,3 +1,1 @@
 # https://docs.netlify.com/routing/headers/
-
-Content-Security-Policy: script-src 'self' https://scripts.simpleanalyticscdn.com;

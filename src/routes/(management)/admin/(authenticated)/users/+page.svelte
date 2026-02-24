@@ -19,7 +19,7 @@
 	};
 </script>
 
-<h1 class="title">User Management</h1>
+<h1 class="title large">User Management</h1>
 
 <div class="btn-wrapper">
 	{#if data.query?.showGroupLeads === 'true'}

@@ -16,7 +16,7 @@
 	import intro8 from '$lib/assets/wayfinding/intro/8.png';
 	import { browser } from '$app/environment';
 
-	let { data, isStart, pollCode = null } = $props();
+	let { data, isStart, pollCode = null, quizOnly = false } = $props();
 	let loading = $state(false);
 
 	// Cloud parallax variables
@@ -106,7 +106,7 @@
 	}
 
 	const resultsLink = $derived.by(() => {
-		let link = '/results/';
+		let link = quizOnly ? '/quiz/results/' : '/results/';
 		for (const s of sections) {
 			link += `${s.key}${s.value}`;
 		}
@@ -123,6 +123,7 @@
 			const resp = await _postResult({
 				...valuesByDynamic,
 				isStart,
+				quizOnly,
 				startCode: data.startCode,
 				pollCode,
 				individual: pollCode ? false : true
@@ -131,7 +132,11 @@
 			if (pollCode) {
 				goto(`/poll/${pollCode}/post-quiz/${newResult.resultCode}`);
 			} else {
-				goto(`/results/${newResult?.resultCode}`);
+				if (quizOnly) {
+					goto(`/quiz/results/${newResult?.resultCode}`);
+				} else {
+					goto(`/results/${newResult?.resultCode}`);
+				}
 			}
 		};
 	});

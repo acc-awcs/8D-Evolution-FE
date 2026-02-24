@@ -12,7 +12,7 @@ export async function load({ cookies, url, fetch }) {
 	const endDate = url.searchParams.get('e') || null;
 
 	const response = await fetch(
-		`${PUBLIC_SERVER_URL}/api/individual-users-results-page?tr=${timeRange}&s=${startDate}&e=${endDate}&page=${page}`,
+		`${PUBLIC_SERVER_URL}/api/surveys?tr=${timeRange}&s=${startDate}&e=${endDate}&page=${page}`,
 		{
 			headers: {
 				Authorization: `Bearer ${sessionToken}`

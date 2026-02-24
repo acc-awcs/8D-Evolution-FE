@@ -48,7 +48,7 @@
 				<h1 class="title large">Trace Your Shifts</h1>
 				<p>
 					To compare where you started this journey and where you find yourself now, enter the
-					unique code you received at the beginning of your <i>Climate Wayfinding</i> journey.
+					unique code you received at the beginning of your Climate Wayfinding journey.
 				</p>
 				<p>
 					You may have it written down or saved it digitally. If you emailed it to yourself, check
@@ -212,23 +212,4 @@
 	.note {
 		font-style: italic;
 	}
-
-	/* Hide little arrows on numeric field */
-	input[type='number']::-webkit-outer-spin-button,
-	input[type='number']::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	/* For Firefox */
-	input[type='number'] {
-		-moz-appearance: textfield;
-		appearance: textfield; /* Standard property */
-	}
-
-	/* @media screen and (max-width: 400px) {
-		.clouds {
-			padding: 10px;
-			padding-bottom: 20px;
-		}
-	} */
 </style>

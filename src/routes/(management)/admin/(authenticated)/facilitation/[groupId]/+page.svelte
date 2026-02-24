@@ -26,8 +26,6 @@
 				? formatAnswers(endResults)
 				: null
 	);
-
-	console.log('SURVEY', data);
 </script>
 
 {#if showDeleteModal}
@@ -89,10 +87,16 @@
 
 <div class="wrapper blue">
 	{#if data.surveyResponses?.length > 0}
-		<!-- <p class="prompt"><i>What did you gain from participating in this experience?</i></p> -->
 		<div class="responses">
 			{#each data.surveyResponses as surveyResponse, idx}
-				<p class="response">“{surveyResponse.text}”</p>
+				<p class="response">
+					“{surveyResponse.text}”<br />
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						href={`/quiz/results/${surveyResponse.resultCode}`}>View Web</a
+					>
+				</p>
 			{/each}
 		</div>
 		<img class="cloud-bg static-fade-in" src={cloudBg} alt="" />
@@ -115,19 +119,22 @@
 	}
 	.wrapper {
 		margin-bottom: 80px;
-		background-color: var(--cloud-light);
+		/* background-color: var(--cloud-light); */
+		border: 1px solid var(--cloud-dark);
+
 		border-radius: var(--br);
-		padding: 20px;
-		margin-left: -20px;
-		margin-right: -20px;
+		padding: 12px;
+		margin-left: -12px;
+		margin-right: -12px;
 		position: relative;
 	}
 	.blue {
 		/* width: 600px; */
 		border: 1px solid var(--cloud-dark);
-		/* background-color: var(--periwinkle); */
+		background-color: var(--cloud);
 		display: flex;
 		justify-content: center;
+		overflow: hidden;
 	}
 	.blue p {
 		margin: 0px;
@@ -141,7 +148,8 @@
 		gap: 30px;
 		position: relative;
 		z-index: 1;
-		/* margin: 30px 0px; */
+		margin: 50px 0px;
+		/* margin-top: 80px; */
 	}
 	.uppercase-title {
 		margin-bottom: 0px;
@@ -152,8 +160,8 @@
 	.response {
 		font-family: 'Instrument Serif', serif;
 		font-weight: 400;
-		font-size: 36px;
-		line-height: 1.2;
+		font-size: 32px;
+		line-height: 1.4;
 		/* width: 500px; */
 		max-width: min(100%, 630px);
 		box-sizing: border-box;
@@ -161,6 +169,17 @@
 		padding: 20px;
 		/* background-color: var(--cloud-faded); */
 		border-radius: var(--br);
+	}
+
+	.response a {
+		display: block;
+		font-size: 16px;
+		margin-top: 18px;
+		opacity: 0.6;
+	}
+
+	.response a:hover {
+		opacity: 1;
 	}
 
 	.response:nth-child(even) {
@@ -171,6 +190,6 @@
 		top: 0px;
 		left: 0px;
 		width: 100%;
-		mix-blend-mode: overlay;
+		/* mix-blend-mode: overlay; */
 	}
 </style>
