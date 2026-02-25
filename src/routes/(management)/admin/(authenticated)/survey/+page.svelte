@@ -54,7 +54,7 @@
 			/>
 			<Pagination {data} />
 		{:else}
-			<p>No facilitations to display.</p>
+			<p>No data to display.</p>
 		{/if}
 	</div>
 {:else}

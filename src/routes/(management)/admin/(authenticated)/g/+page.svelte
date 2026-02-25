@@ -118,7 +118,7 @@
 			])}
 		/>
 		<Pagination {data} />
-	{:else}
+	{:else if !(data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0])}
 		<p>No facilitations to display.</p>
 	{/if}
 </div>

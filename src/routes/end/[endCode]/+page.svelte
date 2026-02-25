@@ -144,7 +144,7 @@
 		min-height: 100dvh;
 		box-sizing: border-box;
 		background-color: var(--periwinkle);
-		background-image:
+		/* background-image:
 			url('$lib/assets/cloud-1.png'), url('$lib/assets/cloud-4.png'), url('$lib/assets/cloud-5.png');
 		background-repeat: no-repeat, no-repeat, no-repeat;
 		background-blend-mode: overlay, overlay, overlay;
@@ -152,7 +152,7 @@
 			bottom left,
 			bottom 0 right -100px,
 			bottom right;
-		background-size: 485px, 504px, 503px;
+		background-size: 485px, 504px, 503px; */
 		padding: 20px 20px;
 	}
 

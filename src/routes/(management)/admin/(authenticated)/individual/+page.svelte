@@ -18,86 +18,52 @@
 
 {#if data?.invalidTimes}
 	<p>{data.msg}</p>
-{:else}
-	{#if data?.paginatedResults?.length > 0}
-		<h2 class="title">Activity</h2>
-		<div class="wrapper">
-			<div class="callout">
-				<div class="item">
-					<h3 class="uppercase-title">Total Start Polls</h3>
-					<p class="title large">{data.totalStartResults}</p>
-				</div>
-				<div class="item">
-					<h3 class="uppercase-title">Total End Polls</h3>
-					<p class="title large">{data.totalEndResults}</p>
-				</div>
-				<div class="item">
-					<h3 class="uppercase-title">Total Poll Syncs</h3>
-					<p class="title large">{data.totalPairedResults}</p>
-				</div>
+{:else if data?.paginatedResults?.length > 0}
+	<h2 class="title">Activity</h2>
+	<div class="wrapper">
+		<div class="callout">
+			<div class="item">
+				<h3 class="uppercase-title">Total Start Polls</h3>
+				<p class="title large">{data.totalStartResults}</p>
 			</div>
-			{#if data?.resultsByMonth?.length > 1}
-				{#key `${data.query.startDate} ${data.query.endDate} ${data.query.timeRange}`}
-					<LineChart
-						data={data?.resultsByMonth}
-						keys={[
-							{
-								label: 'Start Polls',
-								id: 'numStartResults'
-							},
-							{
-								label: 'End Polls',
-								id: 'numEndResults'
-							}
-						]}
-					/>
-				{/key}
-			{/if}
+			<div class="item">
+				<h3 class="uppercase-title">Total End Polls</h3>
+				<p class="title large">{data.totalEndResults}</p>
+			</div>
+			<div class="item">
+				<h3 class="uppercase-title">Total Poll Syncs</h3>
+				<p class="title large">{data.totalPairedResults}</p>
+			</div>
 		</div>
-		<h2 class="title">Shifts</h2>
-		<div class="wrapper">
-			<AdminAnswerComparison
-				startAnswers={formatAveragedAnswers(data.averagedStartResults)}
-				endAnswers={formatAveragedAnswers(data.averagedEndResults)}
-				averagedStartResults={data.averagedStartResults}
-				averagedEndResults={data.averagedEndResults}
-			/>
-		</div>
-	{:else}
-		<p>No data to display. Check back later!</p>
-	{/if}
-
-	<!-- <h2 class="title">Groups</h2> -->
-	<!-- <div class="alt-wrapper">
-		{#if data?.paginatedGroups?.length > 0}
-			<Table
-				header={['User', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
-				rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
-				rows={data.paginatedGroups.map((group: any) => [
-					group.name,
-					group.creatorShortName,
-					group.numParticipants,
-					group.startPollDate
-						? new Date(group.startPollDate).toLocaleString('en-US', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
-							})
-						: 'N/A',
-					group.endPollDate
-						? new Date(group.endPollDate).toLocaleString('en-US', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
-							})
-						: 'N/A'
-				])}
-			/>
-			<Pagination {data} />
-		{:else}
-			<p>No facilitations to display.</p>
+		{#if data?.resultsByMonth?.length > 1}
+			{#key `${data.query.startDate} ${data.query.endDate} ${data.query.timeRange}`}
+				<LineChart
+					data={data?.resultsByMonth}
+					keys={[
+						{
+							label: 'Start Polls',
+							id: 'numStartResults'
+						},
+						{
+							label: 'End Polls',
+							id: 'numEndResults'
+						}
+					]}
+				/>
+			{/key}
 		{/if}
-	</div> -->
+	</div>
+	<h2 class="title">Shifts</h2>
+	<div class="wrapper">
+		<AdminAnswerComparison
+			startAnswers={formatAveragedAnswers(data.averagedStartResults)}
+			endAnswers={formatAveragedAnswers(data.averagedEndResults)}
+			averagedStartResults={data.averagedStartResults}
+			averagedEndResults={data.averagedEndResults}
+		/>
+	</div>
+{:else}
+	<p>No data to display. Check back later!</p>
 {/if}
 
 <div class="space"></div>
