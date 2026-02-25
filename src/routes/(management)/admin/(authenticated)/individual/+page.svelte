@@ -31,7 +31,7 @@
 				<p class="title large">{data.totalEndResults}</p>
 			</div>
 			<div class="item">
-				<h3 class="uppercase-title">Total Poll Syncs</h3>
+				<h3 class="uppercase-title">Shifts Compared</h3>
 				<p class="title large">{data.totalPairedResults}</p>
 			</div>
 		</div>
