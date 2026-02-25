@@ -87,7 +87,12 @@
 		}}
 	>
 		<h1 class="title small">Delete User</h1>
-		<p>Are you sure you want to delete this user? This cannot be undone.</p>
+		<p>
+			Are you sure you want to delete this user? Any groups they've made won't be deleted, but this
+			user won't be able to log in anymore. If they recreate an account, their old groups will no
+			longer be available to them.
+		</p>
+		<p>Account deletion does not automatically notify the user.</p>
 		<input type="hidden" name="userId" value={data.user?._id} />
 		<div class="buttons">
 			<button class="btn secondary large" type="button" onclick={() => (deleteMode = false)}>
