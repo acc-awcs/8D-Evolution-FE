@@ -9,7 +9,7 @@
 
 <Modal handleClose={onClose}>
 	<div class="header">
-		<h1 class="title small">Edit Facilitation</h1>
+		<h1 class="title small">Edit Group</h1>
 		<button onclick={onClose} class="close link-like" type="button">Close</button>
 	</div>
 	<form
@@ -28,7 +28,7 @@
 	>
 		<input type="hidden" name="groupId" value={data.group?._id} />
 		<label>
-			Is this a test facilitation?
+			Is this a test group?
 			<select required name="isTest" value={data.group?.isTest ? 'true' : 'false'}>
 				<option value="false">No, these are results from a live facilitation.</option>
 				<option value="true">Yes, this was created as a test.</option>

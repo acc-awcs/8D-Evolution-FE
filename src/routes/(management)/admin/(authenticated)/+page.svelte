@@ -79,12 +79,12 @@
 		<div class="btn-wrapper">
 			{#if data.query?.showTestData === 'true'}
 				<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
-					Hide test data
+					Hide test groups
 					<Eye visible={true} />
 				</button>
 			{:else}
 				<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
-					Show test data
+					Show test groups
 					<Eye visible={false} /></button
 				>
 			{/if}

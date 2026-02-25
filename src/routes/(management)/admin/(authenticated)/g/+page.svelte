@@ -72,7 +72,7 @@
 		/>
 	</div>
 {:else}
-	<p>No complete facilitations available to display statistics. Check back later!</p>
+	<p>No complete groups available to display statistics. Check back later!</p>
 {/if}
 
 <div class="alt-wrapper">
@@ -82,12 +82,12 @@
 			<div class="btn-wrapper">
 				{#if data.query?.showTestData === 'true'}
 					<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
-						Hide test data
+						Hide test groups
 						<Eye visible={true} />
 					</button>
 				{:else}
 					<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
-						Show test data
+						Show test groups
 						<Eye visible={false} /></button
 					>
 				{/if}
