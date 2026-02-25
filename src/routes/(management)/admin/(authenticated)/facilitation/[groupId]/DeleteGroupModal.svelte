@@ -9,10 +9,10 @@
 
 <Modal handleClose={onClose}>
 	<div class="header">
-		<h1 class="title small">Delete Facilitation</h1>
+		<h1 class="title small">Delete Group</h1>
 		<button onclick={onClose} class="close link-like" type="button">Close</button>
 	</div>
-	<p>Are you sure you want to delete this facilitation? This cannot be undone.</p>
+	<p>Are you sure you want to delete this group? This cannot be undone.</p>
 	<form
 		method="POST"
 		action="?/delete"
@@ -31,7 +31,7 @@
 				{#if loading}
 					<ButtonLoader />
 				{:else}
-					Yes, delete this facilitation
+					Yes, delete this group
 				{/if}
 			</button>
 		</div>

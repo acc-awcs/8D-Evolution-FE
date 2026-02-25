@@ -95,7 +95,7 @@
 <div class="alt-wrapper">
 	{#if data?.paginatedGroups?.length > 0}
 		<Table
-			header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
+			header={['Group Name', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
 			rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
 			rows={data.paginatedGroups.map((group: any) => [
 				group.name,
