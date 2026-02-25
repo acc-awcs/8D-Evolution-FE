@@ -118,8 +118,6 @@
 			])}
 		/>
 		<Pagination {data} />
-	{:else}
-		<p>No facilitations to display.</p>
 	{/if}
 </div>
 
