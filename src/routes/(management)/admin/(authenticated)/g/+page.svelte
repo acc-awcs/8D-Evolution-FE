@@ -43,59 +43,57 @@
 
 {#if data?.invalidTimes}
 	<p>{data.msg}</p>
-{:else}
-	{#if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
-		<h2 class="title">Activity</h2>
-		<div class="wrapper">
-			<div class="callout">
-				<div class="item">
-					<h3 class="uppercase-title">Total Participants</h3>
-					<p class="title large">{data.totalParticipants}</p>
-				</div>
-				<div class="item">
-					<h3 class="uppercase-title">Groups Created</h3>
-					<p class="title large">{data.totalNewGroups}</p>
-				</div>
+{:else if data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0]}
+	<h2 class="title">Activity</h2>
+	<div class="wrapper">
+		<div class="callout">
+			<div class="item">
+				<h3 class="uppercase-title">Total Participants</h3>
+				<p class="title large">{data.totalParticipants}</p>
 			</div>
-			{#if data?.participantsByMonth?.length > 1}
-				{#key `${data.query.startDate} ${data.query.endDate} ${data.query.timeRange}`}
-					<LineChart data={data?.participantsByMonth} />
-				{/key}
-			{/if}
+			<div class="item">
+				<h3 class="uppercase-title">Groups Created</h3>
+				<p class="title large">{data.totalNewGroups}</p>
+			</div>
 		</div>
-		<h2 class="title">Shifts</h2>
-		<div class="wrapper">
-			<AdminAnswerComparison
-				startAnswers={formatAveragedAnswers(data.totalAverageStart)}
-				endAnswers={formatAveragedAnswers(data.totalAverageEnd)}
-				averagedStartResults={data.totalAverageStart}
-				averagedEndResults={data.totalAverageEnd}
-			/>
-		</div>
-	{:else}
-		<p>No complete facilitations available to display statistics. Check back later!</p>
-	{/if}
-
-	<div class="groups-header">
-		<h2 class="title">Groups</h2>
-		<div class="btn-wrapper">
-			{#if data.query?.showTestData === 'true'}
-				<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
-					Hide test data
-					<Eye visible={true} />
-				</button>
-			{:else}
-				<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
-					Show test data
-					<Eye visible={false} /></button
-				>
-			{/if}
-		</div>
+		{#if data?.participantsByMonth?.length > 1}
+			{#key `${data.query.startDate} ${data.query.endDate} ${data.query.timeRange}`}
+				<LineChart data={data?.participantsByMonth} />
+			{/key}
+		{/if}
 	</div>
+	<h2 class="title">Shifts</h2>
+	<div class="wrapper">
+		<AdminAnswerComparison
+			startAnswers={formatAveragedAnswers(data.totalAverageStart)}
+			endAnswers={formatAveragedAnswers(data.totalAverageEnd)}
+			averagedStartResults={data.totalAverageStart}
+			averagedEndResults={data.totalAverageEnd}
+		/>
+	</div>
+{:else}
+	<p>No complete facilitations available to display statistics. Check back later!</p>
 {/if}
 
 <div class="alt-wrapper">
 	{#if data?.paginatedGroups?.length > 0}
+		<div class="groups-header">
+			<h2 class="title">Groups</h2>
+			<div class="btn-wrapper">
+				{#if data.query?.showTestData === 'true'}
+					<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
+						Hide test data
+						<Eye visible={true} />
+					</button>
+				{:else}
+					<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
+						Show test data
+						<Eye visible={false} /></button
+					>
+				{/if}
+			</div>
+		</div>
+
 		<Table
 			header={['Facilitation', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
 			rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
@@ -120,8 +118,6 @@
 			])}
 		/>
 		<Pagination {data} />
-	{:else if !(data?.stats?.length > 0 && data.totalAverageStart?.[0] && data.totalAverageEnd?.[0])}
-		<p>No facilitations to display.</p>
 	{/if}
 </div>
 
