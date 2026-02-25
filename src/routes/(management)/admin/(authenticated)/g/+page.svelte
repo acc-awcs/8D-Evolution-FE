@@ -31,7 +31,7 @@
 <h1 class="title large">Group Lead Data</h1>
 
 <p>
-	Browse data from 8 Dynamics polls run by <strong>group leads</strong>. {#if data.paginatedGroups.length > 0}
+	Browse data from 8 Dynamics polls run by <strong>group leads</strong>. {#if data?.paginatedGroups?.length > 0}
 		Or,
 		<button class="link-like" onclick={() => (showExportModal = true)}
 			>export the full dataset
