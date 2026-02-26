@@ -50,6 +50,7 @@
 		justify-content: center;
 		overflow: hidden;
 		flex-direction: column;
+		align-items: center;
 	}
 	.responses p {
 		margin: 0px;
