@@ -132,6 +132,8 @@
 		<Pagination {data} />
 	{:else if data.query.searchInput?.length > 0}
 		<p>No results for given search input "{data.query.searchInput}"</p>
+	{:else}
+		<p>No groups to display.</p>
 	{/if}
 </div>
 
