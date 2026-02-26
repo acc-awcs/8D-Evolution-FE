@@ -84,7 +84,7 @@
 				/>
 				<label class="newsletter">
 					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
-					Sign me up for the Climate Wayfinding newsletter
+					Sign up to get our monthly newsletter—curated poetry, art, and updates.
 				</label>
 				<div class="buttons">
 					<button class="btn secondary" type="button" onclick={() => (showEmailModal = false)}

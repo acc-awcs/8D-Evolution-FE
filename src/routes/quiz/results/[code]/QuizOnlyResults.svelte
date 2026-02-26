@@ -77,7 +77,7 @@
 		</section>
 		<section class="conclusion">
 			<div class="column">
-				<a class="fancy-link" href="/">8 Dynamics Quiz Home</a>
+				<a class="fancy-link" href="/">Close</a>
 			</div>
 		</section>
 	</main>

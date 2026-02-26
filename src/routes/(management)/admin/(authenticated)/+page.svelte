@@ -9,8 +9,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import ExportModal from './ExportModal.svelte';
+
 	let { data } = $props();
 
+	let searchQuery = $state(data.query.searchInput);
 	let showExportModal = $state(false);
 
 	const updateQueryParam = (key, value) => {
@@ -22,6 +24,19 @@
 		}
 		goto(`?${newSearchParams.toString()}`, { replaceState: true, noScroll: true, keepFocus: true });
 	};
+
+	$effect(() => {
+		if (!searchQuery && data.query.searchInput?.length > 0) {
+			updateQueryParam('i', null);
+			return;
+		}
+		const handler = setTimeout(() => {
+			console.log('HI!', searchQuery);
+			updateQueryParam('i', searchQuery);
+		}, 500);
+
+		return () => clearTimeout(handler);
+	});
 </script>
 
 {#if showExportModal}
@@ -74,23 +89,24 @@
 {/if}
 
 <div class="alt-wrapper">
-	{#if data?.paginatedGroups?.length > 0}
-		<div class="groups-header">
-			<h2 class="title">Groups</h2>
-			<div class="btn-wrapper">
-				{#if data.query?.showTestData === 'true'}
-					<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
-						Hide test groups
-						<Eye visible={true} />
-					</button>
-				{:else}
-					<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
-						Show test groups
-						<Eye visible={false} /></button
-					>
-				{/if}
-			</div>
+	<div class="groups-header">
+		<h2 class="title">Groups</h2>
+		<div class="btn-wrapper">
+			{#if data.query?.showTestData === 'true'}
+				<button class="link-like" onclick={() => updateQueryParam('test', 'false')}>
+					Hide test groups
+					<Eye visible={true} />
+				</button>
+			{:else}
+				<button class="link-like" onclick={() => updateQueryParam('test', 'true')}>
+					Show test groups
+					<Eye visible={false} /></button
+				>
+			{/if}
+			<input bind:value={searchQuery} placeholder="Search group name or facilitator " />
 		</div>
+	</div>
+	{#if data?.paginatedGroups?.length > 0}
 		<Table
 			header={['Group Name', 'Facilitator', 'Participants', 'Start Poll Date', 'End Poll Date']}
 			rowLinks={data.paginatedGroups.map((group: any) => `/admin/facilitation/${group._id}`)}
@@ -115,6 +131,8 @@
 			])}
 		/>
 		<Pagination {data} />
+	{:else if data.query.searchInput?.length > 0}
+		<p>No results for given search input "{data.query.searchInput}"</p>
 	{/if}
 </div>
 
@@ -161,6 +179,14 @@
 		flex-wrap: wrap;
 		align-items: flex-end;
 	}
+	.btn-wrapper {
+		display: flex;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		gap: 16px;
+		align-items: center;
+		margin-bottom: 8px;
+	}
 	.btn-wrapper button {
 		display: flex;
 		align-items: center;
@@ -168,5 +194,20 @@
 	}
 	.link-like {
 		font-size: 16px;
+	}
+	.btn-wrapper input {
+		width: 300px;
+		margin: 0px;
+	}
+	@media screen and (max-width: 600px) {
+		.btn-wrapper {
+			flex-direction: column;
+			align-items: flex-start;
+			margin-bottom: 20px;
+		}
+		.groups-header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
 	}
 </style>

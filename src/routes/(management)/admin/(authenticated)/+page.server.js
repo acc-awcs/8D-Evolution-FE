@@ -11,12 +11,13 @@ export async function load({ cookies, url, fetch }) {
 
 	const page = url.searchParams.get('p') || 0;
 	const timeRange = url.searchParams.get('tr') || 'all';
-	const startDate = url.searchParams.get('s') || null;
-	const endDate = url.searchParams.get('e') || null;
-	const showTestData = url.searchParams.get('test') || null;
+	const startDate = url.searchParams.get('s') || '';
+	const endDate = url.searchParams.get('e') || '';
+	const showTestData = url.searchParams.get('test') || '';
+	const searchInput = url.searchParams.get('i') || '';
 
 	const response = await fetch(
-		`${PUBLIC_SERVER_URL}/api/group-results-page?role=${FACILITATOR}&tr=${timeRange}&s=${startDate}&e=${endDate}&page=${page}&showTestData=${showTestData}`,
+		`${PUBLIC_SERVER_URL}/api/group-results-page?role=${FACILITATOR}&tr=${timeRange}&s=${startDate}&e=${endDate}&page=${page}&showTestData=${showTestData}&i=${searchInput}`,
 		{
 			headers: {
 				Authorization: `Bearer ${sessionToken}`
@@ -48,7 +49,8 @@ export async function load({ cookies, url, fetch }) {
 			timeRange,
 			startDate,
 			endDate,
-			showTestData
+			showTestData,
+			searchInput
 		}
 	};
 }

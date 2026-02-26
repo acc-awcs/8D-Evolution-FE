@@ -35,7 +35,7 @@
 		</div>
 
 		<p class="note">
-			If you're not doing Climate Wayfinding, you can still take the quiz <a href="/quiz">here</a>.
+			If you’re not doing Climate Wayfinding, you can still take the quiz <a href="/quiz">here</a>.
 		</p>
 	</section>
 </main>

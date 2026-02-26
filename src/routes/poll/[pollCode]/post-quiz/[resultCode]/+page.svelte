@@ -22,10 +22,10 @@
 	</div>
 
 	<div class="chart-fade-in chart-intro">
-		<p>Here's your personal 8 Dynamics “web.”</p>
+		<p>Here’s your personal 8 Dynamics “web.”</p>
 
 		<p>
-			Take a screenshot if you’d like. Then, shift your attention to the group's collective map.
+			Take a screenshot if you’d like. Then, shift your attention to the group’s collective map.
 		</p>
 	</div>
 </div>
@@ -64,7 +64,6 @@
 		{:else}
 			<img class="waves chart-fade-in" src={waves} alt="" />
 			<p class="tall chart-fade-in">Thank you!</p>
-			<!-- <p class="tall">We've recorded your response.</p> -->
 		{/if}
 	</div>
 {/if}

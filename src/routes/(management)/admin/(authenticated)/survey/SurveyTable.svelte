@@ -41,9 +41,7 @@
 								{/if}
 							{:else if thirdRowLinks && itemIdx === 2}
 								{#if thirdRowLinks[rowIdx]}
-									<a target="_blank" rel="noopener noreferrer" href={thirdRowLinks[rowIdx]}
-										>{item}</a
-									>
+									<a href={thirdRowLinks[rowIdx]}>{item}</a>
 								{:else}
 									<span class="muted">{item}</span>
 								{/if}

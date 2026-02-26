@@ -1,19 +1,26 @@
 <script lang="ts">
-	import AdminAnswerComparison from '$lib/components/AdminAnswerComparison.svelte';
-	import Eye from '$lib/components/Eye.svelte';
-	import LineChart from '$lib/components/LineChart.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import TimeRangePicker from '$lib/components/TimeRangePicker.svelte';
-	import { formatAveragedAnswers } from '$lib/helpers/results.js';
+	import ExportModal from './ExportModal.svelte';
 	import SurveyTable from './SurveyTable.svelte';
 	let { data } = $props();
 
 	let showDelete = $state(false);
+	let showExportModal = $state(false);
 </script>
+
+{#if showExportModal}
+	<ExportModal onClose={() => (showExportModal = false)} />
+{/if}
 
 <h1 class="title large">Survey Responses</h1>
 
-<p>Browse all survey responses.</p>
+<p>
+	Browse all survey responses. Or,
+	<button class="link-like" onclick={() => (showExportModal = true)}
+		>export the survey dataset
+	</button> to run your own analysis.
+</p>
 
 <TimeRangePicker {data} />
 
@@ -37,18 +44,18 @@
 		{#if data?.paginatedSurveys?.length > 0}
 			<SurveyTable
 				{showDelete}
-				header={['Response', 'Facilitation', 'Results Link', 'Date']}
+				header={['Response', 'Facilitation', 'End Results Link', 'Date']}
 				secondRowLinks={data.paginatedSurveys.map((resp: any) =>
 					resp.facilitationId ? `/admin/facilitation/${resp.facilitationId}` : null
 				)}
 				thirdRowLinks={data.paginatedSurveys.map((resp: any) =>
-					resp.resultCode ? `/quiz/results/${resp.resultCode}` : null
+					resp.resultCode ? `/admin/survey/${resp.resultCode}` : null
 				)}
 				ids={data.paginatedSurveys.map((resp: any) => resp._id)}
 				rows={data.paginatedSurveys.map((resp: any) => [
 					resp.text,
 					resp.facilitationName ? resp.facilitationName : 'Not available',
-					'View Web',
+					'View Ending Point',
 					resp.createdDate
 				])}
 			/>
@@ -75,9 +82,9 @@
 	.alt-wrapper {
 		padding: 12px 0px;
 	}
-	.btn-wrapper {
-		display: flex;
-		justify-content: flex-end;
+	.link-like {
+		display: inline;
+		font-size: 16px;
 	}
 	button {
 		display: flex;

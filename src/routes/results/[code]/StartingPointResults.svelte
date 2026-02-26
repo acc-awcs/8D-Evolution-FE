@@ -111,7 +111,7 @@
 				<label class="visually-hidden" for="email">Your Email Address</label>
 				<label class="newsletter">
 					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
-					Sign me up for the Climate Wayfinding newsletter
+					Sign up to get our monthly newsletter—curated poetry, art, and updates.
 				</label>
 				<input
 					value={email}

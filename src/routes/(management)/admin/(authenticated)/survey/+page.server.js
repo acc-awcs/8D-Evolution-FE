@@ -85,5 +85,41 @@ export const actions = {
 				success: false
 			};
 		}
+	},
+
+	export: async ({ cookies, request }) => {
+		try {
+			const sessionToken = cookies.get('sessionToken');
+
+			const response = await fetch(`${PUBLIC_SERVER_URL}/api/export-surveys`, {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${sessionToken}`
+				}
+			});
+
+			if (!statusIsGood(response.status)) {
+				const body = await response.json();
+				return fail(422, {
+					success: false,
+					message: body?.msg
+				});
+			}
+			const body = await response.json();
+
+			return {
+				success: true,
+				rows: body?.rows
+			};
+		} catch (error) {
+			if (isRedirect(error)) {
+				throw error;
+			}
+			console.error('An error occurred in survey export:', error);
+			return {
+				success: false
+			};
+		}
 	}
 };

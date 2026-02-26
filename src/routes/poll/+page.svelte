@@ -36,7 +36,7 @@
 	}
 </script>
 
-<h1 class="title">Let's Map Our Collective Starting Point</h1>
+<h1 class="title">Let’s Map Our Collective Starting Point</h1>
 <p>Enter Code</p>
 {#if codeError.length > 0}
 	<p class="error">{codeError}</p>
@@ -54,7 +54,7 @@
 			goto(`/poll/${code}`);
 		} else if (resp.notFound) {
 			codeError =
-				"We couldn't find a matching entry with that code. Please double check your entry.";
+				'We couldn’t find a matching entry with that code. Please double check your entry.';
 		} else {
 			codeError = 'Having trouble identifying that code, please refresh your page and try again.';
 		}

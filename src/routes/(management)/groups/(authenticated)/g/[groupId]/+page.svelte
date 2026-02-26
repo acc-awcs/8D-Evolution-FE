@@ -8,6 +8,8 @@
 	import ActionBox from './ActionBox.svelte';
 	import GroupSettingsModal from './GroupSettingsModal.svelte';
 	import ResetModal from './ResetModal.svelte';
+	import cloudBg from '$lib/assets/cloud-bg.jpg';
+	import SurveyResponses from '$lib/components/SurveyResponses.svelte';
 
 	let { data } = $props();
 	let group = $derived(data.group);
@@ -16,6 +18,8 @@
 	let showResetStartModal = $state(false);
 	let showResetEndModal = $state(false);
 	let navigationLoading = $state(false);
+
+	console.log('DATA!', data);
 </script>
 
 {#if showSettingsModal}
@@ -56,7 +60,7 @@
 		active={true}
 		title="Map Collective Starting Point"
 	>
-		<p>From your computer, begin a live poll to map your group's starting point.</p>
+		<p>From your computer, begin a live poll to map your group’s starting point.</p>
 		{#if group.startPollCode && group.startPollInitiated}
 			<div class="buttons">
 				<button class="link-like" type="button" onclick={() => (showResetStartModal = true)}
@@ -88,7 +92,7 @@
 		title="Map Collective Ending Point"
 	>
 		<p>
-			Ready to see what's shifted? From your computer, begin a live poll to map your group's ending
+			Ready to see what’s shifted? From your computer, begin a live poll to map your group’s ending
 			point.
 		</p>
 		{#if status === START}
@@ -123,13 +127,17 @@
 		active={status === COMPLETE}
 		title="Review Collective Shift"
 	>
-		<p>Revisit the collective shift between your group's starting and ending points.</p>
+		<p>Revisit the collective shift between your group’s starting and ending points.</p>
 		{#if status === COMPLETE}
 			<LoaderLink href={`/groups/g/${group._id}/end/review/shift`}>Review Shift</LoaderLink>
 		{:else}
 			<p class="note">Available once both maps have been completed.</p>
 		{/if}
 	</ActionBox>
+
+	{#if data.surveys?.length > 0}
+		<SurveyResponses surveys={data.surveys} facilitatorView={true} />
+	{/if}
 </div>
 
 <style>

@@ -73,7 +73,7 @@
 
 <h1 class="title large">
 	{#if isStart}
-		Let's Map Our Collective Starting Point
+		Let’s Map Our Collective Starting Point
 	{:else}
 		Join Collective Ending Point Poll
 	{/if}

@@ -1,12 +1,15 @@
 <script>
 	import { enhance } from '$app/forms';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import Table from '$lib/components/Table.svelte';
 	import { ADMIN, FACILITATOR, GROUP_LEAD, ROLE_PRETTY_NAMES } from '$lib/constants.js';
 
 	let { data } = $props();
 	let editMode = $state(false);
 	let deleteMode = $state(false);
 	let loading = $state(false);
+
+	console.log('DATA', data);
 </script>
 
 <br /><br />
@@ -88,8 +91,8 @@
 	>
 		<h1 class="title small">Delete User</h1>
 		<p>
-			Are you sure you want to delete this user? Any groups they've made won't be deleted, but this
-			user won't be able to log in anymore. If they recreate an account, their old groups will no
+			Are you sure you want to delete this user? Any groups they’ve made won’t be deleted, but this
+			user won’t be able to log in anymore. If they recreate an account, their old groups will no
 			longer be available to them.
 		</p>
 		<p>Account deletion does not automatically notify the user.</p>
@@ -110,6 +113,36 @@
 {:else}
 	<button class="btn primary" onclick={() => (editMode = true)}>Edit User</button>
 	<button class="btn secondary" onclick={() => (deleteMode = true)}>Delete User</button>
+{/if}
+
+{#if data.user.role !== ADMIN}
+	<h2 class="title" style="margin-top: 50px;">Groups</h2>
+	{#if data.groups?.length > 0}
+		<Table
+			header={['Group Name', 'Facilitator', 'Start Poll Date', 'End Poll Date']}
+			rowLinks={data.groups.map((group) => `/admin/facilitation/${group._id}`)}
+			rows={data.groups.map((group) => [
+				group.name,
+				group.creatorShortName,
+				group.startPollDate
+					? new Date(group.startPollDate).toLocaleString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						})
+					: 'N/A',
+				group.endPollDate
+					? new Date(group.endPollDate).toLocaleString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						})
+					: 'N/A'
+			])}
+		/>
+	{:else}
+		<p>This user hasn’t created any groups yet.</p>
+	{/if}
 {/if}
 
 <style>

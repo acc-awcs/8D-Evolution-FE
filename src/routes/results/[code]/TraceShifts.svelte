@@ -47,28 +47,6 @@
 		<p class="error">{codeError}</p>
 	</div>
 {/if}
-<!-- 
-	onsubmit={async (e) => {
-		if (code === '' || code.length < 6) {
-			codeError = 'Please enter a six-letter code';
-			return;
-		}
-		codeCheckLoading = true;
-		const resp = await _checkStartCode(code);
-		if (resp.success) {
-			if (resp.redirectCode) {
-				goto(`/results/${resp.redirectCode}`);
-			} else {
-				goto(`/end/${code}`);
-			}
-		} else if (resp.notFound) {
-			codeError =
-				"We couldn't find a starting point entry with that code. Please double check your entry.";
-		} else {
-			codeError = 'Having trouble identifying that code, please refresh your page and try again.';
-		}
-		codeCheckLoading = false;
-	}} -->
 <form
 	method="POST"
 	use:enhance={(data) => {

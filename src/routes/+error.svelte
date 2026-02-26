@@ -31,7 +31,7 @@
 			{/if}
 		{:else}
 			<h1 class="title">Oops!</h1>
-			<p>Something went wrong. Let's try that again.</p>
+			<p>Something went wrong. Let’s try that again.</p>
 			<button class="btn secondary" onclick={reloadPage}>Refresh</button>
 		{/if}
 	</section>
