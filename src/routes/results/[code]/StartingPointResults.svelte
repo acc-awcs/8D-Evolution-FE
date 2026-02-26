@@ -109,10 +109,6 @@
 				}}
 			>
 				<label class="visually-hidden" for="email">Your Email Address</label>
-				<label class="newsletter">
-					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
-					Sign up to get our monthly newsletter—curated poetry, art, and updates.
-				</label>
 				<input
 					value={email}
 					type="text"
@@ -120,6 +116,10 @@
 					placeholder="Your Email Address"
 					id="email"
 				/>
+				<label class="newsletter">
+					<input id="addToNewsletter" type="checkbox" bind:checked={addToNewsletter} />
+					Sign up to get our monthly newsletter—curated poetry, art, and updates.
+				</label>
 				<div class="buttons">
 					<button class="btn secondary" type="button" onclick={() => (showEmailModal = false)}
 						>Cancel</button
@@ -296,14 +296,18 @@
 	.newsletter {
 		display: flex;
 		justify-content: flex-start;
-		align-items: center;
-		gap: 8px;
+		/* align-items: center; */
+		gap: 10px;
 		cursor: pointer;
+		align-items: flex-start;
+		font-size: 16px;
+		line-height: 28px;
 	}
 	.newsletter input {
 		width: auto;
 		padding: 0px;
 		margin: 0px;
+		margin-top: 6px;
 	}
 
 	.instructions {

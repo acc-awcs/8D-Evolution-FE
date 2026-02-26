@@ -285,14 +285,18 @@
 	.newsletter {
 		display: flex;
 		justify-content: flex-start;
-		align-items: center;
-		gap: 8px;
+		/* align-items: center; */
+		gap: 10px;
 		cursor: pointer;
+		align-items: flex-start;
+		font-size: 16px;
+		line-height: 28px;
 	}
 	.newsletter input {
 		width: auto;
 		padding: 0px;
 		margin: 0px;
+		margin-top: 6px;
 	}
 	.nums-wrapper {
 		padding: 40px 0px;
