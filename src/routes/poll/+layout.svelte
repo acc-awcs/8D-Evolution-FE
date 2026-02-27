@@ -22,7 +22,7 @@
 <div class="backdrop" style={`background-color: ${bgColor};`}></div>
 
 {#if page.url.pathname === '/poll'}
-	<DecorativeBackground />
+	<DecorativeBackground opacity={true} />
 {/if}
 
 <div class="wrapper">

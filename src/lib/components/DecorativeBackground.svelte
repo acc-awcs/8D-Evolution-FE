@@ -6,10 +6,10 @@
 	import magLong from '$lib/assets/wayfinding/magnestism-2x-3.svg';
 	import magSquare from '$lib/assets/wayfinding/magnestism-2x2.svg';
 
-	let { opacity = false } = $props();
+	let { opacity = false, fullOpacity = false } = $props();
 </script>
 
-<div class="wrapper">
+<div class="wrapper" class:fullOpacity>
 	<!-- Decorative images -->
 	<img class="square" class:opacity src={square} alt="" />
 	<img class="square-2" class:opacity src={square2} alt="" />
@@ -91,6 +91,10 @@
 	@media screen and (max-width: 600px) {
 		.arc-corner {
 			right: -20px;
+		}
+
+		.fullOpacity {
+			opacity: 0.3;
 		}
 
 		.square {

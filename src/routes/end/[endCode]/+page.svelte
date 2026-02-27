@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import ButtonLoader from '$lib/components/ButtonLoader.svelte';
+	import DecorativeBackground from '$lib/components/DecorativeBackground.svelte';
 	import Logo from '$lib/components/Logo.svelte';
 	import { _checkStartCode } from './+page';
 
@@ -39,6 +40,8 @@
 </script>
 
 <div class="wrapper static-fade-in">
+	<DecorativeBackground fullOpacity={true} />
+
 	<header class="logo">
 		<Logo relative={true} />
 	</header>
@@ -139,6 +142,7 @@
 		justify-content: center;
 	}
 	.wrapper {
+		position: relative;
 		background-color: var(--periwinkle);
 		min-height: 100vh;
 		min-height: 100dvh;
@@ -212,5 +216,10 @@
 
 	.note {
 		font-style: italic;
+	}
+
+	main {
+		position: relative;
+		z-index: 10;
 	}
 </style>
