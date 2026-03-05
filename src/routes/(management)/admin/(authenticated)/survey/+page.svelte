@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Pagination from '$lib/components/Pagination.svelte';
 	import TimeRangePicker from '$lib/components/TimeRangePicker.svelte';
+	import { FACILITATOR, GROUP_LEAD } from '$lib/constants';
 	import ExportModal from './ExportModal.svelte';
 	import SurveyTable from './SurveyTable.svelte';
 	let { data } = $props();
@@ -44,7 +45,14 @@
 		{#if data?.paginatedSurveys?.length > 0}
 			<SurveyTable
 				{showDelete}
-				header={['Response', 'Facilitation', 'End Results Link', 'Date']}
+				header={[
+					'Response',
+					'Group Name',
+					'End Results Link',
+					'Group Type',
+					'Live or Test',
+					'Date'
+				]}
 				secondRowLinks={data.paginatedSurveys.map((resp: any) =>
 					resp.facilitationId ? `/admin/facilitation/${resp.facilitationId}` : null
 				)}
@@ -56,6 +64,12 @@
 					resp.text,
 					resp.facilitationName ? resp.facilitationName : 'Not available',
 					'View Ending Point',
+					resp.creatorRole === FACILITATOR
+						? 'Facilitator'
+						: resp.creatorRole === GROUP_LEAD
+							? 'Group Lead'
+							: 'N/A',
+					resp.isTest ? 'Test' : 'Live',
 					resp.createdDate
 				])}
 			/>
